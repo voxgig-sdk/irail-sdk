@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "disturbance": {
+      "DISTURBANCE00": {
+        "description": "s3c",
+        "id": "DISTURBANCE00",
+        "link": "s3e",
+        "timestamp": "s3f",
+        "title": "s40",
+        "type": "s41"
+      },
+      "DISTURBANCE01": {
+        "description": "s78",
+        "id": "DISTURBANCE01",
+        "link": "s7a",
+        "timestamp": "s7b",
+        "title": "s7c",
+        "type": "s7d"
+      },
+      "DISTURBANCE02": {
+        "description": "sb4",
+        "id": "DISTURBANCE02",
+        "link": "sb6",
+        "timestamp": "sb7",
+        "title": "sb8",
+        "type": "sb9"
+      }
+    }
+  },
+  "new": {
+    "disturbance": {
+      "disturbance_ref01": {
+        "description": "sf0",
+        "link": "sf2",
+        "timestamp": "sf3",
+        "title": "sf4",
+        "type": "sf5"
+      }
+    }
+  }
+}

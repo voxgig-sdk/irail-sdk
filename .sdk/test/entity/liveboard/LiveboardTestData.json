@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "liveboard": {
+      "LIVEBOARD00": {
+        "departure": {},
+        "station": "s33",
+        "stationinfo": {},
+        "timestamp": "s35",
+        "version": "s36"
+      },
+      "LIVEBOARD01": {
+        "departure": {},
+        "station": "s65",
+        "stationinfo": {},
+        "timestamp": "s67",
+        "version": "s68"
+      },
+      "LIVEBOARD02": {
+        "departure": {},
+        "station": "s97",
+        "stationinfo": {},
+        "timestamp": "s99",
+        "version": "s9a"
+      }
+    }
+  },
+  "new": {
+    "liveboard": {
+      "liveboard_ref01": {
+        "departure": {},
+        "station": "sc9",
+        "stationinfo": {},
+        "timestamp": "scb",
+        "version": "scc"
+      }
+    }
+  }
+}

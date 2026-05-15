@@ -1,0 +1,28 @@
+# BasicCompositionFlow
+
+main: kit: flow: BasicCompositionFlow:
+{
+  entity: "composition",
+  kind: "basic",
+  name: "BasicCompositionFlow",
+  step: [
+    {
+      input: {
+        ref: "composition_ref01",
+        srcdatavar: "composition_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-composition_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicCompositionFlow"
+}

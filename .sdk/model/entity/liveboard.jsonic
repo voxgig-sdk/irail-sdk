@@ -1,0 +1,137 @@
+# Entity: liveboard
+
+main: kit: entity: liveboard: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "departure"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "station"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "stationinfo"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "timestamp"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "version"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "liveboard"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "alert"
+                orig: "alert"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                example: "departure"
+                kind: "query"
+                name: "arrdep"
+                orig: "arrdep"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "300917"
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "xml"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "BE.NMBS.008892007"
+                kind: "query"
+                name: "id"
+                orig: "id"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "en"
+                kind: "query"
+                name: "lang"
+                orig: "lang"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "Gent-Sint-Pieters"
+                kind: "query"
+                name: "station"
+                orig: "station"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "1230"
+                kind: "query"
+                name: "time"
+                orig: "time"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/liveboard/"
+          parts: [
+            "liveboard"
+          ]
+          select: {
+            exist: [
+              "alert"
+              "arrdep"
+              "date"
+              "format"
+              "id"
+              "lang"
+              "station"
+              "time"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

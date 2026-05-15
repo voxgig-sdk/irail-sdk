@@ -1,0 +1,34 @@
+{
+  "existing": {
+    "composition": {
+      "COMPOSITION00": {
+        "composition": {},
+        "timestamp": "s29",
+        "vehicle": "s2a",
+        "version": "s2b"
+      },
+      "COMPOSITION01": {
+        "composition": {},
+        "timestamp": "s51",
+        "vehicle": "s52",
+        "version": "s53"
+      },
+      "COMPOSITION02": {
+        "composition": {},
+        "timestamp": "s79",
+        "vehicle": "s7a",
+        "version": "s7b"
+      }
+    }
+  },
+  "new": {
+    "composition": {
+      "composition_ref01": {
+        "composition": {},
+        "timestamp": "sa1",
+        "vehicle": "sa2",
+        "version": "sa3"
+      }
+    }
+  }
+}

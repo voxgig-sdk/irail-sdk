@@ -1,0 +1,41 @@
+{
+  "existing": {
+    "connection": {
+      "CONNECTION00": {
+        "arrival": {},
+        "departure": {},
+        "duration": "s3e",
+        "id": "CONNECTION00",
+        "occupancy": {},
+        "via": {}
+      },
+      "CONNECTION01": {
+        "arrival": {},
+        "departure": {},
+        "duration": "s7a",
+        "id": "CONNECTION01",
+        "occupancy": {},
+        "via": {}
+      },
+      "CONNECTION02": {
+        "arrival": {},
+        "departure": {},
+        "duration": "sb6",
+        "id": "CONNECTION02",
+        "occupancy": {},
+        "via": {}
+      }
+    }
+  },
+  "new": {
+    "connection": {
+      "connection_ref01": {
+        "arrival": {},
+        "departure": {},
+        "duration": "sf2",
+        "occupancy": {},
+        "via": {}
+      }
+    }
+  }
+}

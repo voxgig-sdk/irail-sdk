@@ -1,0 +1,61 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 8
+  metrics: count: path: 8
+  metrics: count: method: 8
+
+  entity: composition: {
+    path: "/composition/": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.composition`")|top
+    }
+  }
+
+  entity: connection: {
+    path: "/connections/": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.connection`")|top
+    }
+  }
+
+  entity: disturbance: {
+    path: "/disturbances/": {
+      op: list: method: *GET
+      op: list: transform: res: *("`body.disturbance`")|top
+    }
+  }
+
+  entity: liveboard: {
+    path: "/liveboard/": {
+      op: load: method: *GET
+    }
+  }
+
+  entity: log: {
+    path: "/logs/": {
+      op: list: method: *GET
+    }
+  }
+
+  entity: occupancy: {
+    path: "/feedback/occupancy.php": {
+      op: create: method: *POST
+    }
+  }
+
+  entity: station: {
+    path: "/stations/": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.station`")|top
+    }
+  }
+
+  entity: vehicle: {
+    path: "/vehicle/": {
+      op: load: method: *GET
+      op: load: transform: res: *("`body.vehicle`")|top
+    }
+  }
+
+}

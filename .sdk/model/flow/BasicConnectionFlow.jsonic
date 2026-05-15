@@ -1,0 +1,22 @@
+# BasicConnectionFlow
+
+main: kit: flow: BasicConnectionFlow:
+{
+  entity: "connection",
+  kind: "basic",
+  name: "BasicConnectionFlow",
+  step: [
+    {
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "connection_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicConnectionFlow"
+}

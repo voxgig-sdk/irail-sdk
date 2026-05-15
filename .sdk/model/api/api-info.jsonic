@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "iRail Support"
+        url: "https://docs.irail.be/"
+      }
+      description: "The iRail API provides access to Belgium's railway data, including train schedules, stations, liveboards, connections, vehicles, and disturbances. It allows developers to create applications that can access real-time train information and service updates."
+      license: {
+        name: "Open Data"
+        url: "https://docs.irail.be/"
+      }
+      servers: [
+        {
+          description: "Production API Server"
+          url: "https://api.irail.be"
+        }
+      ]
+      title: "iRail API"
+      version: "1.1"
+    }
+  }
+}
+
+}

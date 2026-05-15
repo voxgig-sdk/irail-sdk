@@ -1,0 +1,64 @@
+# Entity: log
+
+main: kit: entity: log: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "querytime"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "querytype"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "user_agent"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "log"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "xml"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/logs/"
+          parts: [
+            "logs"
+          ]
+          select: {
+            exist: [
+              "format"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

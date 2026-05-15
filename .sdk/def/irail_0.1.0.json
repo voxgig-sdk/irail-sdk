@@ -1,0 +1,1460 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "iRail API",
+    "description": "The iRail API provides access to Belgium's railway data, including train schedules, stations, liveboards, connections, vehicles, and disturbances. It allows developers to create applications that can access real-time train information and service updates.",
+    "version": "1.1",
+    "contact": {
+      "name": "iRail Support",
+      "url": "https://docs.irail.be/"
+    },
+    "license": {
+      "name": "Open Data",
+      "url": "https://docs.irail.be/"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://api.irail.be",
+      "description": "Production API Server"
+    }
+  ],
+  "paths": {
+    "/stations/": {
+      "get": {
+        "summary": "Retrieve all stations",
+        "description": "Retrieve a list of all Belgian railway stations with their locations and identifiers.",
+        "operationId": "getStations",
+        "tags": [
+          "Stations"
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language of any text or names in the response",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with list of stations",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "application/json or application/xml"
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "CORS header"
+              },
+              "cache-control": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "Cache control directive"
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                },
+                "description": "ETag for caching"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StationsResponse"
+                },
+                "example": {
+                  "version": "1.1",
+                  "timestamp": 1489621486,
+                  "station": {
+                    "id": "BE.NMBS.008821006",
+                    "@id": "http://irail.be/stations/NMBS/008821006",
+                    "locationX": 4.421101,
+                    "locationY": 51.2172,
+                    "standardname": "Antwerpen-Centraal",
+                    "name": "Antwerp-Central"
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified - Content has not changed"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/liveboard/": {
+      "get": {
+        "summary": "Retrieve a liveboard",
+        "description": "Liveboards provide real-time information on arriving and departing trains for every Belgian station.",
+        "operationId": "getLiveboard",
+        "tags": [
+          "Liveboard"
+        ],
+        "parameters": [
+          {
+            "name": "station",
+            "in": "query",
+            "description": "The name of the station to query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "Gent-Sint-Pieters"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The ID of the station. Do not use both id and station parameters",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "example": "BE.NMBS.008892007"
+          },
+          {
+            "name": "arrdep",
+            "in": "query",
+            "description": "Whether the results should show arrivals or departures",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "departure",
+                "arrival"
+              ],
+              "default": "departure"
+            }
+          },
+          {
+            "name": "alerts",
+            "in": "query",
+            "description": "Whether to include alerts about trains in the response",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "description": "The time to query in hhmm format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-2][0-9][0-5][0-9]$"
+            },
+            "example": "1230"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date to query in ddmmyy format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-3][0-9][0-1][0-9][0-9]{2}$"
+            },
+            "example": "300917"
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language of any text or names in the response",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with liveboard information",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "cache-control": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LiveboardResponse"
+                },
+                "example": {
+                  "version": "1.1",
+                  "timestamp": 1489614297,
+                  "station": "Ghent-Sint-Pieters",
+                  "stationinfo": {
+                    "id": "BE.NMBS.008821006",
+                    "@id": "http://irail.be/stations/NMBS/008821006",
+                    "locationX": 4.421101,
+                    "locationY": 51.2172,
+                    "standardname": "Antwerpen-Centraal",
+                    "name": "Antwerp-Central"
+                  },
+                  "departures": {
+                    "number": 32,
+                    "departure": [
+                      {
+                        "id": 0,
+                        "delay": 0,
+                        "station": "Antwerp-Central",
+                        "stationinfo": {
+                          "id": "BE.NMBS.008821006",
+                          "@id": "http://irail.be/stations/NMBS/008821006",
+                          "locationX": 4.421101,
+                          "locationY": 51.2172,
+                          "standardname": "Antwerpen-Centraal",
+                          "name": "Antwerp-Central"
+                        },
+                        "time": 1489575600,
+                        "vehicle": "BE.NMBS.IC3033",
+                        "vehicleinfo": {
+                          "name": "BE.NMBS.IC3033",
+                          "shortname": "IC3033",
+                          "@id": "http://irail.be/vehicle/IC3033"
+                        },
+                        "platform": 4,
+                        "platforminfo": {
+                          "name": "4",
+                          "normal": "1"
+                        },
+                        "canceled": 0,
+                        "left": 0,
+                        "departureConnection": "http://irail.be/connections/8821006/20170316/IC1832",
+                        "occupancy": {
+                          "@id": "http://api.irail.be/terms/unknown",
+                          "name": "unknown"
+                        }
+                      }
+                    ]
+                  }
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified - Content has not changed"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          },
+          "500": {
+            "description": "Internal Server Error - May occur when querying dates too far in the past or future"
+          }
+        }
+      }
+    },
+    "/connections/": {
+      "get": {
+        "summary": "Retrieve connections",
+        "description": "Get routes between two stations, including real-time data on delays.",
+        "operationId": "getConnections",
+        "tags": [
+          "Connections"
+        ],
+        "parameters": [
+          {
+            "name": "from",
+            "in": "query",
+            "description": "The departure station name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "description": "The arrival station name",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "time",
+            "in": "query",
+            "description": "The time to query in hhmm format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-2][0-9][0-5][0-9]$"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date to query in ddmmyy format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-3][0-9][0-1][0-9][0-9]{2}$"
+            }
+          },
+          {
+            "name": "timesel",
+            "in": "query",
+            "description": "Whether the time is the departure or arrival time",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "departure",
+                "arrival"
+              ],
+              "default": "departure"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language of any text or names in the response",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "default": "en"
+            }
+          },
+          {
+            "name": "alerts",
+            "in": "query",
+            "description": "Whether to include alerts about trains in the response",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          },
+          {
+            "name": "typeOfTransport",
+            "in": "query",
+            "description": "Filter by type of transport",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "automatic",
+                "trains",
+                "nointernationaltrains",
+                "all"
+              ]
+            }
+          },
+          {
+            "name": "results",
+            "in": "query",
+            "description": "Number of results to return",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 6,
+              "default": 6
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with connections",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "cache-control": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConnectionsResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified - Content has not changed"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          },
+          "500": {
+            "description": "Internal Server Error - May occur when querying dates too far in the past or future"
+          }
+        }
+      }
+    },
+    "/vehicle/": {
+      "get": {
+        "summary": "Retrieve vehicle information",
+        "description": "Get detailed information about a specific train vehicle, including its stops and schedule.",
+        "operationId": "getVehicle",
+        "tags": [
+          "Vehicle"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The vehicle ID (e.g., BE.NMBS.IC532 or IC532)",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "example": "IC532"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date to query in ddmmyy format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-3][0-9][0-1][0-9][0-9]{2}$"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language of any text or names in the response",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "default": "en"
+            }
+          },
+          {
+            "name": "alerts",
+            "in": "query",
+            "description": "Whether to include alerts about the train",
+            "required": false,
+            "schema": {
+              "type": "boolean",
+              "default": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with vehicle information",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "cache-control": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "etag": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VehicleResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "304": {
+            "description": "Not Modified - Content has not changed"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/composition/": {
+      "get": {
+        "summary": "Retrieve train composition",
+        "description": "Get the composition (wagon layout) for a specific train.",
+        "operationId": "getComposition",
+        "tags": [
+          "Composition"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "The vehicle ID",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "description": "The date to query in ddmmyy format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "pattern": "^[0-3][0-9][0-1][0-9][0-9]{2}$"
+            }
+          },
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language of any text or names in the response",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "default": "en"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with composition information",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CompositionResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/disturbances/": {
+      "get": {
+        "summary": "Retrieve current disturbances",
+        "description": "Get information about current service disturbances and disruptions on the Belgian railway network.",
+        "operationId": "getDisturbances",
+        "tags": [
+          "Disturbances"
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language of any text or names in the response",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "default": "en"
+            }
+          },
+          {
+            "name": "lineBreakCharacter",
+            "in": "query",
+            "description": "Character to use for line breaks in disturbance descriptions",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with disturbances information",
+            "headers": {
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "cache-control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/DisturbancesResponse"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/feedback/occupancy.php": {
+      "post": {
+        "summary": "Post occupancy feedback",
+        "description": "Submit feedback about train occupancy (crowdedness) to help other travelers.",
+        "operationId": "postOccupancy",
+        "tags": [
+          "Occupancy"
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "connection": {
+                    "type": "string",
+                    "description": "The connection URI"
+                  },
+                  "from": {
+                    "type": "string",
+                    "description": "The departure station URI"
+                  },
+                  "date": {
+                    "type": "string",
+                    "description": "The date in YYYYMMDD format"
+                  },
+                  "vehicle": {
+                    "type": "string",
+                    "description": "The vehicle ID"
+                  },
+                  "occupancy": {
+                    "type": "string",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ],
+                    "description": "The occupancy level"
+                  }
+                },
+                "required": [
+                  "connection",
+                  "from",
+                  "date",
+                  "vehicle",
+                  "occupancy"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback successfully submitted"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        }
+      }
+    },
+    "/logs/": {
+      "get": {
+        "summary": "Retrieve API logs",
+        "description": "Get the last logs for API usage and feedback data.",
+        "operationId": "getLogs",
+        "tags": [
+          "Logs"
+        ],
+        "parameters": [
+          {
+            "name": "format",
+            "in": "query",
+            "description": "The response format",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "default": "xml"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response with log data",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LogsResponse"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Station": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'"
+          },
+          "@id": {
+            "type": "string",
+            "description": "The URI identifier of the station"
+          },
+          "locationX": {
+            "type": "number",
+            "description": "The longitude of the station"
+          },
+          "locationY": {
+            "type": "number",
+            "description": "The latitude of the station"
+          },
+          "standardname": {
+            "type": "string",
+            "description": "The consistent name of this station"
+          },
+          "name": {
+            "type": "string",
+            "description": "The default name of this station"
+          }
+        },
+        "required": [
+          "id",
+          "@id",
+          "locationX",
+          "locationY",
+          "standardname",
+          "name"
+        ]
+      },
+      "StationsResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of the response"
+          },
+          "station": {
+            "oneOf": [
+              {
+                "$ref": "#/components/schemas/Station"
+              },
+              {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Station"
+                }
+              }
+            ]
+          }
+        },
+        "required": [
+          "version",
+          "timestamp",
+          "station"
+        ]
+      },
+      "VehicleInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Full vehicle name"
+          },
+          "shortname": {
+            "type": "string",
+            "description": "Short vehicle name"
+          },
+          "@id": {
+            "type": "string",
+            "description": "Vehicle URI"
+          }
+        }
+      },
+      "PlatformInfo": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Platform number"
+          },
+          "normal": {
+            "type": "string",
+            "description": "Whether this is the normal platform (1 or 0)"
+          }
+        }
+      },
+      "Occupancy": {
+        "type": "object",
+        "properties": {
+          "@id": {
+            "type": "string",
+            "description": "Occupancy level URI"
+          },
+          "name": {
+            "type": "string",
+            "description": "Occupancy level name",
+            "enum": [
+              "low",
+              "medium",
+              "high",
+              "unknown"
+            ]
+          }
+        }
+      },
+      "Departure": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "description": "Departure sequence ID"
+          },
+          "delay": {
+            "type": "integer",
+            "description": "Delay in seconds"
+          },
+          "station": {
+            "type": "string",
+            "description": "Destination station name"
+          },
+          "stationinfo": {
+            "$ref": "#/components/schemas/Station"
+          },
+          "time": {
+            "type": "integer",
+            "description": "Departure time as Unix timestamp"
+          },
+          "vehicle": {
+            "type": "string",
+            "description": "Vehicle identifier"
+          },
+          "vehicleinfo": {
+            "$ref": "#/components/schemas/VehicleInfo"
+          },
+          "platform": {
+            "type": "integer",
+            "description": "Platform number"
+          },
+          "platforminfo": {
+            "$ref": "#/components/schemas/PlatformInfo"
+          },
+          "canceled": {
+            "type": "integer",
+            "description": "Whether the departure is canceled (1 or 0)"
+          },
+          "left": {
+            "type": "integer",
+            "description": "Whether the train has left (1 or 0)"
+          },
+          "departureConnection": {
+            "type": "string",
+            "description": "URI of the departure connection"
+          },
+          "occupancy": {
+            "$ref": "#/components/schemas/Occupancy"
+          }
+        }
+      },
+      "LiveboardResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of the response"
+          },
+          "station": {
+            "type": "string",
+            "description": "Station name"
+          },
+          "stationinfo": {
+            "$ref": "#/components/schemas/Station"
+          },
+          "departures": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer",
+                "description": "Number of departures"
+              },
+              "departure": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/Departure"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "version",
+          "timestamp",
+          "station",
+          "departures"
+        ]
+      },
+      "ConnectionsResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of the response"
+          },
+          "connection": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "departure": {
+                  "type": "object",
+                  "properties": {
+                    "delay": {
+                      "type": "integer"
+                    },
+                    "station": {
+                      "type": "string"
+                    },
+                    "stationinfo": {
+                      "$ref": "#/components/schemas/Station"
+                    },
+                    "time": {
+                      "type": "integer"
+                    },
+                    "vehicle": {
+                      "type": "string"
+                    },
+                    "platform": {
+                      "type": "string"
+                    },
+                    "canceled": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "arrival": {
+                  "type": "object",
+                  "properties": {
+                    "delay": {
+                      "type": "integer"
+                    },
+                    "station": {
+                      "type": "string"
+                    },
+                    "stationinfo": {
+                      "$ref": "#/components/schemas/Station"
+                    },
+                    "time": {
+                      "type": "integer"
+                    },
+                    "vehicle": {
+                      "type": "string"
+                    },
+                    "platform": {
+                      "type": "string"
+                    },
+                    "canceled": {
+                      "type": "integer"
+                    }
+                  }
+                },
+                "vias": {
+                  "type": "object",
+                  "properties": {
+                    "number": {
+                      "type": "integer"
+                    },
+                    "via": {
+                      "type": "array",
+                      "items": {
+                        "type": "object"
+                      }
+                    }
+                  }
+                },
+                "duration": {
+                  "type": "integer"
+                },
+                "occupancy": {
+                  "$ref": "#/components/schemas/Occupancy"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "version",
+          "timestamp",
+          "connection"
+        ]
+      },
+      "VehicleResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of the response"
+          },
+          "vehicle": {
+            "type": "string",
+            "description": "Vehicle identifier"
+          },
+          "vehicleinfo": {
+            "$ref": "#/components/schemas/VehicleInfo"
+          },
+          "stops": {
+            "type": "object",
+            "properties": {
+              "number": {
+                "type": "integer"
+              },
+              "stop": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "id": {
+                      "type": "integer"
+                    },
+                    "station": {
+                      "type": "string"
+                    },
+                    "stationinfo": {
+                      "$ref": "#/components/schemas/Station"
+                    },
+                    "time": {
+                      "type": "integer"
+                    },
+                    "delay": {
+                      "type": "integer"
+                    },
+                    "platform": {
+                      "type": "string"
+                    },
+                    "platforminfo": {
+                      "$ref": "#/components/schemas/PlatformInfo"
+                    },
+                    "canceled": {
+                      "type": "integer"
+                    },
+                    "left": {
+                      "type": "integer"
+                    },
+                    "occupancy": {
+                      "$ref": "#/components/schemas/Occupancy"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "version",
+          "timestamp",
+          "vehicle",
+          "stops"
+        ]
+      },
+      "CompositionResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of the response"
+          },
+          "vehicle": {
+            "type": "string",
+            "description": "Vehicle identifier"
+          },
+          "composition": {
+            "type": "object",
+            "properties": {
+              "segments": {
+                "type": "object",
+                "properties": {
+                  "number": {
+                    "type": "integer"
+                  },
+                  "segment": {
+                    "type": "array",
+                    "items": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "DisturbancesResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "description": "API version"
+          },
+          "timestamp": {
+            "type": "integer",
+            "description": "Unix timestamp of the response"
+          },
+          "disturbance": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "id": {
+                  "type": "integer"
+                },
+                "title": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "type": {
+                  "type": "integer"
+                },
+                "timestamp": {
+                  "type": "integer"
+                },
+                "link": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "required": [
+          "version",
+          "timestamp",
+          "disturbance"
+        ]
+      },
+      "LogsResponse": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "integer"
+          },
+          "logs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "querytime": {
+                  "type": "integer"
+                },
+                "querytype": {
+                  "type": "string"
+                },
+                "user_agent": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "securitySchemes": {}
+  },
+  "tags": [
+    {
+      "name": "Stations",
+      "description": "Operations related to railway stations"
+    },
+    {
+      "name": "Liveboard",
+      "description": "Real-time departure and arrival information"
+    },
+    {
+      "name": "Connections",
+      "description": "Route planning between stations"
+    },
+    {
+      "name": "Vehicle",
+      "description": "Train vehicle information and schedules"
+    },
+    {
+      "name": "Composition",
+      "description": "Train composition and wagon layout"
+    },
+    {
+      "name": "Disturbances",
+      "description": "Service disruptions and alerts"
+    },
+    {
+      "name": "Occupancy",
+      "description": "Train occupancy feedback"
+    },
+    {
+      "name": "Logs",
+      "description": "API usage logs and statistics"
+    }
+  ],
+  "x-rate-limit": {
+    "requests": 3,
+    "period": "second",
+    "burst": 5,
+    "description": "3 requests per second with 5 burst requests. Exceeding limits results in HTTP 429 responses."
+  }
+}

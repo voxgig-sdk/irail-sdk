@@ -1,0 +1,14 @@
+{
+  "existing": {
+    "occupancy": {
+      "OCCUPANCY00": {},
+      "OCCUPANCY01": {},
+      "OCCUPANCY02": {}
+    }
+  },
+  "new": {
+    "occupancy": {
+      "occupancy_ref01": {}
+    }
+  }
+}

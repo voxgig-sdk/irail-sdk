@@ -1,0 +1,73 @@
+# Entity: station
+
+main: kit: entity: station: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "station"
+      req: true
+      type: "`$ANY`"
+    }
+    {
+      name: "timestamp"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "version"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "station"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: "xml"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "en"
+                kind: "query"
+                name: "lang"
+                orig: "lang"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/stations/"
+          parts: [
+            "stations"
+          ]
+          select: {
+            exist: [
+              "format"
+              "lang"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

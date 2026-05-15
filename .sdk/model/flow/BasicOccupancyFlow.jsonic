@@ -1,0 +1,18 @@
+# BasicOccupancyFlow
+
+main: kit: flow: BasicOccupancyFlow:
+{
+  entity: "occupancy",
+  kind: "basic",
+  name: "BasicOccupancyFlow",
+  step: [
+    {
+      input: {
+        ref: "occupancy_ref01"
+      }
+
+      op: "create"
+    }
+  ],
+  "key$": "BasicOccupancyFlow"
+}

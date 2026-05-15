@@ -1,0 +1,160 @@
+# Entity: connection
+
+main: kit: entity: connection: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "arrival"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "departure"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "duration"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "id"
+      req: false
+      type: "`$INTEGER`"
+    }
+    {
+      name: "occupancy"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "via"
+      req: false
+      type: "`$OBJECT`"
+    }
+  ]
+
+  id: {
+    field: "id"
+    name: "id"
+  }
+
+  name: "connection"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "alert"
+                orig: "alert"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "xml"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "from"
+                orig: "from"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: "en"
+                kind: "query"
+                name: "lang"
+                orig: "lang"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: 6
+                kind: "query"
+                name: "result"
+                orig: "result"
+                reqd: false
+                type: "`$INTEGER`"
+              }
+              {
+                kind: "query"
+                name: "time"
+                orig: "time"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "departure"
+                kind: "query"
+                name: "timesel"
+                orig: "timesel"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "to"
+                orig: "to"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                kind: "query"
+                name: "type_of_transport"
+                orig: "type_of_transport"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/connections/"
+          parts: [
+            "connections"
+          ]
+          select: {
+            exist: [
+              "alert"
+              "date"
+              "format"
+              "from"
+              "lang"
+              "result"
+              "time"
+              "timesel"
+              "to"
+              "type_of_transport"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

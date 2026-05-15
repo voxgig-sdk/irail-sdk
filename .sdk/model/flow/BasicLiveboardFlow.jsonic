@@ -1,0 +1,28 @@
+# BasicLiveboardFlow
+
+main: kit: flow: BasicLiveboardFlow:
+{
+  entity: "liveboard",
+  kind: "basic",
+  name: "BasicLiveboardFlow",
+  step: [
+    {
+      input: {
+        ref: "liveboard_ref01",
+        srcdatavar: "liveboard_ref01_data",
+        suffix: "_dt0"
+      }
+
+      op: "load",
+      valid: [
+        {
+          apply: "TextFieldMark",
+          def: {
+            mark: "Mark01-liveboard_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicLiveboardFlow"
+}

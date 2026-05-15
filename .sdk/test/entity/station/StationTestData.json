@@ -1,0 +1,30 @@
+{
+  "existing": {
+    "station": {
+      "STATION00": {
+        "station": "s1e",
+        "timestamp": "s1f",
+        "version": "s20"
+      },
+      "STATION01": {
+        "station": "s3c",
+        "timestamp": "s3d",
+        "version": "s3e"
+      },
+      "STATION02": {
+        "station": "s5a",
+        "timestamp": "s5b",
+        "version": "s5c"
+      }
+    }
+  },
+  "new": {
+    "station": {
+      "station_ref01": {
+        "station": "s78",
+        "timestamp": "s79",
+        "version": "s7a"
+      }
+    }
+  }
+}

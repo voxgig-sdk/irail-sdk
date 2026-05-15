@@ -1,0 +1,109 @@
+# Entity: vehicle
+
+main: kit: entity: vehicle: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "stop"
+      req: true
+      type: "`$OBJECT`"
+    }
+    {
+      name: "timestamp"
+      req: true
+      type: "`$INTEGER`"
+    }
+    {
+      name: "vehicle"
+      req: true
+      type: "`$STRING`"
+    }
+    {
+      name: "vehicleinfo"
+      req: false
+      type: "`$OBJECT`"
+    }
+    {
+      name: "version"
+      req: true
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "vehicle"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          args: {
+            query: [
+              {
+                example: false
+                kind: "query"
+                name: "alert"
+                orig: "alert"
+                reqd: false
+                type: "`$BOOLEAN`"
+              }
+              {
+                kind: "query"
+                name: "date"
+                orig: "date"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "xml"
+                kind: "query"
+                name: "format"
+                orig: "format"
+                reqd: false
+                type: "`$STRING`"
+              }
+              {
+                example: "IC532"
+                kind: "query"
+                name: "id"
+                orig: "id"
+                reqd: true
+                type: "`$STRING`"
+              }
+              {
+                example: "en"
+                kind: "query"
+                name: "lang"
+                orig: "lang"
+                reqd: false
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/vehicle/"
+          parts: [
+            "vehicle"
+          ]
+          select: {
+            exist: [
+              "alert"
+              "date"
+              "format"
+              "id"
+              "lang"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

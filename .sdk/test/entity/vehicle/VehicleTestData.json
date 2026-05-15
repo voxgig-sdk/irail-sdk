@@ -1,0 +1,38 @@
+{
+  "existing": {
+    "vehicle": {
+      "VEHICLE00": {
+        "stop": {},
+        "timestamp": "s33",
+        "vehicle": "s34",
+        "vehicleinfo": {},
+        "version": "s36"
+      },
+      "VEHICLE01": {
+        "stop": {},
+        "timestamp": "s65",
+        "vehicle": "s66",
+        "vehicleinfo": {},
+        "version": "s68"
+      },
+      "VEHICLE02": {
+        "stop": {},
+        "timestamp": "s97",
+        "vehicle": "s98",
+        "vehicleinfo": {},
+        "version": "s9a"
+      }
+    }
+  },
+  "new": {
+    "vehicle": {
+      "vehicle_ref01": {
+        "stop": {},
+        "timestamp": "sc9",
+        "vehicle": "sca",
+        "vehicleinfo": {},
+        "version": "scc"
+      }
+    }
+  }
+}
