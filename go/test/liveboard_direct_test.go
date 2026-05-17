@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/irail-sdk"
-	"github.com/voxgig-sdk/irail-sdk/core"
+	sdk "github.com/voxgig-sdk/irail-sdk/go"
+	"github.com/voxgig-sdk/irail-sdk/go/core"
 )
 
 func TestLiveboardDirect(t *testing.T) {

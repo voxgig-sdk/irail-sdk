@@ -6,21 +6,24 @@
         "station": "s33",
         "stationinfo": {},
         "timestamp": "s35",
-        "version": "s36"
+        "version": "s36",
+        "id": "LIVEBOARD00"
       },
       "LIVEBOARD01": {
         "departure": {},
         "station": "s65",
         "stationinfo": {},
         "timestamp": "s67",
-        "version": "s68"
+        "version": "s68",
+        "id": "LIVEBOARD01"
       },
       "LIVEBOARD02": {
         "departure": {},
         "station": "s97",
         "stationinfo": {},
         "timestamp": "s99",
-        "version": "s9a"
+        "version": "s9a",
+        "id": "LIVEBOARD02"
       }
     }
   },

@@ -4,17 +4,20 @@
       "STATION00": {
         "station": "s1e",
         "timestamp": "s1f",
-        "version": "s20"
+        "version": "s20",
+        "id": "STATION00"
       },
       "STATION01": {
         "station": "s3c",
         "timestamp": "s3d",
-        "version": "s3e"
+        "version": "s3e",
+        "id": "STATION01"
       },
       "STATION02": {
         "station": "s5a",
         "timestamp": "s5b",
-        "version": "s5c"
+        "version": "s5c",
+        "id": "STATION02"
       }
     }
   },

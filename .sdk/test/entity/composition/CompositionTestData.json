@@ -5,19 +5,22 @@
         "composition": {},
         "timestamp": "s29",
         "vehicle": "s2a",
-        "version": "s2b"
+        "version": "s2b",
+        "id": "COMPOSITION00"
       },
       "COMPOSITION01": {
         "composition": {},
         "timestamp": "s51",
         "vehicle": "s52",
-        "version": "s53"
+        "version": "s53",
+        "id": "COMPOSITION01"
       },
       "COMPOSITION02": {
         "composition": {},
         "timestamp": "s79",
         "vehicle": "s7a",
-        "version": "s7b"
+        "version": "s7b",
+        "id": "COMPOSITION02"
       }
     }
   },

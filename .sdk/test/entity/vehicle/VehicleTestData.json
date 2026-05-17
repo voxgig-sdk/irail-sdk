@@ -6,21 +6,24 @@
         "timestamp": "s33",
         "vehicle": "s34",
         "vehicleinfo": {},
-        "version": "s36"
+        "version": "s36",
+        "id": "VEHICLE00"
       },
       "VEHICLE01": {
         "stop": {},
         "timestamp": "s65",
         "vehicle": "s66",
         "vehicleinfo": {},
-        "version": "s68"
+        "version": "s68",
+        "id": "VEHICLE01"
       },
       "VEHICLE02": {
         "stop": {},
         "timestamp": "s97",
         "vehicle": "s98",
         "vehicleinfo": {},
-        "version": "s9a"
+        "version": "s9a",
+        "id": "VEHICLE02"
       }
     }
   },

@@ -1,6 +1,6 @@
 package utility
 
-import "github.com/voxgig-sdk/irail-sdk/core"
+import "github.com/voxgig-sdk/irail-sdk/go/core"
 
 func init() {
 	core.UtilityRegistrar = registerAll

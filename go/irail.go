@@ -1,10 +1,10 @@
 package voxgigirailsdk
 
 import (
-	"github.com/voxgig-sdk/irail-sdk/core"
-	"github.com/voxgig-sdk/irail-sdk/entity"
-	"github.com/voxgig-sdk/irail-sdk/feature"
-	_ "github.com/voxgig-sdk/irail-sdk/utility"
+	"github.com/voxgig-sdk/irail-sdk/go/core"
+	"github.com/voxgig-sdk/irail-sdk/go/entity"
+	"github.com/voxgig-sdk/irail-sdk/go/feature"
+	_ "github.com/voxgig-sdk/irail-sdk/go/utility"
 )
 
 // Type aliases preserve external API.
