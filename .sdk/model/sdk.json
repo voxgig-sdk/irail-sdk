@@ -21,7 +21,24 @@
           }
         ],
         "title": "iRail API",
-        "version": "1.1"
+        "version": "1.1",
+        "tagline": "Query Belgian rail schedules, stations, liveboards, connections, and disruptions from the iRail open-data API",
+        "homepage": "https://docs.irail.be/",
+        "docs_url": "https://docs.irail.be/",
+        "license_short": "Open data; set a descriptive User-Agent identifying your app",
+        "license_md": "- Open data published by the community-run iRail project.\n- No explicit license statement in the docs; treat as open data with attribution.\n- Requests should include a descriptive `User-Agent` identifying your application; unidentified clients may be blocked.\n- Use the semantic URIs returned in responses rather than composing your own.",
+        "about_md": "[iRail](https://docs.irail.be/) is a community-driven project that exposes data from Belgian rail operator NMBS/SNCB as a clean HTTP API. It backs a long-running family of apps and tools and is widely used to build journey planners, station displays, and mobility research projects.\n\nWhat you get from the API:\n\n- Belgian railway **stations** with locations.\n- **Liveboards** of real-time arrivals and departures at a station.\n- **Connections** between two stations, including delay information.\n- **Vehicle** details: stops, occupancy, and current position.\n- **Composition** of a train (carriages and locomotive specs).\n- **Disturbances**: current incidents and planned maintenance.\n- **Occupancy** feedback submissions for crowding reports.\n- **Logs** of recent API usage (1000 most recent entries).\n\nOperational notes: responses are available in JSON, XML, and JSONP. The server is rate limited to roughly 3 requests/second per source IP with a small burst allowance, returning HTTP 429 when exceeded. TLS 1.1 or higher is required, and CORS is enabled.",
+        "entity_desc": {
+          "composition": "Carriage and locomotive make-up of a specific train.",
+          "connection": "Route between two stations with timing and delay information.",
+          "disturbance": "Current network disruptions and planned maintenance notices.",
+          "liveboard": "Real-time arrivals and departures board for a station.",
+          "log": "Recent API usage entries (most recent 1000).",
+          "occupancy": "Crowding feedback that clients can read or submit for a vehicle.",
+          "station": "Belgian railway stations with locations and identifiers.",
+          "vehicle": "Train details including stops, occupancy, and current location, served from `GET /v1/vehicle/`."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -29,7 +46,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "composition": {

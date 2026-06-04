@@ -21,8 +21,39 @@ main: {
       ]
       title: "iRail API"
       version: "1.1"
+      tagline: "Query Belgian rail schedules, stations, liveboards, connections, and disruptions from the iRail open-data API"
+      homepage: "https://docs.irail.be/"
+      docs_url: "https://docs.irail.be/"
+      license_short: "Open data; set a descriptive User-Agent identifying your app"
+      license_md: `- Open data published by the community-run iRail project.
+- No explicit license statement in the docs; treat as open data with attribution.
+- Requests should include a descriptive \`User-Agent\` identifying your application; unidentified clients may be blocked.
+- Use the semantic URIs returned in responses rather than composing your own.`
+      about_md: `[iRail](https://docs.irail.be/) is a community-driven project that exposes data from Belgian rail operator NMBS/SNCB as a clean HTTP API. It backs a long-running family of apps and tools and is widely used to build journey planners, station displays, and mobility research projects.
+
+What you get from the API:
+
+- Belgian railway **stations** with locations.
+- **Liveboards** of real-time arrivals and departures at a station.
+- **Connections** between two stations, including delay information.
+- **Vehicle** details: stops, occupancy, and current position.
+- **Composition** of a train (carriages and locomotive specs).
+- **Disturbances**: current incidents and planned maintenance.
+- **Occupancy** feedback submissions for crowding reports.
+- **Logs** of recent API usage (1000 most recent entries).
+
+Operational notes: responses are available in JSON, XML, and JSONP. The server is rate limited to roughly 3 requests/second per source IP with a small burst allowance, returning HTTP 429 when exceeded. TLS 1.1 or higher is required, and CORS is enabled.`
+      entity_desc: {
+        composition: "Carriage and locomotive make-up of a specific train."
+        connection: "Route between two stations with timing and delay information."
+        disturbance: "Current network disruptions and planned maintenance notices."
+        liveboard: "Real-time arrivals and departures board for a station."
+        log: "Recent API usage entries (most recent 1000)."
+        occupancy: "Crowding feedback that clients can read or submit for a vehicle."
+        station: "Belgian railway stations with locations and identifiers."
+        vehicle: "Train details including stops, occupancy, and current location, served from `GET /v1/vehicle/`."
+      }
+      auth: false
     }
   }
-}
-
 }

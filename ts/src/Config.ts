@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://api.irail.be',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },

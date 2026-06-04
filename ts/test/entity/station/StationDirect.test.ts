@@ -74,14 +74,12 @@ function directSetup(mockres?: any) {
   const env = envOverride({
     'IRAIL_TEST_STATION_ENTID': {},
     'IRAIL_TEST_LIVE': 'FALSE',
-    'IRAIL_APIKEY': 'NONE',
   })
 
   const live = 'TRUE' === env.IRAIL_TEST_LIVE
 
   if (live) {
     const client = new IrailSDK({
-      apikey: env.IRAIL_APIKEY,
     })
 
     let idmap: any = env['IRAIL_TEST_STATION_ENTID']
