@@ -113,6 +113,7 @@ function basicSetup(extra?: any) {
     'IRAIL_TEST_LIVEBOARD_ENTID': idmap,
     'IRAIL_TEST_LIVE': 'FALSE',
     'IRAIL_TEST_EXPLAIN': 'FALSE',
+    'IRAIL_APIKEY': 'NONE',
   })
 
   idmap = env['IRAIL_TEST_LIVEBOARD_ENTID']
@@ -122,6 +123,7 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new IrailSDK(merge([
       {
+        apikey: env.IRAIL_APIKEY,
       },
       extra
     ]))

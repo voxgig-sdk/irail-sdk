@@ -68,12 +68,14 @@ function connection_direct_setup($mockres)
     $env = Runner::env_override([
         "IRAIL_TEST_CONNECTION_ENTID" => [],
         "IRAIL_TEST_LIVE" => "FALSE",
+        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $live = $env["IRAIL_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["IRAIL_APIKEY"],
         ];
         $client = new IrailSDK($merged_opts);
         return [

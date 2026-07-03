@@ -59,12 +59,14 @@ def _station_direct_setup(mockres):
     env = runner.env_override({
         "IRAIL_TEST_STATION_ENTID": {},
         "IRAIL_TEST_LIVE": "FALSE",
+        "IRAIL_APIKEY": "NONE",
     })
 
     live = env.get("IRAIL_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
+            "apikey": env.get("IRAIL_APIKEY"),
         }
         client = IrailSDK(merged_opts)
         return {

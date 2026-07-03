@@ -89,7 +89,7 @@ main: kit: entity: disturbance: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.disturbance`"
           }
         }
       ]

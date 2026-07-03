@@ -93,12 +93,14 @@ func logDirectSetup(mockres any) *logDirectSetupResult {
 	env := envOverride(map[string]any{
 		"IRAIL_TEST_LOG_ENTID": map[string]any{},
 		"IRAIL_TEST_LIVE":    "FALSE",
+		"IRAIL_APIKEY":       "NONE",
 	})
 
 	live := env["IRAIL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["IRAIL_APIKEY"],
 		}
 		client := sdk.NewIrailSDK(mergedOpts)
 

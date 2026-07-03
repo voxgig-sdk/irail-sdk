@@ -82,7 +82,7 @@ main: kit: entity: composition: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.composition`"
           }
         }
       ]

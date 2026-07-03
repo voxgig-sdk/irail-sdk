@@ -117,6 +117,7 @@ func vehicleBasicSetup(extra map[string]any) *entityTestSetup {
 		"IRAIL_TEST_VEHICLE_ENTID": idmap,
 		"IRAIL_TEST_LIVE":      "FALSE",
 		"IRAIL_TEST_EXPLAIN":   "FALSE",
+		"IRAIL_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["IRAIL_TEST_VEHICLE_ENTID"])
@@ -127,6 +128,7 @@ func vehicleBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["IRAIL_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["IRAIL_APIKEY"],
 			},
 			extra,
 		})

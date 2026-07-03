@@ -1,25 +1,8 @@
 # Irail SDK
 
-Query Belgian rail schedules, stations, liveboards, connections, and disruptions from the iRail open-data API
+iRail API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About iRail API
-
-[iRail](https://docs.irail.be/) is a community-driven project that exposes data from Belgian rail operator NMBS/SNCB as a clean HTTP API. It backs a long-running family of apps and tools and is widely used to build journey planners, station displays, and mobility research projects.
-
-What you get from the API:
-
-- Belgian railway **stations** with locations.
-- **Liveboards** of real-time arrivals and departures at a station.
-- **Connections** between two stations, including delay information.
-- **Vehicle** details: stops, occupancy, and current position.
-- **Composition** of a train (carriages and locomotive specs).
-- **Disturbances**: current incidents and planned maintenance.
-- **Occupancy** feedback submissions for crowding reports.
-- **Logs** of recent API usage (1000 most recent entries).
-
-Operational notes: responses are available in JSON, XML, and JSONP. The server is rate limited to roughly 3 requests/second per source IP with a small burst allowance, returning HTTP 429 when exceeded. TLS 1.1 or higher is required, and CORS is enabled.
 
 ## Try it
 
@@ -53,27 +36,31 @@ gem install irail-sdk
 luarocks install irail-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { IrailSDK } from 'irail'
 
-const client = new IrailSDK({})
+const client = new IrailSDK({
+  apikey: process.env.IRAIL_APIKEY,
+})
 
+// Load composition data
+const composition = await client.Composition().load({})
+console.log(composition.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -103,14 +90,14 @@ The API exposes 8 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **Composition** | Carriage and locomotive make-up of a specific train. | `/composition/` |
-| **Connection** | Route between two stations with timing and delay information. | `/connections/` |
-| **Disturbance** | Current network disruptions and planned maintenance notices. | `/disturbances/` |
-| **Liveboard** | Real-time arrivals and departures board for a station. | `/liveboard/` |
-| **Log** | Recent API usage entries (most recent 1000). | `/logs/` |
-| **Occupancy** | Crowding feedback that clients can read or submit for a vehicle. | `/feedback/occupancy.php` |
-| **Station** | Belgian railway stations with locations and identifiers. | `/stations/` |
-| **Vehicle** | Train details including stops, occupancy, and current location, served from `GET /v1/vehicle/`. | `/vehicle/` |
+| **Composition** |  | `/composition/` |
+| **Connection** |  | `/connections/` |
+| **Disturbance** |  | `/disturbances/` |
+| **Liveboard** |  | `/liveboard/` |
+| **Log** |  | `/logs/` |
+| **Occupancy** |  | `/feedback/occupancy.php` |
+| **Station** |  | `/stations/` |
+| **Vehicle** |  | `/vehicle/` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -120,15 +107,17 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from irail_sdk import IrailSDK
 
-client = IrailSDK({})
+client = IrailSDK({
+    "apikey": os.environ.get("IRAIL_APIKEY"),
+})
 
 
 # Load a specific composition
-composition, err = client.Composition(None).load(
-    {"id": "example_id"}, None
-)
+composition, err = client.Composition().load({"id": "example_id"})
+print(composition)
 ```
 
 ### PHP
@@ -137,13 +126,14 @@ composition, err = client.Composition(None).load(
 <?php
 require_once 'irail_sdk.php';
 
-$client = new IrailSDK([]);
+$client = new IrailSDK([
+    "apikey" => getenv("IRAIL_APIKEY"),
+]);
 
 
 // Load a specific composition
-[$composition, $err] = $client->Composition(null)->load(
-    ["id" => "example_id"], null
-);
+[$composition, $err] = $client->Composition()->load(["id" => "example_id"]);
+print_r($composition);
 ```
 
 ### Golang
@@ -151,8 +141,13 @@ $client = new IrailSDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/irail-sdk/go"
 
-client := sdk.NewIrailSDK(map[string]any{})
+client := sdk.NewIrailSDK(map[string]any{
+    "apikey": os.Getenv("IRAIL_APIKEY"),
+})
 
+// Load composition data
+composition, err := client.Composition(nil).Load(map[string]any{}, nil)
+fmt.Println(composition)
 ```
 
 ### Ruby
@@ -160,13 +155,14 @@ client := sdk.NewIrailSDK(map[string]any{})
 ```ruby
 require_relative "Irail_sdk"
 
-client = IrailSDK.new({})
+client = IrailSDK.new({
+  "apikey" => ENV["IRAIL_APIKEY"],
+})
 
 
 # Load a specific composition
-composition, err = client.Composition(nil).load(
-  { "id" => "example_id" }, nil
-)
+composition, err = client.Composition().load({ "id" => "example_id" })
+puts composition
 ```
 
 ### Lua
@@ -174,13 +170,14 @@ composition, err = client.Composition(nil).load(
 ```lua
 local sdk = require("irail_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("IRAIL_APIKEY"),
+})
 
 
 -- Load a specific composition
-local composition, err = client:Composition(nil):load(
-  { id = "example_id" }, nil
-)
+local composition, err = client:Composition():load({ id = "example_id" })
+print(composition)
 ```
 
 ## Unit testing in offline mode
@@ -199,25 +196,21 @@ const result = await client.Composition().load({ id: 'test01' })
 ### Python
 
 ```python
-client = IrailSDK.test(None, None)
-result, err = client.Composition(None).load(
-    {"id": "test01"}, None
-)
+client = IrailSDK.test()
+result, err = client.Composition().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = IrailSDK::test(null, null);
-[$result, $err] = $client->Composition(null)->load(
-    ["id" => "test01"], null
-);
+$client = IrailSDK::test();
+[$result, $err] = $client->Composition()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.Composition(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -226,19 +219,15 @@ result, err := client.Composition(nil).Load(
 ### Ruby
 
 ```ruby
-client = IrailSDK.test(nil, nil)
-result, err = client.Composition(nil).load(
-  { "id" => "test01" }, nil
-)
+client = IrailSDK.test
+result, err = client.Composition().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:Composition(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:Composition():load({ id = "test01" })
 ```
 
 ## How it works
@@ -342,15 +331,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the iRail API
-
-- Upstream: [https://docs.irail.be/](https://docs.irail.be/)
-
-- Open data published by the community-run iRail project.
-- No explicit license statement in the docs; treat as open data with attribution.
-- Requests should include a descriptive `User-Agent` identifying your application; unidentified clients may be blocked.
-- Use the semantic URIs returned in responses rather than composing your own.
 
 ---
 

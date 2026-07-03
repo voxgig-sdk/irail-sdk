@@ -148,7 +148,7 @@ main: kit: entity: connection: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.connection`"
           }
         }
       ]

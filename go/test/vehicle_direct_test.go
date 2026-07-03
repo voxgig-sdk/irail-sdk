@@ -105,12 +105,14 @@ func vehicleDirectSetup(mockres any) *vehicleDirectSetupResult {
 	env := envOverride(map[string]any{
 		"IRAIL_TEST_VEHICLE_ENTID": map[string]any{},
 		"IRAIL_TEST_LIVE":    "FALSE",
+		"IRAIL_APIKEY":       "NONE",
 	})
 
 	live := env["IRAIL_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["IRAIL_APIKEY"],
 		}
 		client := sdk.NewIrailSDK(mergedOpts)
 

@@ -30,12 +30,12 @@ Create a new SDK client instance.
 
 ### Static Methods
 
-#### `sdk.test(testopts, sdkopts)`
+#### `sdk.test(testopts?, sdkopts?)`
 
-Create a test client with mock features active. Both arguments may be `nil`.
+Create a test client with mock features active. Both arguments are optional.
 
 ```lua
-local client = sdk.test(nil, nil)
+local client = sdk.test()
 ```
 
 
@@ -131,7 +131,7 @@ local composition = client:Composition(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Composition(nil):load({ id = "composition_id" }, nil)
+local result, err = client:Composition():load({ id = "composition_id" })
 ```
 
 ### Common Methods
@@ -188,7 +188,7 @@ local connection = client:Connection(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Connection(nil):list(nil, nil)
+local results, err = client:Connection():list()
 ```
 
 ### Common Methods
@@ -245,7 +245,7 @@ local disturbance = client:Disturbance(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Disturbance(nil):list(nil, nil)
+local results, err = client:Disturbance():list()
 ```
 
 ### Common Methods
@@ -301,7 +301,7 @@ local liveboard = client:Liveboard(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Liveboard(nil):load({ id = "liveboard_id" }, nil)
+local result, err = client:Liveboard():load({ id = "liveboard_id" })
 ```
 
 ### Common Methods
@@ -355,7 +355,7 @@ local log = client:Log(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Log(nil):list(nil, nil)
+local results, err = client:Log():list()
 ```
 
 ### Common Methods
@@ -401,8 +401,8 @@ local occupancy = client:Occupancy(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Occupancy(nil):create({
-}, nil)
+local result, err = client:Occupancy():create({
+})
 ```
 
 ### Common Methods
@@ -456,7 +456,7 @@ local station = client:Station(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Station(nil):load({ id = "station_id" }, nil)
+local result, err = client:Station():load({ id = "station_id" })
 ```
 
 ### Common Methods
@@ -512,7 +512,7 @@ local vehicle = client:Vehicle(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Vehicle(nil):load({ id = "vehicle_id" }, nil)
+local result, err = client:Vehicle():load({ id = "vehicle_id" })
 ```
 
 ### Common Methods

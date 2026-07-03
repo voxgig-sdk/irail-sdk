@@ -87,6 +87,7 @@ def _occupancy_basic_setup(extra):
         "IRAIL_TEST_OCCUPANCY_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
+        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -97,6 +98,7 @@ def _occupancy_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
+                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

@@ -63,12 +63,14 @@ function connection_direct_setup(mockres)
   local env = runner.env_override({
     ["IRAIL_TEST_CONNECTION_ENTID"] = {},
     ["IRAIL_TEST_LIVE"] = "FALSE",
+    ["IRAIL_APIKEY"] = "NONE",
   })
 
   local live = env["IRAIL_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["IRAIL_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

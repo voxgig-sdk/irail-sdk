@@ -61,7 +61,7 @@ main: kit: entity: station: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.station`"
           }
         }
       ]
