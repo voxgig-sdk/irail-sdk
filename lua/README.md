@@ -10,7 +10,7 @@ The Lua SDK for the Irail API — an entity-oriented client using Lua convention
 
 ## Install
 ```bash
-luarocks install irail-sdk
+luarocks install voxgig-sdk-irail
 ```
 
 If the module is not yet published, add the source directory to

@@ -10,7 +10,7 @@ The Python SDK for the Irail API — an entity-oriented client following Pythoni
 
 ## Install
 ```bash
-pip install irail-sdk
+pip install voxgig-sdk-irail
 ```
 
 Or install from source:

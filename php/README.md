@@ -10,7 +10,7 @@ The PHP SDK for the Irail API — an entity-oriented client using PHP convention
 
 ## Install
 ```bash
-composer require voxgig/irail-sdk
+composer require voxgig-sdk/irail
 ```
 
 

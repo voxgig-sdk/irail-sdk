@@ -10,7 +10,7 @@ The TypeScript SDK for the Irail API — a type-safe, entity-oriented client wit
 
 ## Install
 ```bash
-npm install irail
+npm install @voxgig-sdk/irail
 ```
 ## Tutorial: your first API call
 

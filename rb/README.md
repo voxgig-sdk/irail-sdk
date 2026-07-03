@@ -10,13 +10,13 @@ The Ruby SDK for the Irail API — an entity-oriented client using idiomatic Rub
 
 ## Install
 ```bash
-gem install irail-sdk
+gem install voxgig-sdk-irail
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "irail-sdk"
+gem "voxgig-sdk-irail"
 ```
 
 Then run:
