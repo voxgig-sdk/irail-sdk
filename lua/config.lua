@@ -860,7 +860,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body.vehicle`",
+                  ["res"] = "`body`",
                 },
                 ["index$"] = 0,
               },

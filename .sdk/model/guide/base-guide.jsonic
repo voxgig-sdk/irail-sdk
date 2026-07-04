@@ -54,7 +54,6 @@ guide: {
   entity: vehicle: {
     path: "/vehicle/": {
       op: load: method: *GET
-      op: load: transform: res: *("`body.vehicle`")|top
     }
   }
 

@@ -4,71 +4,69 @@
 # params (op.<name>.points[].args.params[]). Field/param types come from the
 # canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 # @voxgig/apidef VALID_CANON). Do not edit by hand.
+#
+# These are TypedDicts, not dataclasses: the SDK ops return/accept plain dicts
+# at runtime, and a TypedDict IS a dict shape, so the types match the runtime.
+# Optional (req:false) keys are modelled as TypedDict key-optionality
+# (total=False), split into a required base + total=False subclass when a type
+# has both required and optional keys.
 
 from __future__ import annotations
 
-from dataclasses import dataclass
-from typing import Optional, Any
+from typing import TypedDict, Any
 
 
-@dataclass
-class Composition:
-    composition: Optional[dict] = None
-    timestamp: Optional[int] = None
-    vehicle: Optional[str] = None
-    version: Optional[str] = None
+class Composition(TypedDict, total=False):
+    composition: dict
+    timestamp: int
+    vehicle: str
+    version: str
 
 
-@dataclass
-class CompositionLoadMatch:
-    composition: Optional[dict] = None
-    timestamp: Optional[int] = None
-    vehicle: Optional[str] = None
-    version: Optional[str] = None
+class CompositionLoadMatch(TypedDict, total=False):
+    composition: dict
+    timestamp: int
+    vehicle: str
+    version: str
 
 
-@dataclass
-class Connection:
-    arrival: Optional[dict] = None
-    departure: Optional[dict] = None
-    duration: Optional[int] = None
-    id: Optional[int] = None
-    occupancy: Optional[dict] = None
-    via: Optional[dict] = None
+class Connection(TypedDict, total=False):
+    arrival: dict
+    departure: dict
+    duration: int
+    id: int
+    occupancy: dict
+    via: dict
 
 
-@dataclass
-class ConnectionListMatch:
-    arrival: Optional[dict] = None
-    departure: Optional[dict] = None
-    duration: Optional[int] = None
-    id: Optional[int] = None
-    occupancy: Optional[dict] = None
-    via: Optional[dict] = None
+class ConnectionListMatch(TypedDict, total=False):
+    arrival: dict
+    departure: dict
+    duration: int
+    id: int
+    occupancy: dict
+    via: dict
 
 
-@dataclass
-class Disturbance:
-    description: Optional[str] = None
-    id: Optional[int] = None
-    link: Optional[str] = None
-    timestamp: Optional[int] = None
-    title: Optional[str] = None
-    type: Optional[int] = None
+class Disturbance(TypedDict, total=False):
+    description: str
+    id: int
+    link: str
+    timestamp: int
+    title: str
+    type: int
 
 
-@dataclass
-class DisturbanceListMatch:
-    description: Optional[str] = None
-    id: Optional[int] = None
-    link: Optional[str] = None
-    timestamp: Optional[int] = None
-    title: Optional[str] = None
-    type: Optional[int] = None
+class DisturbanceListMatch(TypedDict, total=False):
+    description: str
+    id: int
+    link: str
+    timestamp: int
+    title: str
+    type: int
 
 
-@dataclass
-class Liveboard:
+class Liveboard(TypedDict):
     departure: dict
     station: str
     stationinfo: dict
@@ -76,67 +74,60 @@ class Liveboard:
     version: str
 
 
-@dataclass
-class LiveboardLoadMatch:
-    departure: Optional[dict] = None
-    station: Optional[str] = None
-    stationinfo: Optional[dict] = None
-    timestamp: Optional[int] = None
-    version: Optional[str] = None
+class LiveboardLoadMatch(TypedDict, total=False):
+    departure: dict
+    station: str
+    stationinfo: dict
+    timestamp: int
+    version: str
 
 
-@dataclass
-class Log:
-    querytime: Optional[int] = None
-    querytype: Optional[str] = None
-    user_agent: Optional[str] = None
+class Log(TypedDict, total=False):
+    querytime: int
+    querytype: str
+    user_agent: str
 
 
-@dataclass
-class LogListMatch:
-    querytime: Optional[int] = None
-    querytype: Optional[str] = None
-    user_agent: Optional[str] = None
+class LogListMatch(TypedDict, total=False):
+    querytime: int
+    querytype: str
+    user_agent: str
 
 
-@dataclass
-class Occupancy:
+class Occupancy(TypedDict):
     pass
 
 
-@dataclass
-class OccupancyCreateData:
+class OccupancyCreateData(TypedDict):
     pass
 
 
-@dataclass
-class Station:
+class Station(TypedDict):
     station: Any
     timestamp: int
     version: str
 
 
-@dataclass
-class StationLoadMatch:
-    station: Optional[Any] = None
-    timestamp: Optional[int] = None
-    version: Optional[str] = None
+class StationLoadMatch(TypedDict, total=False):
+    station: Any
+    timestamp: int
+    version: str
 
 
-@dataclass
-class Vehicle:
+class VehicleRequired(TypedDict):
     stop: dict
     timestamp: int
     vehicle: str
     version: str
-    vehicleinfo: Optional[dict] = None
 
 
-@dataclass
-class VehicleLoadMatch:
-    stop: Optional[dict] = None
-    timestamp: Optional[int] = None
-    vehicle: Optional[str] = None
-    vehicleinfo: Optional[dict] = None
-    version: Optional[str] = None
+class Vehicle(VehicleRequired, total=False):
+    vehicleinfo: dict
 
+
+class VehicleLoadMatch(TypedDict, total=False):
+    stop: dict
+    timestamp: int
+    vehicle: str
+    vehicleinfo: dict
+    version: str

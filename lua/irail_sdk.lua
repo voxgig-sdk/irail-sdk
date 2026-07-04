@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:composition():list() / client:composition():load({ id = ... })
-function IrailSDK:composition(data)
+-- Idiomatic facade: client:Composition():list() / client:Composition():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Composition(data)
   local EntityMod = require("entity.composition_entity")
   if data == nil then
     if self._composition == nil then
@@ -256,15 +257,10 @@ function IrailSDK:composition(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:composition() instead.
-function IrailSDK:Composition(data)
-  local EntityMod = require("entity.composition_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:connection():list() / client:connection():load({ id = ... })
-function IrailSDK:connection(data)
+-- Idiomatic facade: client:Connection():list() / client:Connection():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Connection(data)
   local EntityMod = require("entity.connection_entity")
   if data == nil then
     if self._connection == nil then
@@ -275,15 +271,10 @@ function IrailSDK:connection(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:connection() instead.
-function IrailSDK:Connection(data)
-  local EntityMod = require("entity.connection_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:disturbance():list() / client:disturbance():load({ id = ... })
-function IrailSDK:disturbance(data)
+-- Idiomatic facade: client:Disturbance():list() / client:Disturbance():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Disturbance(data)
   local EntityMod = require("entity.disturbance_entity")
   if data == nil then
     if self._disturbance == nil then
@@ -294,15 +285,10 @@ function IrailSDK:disturbance(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:disturbance() instead.
-function IrailSDK:Disturbance(data)
-  local EntityMod = require("entity.disturbance_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:liveboard():list() / client:liveboard():load({ id = ... })
-function IrailSDK:liveboard(data)
+-- Idiomatic facade: client:Liveboard():list() / client:Liveboard():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Liveboard(data)
   local EntityMod = require("entity.liveboard_entity")
   if data == nil then
     if self._liveboard == nil then
@@ -313,15 +299,10 @@ function IrailSDK:liveboard(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:liveboard() instead.
-function IrailSDK:Liveboard(data)
-  local EntityMod = require("entity.liveboard_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:log():list() / client:log():load({ id = ... })
-function IrailSDK:log(data)
+-- Idiomatic facade: client:Log():list() / client:Log():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Log(data)
   local EntityMod = require("entity.log_entity")
   if data == nil then
     if self._log == nil then
@@ -332,15 +313,10 @@ function IrailSDK:log(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:log() instead.
-function IrailSDK:Log(data)
-  local EntityMod = require("entity.log_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:occupancy():list() / client:occupancy():load({ id = ... })
-function IrailSDK:occupancy(data)
+-- Idiomatic facade: client:Occupancy():list() / client:Occupancy():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Occupancy(data)
   local EntityMod = require("entity.occupancy_entity")
   if data == nil then
     if self._occupancy == nil then
@@ -351,15 +327,10 @@ function IrailSDK:occupancy(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:occupancy() instead.
-function IrailSDK:Occupancy(data)
-  local EntityMod = require("entity.occupancy_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:station():list() / client:station():load({ id = ... })
-function IrailSDK:station(data)
+-- Idiomatic facade: client:Station():list() / client:Station():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Station(data)
   local EntityMod = require("entity.station_entity")
   if data == nil then
     if self._station == nil then
@@ -370,15 +341,10 @@ function IrailSDK:station(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:station() instead.
-function IrailSDK:Station(data)
-  local EntityMod = require("entity.station_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:vehicle():list() / client:vehicle():load({ id = ... })
-function IrailSDK:vehicle(data)
+-- Idiomatic facade: client:Vehicle():list() / client:Vehicle():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function IrailSDK:Vehicle(data)
   local EntityMod = require("entity.vehicle_entity")
   if data == nil then
     if self._vehicle == nil then
@@ -386,12 +352,6 @@ function IrailSDK:vehicle(data)
     end
     return self._vehicle
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:vehicle() instead.
-function IrailSDK:Vehicle(data)
-  local EntityMod = require("entity.vehicle_entity")
   return EntityMod.new(self, data)
 end
 

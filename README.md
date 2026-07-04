@@ -26,9 +26,9 @@ import { IrailSDK } from '@voxgig-sdk/irail'
 
 const client = new IrailSDK()
 
-// Load composition data
-const composition = await client.composition.load({})
-console.log(composition.data)
+// Load composition data (returns a Composition)
+const composition = await client.Composition().load()
+console.log(composition)
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -91,8 +91,8 @@ from irail_sdk import IrailSDK
 client = IrailSDK()
 
 
-# Load a specific composition
-composition = client.composition.load({"id": "example_id"})
+# Load a specific composition (returns the record, raises on error)
+composition = client.Composition().load({"id": "example_id"})
 print(composition)
 ```
 
@@ -105,8 +105,8 @@ require_once 'irail_sdk.php';
 $client = new IrailSDK();
 
 
-// Load a specific composition
-$composition = $client->composition()->load(["id" => "example_id"]);
+// Load a specific composition (returns the bare record; throws on error)
+$composition = $client->Composition()->load(["id" => "example_id"]);
 print_r($composition);
 ```
 
@@ -130,8 +130,8 @@ require_relative "Irail_sdk"
 client = IrailSDK.new
 
 
-# Load a specific composition
-composition = client.composition.load({ "id" => "example_id" })
+# Load a specific composition (returns the bare record; raises on error)
+composition = client.Composition.load({ "id" => "example_id" })
 puts composition
 ```
 
@@ -144,7 +144,7 @@ local client = sdk.new()
 
 
 -- Load a specific composition
-local composition, err = client:composition():load({ id = "example_id" })
+local composition, err = client:Composition():load({ id = "example_id" })
 print(composition)
 ```
 
@@ -157,22 +157,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = IrailSDK.test()
-const result = await client.composition.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const composition = await client.Composition().load({ id: 'test01' })
+// composition is a bare Composition populated with mock data
+console.log(composition)
 ```
 
 ### Python
 
 ```python
 client = IrailSDK.test()
-result = client.composition.load({"id": "test01"})
+composition = client.Composition().load({"id": "test01"})
+print(composition)
 ```
 
 ### PHP
 
 ```php
-$client = IrailSDK::test();
-$result = $client->composition()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = IrailSDK::test([
+    "entity" => ["composition" => ["test01" => ["id" => "test01"]]],
+]);
+$composition = $client->Composition()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -187,15 +192,18 @@ result, err := client.Composition(nil).Load(
 ### Ruby
 
 ```ruby
-client = IrailSDK.test
-result = client.composition.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = IrailSDK.test({
+  "entity" => { "composition" => { "test01" => { "id" => "test01" } } },
+})
+composition = client.Composition.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:composition():load({ id = "test01" })
+local result, err = client:Composition():load({ id = "test01" })
 ```
 
 ## How it works
@@ -243,6 +251,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

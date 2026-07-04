@@ -30,36 +30,30 @@ go mod edit -replace github.com/voxgig-sdk/irail-sdk/go=../irail-sdk/go
 This tutorial walks through creating a client, listing entities, and
 loading a specific record.
 
-### 1. Create a client
+### Quickstart
+
+A complete program: create a client, then call the entity operations.
+Each operation returns `(value, error)` — the value is the data itself
+(there is no `{ok, data}` wrapper), so check `err` and use the value
+directly.
 
 ```go
 package main
 
 import (
     "fmt"
-
     sdk "github.com/voxgig-sdk/irail-sdk/go"
-    "github.com/voxgig-sdk/irail-sdk/go/core"
 )
 
 func main() {
     client := sdk.New()
-```
 
-### 3. Load a composition
-
-```go
-    result, err = client.Composition(nil).Load(
-        map[string]any{"id": "example_id"}, nil,
-    )
+    // Load a single composition — the value is the loaded record.
+    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
-
-    rm = core.ToMapAny(result)
-    if rm["ok"] == true {
-        fmt.Println(rm["data"])
-    }
+    fmt.Println(composition)
 }
 ```
 
@@ -110,10 +104,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-result, err := client.Composition(nil).Load(
+composition, err := client.Composition(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
-// result contains mock response data
+if err != nil {
+    panic(err)
+}
+fmt.Println(composition) // the loaded mock data
 ```
 
 ### Use a custom fetch function
@@ -195,7 +192,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Disturbance` | `(data map[string]any) IrailEntity` | Create a Disturbance entity instance. |
 | `Liveboard` | `(data map[string]any) IrailEntity` | Create a Liveboard entity instance. |
 | `Log` | `(data map[string]any) IrailEntity` | Create a Log entity instance. |
-| `Occupancy` | `(data map[string]any) IrailEntity` | Create a Occupancy entity instance. |
+| `Occupancy` | `(data map[string]any) IrailEntity` | Create an Occupancy entity instance. |
 | `Station` | `(data map[string]any) IrailEntity` | Create a Station entity instance. |
 | `Vehicle` | `(data map[string]any) IrailEntity` | Create a Vehicle entity instance. |
 
@@ -217,17 +214,24 @@ All entities implement the `IrailEntity` interface.
 
 ### Result shape
 
-Entity operations return `(any, error)`. The `any` value is a
-`map[string]any` with these keys:
+Entity operations return `(value, error)`. The `value` is the
+operation's data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `"ok"` | `bool` | `true` if the HTTP status is 2xx. |
-| `"status"` | `int` | HTTP status code. |
-| `"headers"` | `map[string]any` | Response headers. |
-| `"data"` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `Load` / `Create` / `Update` / `Remove` | the entity record (`map[string]any`) |
+| `List` | a `[]any` of entity records |
 
-On error, `"ok"` is `false` and `"err"` contains the error value.
+Check `err` first, then use the value directly (or the typed
+`...Typed` variants, which return the entity's model struct and a typed
+slice):
+
+    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id"}, nil)
+    if err != nil { /* handle */ }
+    // composition is the loaded record
+
+Only `Direct()` returns a response envelope — a `map[string]any` with
+`"ok"`, `"status"`, `"headers"`, and `"data"` keys.
 
 ### Entities
 
@@ -362,7 +366,11 @@ Create an instance: `composition := client.Composition(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Composition(nil).Load(map[string]any{"id": "composition_id"}, nil)
+composition, err := client.Composition(nil).Load(map[string]any{"id": "composition_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(composition) // the loaded record
 ```
 
 
@@ -390,7 +398,11 @@ Create an instance: `connection := client.Connection(nil)`
 #### Example: List
 
 ```go
-results, err := client.Connection(nil).List(nil, nil)
+connections, err := client.Connection(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(connections) // the array of records
 ```
 
 
@@ -418,7 +430,11 @@ Create an instance: `disturbance := client.Disturbance(nil)`
 #### Example: List
 
 ```go
-results, err := client.Disturbance(nil).List(nil, nil)
+disturbances, err := client.Disturbance(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(disturbances) // the array of records
 ```
 
 
@@ -445,7 +461,11 @@ Create an instance: `liveboard := client.Liveboard(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Liveboard(nil).Load(map[string]any{"id": "liveboard_id"}, nil)
+liveboard, err := client.Liveboard(nil).Load(map[string]any{"id": "liveboard_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(liveboard) // the loaded record
 ```
 
 
@@ -470,7 +490,11 @@ Create an instance: `log := client.Log(nil)`
 #### Example: List
 
 ```go
-results, err := client.Log(nil).List(nil, nil)
+logs, err := client.Log(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(logs) // the array of records
 ```
 
 
@@ -513,7 +537,11 @@ Create an instance: `station := client.Station(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Station(nil).Load(map[string]any{"id": "station_id"}, nil)
+station, err := client.Station(nil).Load(map[string]any{"id": "station_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(station) // the loaded record
 ```
 
 
@@ -540,7 +568,11 @@ Create an instance: `vehicle := client.Vehicle(nil)`
 #### Example: Load
 
 ```go
-result, err := client.Vehicle(nil).Load(map[string]any{"id": "vehicle_id"}, nil)
+vehicle, err := client.Vehicle(nil).Load(map[string]any{"id": "vehicle_id"}, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(vehicle) // the loaded record
 ```
 
 

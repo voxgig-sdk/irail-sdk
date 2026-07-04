@@ -208,104 +208,56 @@ class IrailSDK
   end
 
 
-  # Idiomatic facade: client.composition.list / client.composition.load({ "id" => ... })
-  def composition
-    require_relative 'entity/composition_entity'
-    @composition ||= CompositionEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.composition instead.
+  # Canonical facade: client.Composition.list / client.Composition.load({ "id" => ... })
   def Composition(data = nil)
     require_relative 'entity/composition_entity'
     CompositionEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.connection.list / client.connection.load({ "id" => ... })
-  def connection
-    require_relative 'entity/connection_entity'
-    @connection ||= ConnectionEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.connection instead.
+  # Canonical facade: client.Connection.list / client.Connection.load({ "id" => ... })
   def Connection(data = nil)
     require_relative 'entity/connection_entity'
     ConnectionEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.disturbance.list / client.disturbance.load({ "id" => ... })
-  def disturbance
-    require_relative 'entity/disturbance_entity'
-    @disturbance ||= DisturbanceEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.disturbance instead.
+  # Canonical facade: client.Disturbance.list / client.Disturbance.load({ "id" => ... })
   def Disturbance(data = nil)
     require_relative 'entity/disturbance_entity'
     DisturbanceEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.liveboard.list / client.liveboard.load({ "id" => ... })
-  def liveboard
-    require_relative 'entity/liveboard_entity'
-    @liveboard ||= LiveboardEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.liveboard instead.
+  # Canonical facade: client.Liveboard.list / client.Liveboard.load({ "id" => ... })
   def Liveboard(data = nil)
     require_relative 'entity/liveboard_entity'
     LiveboardEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.log.list / client.log.load({ "id" => ... })
-  def log
-    require_relative 'entity/log_entity'
-    @log ||= LogEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.log instead.
+  # Canonical facade: client.Log.list / client.Log.load({ "id" => ... })
   def Log(data = nil)
     require_relative 'entity/log_entity'
     LogEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.occupancy.list / client.occupancy.load({ "id" => ... })
-  def occupancy
-    require_relative 'entity/occupancy_entity'
-    @occupancy ||= OccupancyEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.occupancy instead.
+  # Canonical facade: client.Occupancy.list / client.Occupancy.load({ "id" => ... })
   def Occupancy(data = nil)
     require_relative 'entity/occupancy_entity'
     OccupancyEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.station.list / client.station.load({ "id" => ... })
-  def station
-    require_relative 'entity/station_entity'
-    @station ||= StationEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.station instead.
+  # Canonical facade: client.Station.list / client.Station.load({ "id" => ... })
   def Station(data = nil)
     require_relative 'entity/station_entity'
     StationEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.vehicle.list / client.vehicle.load({ "id" => ... })
-  def vehicle
-    require_relative 'entity/vehicle_entity'
-    @vehicle ||= VehicleEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.vehicle instead.
+  # Canonical facade: client.Vehicle.list / client.Vehicle.load({ "id" => ... })
   def Vehicle(data = nil)
     require_relative 'entity/vehicle_entity'
     VehicleEntity.new(self, data)

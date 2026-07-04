@@ -860,7 +860,7 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body.vehicle`",
+									"res": "`body`",
 								},
 								"index$": 0,
 							},

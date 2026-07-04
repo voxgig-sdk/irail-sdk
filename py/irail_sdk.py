@@ -220,137 +220,57 @@ class IrailSDK:
         }
 
 
-    @property
-    def composition(self):
-        """Idiomatic facade: client.composition.list() / client.composition.load({"id": ...})."""
-        from entity.composition_entity import CompositionEntity
-        cached = getattr(self, "_composition", None)
-        if cached is None:
-            cached = CompositionEntity(self, None)
-            self._composition = cached
-        return cached
-
-    def Composition(self, data=None):
-        # Deprecated: use client.composition instead.
+    def Composition(self, data=None) -> "CompositionEntity":
+        """Entity factory: client.Composition().list({}) / client.Composition().load({"id": ...})."""
         from entity.composition_entity import CompositionEntity
         return CompositionEntity(self, data)
 
 
-    @property
-    def connection(self):
-        """Idiomatic facade: client.connection.list() / client.connection.load({"id": ...})."""
-        from entity.connection_entity import ConnectionEntity
-        cached = getattr(self, "_connection", None)
-        if cached is None:
-            cached = ConnectionEntity(self, None)
-            self._connection = cached
-        return cached
-
-    def Connection(self, data=None):
-        # Deprecated: use client.connection instead.
+    def Connection(self, data=None) -> "ConnectionEntity":
+        """Entity factory: client.Connection().list({}) / client.Connection().load({"id": ...})."""
         from entity.connection_entity import ConnectionEntity
         return ConnectionEntity(self, data)
 
 
-    @property
-    def disturbance(self):
-        """Idiomatic facade: client.disturbance.list() / client.disturbance.load({"id": ...})."""
-        from entity.disturbance_entity import DisturbanceEntity
-        cached = getattr(self, "_disturbance", None)
-        if cached is None:
-            cached = DisturbanceEntity(self, None)
-            self._disturbance = cached
-        return cached
-
-    def Disturbance(self, data=None):
-        # Deprecated: use client.disturbance instead.
+    def Disturbance(self, data=None) -> "DisturbanceEntity":
+        """Entity factory: client.Disturbance().list({}) / client.Disturbance().load({"id": ...})."""
         from entity.disturbance_entity import DisturbanceEntity
         return DisturbanceEntity(self, data)
 
 
-    @property
-    def liveboard(self):
-        """Idiomatic facade: client.liveboard.list() / client.liveboard.load({"id": ...})."""
-        from entity.liveboard_entity import LiveboardEntity
-        cached = getattr(self, "_liveboard", None)
-        if cached is None:
-            cached = LiveboardEntity(self, None)
-            self._liveboard = cached
-        return cached
-
-    def Liveboard(self, data=None):
-        # Deprecated: use client.liveboard instead.
+    def Liveboard(self, data=None) -> "LiveboardEntity":
+        """Entity factory: client.Liveboard().list({}) / client.Liveboard().load({"id": ...})."""
         from entity.liveboard_entity import LiveboardEntity
         return LiveboardEntity(self, data)
 
 
-    @property
-    def log(self):
-        """Idiomatic facade: client.log.list() / client.log.load({"id": ...})."""
-        from entity.log_entity import LogEntity
-        cached = getattr(self, "_log", None)
-        if cached is None:
-            cached = LogEntity(self, None)
-            self._log = cached
-        return cached
-
-    def Log(self, data=None):
-        # Deprecated: use client.log instead.
+    def Log(self, data=None) -> "LogEntity":
+        """Entity factory: client.Log().list({}) / client.Log().load({"id": ...})."""
         from entity.log_entity import LogEntity
         return LogEntity(self, data)
 
 
-    @property
-    def occupancy(self):
-        """Idiomatic facade: client.occupancy.list() / client.occupancy.load({"id": ...})."""
-        from entity.occupancy_entity import OccupancyEntity
-        cached = getattr(self, "_occupancy", None)
-        if cached is None:
-            cached = OccupancyEntity(self, None)
-            self._occupancy = cached
-        return cached
-
-    def Occupancy(self, data=None):
-        # Deprecated: use client.occupancy instead.
+    def Occupancy(self, data=None) -> "OccupancyEntity":
+        """Entity factory: client.Occupancy().list({}) / client.Occupancy().load({"id": ...})."""
         from entity.occupancy_entity import OccupancyEntity
         return OccupancyEntity(self, data)
 
 
-    @property
-    def station(self):
-        """Idiomatic facade: client.station.list() / client.station.load({"id": ...})."""
-        from entity.station_entity import StationEntity
-        cached = getattr(self, "_station", None)
-        if cached is None:
-            cached = StationEntity(self, None)
-            self._station = cached
-        return cached
-
-    def Station(self, data=None):
-        # Deprecated: use client.station instead.
+    def Station(self, data=None) -> "StationEntity":
+        """Entity factory: client.Station().list({}) / client.Station().load({"id": ...})."""
         from entity.station_entity import StationEntity
         return StationEntity(self, data)
 
 
-    @property
-    def vehicle(self):
-        """Idiomatic facade: client.vehicle.list() / client.vehicle.load({"id": ...})."""
-        from entity.vehicle_entity import VehicleEntity
-        cached = getattr(self, "_vehicle", None)
-        if cached is None:
-            cached = VehicleEntity(self, None)
-            self._vehicle = cached
-        return cached
-
-    def Vehicle(self, data=None):
-        # Deprecated: use client.vehicle instead.
+    def Vehicle(self, data=None) -> "VehicleEntity":
+        """Entity factory: client.Vehicle().list({}) / client.Vehicle().load({"id": ...})."""
         from entity.vehicle_entity import VehicleEntity
         return VehicleEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "IrailSDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -370,3 +290,16 @@ class IrailSDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.composition_entity import CompositionEntity
+    from entity.connection_entity import ConnectionEntity
+    from entity.disturbance_entity import DisturbanceEntity
+    from entity.liveboard_entity import LiveboardEntity
+    from entity.log_entity import LogEntity
+    from entity.occupancy_entity import OccupancyEntity
+    from entity.station_entity import StationEntity
+    from entity.vehicle_entity import VehicleEntity

@@ -866,7 +866,7 @@ class IrailConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body.vehicle`',
+                    'res' => '`body`',
                   ],
                   'index$' => 0,
                 ],

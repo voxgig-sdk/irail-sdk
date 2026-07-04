@@ -97,7 +97,7 @@ main: kit: entity: vehicle: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body.vehicle`"
+            res: "`body`"
           }
         }
       ]

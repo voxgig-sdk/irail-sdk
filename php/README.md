@@ -33,9 +33,10 @@ $client = new IrailSDK();
 
 ```php
 try {
-    $result = $client->composition()->load(["id" => "example_id"]);
-    print_r($result);
-} catch (\Exception $err) {
+    // load() returns the bare Composition record (throws on error).
+    $composition = $client->Composition()->load(["id" => "example_id"]);
+    print_r($composition);
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -81,13 +82,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = IrailSDK::test();
+$client = IrailSDK::test([
+    "entity" => ["composition" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->composition()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$composition = $client->Composition()->load(["id" => "test01"]);
+print_r($composition);
 ```
 
 ### Use a custom fetch function
@@ -171,7 +176,7 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `Disturbance` | `($data): DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard` | `($data): LiveboardEntity` | Create a Liveboard entity instance. |
 | `Log` | `($data): LogEntity` | Create a Log entity instance. |
-| `Occupancy` | `($data): OccupancyEntity` | Create a Occupancy entity instance. |
+| `Occupancy` | `($data): OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station` | `($data): StationEntity` | Create a Station entity instance. |
 | `Vehicle` | `($data): VehicleEntity` | Create a Vehicle entity instance. |
 
@@ -324,7 +329,7 @@ API path: `/vehicle/`
 
 ### Composition
 
-Create an instance: `const composition = client.composition`
+Create an instance: `$composition = $client->Composition();`
 
 #### Operations
 
@@ -343,14 +348,15 @@ Create an instance: `const composition = client.composition`
 
 #### Example: Load
 
-```ts
-const composition = await client.composition.load({ id: 'composition_id' })
+```php
+// load() returns the bare Composition record (throws on error).
+$composition = $client->Composition()->load(["id" => "composition_id"]);
 ```
 
 
 ### Connection
 
-Create an instance: `const connection = client.connection`
+Create an instance: `$connection = $client->Connection();`
 
 #### Operations
 
@@ -371,14 +377,15 @@ Create an instance: `const connection = client.connection`
 
 #### Example: List
 
-```ts
-const connections = await client.connection.list()
+```php
+// list() returns an array of Connection records (throws on error).
+$connections = $client->Connection()->list();
 ```
 
 
 ### Disturbance
 
-Create an instance: `const disturbance = client.disturbance`
+Create an instance: `$disturbance = $client->Disturbance();`
 
 #### Operations
 
@@ -399,14 +406,15 @@ Create an instance: `const disturbance = client.disturbance`
 
 #### Example: List
 
-```ts
-const disturbances = await client.disturbance.list()
+```php
+// list() returns an array of Disturbance records (throws on error).
+$disturbances = $client->Disturbance()->list();
 ```
 
 
 ### Liveboard
 
-Create an instance: `const liveboard = client.liveboard`
+Create an instance: `$liveboard = $client->Liveboard();`
 
 #### Operations
 
@@ -426,14 +434,15 @@ Create an instance: `const liveboard = client.liveboard`
 
 #### Example: Load
 
-```ts
-const liveboard = await client.liveboard.load({ id: 'liveboard_id' })
+```php
+// load() returns the bare Liveboard record (throws on error).
+$liveboard = $client->Liveboard()->load(["id" => "liveboard_id"]);
 ```
 
 
 ### Log
 
-Create an instance: `const log = client.log`
+Create an instance: `$log = $client->Log();`
 
 #### Operations
 
@@ -451,14 +460,15 @@ Create an instance: `const log = client.log`
 
 #### Example: List
 
-```ts
-const logs = await client.log.list()
+```php
+// list() returns an array of Log records (throws on error).
+$logs = $client->Log()->list();
 ```
 
 
 ### Occupancy
 
-Create an instance: `const occupancy = client.occupancy`
+Create an instance: `$occupancy = $client->Occupancy();`
 
 #### Operations
 
@@ -468,15 +478,15 @@ Create an instance: `const occupancy = client.occupancy`
 
 #### Example: Create
 
-```ts
-const occupancy = await client.occupancy.create({
-})
+```php
+$occupancy = $client->Occupancy()->create([
+]);
 ```
 
 
 ### Station
 
-Create an instance: `const station = client.station`
+Create an instance: `$station = $client->Station();`
 
 #### Operations
 
@@ -494,14 +504,15 @@ Create an instance: `const station = client.station`
 
 #### Example: Load
 
-```ts
-const station = await client.station.load({ id: 'station_id' })
+```php
+// load() returns the bare Station record (throws on error).
+$station = $client->Station()->load(["id" => "station_id"]);
 ```
 
 
 ### Vehicle
 
-Create an instance: `const vehicle = client.vehicle`
+Create an instance: `$vehicle = $client->Vehicle();`
 
 #### Operations
 
@@ -521,8 +532,9 @@ Create an instance: `const vehicle = client.vehicle`
 
 #### Example: Load
 
-```ts
-const vehicle = await client.vehicle.load({ id: 'vehicle_id' })
+```php
+// load() returns the bare Vehicle record (throws on error).
+$vehicle = $client->Vehicle()->load(["id" => "vehicle_id"]);
 ```
 
 
@@ -597,7 +609,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$composition = $client->composition();
+$composition = $client->Composition();
 $composition->load(["id" => "example_id"]);
 
 // $composition->dataGet() now returns the loaded composition data

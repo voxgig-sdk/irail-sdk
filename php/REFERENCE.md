@@ -113,7 +113,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## CompositionEntity
 
 ```php
-$composition = $client->composition();
+$composition = $client->Composition();
 ```
 
 ### Fields
@@ -132,7 +132,7 @@ $composition = $client->composition();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->composition()->load(["id" => "composition_id"]);
+$result = $client->Composition()->load(["id" => "composition_id"]);
 ```
 
 ### Common Methods
@@ -168,7 +168,7 @@ Return the entity name.
 ## ConnectionEntity
 
 ```php
-$connection = $client->connection();
+$connection = $client->Connection();
 ```
 
 ### Fields
@@ -189,7 +189,7 @@ $connection = $client->connection();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->connection()->list([]);
+$results = $client->Connection()->list([]);
 ```
 
 ### Common Methods
@@ -225,7 +225,7 @@ Return the entity name.
 ## DisturbanceEntity
 
 ```php
-$disturbance = $client->disturbance();
+$disturbance = $client->Disturbance();
 ```
 
 ### Fields
@@ -246,7 +246,7 @@ $disturbance = $client->disturbance();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->disturbance()->list([]);
+$results = $client->Disturbance()->list([]);
 ```
 
 ### Common Methods
@@ -282,7 +282,7 @@ Return the entity name.
 ## LiveboardEntity
 
 ```php
-$liveboard = $client->liveboard();
+$liveboard = $client->Liveboard();
 ```
 
 ### Fields
@@ -302,7 +302,7 @@ $liveboard = $client->liveboard();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->liveboard()->load(["id" => "liveboard_id"]);
+$result = $client->Liveboard()->load(["id" => "liveboard_id"]);
 ```
 
 ### Common Methods
@@ -338,7 +338,7 @@ Return the entity name.
 ## LogEntity
 
 ```php
-$log = $client->log();
+$log = $client->Log();
 ```
 
 ### Fields
@@ -356,7 +356,7 @@ $log = $client->log();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->log()->list([]);
+$results = $client->Log()->list([]);
 ```
 
 ### Common Methods
@@ -392,7 +392,7 @@ Return the entity name.
 ## OccupancyEntity
 
 ```php
-$occupancy = $client->occupancy();
+$occupancy = $client->Occupancy();
 ```
 
 ### Operations
@@ -402,7 +402,7 @@ $occupancy = $client->occupancy();
 Create a new entity with the given data. Throws on error.
 
 ```php
-$result = $client->occupancy()->create([
+$result = $client->Occupancy()->create([
 ]);
 ```
 
@@ -439,7 +439,7 @@ Return the entity name.
 ## StationEntity
 
 ```php
-$station = $client->station();
+$station = $client->Station();
 ```
 
 ### Fields
@@ -457,7 +457,7 @@ $station = $client->station();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->station()->load(["id" => "station_id"]);
+$result = $client->Station()->load(["id" => "station_id"]);
 ```
 
 ### Common Methods
@@ -493,7 +493,7 @@ Return the entity name.
 ## VehicleEntity
 
 ```php
-$vehicle = $client->vehicle();
+$vehicle = $client->Vehicle();
 ```
 
 ### Fields
@@ -513,7 +513,7 @@ $vehicle = $client->vehicle();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->vehicle()->load(["id" => "vehicle_id"]);
+$result = $client->Vehicle()->load(["id" => "vehicle_id"]);
 ```
 
 ### Common Methods

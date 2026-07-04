@@ -233,10 +233,10 @@ class IrailSDK
 
     private $_composition = null;
 
-    // Idiomatic facade: $client->composition()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Composition() (PHP method
-    // names are case-insensitive).
-    public function composition($data = null)
+    // Canonical facade: $client->Composition()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->composition()
+    // resolves here too.
+    public function Composition($data = null)
     {
         require_once __DIR__ . '/entity/composition_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class IrailSDK
 
     private $_connection = null;
 
-    // Idiomatic facade: $client->connection()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Connection() (PHP method
-    // names are case-insensitive).
-    public function connection($data = null)
+    // Canonical facade: $client->Connection()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->connection()
+    // resolves here too.
+    public function Connection($data = null)
     {
         require_once __DIR__ . '/entity/connection_entity.php';
         if ($data === null) {
@@ -269,10 +269,10 @@ class IrailSDK
 
     private $_disturbance = null;
 
-    // Idiomatic facade: $client->disturbance()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Disturbance() (PHP method
-    // names are case-insensitive).
-    public function disturbance($data = null)
+    // Canonical facade: $client->Disturbance()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->disturbance()
+    // resolves here too.
+    public function Disturbance($data = null)
     {
         require_once __DIR__ . '/entity/disturbance_entity.php';
         if ($data === null) {
@@ -287,10 +287,10 @@ class IrailSDK
 
     private $_liveboard = null;
 
-    // Idiomatic facade: $client->liveboard()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Liveboard() (PHP method
-    // names are case-insensitive).
-    public function liveboard($data = null)
+    // Canonical facade: $client->Liveboard()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->liveboard()
+    // resolves here too.
+    public function Liveboard($data = null)
     {
         require_once __DIR__ . '/entity/liveboard_entity.php';
         if ($data === null) {
@@ -305,10 +305,10 @@ class IrailSDK
 
     private $_log = null;
 
-    // Idiomatic facade: $client->log()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Log() (PHP method
-    // names are case-insensitive).
-    public function log($data = null)
+    // Canonical facade: $client->Log()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->log()
+    // resolves here too.
+    public function Log($data = null)
     {
         require_once __DIR__ . '/entity/log_entity.php';
         if ($data === null) {
@@ -323,10 +323,10 @@ class IrailSDK
 
     private $_occupancy = null;
 
-    // Idiomatic facade: $client->occupancy()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Occupancy() (PHP method
-    // names are case-insensitive).
-    public function occupancy($data = null)
+    // Canonical facade: $client->Occupancy()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->occupancy()
+    // resolves here too.
+    public function Occupancy($data = null)
     {
         require_once __DIR__ . '/entity/occupancy_entity.php';
         if ($data === null) {
@@ -341,10 +341,10 @@ class IrailSDK
 
     private $_station = null;
 
-    // Idiomatic facade: $client->station()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Station() (PHP method
-    // names are case-insensitive).
-    public function station($data = null)
+    // Canonical facade: $client->Station()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->station()
+    // resolves here too.
+    public function Station($data = null)
     {
         require_once __DIR__ . '/entity/station_entity.php';
         if ($data === null) {
@@ -359,10 +359,10 @@ class IrailSDK
 
     private $_vehicle = null;
 
-    // Idiomatic facade: $client->vehicle()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Vehicle() (PHP method
-    // names are case-insensitive).
-    public function vehicle($data = null)
+    // Canonical facade: $client->Vehicle()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->vehicle()
+    // resolves here too.
+    public function Vehicle($data = null)
     {
         require_once __DIR__ . '/entity/vehicle_entity.php';
         if ($data === null) {

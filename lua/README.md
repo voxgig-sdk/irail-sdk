@@ -34,9 +34,9 @@ local client = sdk.new()
 ### 3. Load a composition
 
 ```lua
-local result, err = client:composition():load({ id = "example_id" })
+local composition, err = client:Composition():load({ id = "example_id" })
 if err then error(err) end
-print(result)
+print(composition)
 ```
 
 
@@ -82,8 +82,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:composition():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:Composition():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -166,7 +166,7 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Disturbance` | `(data) -> DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard` | `(data) -> LiveboardEntity` | Create a Liveboard entity instance. |
 | `Log` | `(data) -> LogEntity` | Create a Log entity instance. |
-| `Occupancy` | `(data) -> OccupancyEntity` | Create a Occupancy entity instance. |
+| `Occupancy` | `(data) -> OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station` | `(data) -> StationEntity` | Create a Station entity instance. |
 | `Vehicle` | `(data) -> VehicleEntity` | Create a Vehicle entity instance. |
 
@@ -190,17 +190,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local composition, err = client:Composition():load({ id = "example_id" })
+    if err then error(err) end
+    -- composition is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -315,7 +320,7 @@ API path: `/vehicle/`
 
 ### Composition
 
-Create an instance: `const composition = client.composition`
+Create an instance: `local composition = client:Composition(nil)`
 
 #### Operations
 
@@ -334,14 +339,14 @@ Create an instance: `const composition = client.composition`
 
 #### Example: Load
 
-```ts
-const composition = await client.composition.load({ id: 'composition_id' })
+```lua
+local composition, err = client:Composition():load({ id = "composition_id" })
 ```
 
 
 ### Connection
 
-Create an instance: `const connection = client.connection`
+Create an instance: `local connection = client:Connection(nil)`
 
 #### Operations
 
@@ -362,14 +367,14 @@ Create an instance: `const connection = client.connection`
 
 #### Example: List
 
-```ts
-const connections = await client.connection.list()
+```lua
+local connections, err = client:Connection():list()
 ```
 
 
 ### Disturbance
 
-Create an instance: `const disturbance = client.disturbance`
+Create an instance: `local disturbance = client:Disturbance(nil)`
 
 #### Operations
 
@@ -390,14 +395,14 @@ Create an instance: `const disturbance = client.disturbance`
 
 #### Example: List
 
-```ts
-const disturbances = await client.disturbance.list()
+```lua
+local disturbances, err = client:Disturbance():list()
 ```
 
 
 ### Liveboard
 
-Create an instance: `const liveboard = client.liveboard`
+Create an instance: `local liveboard = client:Liveboard(nil)`
 
 #### Operations
 
@@ -417,14 +422,14 @@ Create an instance: `const liveboard = client.liveboard`
 
 #### Example: Load
 
-```ts
-const liveboard = await client.liveboard.load({ id: 'liveboard_id' })
+```lua
+local liveboard, err = client:Liveboard():load({ id = "liveboard_id" })
 ```
 
 
 ### Log
 
-Create an instance: `const log = client.log`
+Create an instance: `local log = client:Log(nil)`
 
 #### Operations
 
@@ -442,14 +447,14 @@ Create an instance: `const log = client.log`
 
 #### Example: List
 
-```ts
-const logs = await client.log.list()
+```lua
+local logs, err = client:Log():list()
 ```
 
 
 ### Occupancy
 
-Create an instance: `const occupancy = client.occupancy`
+Create an instance: `local occupancy = client:Occupancy(nil)`
 
 #### Operations
 
@@ -459,15 +464,15 @@ Create an instance: `const occupancy = client.occupancy`
 
 #### Example: Create
 
-```ts
-const occupancy = await client.occupancy.create({
+```lua
+local occupancy, err = client:Occupancy():create({
 })
 ```
 
 
 ### Station
 
-Create an instance: `const station = client.station`
+Create an instance: `local station = client:Station(nil)`
 
 #### Operations
 
@@ -485,14 +490,14 @@ Create an instance: `const station = client.station`
 
 #### Example: Load
 
-```ts
-const station = await client.station.load({ id: 'station_id' })
+```lua
+local station, err = client:Station():load({ id = "station_id" })
 ```
 
 
 ### Vehicle
 
-Create an instance: `const vehicle = client.vehicle`
+Create an instance: `local vehicle = client:Vehicle(nil)`
 
 #### Operations
 
@@ -512,8 +517,8 @@ Create an instance: `const vehicle = client.vehicle`
 
 #### Example: Load
 
-```ts
-const vehicle = await client.vehicle.load({ id: 'vehicle_id' })
+```lua
+local vehicle, err = client:Vehicle():load({ id = "vehicle_id" })
 ```
 
 
@@ -588,7 +593,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local composition = client:composition()
+local composition = client:Composition()
 composition:load({ id = "example_id" })
 
 -- composition:data_get() now returns the loaded composition data

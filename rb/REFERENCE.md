@@ -114,7 +114,7 @@ same parameters as `direct()`. Raises on error.
 ## CompositionEntity
 
 ```ruby
-composition = client.composition
+composition = client.Composition
 ```
 
 ### Fields
@@ -133,7 +133,7 @@ composition = client.composition
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.composition.load({ "id" => "composition_id" })
+result = client.Composition.load({ "id" => "composition_id" })
 ```
 
 ### Common Methods
@@ -169,7 +169,7 @@ Return the entity name.
 ## ConnectionEntity
 
 ```ruby
-connection = client.connection
+connection = client.Connection
 ```
 
 ### Fields
@@ -190,7 +190,7 @@ connection = client.connection
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.connection.list(nil)
+results = client.Connection.list(nil)
 ```
 
 ### Common Methods
@@ -226,7 +226,7 @@ Return the entity name.
 ## DisturbanceEntity
 
 ```ruby
-disturbance = client.disturbance
+disturbance = client.Disturbance
 ```
 
 ### Fields
@@ -247,7 +247,7 @@ disturbance = client.disturbance
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.disturbance.list(nil)
+results = client.Disturbance.list(nil)
 ```
 
 ### Common Methods
@@ -283,7 +283,7 @@ Return the entity name.
 ## LiveboardEntity
 
 ```ruby
-liveboard = client.liveboard
+liveboard = client.Liveboard
 ```
 
 ### Fields
@@ -303,7 +303,7 @@ liveboard = client.liveboard
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.liveboard.load({ "id" => "liveboard_id" })
+result = client.Liveboard.load({ "id" => "liveboard_id" })
 ```
 
 ### Common Methods
@@ -339,7 +339,7 @@ Return the entity name.
 ## LogEntity
 
 ```ruby
-log = client.log
+log = client.Log
 ```
 
 ### Fields
@@ -357,7 +357,7 @@ log = client.log
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.log.list(nil)
+results = client.Log.list(nil)
 ```
 
 ### Common Methods
@@ -393,7 +393,7 @@ Return the entity name.
 ## OccupancyEntity
 
 ```ruby
-occupancy = client.occupancy
+occupancy = client.Occupancy
 ```
 
 ### Operations
@@ -403,7 +403,7 @@ occupancy = client.occupancy
 Create a new entity with the given data. Raises on error.
 
 ```ruby
-result = client.occupancy.create({
+result = client.Occupancy.create({
 })
 ```
 
@@ -440,7 +440,7 @@ Return the entity name.
 ## StationEntity
 
 ```ruby
-station = client.station
+station = client.Station
 ```
 
 ### Fields
@@ -458,7 +458,7 @@ station = client.station
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.station.load({ "id" => "station_id" })
+result = client.Station.load({ "id" => "station_id" })
 ```
 
 ### Common Methods
@@ -494,7 +494,7 @@ Return the entity name.
 ## VehicleEntity
 
 ```ruby
-vehicle = client.vehicle
+vehicle = client.Vehicle
 ```
 
 ### Fields
@@ -514,7 +514,7 @@ vehicle = client.vehicle
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.vehicle.load({ "id" => "vehicle_id" })
+result = client.Vehicle.load({ "id" => "vehicle_id" })
 ```
 
 ### Common Methods

@@ -30,11 +30,14 @@ const client = new IrailSDK()
 
 ### 3. Load a composition
 
-```ts
-const result = await client.composition.load({ id: 'example_id' })
+`load()` returns the entity directly and throws on failure:
 
-if (result.ok) {
-  console.log(result.data)
+```ts
+try {
+  const composition = await client.Composition().load({ id: 'example_id' })
+  console.log(composition)
+} catch (err) {
+  console.error('load failed:', err)
 }
 ```
 
@@ -52,6 +55,9 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
+if (result instanceof Error) {
+  throw result
+}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -80,9 +86,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = IrailSDK.test()
 
-const result = await client.composition.load({ id: 'test01' })
-// result.ok === true
-// result.data contains mock response data
+const composition = await client.Composition().load({ id: 'test01' })
+// composition is a bare entity populated with mock response data
+console.log(composition)
 ```
 
 You can also use the instance method:
@@ -97,7 +103,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.composition
+const entity = client.Composition()
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -180,7 +186,7 @@ new IrailSDK(options?: {
 | `Disturbance(data?)` | `DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard(data?)` | `LiveboardEntity` | Create a Liveboard entity instance. |
 | `Log(data?)` | `LogEntity` | Create a Log entity instance. |
-| `Occupancy(data?)` | `OccupancyEntity` | Create a Occupancy entity instance. |
+| `Occupancy(data?)` | `OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station(data?)` | `StationEntity` | Create a Station entity instance. |
 | `Vehicle(data?)` | `VehicleEntity` | Create a Vehicle entity instance. |
 | `tester(testopts?, sdkopts?)` | `IrailSDK` | Create a test-mode client instance. |
@@ -199,29 +205,30 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Result>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Result>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Result>` | Create a new entity. |
-| `update` | `update(reqdata?, ctrl?): Promise<Result>` | Update an existing entity. |
-| `remove` | `remove(reqmatch?, ctrl?): Promise<Result>` | Remove an entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `update` | `update(reqdata?, ctrl?): Promise<Entity>` | Update an existing entity. |
+| `remove` | `remove(reqmatch?, ctrl?): Promise<void>` | Remove an entity. |
 | `data` | `data(data?): any` | Get or set entity data. |
 | `match` | `match(match?): any` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
 | `client` | `client(): IrailSDK` | Return the parent SDK client. |
 | `entopts` | `entopts(): object` | Return a copy of the entity options. |
 
-#### Result shape
+#### Return values
 
-All entity operations return a Result object:
+Entity operations resolve to the entity data directly — there is no
+result envelope:
 
-```ts
-{
-  ok: boolean      // true if the HTTP status is 2xx
-  status: number   // HTTP status code
-  headers: object  // response headers
-  data: any        // parsed JSON response body
-}
-```
+- `load`, `create` and `update` resolve to a single entity object.
+- `list` resolves to an **array** of entity objects (iterate it directly;
+  there is no `.data` and no `.ok`).
+- `remove` resolves to `void`.
+
+On a failed request these methods **throw**, so wrap calls in
+`try`/`catch` to handle errors. Only `direct()` returns the result
+envelope described below.
 
 ### DirectResult shape
 
@@ -364,7 +371,7 @@ API path: `/vehicle/`
 
 ### Composition
 
-Create an instance: `const composition = client.composition`
+Create an instance: `const composition = client.Composition()`
 
 #### Operations
 
@@ -384,13 +391,13 @@ Create an instance: `const composition = client.composition`
 #### Example: Load
 
 ```ts
-const composition = await client.composition.load({ id: 'composition_id' })
+const composition = await client.Composition().load({ id: 'composition_id' })
 ```
 
 
 ### Connection
 
-Create an instance: `const connection = client.connection`
+Create an instance: `const connection = client.Connection()`
 
 #### Operations
 
@@ -412,13 +419,13 @@ Create an instance: `const connection = client.connection`
 #### Example: List
 
 ```ts
-const connections = await client.connection.list()
+const connections = await client.Connection().list()
 ```
 
 
 ### Disturbance
 
-Create an instance: `const disturbance = client.disturbance`
+Create an instance: `const disturbance = client.Disturbance()`
 
 #### Operations
 
@@ -440,13 +447,13 @@ Create an instance: `const disturbance = client.disturbance`
 #### Example: List
 
 ```ts
-const disturbances = await client.disturbance.list()
+const disturbances = await client.Disturbance().list()
 ```
 
 
 ### Liveboard
 
-Create an instance: `const liveboard = client.liveboard`
+Create an instance: `const liveboard = client.Liveboard()`
 
 #### Operations
 
@@ -467,13 +474,13 @@ Create an instance: `const liveboard = client.liveboard`
 #### Example: Load
 
 ```ts
-const liveboard = await client.liveboard.load({ id: 'liveboard_id' })
+const liveboard = await client.Liveboard().load({ id: 'liveboard_id' })
 ```
 
 
 ### Log
 
-Create an instance: `const log = client.log`
+Create an instance: `const log = client.Log()`
 
 #### Operations
 
@@ -492,13 +499,13 @@ Create an instance: `const log = client.log`
 #### Example: List
 
 ```ts
-const logs = await client.log.list()
+const logs = await client.Log().list()
 ```
 
 
 ### Occupancy
 
-Create an instance: `const occupancy = client.occupancy`
+Create an instance: `const occupancy = client.Occupancy()`
 
 #### Operations
 
@@ -509,14 +516,14 @@ Create an instance: `const occupancy = client.occupancy`
 #### Example: Create
 
 ```ts
-const occupancy = await client.occupancy.create({
+const occupancy = await client.Occupancy().create({
 })
 ```
 
 
 ### Station
 
-Create an instance: `const station = client.station`
+Create an instance: `const station = client.Station()`
 
 #### Operations
 
@@ -535,13 +542,13 @@ Create an instance: `const station = client.station`
 #### Example: Load
 
 ```ts
-const station = await client.station.load({ id: 'station_id' })
+const station = await client.Station().load({ id: 'station_id' })
 ```
 
 
 ### Vehicle
 
-Create an instance: `const vehicle = client.vehicle`
+Create an instance: `const vehicle = client.Vehicle()`
 
 #### Operations
 
@@ -562,7 +569,7 @@ Create an instance: `const vehicle = client.vehicle`
 #### Example: Load
 
 ```ts
-const vehicle = await client.vehicle.load({ id: 'vehicle_id' })
+const vehicle = await client.Vehicle().load({ id: 'vehicle_id' })
 ```
 
 
@@ -633,7 +640,7 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const composition = client.composition
+const composition = client.Composition()
 await composition.load({ id: "example_id" })
 
 // composition.data() now returns the loaded composition data
