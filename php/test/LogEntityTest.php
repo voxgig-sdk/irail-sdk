@@ -50,8 +50,7 @@ class LogEntityTest extends TestCase
         $log_ref01_ent = $client->Log(null);
         $log_ref01_match = [];
 
-        [$log_ref01_list_result, $err] = $log_ref01_ent->list($log_ref01_match, null);
-        $this->assertNull($err);
+        $log_ref01_list_result = $log_ref01_ent->list($log_ref01_match, null);
         $this->assertIsArray($log_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function log_basic_setup($extra)
         "IRAIL_TEST_LOG_ENTID" => $idmap,
         "IRAIL_TEST_LIVE" => "FALSE",
         "IRAIL_TEST_EXPLAIN" => "FALSE",
-        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function log_basic_setup($extra)
     if ($env["IRAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["IRAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

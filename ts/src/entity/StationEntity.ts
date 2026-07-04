@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Station,
+  StationLoadMatch,
+} from '../IrailTypes'
 
 // TODO: needs Entity superclass
-class StationEntity extends IrailEntityBase {
+class StationEntity extends IrailEntityBase<Station> {
 
   constructor(client: IrailSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class StationEntity extends IrailEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: StationLoadMatch, ctrl?: Control): Promise<Station> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class StationEntity extends IrailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Station> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

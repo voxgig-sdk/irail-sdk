@@ -42,8 +42,7 @@ class LiveboardEntityTest < Minitest::Test
     # LOAD
     liveboard_ref01_ent = client.Liveboard(nil)
     liveboard_ref01_match_dt0 = {}
-    liveboard_ref01_data_dt0_loaded, err = liveboard_ref01_ent.load(liveboard_ref01_match_dt0, nil)
-    assert_nil err
+    liveboard_ref01_data_dt0_loaded = liveboard_ref01_ent.load(liveboard_ref01_match_dt0, nil)
     assert !liveboard_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def liveboard_basic_setup(extra)
     "IRAIL_TEST_LIVEBOARD_ENTID" => idmap,
     "IRAIL_TEST_LIVE" => "FALSE",
     "IRAIL_TEST_EXPLAIN" => "FALSE",
-    "IRAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def liveboard_basic_setup(extra)
   if env["IRAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["IRAIL_APIKEY"],
       },
       extra || {},
     ])

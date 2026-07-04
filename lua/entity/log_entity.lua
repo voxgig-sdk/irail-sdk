@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch LogListMatch
+---@param ctrl? table
+---@return Log[]
+---@return string? err
 function LogEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

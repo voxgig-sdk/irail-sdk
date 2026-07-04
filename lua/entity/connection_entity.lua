@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch ConnectionListMatch
+---@param ctrl? table
+---@return Connection[]
+---@return string? err
 function ConnectionEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

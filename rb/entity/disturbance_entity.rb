@@ -45,6 +45,7 @@ class DisturbanceEntity
     end
   end
 
+  # @return [Disturbance, Hash] the current Disturbance data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class DisturbanceEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of Disturbance fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class DisturbanceEntity
   
 
   
+  # List Disturbance items matching the given filter.
+  #
+  # @param reqmatch [DisturbanceListMatch, Hash, nil] match filter (any subset of Disturbance fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<Disturbance>, Array] the matching Disturbance items; raises IrailError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

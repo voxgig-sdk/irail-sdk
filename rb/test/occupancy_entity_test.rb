@@ -36,8 +36,7 @@ class OccupancyEntityTest < Minitest::Test
     occupancy_ref01_data = Helpers.to_map(Vs.getprop(
       Vs.getpath(setup[:data], "new.occupancy"), "occupancy_ref01"))
 
-    occupancy_ref01_data_result, err = occupancy_ref01_ent.create(occupancy_ref01_data, nil)
-    assert_nil err
+    occupancy_ref01_data_result = occupancy_ref01_ent.create(occupancy_ref01_data, nil)
     occupancy_ref01_data = Helpers.to_map(occupancy_ref01_data_result)
     assert !occupancy_ref01_data.nil?
 
@@ -77,7 +76,6 @@ def occupancy_basic_setup(extra)
     "IRAIL_TEST_OCCUPANCY_ENTID" => idmap,
     "IRAIL_TEST_LIVE" => "FALSE",
     "IRAIL_TEST_EXPLAIN" => "FALSE",
-    "IRAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -89,7 +87,6 @@ def occupancy_basic_setup(extra)
   if env["IRAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["IRAIL_APIKEY"],
       },
       extra || {},
     ])

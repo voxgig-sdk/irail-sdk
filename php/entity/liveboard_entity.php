@@ -55,6 +55,9 @@ class LiveboardEntity
         return new LiveboardEntity($this->_client, $opts);
     }
 
+    /**
+     * @param Liveboard|array $args Liveboard data (assoc-array) to store.
+     */
     public function data_set($args): void
     {
         if ($args) {
@@ -63,12 +66,18 @@ class LiveboardEntity
         }
     }
 
+    /**
+     * @return Liveboard|array The current Liveboard data as an assoc-array.
+     */
     public function data_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetData");
         return Struct::clone($this->_data);
     }
 
+    /**
+     * @param array $args Match filter (any subset of Liveboard fields).
+     */
     public function match_set($args): void
     {
         if ($args) {
@@ -77,6 +86,9 @@ class LiveboardEntity
         }
     }
 
+    /**
+     * @return array The current match filter (any subset of Liveboard fields).
+     */
     public function match_get()
     {
         ($this->_utility->feature_hook)($this->_entctx, "GetMatch");
@@ -84,7 +96,16 @@ class LiveboardEntity
     }
 
     
-    public function load($reqmatch, $ctrl = null): array
+    /**
+     * Load a single Liveboard.
+     *
+     * @param LiveboardLoadMatch|array|null $reqmatch Match criteria (id/query
+     *   fields) as an assoc-array; a typed LiveboardLoadMatch names the shape.
+     * @param mixed $ctrl Optional per-call control overrides.
+     * @return Liveboard|array The loaded Liveboard as an assoc-array at the
+     *   SDK boundary; throws IrailError on failure (item-5 convention).
+     */
+    public function load(?array $reqmatch = null, $ctrl = null): mixed
     {
         $utility = $this->_utility;
         $ctx = ($utility->make_context)([
@@ -117,7 +138,7 @@ class LiveboardEntity
 
     
 
-    private function _run_op($ctx, callable $post_done): array
+    private function _run_op($ctx, callable $post_done): mixed
     {
         $utility = $this->_utility;
 

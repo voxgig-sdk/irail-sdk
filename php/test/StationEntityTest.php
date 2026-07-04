@@ -49,8 +49,7 @@ class StationEntityTest extends TestCase
         // LOAD
         $station_ref01_ent = $client->Station(null);
         $station_ref01_match_dt0 = [];
-        [$station_ref01_data_dt0_loaded, $err] = $station_ref01_ent->load($station_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $station_ref01_data_dt0_loaded = $station_ref01_ent->load($station_ref01_match_dt0, null);
         $this->assertNotNull($station_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function station_basic_setup($extra)
         "IRAIL_TEST_STATION_ENTID" => $idmap,
         "IRAIL_TEST_LIVE" => "FALSE",
         "IRAIL_TEST_EXPLAIN" => "FALSE",
-        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function station_basic_setup($extra)
     if ($env["IRAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["IRAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -50,8 +50,7 @@ class ConnectionEntityTest extends TestCase
         $connection_ref01_ent = $client->Connection(null);
         $connection_ref01_match = [];
 
-        [$connection_ref01_list_result, $err] = $connection_ref01_ent->list($connection_ref01_match, null);
-        $this->assertNull($err);
+        $connection_ref01_list_result = $connection_ref01_ent->list($connection_ref01_match, null);
         $this->assertIsArray($connection_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function connection_basic_setup($extra)
         "IRAIL_TEST_CONNECTION_ENTID" => $idmap,
         "IRAIL_TEST_LIVE" => "FALSE",
         "IRAIL_TEST_EXPLAIN" => "FALSE",
-        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function connection_basic_setup($extra)
     if ($env["IRAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["IRAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch DisturbanceListMatch
+---@param ctrl? table
+---@return Disturbance[]
+---@return string? err
 function DisturbanceEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

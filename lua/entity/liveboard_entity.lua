@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch LiveboardLoadMatch
+---@param ctrl? table
+---@return Liveboard
+---@return string? err
 function LiveboardEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

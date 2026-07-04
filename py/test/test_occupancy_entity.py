@@ -44,9 +44,7 @@ class TestOccupancyEntity:
         occupancy_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.occupancy"), "occupancy_ref01"))
 
-        occupancy_ref01_data_result, err = occupancy_ref01_ent.create(occupancy_ref01_data, None)
-        assert err is None
-        occupancy_ref01_data = helpers.to_map(occupancy_ref01_data_result)
+        occupancy_ref01_data = helpers.to_map(occupancy_ref01_ent.create(occupancy_ref01_data, None))
         assert occupancy_ref01_data is not None
 
 
@@ -87,7 +85,6 @@ def _occupancy_basic_setup(extra):
         "IRAIL_TEST_OCCUPANCY_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -98,7 +95,6 @@ def _occupancy_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

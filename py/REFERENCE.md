@@ -20,7 +20,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `dict` | SDK configuration options. |
-| `options["apikey"]` | `str` | API key for authentication. |
 | `options["base"]` | `str` | Base URL for API requests. |
 | `options["prefix"]` | `str` | URL prefix appended after base. |
 | `options["suffix"]` | `str` | URL suffix appended after path. |
@@ -82,9 +81,9 @@ Return a deep copy of the current SDK options.
 
 Return a copy of the SDK utility object.
 
-#### `direct(fetchargs=None) -> tuple`
+#### `direct(fetchargs=None) -> dict`
 
-Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
+Make a direct HTTP request to any API endpoint. Returns a result `dict` with `ok`, `status`, `headers`, and `data` (or `err` on failure). This escape hatch never raises — branch on `result["ok"]`.
 
 **Parameters:**
 
@@ -97,11 +96,11 @@ Make a direct HTTP request to any API endpoint. Returns `(result, err)`.
 | `fetchargs["headers"]` | `dict` | Request headers (merged with defaults). |
 | `fetchargs["body"]` | `any` | Request body (dicts are JSON-serialized). |
 
-**Returns:** `(result_dict, err)`
+**Returns:** `result_dict`
 
-#### `prepare(fetchargs=None) -> tuple`
+#### `prepare(fetchargs=None) -> dict`
 
-Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
+Prepare a fetch definition without sending. Returns the `fetchdef` and raises on error.
 
 
 ---
@@ -109,7 +108,7 @@ Prepare a fetch definition without sending. Returns `(fetchdef, err)`.
 ## CompositionEntity
 
 ```python
-composition = client.Composition()
+composition = client.composition
 ```
 
 ### Fields
@@ -123,12 +122,12 @@ composition = client.Composition()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Composition().load({"id": "composition_id"})
+result = client.composition.load({"id": "composition_id"})
 ```
 
 ### Common Methods
@@ -163,7 +162,7 @@ Return the entity name.
 ## ConnectionEntity
 
 ```python
-connection = client.Connection()
+connection = client.connection
 ```
 
 ### Fields
@@ -179,12 +178,12 @@ connection = client.Connection()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Connection().list({})
+results = client.connection.list({})
 ```
 
 ### Common Methods
@@ -219,7 +218,7 @@ Return the entity name.
 ## DisturbanceEntity
 
 ```python
-disturbance = client.Disturbance()
+disturbance = client.disturbance
 ```
 
 ### Fields
@@ -235,12 +234,12 @@ disturbance = client.Disturbance()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Disturbance().list({})
+results = client.disturbance.list({})
 ```
 
 ### Common Methods
@@ -275,7 +274,7 @@ Return the entity name.
 ## LiveboardEntity
 
 ```python
-liveboard = client.Liveboard()
+liveboard = client.liveboard
 ```
 
 ### Fields
@@ -290,12 +289,12 @@ liveboard = client.Liveboard()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Liveboard().load({"id": "liveboard_id"})
+result = client.liveboard.load({"id": "liveboard_id"})
 ```
 
 ### Common Methods
@@ -330,7 +329,7 @@ Return the entity name.
 ## LogEntity
 
 ```python
-log = client.Log()
+log = client.log
 ```
 
 ### Fields
@@ -343,12 +342,12 @@ log = client.Log()
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> tuple`
+#### `list(reqmatch, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results, err = client.Log().list({})
+results = client.log.list({})
 ```
 
 ### Common Methods
@@ -383,17 +382,17 @@ Return the entity name.
 ## OccupancyEntity
 
 ```python
-occupancy = client.Occupancy()
+occupancy = client.occupancy
 ```
 
 ### Operations
 
-#### `create(reqdata, ctrl=None) -> tuple`
+#### `create(reqdata, ctrl=None) -> dict`
 
-Create a new entity with the given data.
+Create a new entity with the given data. Returns the created entity data and raises on error.
 
 ```python
-result, err = client.Occupancy().create({
+result = client.occupancy.create({
 })
 ```
 
@@ -429,7 +428,7 @@ Return the entity name.
 ## StationEntity
 
 ```python
-station = client.Station()
+station = client.station
 ```
 
 ### Fields
@@ -442,12 +441,12 @@ station = client.Station()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Station().load({"id": "station_id"})
+result = client.station.load({"id": "station_id"})
 ```
 
 ### Common Methods
@@ -482,7 +481,7 @@ Return the entity name.
 ## VehicleEntity
 
 ```python
-vehicle = client.Vehicle()
+vehicle = client.vehicle
 ```
 
 ### Fields
@@ -497,12 +496,12 @@ vehicle = client.Vehicle()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> tuple`
+#### `load(reqmatch, ctrl=None) -> dict`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result, err = client.Vehicle().load({"id": "vehicle_id"})
+result = client.vehicle.load({"id": "vehicle_id"})
 ```
 
 ### Common Methods

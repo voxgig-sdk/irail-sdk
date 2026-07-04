@@ -19,7 +19,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `table` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -112,7 +111,7 @@ same parameters as `direct()`.
 ## CompositionEntity
 
 ```lua
-local composition = client:Composition(nil)
+local composition = client:composition(nil)
 ```
 
 ### Fields
@@ -131,7 +130,7 @@ local composition = client:Composition(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Composition():load({ id = "composition_id" })
+local result, err = client:composition():load({ id = "composition_id" })
 ```
 
 ### Common Methods
@@ -167,7 +166,7 @@ Return the entity name.
 ## ConnectionEntity
 
 ```lua
-local connection = client:Connection(nil)
+local connection = client:connection(nil)
 ```
 
 ### Fields
@@ -188,7 +187,7 @@ local connection = client:Connection(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Connection():list()
+local results, err = client:connection():list()
 ```
 
 ### Common Methods
@@ -224,7 +223,7 @@ Return the entity name.
 ## DisturbanceEntity
 
 ```lua
-local disturbance = client:Disturbance(nil)
+local disturbance = client:disturbance(nil)
 ```
 
 ### Fields
@@ -245,7 +244,7 @@ local disturbance = client:Disturbance(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Disturbance():list()
+local results, err = client:disturbance():list()
 ```
 
 ### Common Methods
@@ -281,7 +280,7 @@ Return the entity name.
 ## LiveboardEntity
 
 ```lua
-local liveboard = client:Liveboard(nil)
+local liveboard = client:liveboard(nil)
 ```
 
 ### Fields
@@ -301,7 +300,7 @@ local liveboard = client:Liveboard(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Liveboard():load({ id = "liveboard_id" })
+local result, err = client:liveboard():load({ id = "liveboard_id" })
 ```
 
 ### Common Methods
@@ -337,7 +336,7 @@ Return the entity name.
 ## LogEntity
 
 ```lua
-local log = client:Log(nil)
+local log = client:log(nil)
 ```
 
 ### Fields
@@ -355,7 +354,7 @@ local log = client:Log(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:Log():list()
+local results, err = client:log():list()
 ```
 
 ### Common Methods
@@ -391,7 +390,7 @@ Return the entity name.
 ## OccupancyEntity
 
 ```lua
-local occupancy = client:Occupancy(nil)
+local occupancy = client:occupancy(nil)
 ```
 
 ### Operations
@@ -401,7 +400,7 @@ local occupancy = client:Occupancy(nil)
 Create a new entity with the given data.
 
 ```lua
-local result, err = client:Occupancy():create({
+local result, err = client:occupancy():create({
 })
 ```
 
@@ -438,7 +437,7 @@ Return the entity name.
 ## StationEntity
 
 ```lua
-local station = client:Station(nil)
+local station = client:station(nil)
 ```
 
 ### Fields
@@ -456,7 +455,7 @@ local station = client:Station(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Station():load({ id = "station_id" })
+local result, err = client:station():load({ id = "station_id" })
 ```
 
 ### Common Methods
@@ -492,7 +491,7 @@ Return the entity name.
 ## VehicleEntity
 
 ```lua
-local vehicle = client:Vehicle(nil)
+local vehicle = client:vehicle(nil)
 ```
 
 ### Fields
@@ -512,7 +511,7 @@ local vehicle = client:Vehicle(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Vehicle():load({ id = "vehicle_id" })
+local result, err = client:vehicle():load({ id = "vehicle_id" })
 ```
 
 ### Common Methods

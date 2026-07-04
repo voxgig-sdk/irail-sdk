@@ -49,8 +49,7 @@ class TestVehicleEntity:
         # LOAD
         vehicle_ref01_ent = client.Vehicle(None)
         vehicle_ref01_match_dt0 = {}
-        vehicle_ref01_data_dt0_loaded, err = vehicle_ref01_ent.load(vehicle_ref01_match_dt0, None)
-        assert err is None
+        vehicle_ref01_data_dt0_loaded = vehicle_ref01_ent.load(vehicle_ref01_match_dt0, None)
         assert vehicle_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _vehicle_basic_setup(extra):
         "IRAIL_TEST_VEHICLE_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _vehicle_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

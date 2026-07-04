@@ -50,8 +50,7 @@ class DisturbanceEntityTest extends TestCase
         $disturbance_ref01_ent = $client->Disturbance(null);
         $disturbance_ref01_match = [];
 
-        [$disturbance_ref01_list_result, $err] = $disturbance_ref01_ent->list($disturbance_ref01_match, null);
-        $this->assertNull($err);
+        $disturbance_ref01_list_result = $disturbance_ref01_ent->list($disturbance_ref01_match, null);
         $this->assertIsArray($disturbance_ref01_list_result);
 
     }
@@ -86,7 +85,6 @@ function disturbance_basic_setup($extra)
         "IRAIL_TEST_DISTURBANCE_ENTID" => $idmap,
         "IRAIL_TEST_LIVE" => "FALSE",
         "IRAIL_TEST_EXPLAIN" => "FALSE",
-        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -98,7 +96,6 @@ function disturbance_basic_setup($extra)
     if ($env["IRAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["IRAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

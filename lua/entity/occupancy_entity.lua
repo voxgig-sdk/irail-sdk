@@ -83,6 +83,10 @@ end
 
 
 
+---@param reqdata OccupancyCreateData
+---@param ctrl? table
+---@return Occupancy
+---@return string? err
 function OccupancyEntity:create(reqdata, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

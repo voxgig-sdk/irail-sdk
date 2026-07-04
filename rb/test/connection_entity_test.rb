@@ -43,8 +43,7 @@ class ConnectionEntityTest < Minitest::Test
     connection_ref01_ent = client.Connection(nil)
     connection_ref01_match = {}
 
-    connection_ref01_list_result, err = connection_ref01_ent.list(connection_ref01_match, nil)
-    assert_nil err
+    connection_ref01_list_result = connection_ref01_ent.list(connection_ref01_match, nil)
     assert connection_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def connection_basic_setup(extra)
     "IRAIL_TEST_CONNECTION_ENTID" => idmap,
     "IRAIL_TEST_LIVE" => "FALSE",
     "IRAIL_TEST_EXPLAIN" => "FALSE",
-    "IRAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def connection_basic_setup(extra)
   if env["IRAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["IRAIL_APIKEY"],
       },
       extra || {},
     ])

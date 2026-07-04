@@ -49,8 +49,7 @@ class TestStationEntity:
         # LOAD
         station_ref01_ent = client.Station(None)
         station_ref01_match_dt0 = {}
-        station_ref01_data_dt0_loaded, err = station_ref01_ent.load(station_ref01_match_dt0, None)
-        assert err is None
+        station_ref01_data_dt0_loaded = station_ref01_ent.load(station_ref01_match_dt0, None)
         assert station_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _station_basic_setup(extra):
         "IRAIL_TEST_STATION_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _station_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

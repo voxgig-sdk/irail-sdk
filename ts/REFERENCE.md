@@ -18,7 +18,6 @@ Create a new SDK client instance.
 | Name | Type | Description |
 | --- | --- | --- |
 | `options` | `object` | SDK configuration options. |
-| `options.apikey` | `string` | API key for authentication. |
 | `options.base` | `string` | Base URL for API requests. |
 | `options.prefix` | `string` | URL prefix appended after base. |
 | `options.suffix` | `string` | URL suffix appended after path. |
@@ -194,7 +193,7 @@ Alias for `IrailSDK.test()`.
 ## CompositionEntity
 
 ```ts
-const composition = client.Composition()
+const composition = client.composition
 ```
 
 ### Fields
@@ -213,7 +212,7 @@ const composition = client.Composition()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Composition().load({ id: 'composition_id' })
+const result = await client.composition.load({ id: 'composition_id' })
 ```
 
 ### Common Methods
@@ -247,7 +246,7 @@ Return a copy of the entity options.
 ## ConnectionEntity
 
 ```ts
-const connection = client.Connection()
+const connection = client.connection
 ```
 
 ### Fields
@@ -268,7 +267,7 @@ const connection = client.Connection()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Connection().list()
+const results = await client.connection.list()
 ```
 
 ### Common Methods
@@ -302,7 +301,7 @@ Return a copy of the entity options.
 ## DisturbanceEntity
 
 ```ts
-const disturbance = client.Disturbance()
+const disturbance = client.disturbance
 ```
 
 ### Fields
@@ -323,7 +322,7 @@ const disturbance = client.Disturbance()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Disturbance().list()
+const results = await client.disturbance.list()
 ```
 
 ### Common Methods
@@ -357,7 +356,7 @@ Return a copy of the entity options.
 ## LiveboardEntity
 
 ```ts
-const liveboard = client.Liveboard()
+const liveboard = client.liveboard
 ```
 
 ### Fields
@@ -377,7 +376,7 @@ const liveboard = client.Liveboard()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Liveboard().load({ id: 'liveboard_id' })
+const result = await client.liveboard.load({ id: 'liveboard_id' })
 ```
 
 ### Common Methods
@@ -411,7 +410,7 @@ Return a copy of the entity options.
 ## LogEntity
 
 ```ts
-const log = client.Log()
+const log = client.log
 ```
 
 ### Fields
@@ -429,7 +428,7 @@ const log = client.Log()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.Log().list()
+const results = await client.log.list()
 ```
 
 ### Common Methods
@@ -463,7 +462,7 @@ Return a copy of the entity options.
 ## OccupancyEntity
 
 ```ts
-const occupancy = client.Occupancy()
+const occupancy = client.occupancy
 ```
 
 ### Operations
@@ -473,7 +472,7 @@ const occupancy = client.Occupancy()
 Create a new entity with the given data.
 
 ```ts
-const result = await client.Occupancy().create({
+const result = await client.occupancy.create({
 })
 ```
 
@@ -508,7 +507,7 @@ Return a copy of the entity options.
 ## StationEntity
 
 ```ts
-const station = client.Station()
+const station = client.station
 ```
 
 ### Fields
@@ -526,7 +525,7 @@ const station = client.Station()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Station().load({ id: 'station_id' })
+const result = await client.station.load({ id: 'station_id' })
 ```
 
 ### Common Methods
@@ -560,7 +559,7 @@ Return a copy of the entity options.
 ## VehicleEntity
 
 ```ts
-const vehicle = client.Vehicle()
+const vehicle = client.vehicle
 ```
 
 ### Fields
@@ -580,7 +579,7 @@ const vehicle = client.Vehicle()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Vehicle().load({ id: 'vehicle_id' })
+const result = await client.vehicle.load({ id: 'vehicle_id' })
 ```
 
 ### Common Methods

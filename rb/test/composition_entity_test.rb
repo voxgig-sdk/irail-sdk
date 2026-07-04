@@ -42,8 +42,7 @@ class CompositionEntityTest < Minitest::Test
     # LOAD
     composition_ref01_ent = client.Composition(nil)
     composition_ref01_match_dt0 = {}
-    composition_ref01_data_dt0_loaded, err = composition_ref01_ent.load(composition_ref01_match_dt0, nil)
-    assert_nil err
+    composition_ref01_data_dt0_loaded = composition_ref01_ent.load(composition_ref01_match_dt0, nil)
     assert !composition_ref01_data_dt0_loaded.nil?
 
   end
@@ -82,7 +81,6 @@ def composition_basic_setup(extra)
     "IRAIL_TEST_COMPOSITION_ENTID" => idmap,
     "IRAIL_TEST_LIVE" => "FALSE",
     "IRAIL_TEST_EXPLAIN" => "FALSE",
-    "IRAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -94,7 +92,6 @@ def composition_basic_setup(extra)
   if env["IRAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["IRAIL_APIKEY"],
       },
       extra || {},
     ])

@@ -49,8 +49,7 @@ class TestCompositionEntity:
         # LOAD
         composition_ref01_ent = client.Composition(None)
         composition_ref01_match_dt0 = {}
-        composition_ref01_data_dt0_loaded, err = composition_ref01_ent.load(composition_ref01_match_dt0, None)
-        assert err is None
+        composition_ref01_data_dt0_loaded = composition_ref01_ent.load(composition_ref01_match_dt0, None)
         assert composition_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _composition_basic_setup(extra):
         "IRAIL_TEST_COMPOSITION_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _composition_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

@@ -49,8 +49,7 @@ class LiveboardEntityTest extends TestCase
         // LOAD
         $liveboard_ref01_ent = $client->Liveboard(null);
         $liveboard_ref01_match_dt0 = [];
-        [$liveboard_ref01_data_dt0_loaded, $err] = $liveboard_ref01_ent->load($liveboard_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $liveboard_ref01_data_dt0_loaded = $liveboard_ref01_ent->load($liveboard_ref01_match_dt0, null);
         $this->assertNotNull($liveboard_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function liveboard_basic_setup($extra)
         "IRAIL_TEST_LIVEBOARD_ENTID" => $idmap,
         "IRAIL_TEST_LIVE" => "FALSE",
         "IRAIL_TEST_EXPLAIN" => "FALSE",
-        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function liveboard_basic_setup($extra)
     if ($env["IRAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["IRAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

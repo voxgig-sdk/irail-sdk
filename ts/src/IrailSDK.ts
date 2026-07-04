@@ -9,6 +9,8 @@ import { OccupancyEntity } from './entity/OccupancyEntity'
 import { StationEntity } from './entity/StationEntity'
 import { VehicleEntity } from './entity/VehicleEntity'
 
+export type * from './IrailTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -209,48 +211,112 @@ class IrailSDK {
 
 
 
+  _composition?: CompositionEntity
+
+  // Idiomatic facade: `client.composition.list()` / `client.composition.load({ id })`.
+  get composition(): CompositionEntity {
+    return (this._composition ??= new CompositionEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.composition` instead. */
   Composition(data?: any) {
     const self = this
     return new CompositionEntity(self,data)
   }
 
 
+  _connection?: ConnectionEntity
+
+  // Idiomatic facade: `client.connection.list()` / `client.connection.load({ id })`.
+  get connection(): ConnectionEntity {
+    return (this._connection ??= new ConnectionEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.connection` instead. */
   Connection(data?: any) {
     const self = this
     return new ConnectionEntity(self,data)
   }
 
 
+  _disturbance?: DisturbanceEntity
+
+  // Idiomatic facade: `client.disturbance.list()` / `client.disturbance.load({ id })`.
+  get disturbance(): DisturbanceEntity {
+    return (this._disturbance ??= new DisturbanceEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.disturbance` instead. */
   Disturbance(data?: any) {
     const self = this
     return new DisturbanceEntity(self,data)
   }
 
 
+  _liveboard?: LiveboardEntity
+
+  // Idiomatic facade: `client.liveboard.list()` / `client.liveboard.load({ id })`.
+  get liveboard(): LiveboardEntity {
+    return (this._liveboard ??= new LiveboardEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.liveboard` instead. */
   Liveboard(data?: any) {
     const self = this
     return new LiveboardEntity(self,data)
   }
 
 
+  _log?: LogEntity
+
+  // Idiomatic facade: `client.log.list()` / `client.log.load({ id })`.
+  get log(): LogEntity {
+    return (this._log ??= new LogEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.log` instead. */
   Log(data?: any) {
     const self = this
     return new LogEntity(self,data)
   }
 
 
+  _occupancy?: OccupancyEntity
+
+  // Idiomatic facade: `client.occupancy.list()` / `client.occupancy.load({ id })`.
+  get occupancy(): OccupancyEntity {
+    return (this._occupancy ??= new OccupancyEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.occupancy` instead. */
   Occupancy(data?: any) {
     const self = this
     return new OccupancyEntity(self,data)
   }
 
 
+  _station?: StationEntity
+
+  // Idiomatic facade: `client.station.list()` / `client.station.load({ id })`.
+  get station(): StationEntity {
+    return (this._station ??= new StationEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.station` instead. */
   Station(data?: any) {
     const self = this
     return new StationEntity(self,data)
   }
 
 
+  _vehicle?: VehicleEntity
+
+  // Idiomatic facade: `client.vehicle.list()` / `client.vehicle.load({ id })`.
+  get vehicle(): VehicleEntity {
+    return (this._vehicle ??= new VehicleEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.vehicle` instead. */
   Vehicle(data?: any) {
     const self = this
     return new VehicleEntity(self,data)

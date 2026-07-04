@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Log,
+  LogListMatch,
+} from '../IrailTypes'
 
 // TODO: needs Entity superclass
-class LogEntity extends IrailEntityBase {
+class LogEntity extends IrailEntityBase<Log> {
 
   constructor(client: IrailSDK, entopts: any) {
     super(client, entopts)
@@ -33,7 +37,7 @@ class LogEntity extends IrailEntityBase {
 
 
 
-  async list(this: any, reqmatch?: any, ctrl?: Control) {
+  async list(this: any, reqmatch?: LogListMatch, ctrl?: Control): Promise<Log[]> {
 
     const utility = this._utility
 
@@ -133,7 +137,9 @@ class LogEntity extends IrailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Log[]> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

@@ -43,8 +43,7 @@ class LogEntityTest < Minitest::Test
     log_ref01_ent = client.Log(nil)
     log_ref01_match = {}
 
-    log_ref01_list_result, err = log_ref01_ent.list(log_ref01_match, nil)
-    assert_nil err
+    log_ref01_list_result = log_ref01_ent.list(log_ref01_match, nil)
     assert log_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def log_basic_setup(extra)
     "IRAIL_TEST_LOG_ENTID" => idmap,
     "IRAIL_TEST_LIVE" => "FALSE",
     "IRAIL_TEST_EXPLAIN" => "FALSE",
-    "IRAIL_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def log_basic_setup(extra)
   if env["IRAIL_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["IRAIL_APIKEY"],
       },
       extra || {},
     ])

@@ -50,8 +50,7 @@ class TestConnectionEntity:
         connection_ref01_ent = client.Connection(None)
         connection_ref01_match = {}
 
-        connection_ref01_list_result, err = connection_ref01_ent.list(connection_ref01_match, None)
-        assert err is None
+        connection_ref01_list_result = connection_ref01_ent.list(connection_ref01_match, None)
         assert isinstance(connection_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _connection_basic_setup(extra):
         "IRAIL_TEST_CONNECTION_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _connection_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

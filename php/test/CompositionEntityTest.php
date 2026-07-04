@@ -49,8 +49,7 @@ class CompositionEntityTest extends TestCase
         // LOAD
         $composition_ref01_ent = $client->Composition(null);
         $composition_ref01_match_dt0 = [];
-        [$composition_ref01_data_dt0_loaded, $err] = $composition_ref01_ent->load($composition_ref01_match_dt0, null);
-        $this->assertNull($err);
+        $composition_ref01_data_dt0_loaded = $composition_ref01_ent->load($composition_ref01_match_dt0, null);
         $this->assertNotNull($composition_ref01_data_dt0_loaded);
 
     }
@@ -85,7 +84,6 @@ function composition_basic_setup($extra)
         "IRAIL_TEST_COMPOSITION_ENTID" => $idmap,
         "IRAIL_TEST_LIVE" => "FALSE",
         "IRAIL_TEST_EXPLAIN" => "FALSE",
-        "IRAIL_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -97,7 +95,6 @@ function composition_basic_setup($extra)
     if ($env["IRAIL_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
-                "apikey" => $env["IRAIL_APIKEY"],
             ],
             $extra ?? [],
         ]);

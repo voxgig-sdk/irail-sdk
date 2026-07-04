@@ -9,9 +9,12 @@ The TypeScript SDK for the Irail API — a type-safe, entity-oriented client wit
 
 
 ## Install
-```bash
-npm install @voxgig-sdk/irail
-```
+This package is not yet published to npm. Install it from the GitHub
+release tag (`ts/vX.Y.Z`):
+
+- Releases: [https://github.com/voxgig-sdk/irail-sdk/releases](https://github.com/voxgig-sdk/irail-sdk/releases)
+
+
 ## Tutorial: your first API call
 
 This tutorial walks through creating a client, listing entities, and
@@ -20,17 +23,15 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { IrailSDK } from 'irail'
+import { IrailSDK } from '@voxgig-sdk/irail'
 
-const client = new IrailSDK({
-  apikey: process.env.IRAIL_APIKEY,
-})
+const client = new IrailSDK()
 ```
 
 ### 3. Load a composition
 
 ```ts
-const result = await client.Composition().load({ id: 'example_id' })
+const result = await client.composition.load({ id: 'example_id' })
 
 if (result.ok) {
   console.log(result.data)
@@ -79,7 +80,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = IrailSDK.test()
 
-const result = await client.Planet().load({ id: 'test01' })
+const result = await client.composition.load({ id: 'test01' })
 // result.ok === true
 // result.data contains mock response data
 ```
@@ -87,7 +88,7 @@ const result = await client.Planet().load({ id: 'test01' })
 You can also use the instance method:
 
 ```ts
-const client = new IrailSDK({ apikey: '...' })
+const client = new IrailSDK()
 const testClient = client.tester()
 ```
 
@@ -96,7 +97,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Planet()
+const entity = client.composition
 
 // First call sets internal match
 await entity.load({ id: 'example' })
@@ -123,7 +124,6 @@ const logger = {
 }
 
 const client = new IrailSDK({
-  apikey: '...',
   extend: [logger],
 })
 ```
@@ -134,7 +134,6 @@ Create a `.env.local` file at the project root:
 
 ```
 IRAIL_TEST_LIVE=TRUE
-IRAIL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -152,7 +151,6 @@ cd ts && npm test
 
 ```ts
 new IrailSDK(options?: {
-  apikey?: string
   base?: string
   prefix?: string
   suffix?: string
@@ -163,7 +161,6 @@ new IrailSDK(options?: {
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -367,7 +364,7 @@ API path: `/vehicle/`
 
 ### Composition
 
-Create an instance: `const composition = client.Composition()`
+Create an instance: `const composition = client.composition`
 
 #### Operations
 
@@ -387,13 +384,13 @@ Create an instance: `const composition = client.Composition()`
 #### Example: Load
 
 ```ts
-const composition = await client.Composition().load({ id: 'composition_id' })
+const composition = await client.composition.load({ id: 'composition_id' })
 ```
 
 
 ### Connection
 
-Create an instance: `const connection = client.Connection()`
+Create an instance: `const connection = client.connection`
 
 #### Operations
 
@@ -415,13 +412,13 @@ Create an instance: `const connection = client.Connection()`
 #### Example: List
 
 ```ts
-const connections = await client.Connection().list()
+const connections = await client.connection.list()
 ```
 
 
 ### Disturbance
 
-Create an instance: `const disturbance = client.Disturbance()`
+Create an instance: `const disturbance = client.disturbance`
 
 #### Operations
 
@@ -443,13 +440,13 @@ Create an instance: `const disturbance = client.Disturbance()`
 #### Example: List
 
 ```ts
-const disturbances = await client.Disturbance().list()
+const disturbances = await client.disturbance.list()
 ```
 
 
 ### Liveboard
 
-Create an instance: `const liveboard = client.Liveboard()`
+Create an instance: `const liveboard = client.liveboard`
 
 #### Operations
 
@@ -470,13 +467,13 @@ Create an instance: `const liveboard = client.Liveboard()`
 #### Example: Load
 
 ```ts
-const liveboard = await client.Liveboard().load({ id: 'liveboard_id' })
+const liveboard = await client.liveboard.load({ id: 'liveboard_id' })
 ```
 
 
 ### Log
 
-Create an instance: `const log = client.Log()`
+Create an instance: `const log = client.log`
 
 #### Operations
 
@@ -495,13 +492,13 @@ Create an instance: `const log = client.Log()`
 #### Example: List
 
 ```ts
-const logs = await client.Log().list()
+const logs = await client.log.list()
 ```
 
 
 ### Occupancy
 
-Create an instance: `const occupancy = client.Occupancy()`
+Create an instance: `const occupancy = client.occupancy`
 
 #### Operations
 
@@ -512,14 +509,14 @@ Create an instance: `const occupancy = client.Occupancy()`
 #### Example: Create
 
 ```ts
-const occupancy = await client.Occupancy().create({
+const occupancy = await client.occupancy.create({
 })
 ```
 
 
 ### Station
 
-Create an instance: `const station = client.Station()`
+Create an instance: `const station = client.station`
 
 #### Operations
 
@@ -538,13 +535,13 @@ Create an instance: `const station = client.Station()`
 #### Example: Load
 
 ```ts
-const station = await client.Station().load({ id: 'station_id' })
+const station = await client.station.load({ id: 'station_id' })
 ```
 
 
 ### Vehicle
 
-Create an instance: `const vehicle = client.Vehicle()`
+Create an instance: `const vehicle = client.vehicle`
 
 #### Operations
 
@@ -565,7 +562,7 @@ Create an instance: `const vehicle = client.Vehicle()`
 #### Example: Load
 
 ```ts
-const vehicle = await client.Vehicle().load({ id: 'vehicle_id' })
+const vehicle = await client.vehicle.load({ id: 'vehicle_id' })
 ```
 
 
@@ -626,7 +623,7 @@ irail/
 Import the SDK from the package root:
 
 ```ts
-import { IrailSDK } from 'irail'
+import { IrailSDK } from '@voxgig-sdk/irail'
 ```
 
 ### Entity state
@@ -636,11 +633,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const moon = client.Moon()
-await moon.load({ planet_id: 'earth', id: 'luna' })
+const composition = client.composition
+await composition.load({ id: "example_id" })
 
-// moon.data() now returns the loaded moon data
-// moon.match() returns { planet_id: 'earth', id: 'luna' }
+// composition.data() now returns the loaded composition data
+// composition.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

@@ -85,6 +85,27 @@ func (e *OccupancyEntity) Match(args ...any) any {
 	return out
 }
 
+// DataTyped is the statically-typed accessor for this entity's data. With no
+// argument it returns the current data as an Occupancy; with an argument it
+// sets the data and returns the stored value. It delegates to the untyped Data
+// (identical runtime) and converts at the typed boundary.
+func (e *OccupancyEntity) DataTyped(data ...Occupancy) Occupancy {
+	if len(data) > 0 {
+		return typedFrom[Occupancy](e.Data(asMap(data[0])))
+	}
+	return typedFrom[Occupancy](e.Data())
+}
+
+// MatchTyped mirrors DataTyped for the entity's match filter. The match is a
+// partial of the entity, so it round-trips through Occupancy (all fields
+// optional at the wire level).
+func (e *OccupancyEntity) MatchTyped(match ...Occupancy) Occupancy {
+	if len(match) > 0 {
+		return typedFrom[Occupancy](e.Match(asMap(match[0])))
+	}
+	return typedFrom[Occupancy](e.Match())
+}
+
 func (e *OccupancyEntity) Load(_ map[string]any, _ map[string]any) (any, error) {
 	return core.UnsupportedOp("load", e.name)
 }
@@ -116,6 +137,17 @@ func (e *OccupancyEntity) Create(reqdata map[string]any, ctrl map[string]any) (a
 			}
 		}
 	})
+}
+
+// CreateTyped is the statically-typed variant of Create: it takes an
+// OccupancyCreateData and returns an Occupancy. It delegates to the untyped
+// Create (identical runtime) and converts at the typed boundary.
+func (e *OccupancyEntity) CreateTyped(reqdata OccupancyCreateData, ctrl map[string]any) (Occupancy, error) {
+	res, err := e.Create(asMap(reqdata), ctrl)
+	if err != nil {
+		return Occupancy{}, err
+	}
+	return typedFrom[Occupancy](res), nil
 }
 
 

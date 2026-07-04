@@ -49,8 +49,7 @@ class TestLiveboardEntity:
         # LOAD
         liveboard_ref01_ent = client.Liveboard(None)
         liveboard_ref01_match_dt0 = {}
-        liveboard_ref01_data_dt0_loaded, err = liveboard_ref01_ent.load(liveboard_ref01_match_dt0, None)
-        assert err is None
+        liveboard_ref01_data_dt0_loaded = liveboard_ref01_ent.load(liveboard_ref01_match_dt0, None)
         assert liveboard_ref01_data_dt0_loaded is not None
 
 
@@ -91,7 +90,6 @@ def _liveboard_basic_setup(extra):
         "IRAIL_TEST_LIVEBOARD_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -102,7 +100,6 @@ def _liveboard_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

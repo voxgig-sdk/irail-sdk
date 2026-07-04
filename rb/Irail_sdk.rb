@@ -13,6 +13,9 @@ require_relative 'config'
 require_relative 'feature/base_feature'
 require_relative 'features'
 
+# Load typed models (Struct value objects).
+require_relative 'Irail_types'
+
 
 class IrailSDK
   attr_accessor :mode, :features, :options
@@ -131,7 +134,7 @@ class IrailSDK
     end
 
     _, err = utility.prepare_auth.call(ctx)
-    return nil, err if err
+    raise err if err
 
     utility.make_fetch_def.call(ctx)
   end
@@ -139,8 +142,14 @@ class IrailSDK
   def direct(fetchargs = {})
     utility = @_utility
 
-    fetchdef, err = prepare(fetchargs)
-    return { "ok" => false, "err" => err }, nil if err
+    # direct() is the raw-HTTP escape hatch: it always returns a result hash
+    # ({ "ok" => ..., ... }) and never raises. prepare() raises on error, so
+    # trap that and surface it in the hash.
+    begin
+      fetchdef = prepare(fetchargs)
+    rescue IrailError => err
+      return { "ok" => false, "err" => err }
+    end
 
     fetchargs ||= {}
     ctrl = IrailHelpers.to_map(VoxgigStruct.getprop(fetchargs, "ctrl")) || {}
@@ -153,13 +162,13 @@ class IrailSDK
     url = fetchdef["url"] || ""
     fetched, fetch_err = utility.fetcher.call(ctx, url, fetchdef)
 
-    return { "ok" => false, "err" => fetch_err }, nil if fetch_err
+    return { "ok" => false, "err" => fetch_err } if fetch_err
 
     if fetched.nil?
       return {
         "ok" => false,
         "err" => ctx.make_error("direct_no_response", "response: undefined"),
-      }, nil
+      }
     end
 
     if fetched.is_a?(Hash)
@@ -189,58 +198,114 @@ class IrailSDK
         "status" => status,
         "headers" => headers,
         "data" => json_data,
-      }, nil
+      }
     end
 
     return {
       "ok" => false,
       "err" => ctx.make_error("direct_invalid", "invalid response type"),
-    }, nil
+    }
   end
 
 
+  # Idiomatic facade: client.composition.list / client.composition.load({ "id" => ... })
+  def composition
+    require_relative 'entity/composition_entity'
+    @composition ||= CompositionEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.composition instead.
   def Composition(data = nil)
     require_relative 'entity/composition_entity'
     CompositionEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.connection.list / client.connection.load({ "id" => ... })
+  def connection
+    require_relative 'entity/connection_entity'
+    @connection ||= ConnectionEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.connection instead.
   def Connection(data = nil)
     require_relative 'entity/connection_entity'
     ConnectionEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.disturbance.list / client.disturbance.load({ "id" => ... })
+  def disturbance
+    require_relative 'entity/disturbance_entity'
+    @disturbance ||= DisturbanceEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.disturbance instead.
   def Disturbance(data = nil)
     require_relative 'entity/disturbance_entity'
     DisturbanceEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.liveboard.list / client.liveboard.load({ "id" => ... })
+  def liveboard
+    require_relative 'entity/liveboard_entity'
+    @liveboard ||= LiveboardEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.liveboard instead.
   def Liveboard(data = nil)
     require_relative 'entity/liveboard_entity'
     LiveboardEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.log.list / client.log.load({ "id" => ... })
+  def log
+    require_relative 'entity/log_entity'
+    @log ||= LogEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.log instead.
   def Log(data = nil)
     require_relative 'entity/log_entity'
     LogEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.occupancy.list / client.occupancy.load({ "id" => ... })
+  def occupancy
+    require_relative 'entity/occupancy_entity'
+    @occupancy ||= OccupancyEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.occupancy instead.
   def Occupancy(data = nil)
     require_relative 'entity/occupancy_entity'
     OccupancyEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.station.list / client.station.load({ "id" => ... })
+  def station
+    require_relative 'entity/station_entity'
+    @station ||= StationEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.station instead.
   def Station(data = nil)
     require_relative 'entity/station_entity'
     StationEntity.new(self, data)
   end
 
 
+  # Idiomatic facade: client.vehicle.list / client.vehicle.load({ "id" => ... })
+  def vehicle
+    require_relative 'entity/vehicle_entity'
+    @vehicle ||= VehicleEntity.new(self, nil)
+  end
+
+  # Deprecated: use client.vehicle instead.
   def Vehicle(data = nil)
     require_relative 'entity/vehicle_entity'
     VehicleEntity.new(self, data)

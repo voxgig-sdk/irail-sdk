@@ -50,8 +50,7 @@ class TestLogEntity:
         log_ref01_ent = client.Log(None)
         log_ref01_match = {}
 
-        log_ref01_list_result, err = log_ref01_ent.list(log_ref01_match, None)
-        assert err is None
+        log_ref01_list_result = log_ref01_ent.list(log_ref01_match, None)
         assert isinstance(log_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _log_basic_setup(extra):
         "IRAIL_TEST_LOG_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _log_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

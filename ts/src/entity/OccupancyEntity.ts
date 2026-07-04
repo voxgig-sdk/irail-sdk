@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Occupancy,
+  OccupancyCreateData,
+} from '../IrailTypes'
 
 // TODO: needs Entity superclass
-class OccupancyEntity extends IrailEntityBase {
+class OccupancyEntity extends IrailEntityBase<Occupancy> {
 
   constructor(client: IrailSDK, entopts: any) {
     super(client, entopts)
@@ -34,7 +38,7 @@ class OccupancyEntity extends IrailEntityBase {
 
 
 
-  async create(this: any, reqdata?: any, ctrl?: Control) {
+  async create(this: any, reqdata?: OccupancyCreateData, ctrl?: Control): Promise<Occupancy> {
 
     const utility = this._utility
     const {
@@ -133,7 +137,9 @@ class OccupancyEntity extends IrailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Occupancy> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

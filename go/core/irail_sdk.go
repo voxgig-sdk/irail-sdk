@@ -245,41 +245,65 @@ func (sdk *IrailSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 }
 
 
+// Composition returns a Composition entity bound to this client.
+// Idiomatic usage: client.Composition(nil).List(nil, nil) or
+// client.Composition(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Composition(data map[string]any) IrailEntity {
 	return NewCompositionEntityFunc(sdk, data)
 }
 
 
+// Connection returns a Connection entity bound to this client.
+// Idiomatic usage: client.Connection(nil).List(nil, nil) or
+// client.Connection(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Connection(data map[string]any) IrailEntity {
 	return NewConnectionEntityFunc(sdk, data)
 }
 
 
+// Disturbance returns a Disturbance entity bound to this client.
+// Idiomatic usage: client.Disturbance(nil).List(nil, nil) or
+// client.Disturbance(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Disturbance(data map[string]any) IrailEntity {
 	return NewDisturbanceEntityFunc(sdk, data)
 }
 
 
+// Liveboard returns a Liveboard entity bound to this client.
+// Idiomatic usage: client.Liveboard(nil).List(nil, nil) or
+// client.Liveboard(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Liveboard(data map[string]any) IrailEntity {
 	return NewLiveboardEntityFunc(sdk, data)
 }
 
 
+// Log returns a Log entity bound to this client.
+// Idiomatic usage: client.Log(nil).List(nil, nil) or
+// client.Log(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Log(data map[string]any) IrailEntity {
 	return NewLogEntityFunc(sdk, data)
 }
 
 
+// Occupancy returns a Occupancy entity bound to this client.
+// Idiomatic usage: client.Occupancy(nil).List(nil, nil) or
+// client.Occupancy(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Occupancy(data map[string]any) IrailEntity {
 	return NewOccupancyEntityFunc(sdk, data)
 }
 
 
+// Station returns a Station entity bound to this client.
+// Idiomatic usage: client.Station(nil).List(nil, nil) or
+// client.Station(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Station(data map[string]any) IrailEntity {
 	return NewStationEntityFunc(sdk, data)
 }
 
 
+// Vehicle returns a Vehicle entity bound to this client.
+// Idiomatic usage: client.Vehicle(nil).List(nil, nil) or
+// client.Vehicle(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *IrailSDK) Vehicle(data map[string]any) IrailEntity {
 	return NewVehicleEntityFunc(sdk, data)
 }

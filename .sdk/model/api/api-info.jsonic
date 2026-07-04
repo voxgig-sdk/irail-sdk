@@ -4,6 +4,7 @@
 main: {
   kit: {
     info: {
+      auth: false
       contact: {
         name: "iRail Support"
         url: "https://docs.irail.be/"

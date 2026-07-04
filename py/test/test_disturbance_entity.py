@@ -50,8 +50,7 @@ class TestDisturbanceEntity:
         disturbance_ref01_ent = client.Disturbance(None)
         disturbance_ref01_match = {}
 
-        disturbance_ref01_list_result, err = disturbance_ref01_ent.list(disturbance_ref01_match, None)
-        assert err is None
+        disturbance_ref01_list_result = disturbance_ref01_ent.list(disturbance_ref01_match, None)
         assert isinstance(disturbance_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _disturbance_basic_setup(extra):
         "IRAIL_TEST_DISTURBANCE_ENTID": idmap,
         "IRAIL_TEST_LIVE": "FALSE",
         "IRAIL_TEST_EXPLAIN": "FALSE",
-        "IRAIL_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _disturbance_basic_setup(extra):
     if env.get("IRAIL_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("IRAIL_APIKEY"),
             },
             extra or {},
         ])

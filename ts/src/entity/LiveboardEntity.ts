@@ -14,9 +14,13 @@ import type {
   Control,
 } from '../types'
 
+import type {
+  Liveboard,
+  LiveboardLoadMatch,
+} from '../IrailTypes'
 
 // TODO: needs Entity superclass
-class LiveboardEntity extends IrailEntityBase {
+class LiveboardEntity extends IrailEntityBase<Liveboard> {
 
   constructor(client: IrailSDK, entopts: any) {
     super(client, entopts)
@@ -32,7 +36,7 @@ class LiveboardEntity extends IrailEntityBase {
 
 
 
-  async load(this: any, reqmatch?: any, ctrl?: Control) {
+  async load(this: any, reqmatch?: LiveboardLoadMatch, ctrl?: Control): Promise<Liveboard> {
 
     const utility = this._utility
 
@@ -136,7 +140,9 @@ class LiveboardEntity extends IrailEntityBase {
         throw err
       }
       else {
-        return undefined
+        // Off-happy-path (throw disabled): typed as any so the method's
+        // Promise<Liveboard> return stays clean under strict null checks.
+        return undefined as any
       }
     }
   }

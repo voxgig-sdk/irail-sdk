@@ -9,12 +9,9 @@ The Lua SDK for the Irail API — an entity-oriented client using Lua convention
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-irail
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("irail_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("IRAIL_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 3. Load a composition
 
 ```lua
-local result, err = client:Composition():load({ id = "example_id" })
+local result, err = client:composition():load({ id = "example_id" })
 if err then error(err) end
 print(result)
 ```
@@ -87,7 +82,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Irail():load({ id = "test01" })
+local result, err = client:composition():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -121,7 +116,6 @@ Create a `.env.local` file at the project root:
 
 ```
 IRAIL_TEST_LIVE=TRUE
-IRAIL_APIKEY=<your-key>
 ```
 
 Then run:
@@ -144,7 +138,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -322,7 +315,7 @@ API path: `/vehicle/`
 
 ### Composition
 
-Create an instance: `const composition = client.Composition()`
+Create an instance: `const composition = client.composition`
 
 #### Operations
 
@@ -342,13 +335,13 @@ Create an instance: `const composition = client.Composition()`
 #### Example: Load
 
 ```ts
-const composition = await client.Composition().load({ id: 'composition_id' })
+const composition = await client.composition.load({ id: 'composition_id' })
 ```
 
 
 ### Connection
 
-Create an instance: `const connection = client.Connection()`
+Create an instance: `const connection = client.connection`
 
 #### Operations
 
@@ -370,13 +363,13 @@ Create an instance: `const connection = client.Connection()`
 #### Example: List
 
 ```ts
-const connections = await client.Connection().list()
+const connections = await client.connection.list()
 ```
 
 
 ### Disturbance
 
-Create an instance: `const disturbance = client.Disturbance()`
+Create an instance: `const disturbance = client.disturbance`
 
 #### Operations
 
@@ -398,13 +391,13 @@ Create an instance: `const disturbance = client.Disturbance()`
 #### Example: List
 
 ```ts
-const disturbances = await client.Disturbance().list()
+const disturbances = await client.disturbance.list()
 ```
 
 
 ### Liveboard
 
-Create an instance: `const liveboard = client.Liveboard()`
+Create an instance: `const liveboard = client.liveboard`
 
 #### Operations
 
@@ -425,13 +418,13 @@ Create an instance: `const liveboard = client.Liveboard()`
 #### Example: Load
 
 ```ts
-const liveboard = await client.Liveboard().load({ id: 'liveboard_id' })
+const liveboard = await client.liveboard.load({ id: 'liveboard_id' })
 ```
 
 
 ### Log
 
-Create an instance: `const log = client.Log()`
+Create an instance: `const log = client.log`
 
 #### Operations
 
@@ -450,13 +443,13 @@ Create an instance: `const log = client.Log()`
 #### Example: List
 
 ```ts
-const logs = await client.Log().list()
+const logs = await client.log.list()
 ```
 
 
 ### Occupancy
 
-Create an instance: `const occupancy = client.Occupancy()`
+Create an instance: `const occupancy = client.occupancy`
 
 #### Operations
 
@@ -467,14 +460,14 @@ Create an instance: `const occupancy = client.Occupancy()`
 #### Example: Create
 
 ```ts
-const occupancy = await client.Occupancy().create({
+const occupancy = await client.occupancy.create({
 })
 ```
 
 
 ### Station
 
-Create an instance: `const station = client.Station()`
+Create an instance: `const station = client.station`
 
 #### Operations
 
@@ -493,13 +486,13 @@ Create an instance: `const station = client.Station()`
 #### Example: Load
 
 ```ts
-const station = await client.Station().load({ id: 'station_id' })
+const station = await client.station.load({ id: 'station_id' })
 ```
 
 
 ### Vehicle
 
-Create an instance: `const vehicle = client.Vehicle()`
+Create an instance: `const vehicle = client.vehicle`
 
 #### Operations
 
@@ -520,7 +513,7 @@ Create an instance: `const vehicle = client.Vehicle()`
 #### Example: Load
 
 ```ts
-const vehicle = await client.Vehicle().load({ id: 'vehicle_id' })
+const vehicle = await client.vehicle.load({ id: 'vehicle_id' })
 ```
 
 
@@ -595,11 +588,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local composition = client:composition()
+composition:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- composition:data_get() now returns the loaded composition data
+-- composition:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

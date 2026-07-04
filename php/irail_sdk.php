@@ -103,7 +103,7 @@ class IrailSDK
         return $this->_rootctx;
     }
 
-    public function prepare(array $fetchargs = []): array
+    public function prepare(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
         $fetchargs = $fetchargs ?? [];
@@ -149,19 +149,27 @@ class IrailSDK
 
         [$_, $err] = ($utility->prepare_auth)($ctx);
         if ($err) {
-            return [null, $err];
+            return ($utility->make_error)($ctx, $err);
         }
 
-        return ($utility->make_fetch_def)($ctx);
+        [$fetchdef, $fd_err] = ($utility->make_fetch_def)($ctx);
+        if ($fd_err) {
+            return ($utility->make_error)($ctx, $fd_err);
+        }
+        return $fetchdef;
     }
 
-    public function direct(array $fetchargs = []): array
+    public function direct(array $fetchargs = []): mixed
     {
         $utility = $this->_utility;
 
-        [$fetchdef, $err] = $this->prepare($fetchargs);
-        if ($err) {
-            return [["ok" => false, "err" => $err], null];
+        // direct() is the raw-HTTP escape hatch: it never throws, it returns
+        // an {ok, err, ...} dict. prepare() now raises on error, so catch it
+        // and surface the failure through the dict instead.
+        try {
+            $fetchdef = $this->prepare($fetchargs);
+        } catch (\Throwable $err) {
+            return ["ok" => false, "err" => $err];
         }
 
         $fetchargs = $fetchargs ?? [];
@@ -176,14 +184,14 @@ class IrailSDK
         [$fetched, $fetch_err] = ($utility->fetcher)($ctx, $url, $fetchdef);
 
         if ($fetch_err) {
-            return [["ok" => false, "err" => $fetch_err], null];
+            return ["ok" => false, "err" => $fetch_err];
         }
 
         if ($fetched === null) {
-            return [[
+            return [
                 "ok" => false,
                 "err" => $ctx->make_error("direct_no_response", "response: undefined"),
-            ], null];
+            ];
         }
 
         if (is_array($fetched)) {
@@ -208,73 +216,161 @@ class IrailSDK
                 }
             }
 
-            return [[
+            return [
                 "ok" => $status >= 200 && $status < 300,
                 "status" => $status,
                 "headers" => Struct::getprop($fetched, "headers"),
                 "data" => $json_data,
-            ], null];
+            ];
         }
 
-        return [[
+        return [
             "ok" => false,
             "err" => $ctx->make_error("direct_invalid", "invalid response type"),
-        ], null];
+        ];
     }
 
 
-    public function Composition($data = null)
+    private $_composition = null;
+
+    // Idiomatic facade: $client->composition()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Composition() (PHP method
+    // names are case-insensitive).
+    public function composition($data = null)
     {
         require_once __DIR__ . '/entity/composition_entity.php';
+        if ($data === null) {
+            if ($this->_composition === null) {
+                $this->_composition = new CompositionEntity($this, null);
+            }
+            return $this->_composition;
+        }
         return new CompositionEntity($this, $data);
     }
 
 
-    public function Connection($data = null)
+    private $_connection = null;
+
+    // Idiomatic facade: $client->connection()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Connection() (PHP method
+    // names are case-insensitive).
+    public function connection($data = null)
     {
         require_once __DIR__ . '/entity/connection_entity.php';
+        if ($data === null) {
+            if ($this->_connection === null) {
+                $this->_connection = new ConnectionEntity($this, null);
+            }
+            return $this->_connection;
+        }
         return new ConnectionEntity($this, $data);
     }
 
 
-    public function Disturbance($data = null)
+    private $_disturbance = null;
+
+    // Idiomatic facade: $client->disturbance()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Disturbance() (PHP method
+    // names are case-insensitive).
+    public function disturbance($data = null)
     {
         require_once __DIR__ . '/entity/disturbance_entity.php';
+        if ($data === null) {
+            if ($this->_disturbance === null) {
+                $this->_disturbance = new DisturbanceEntity($this, null);
+            }
+            return $this->_disturbance;
+        }
         return new DisturbanceEntity($this, $data);
     }
 
 
-    public function Liveboard($data = null)
+    private $_liveboard = null;
+
+    // Idiomatic facade: $client->liveboard()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Liveboard() (PHP method
+    // names are case-insensitive).
+    public function liveboard($data = null)
     {
         require_once __DIR__ . '/entity/liveboard_entity.php';
+        if ($data === null) {
+            if ($this->_liveboard === null) {
+                $this->_liveboard = new LiveboardEntity($this, null);
+            }
+            return $this->_liveboard;
+        }
         return new LiveboardEntity($this, $data);
     }
 
 
-    public function Log($data = null)
+    private $_log = null;
+
+    // Idiomatic facade: $client->log()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Log() (PHP method
+    // names are case-insensitive).
+    public function log($data = null)
     {
         require_once __DIR__ . '/entity/log_entity.php';
+        if ($data === null) {
+            if ($this->_log === null) {
+                $this->_log = new LogEntity($this, null);
+            }
+            return $this->_log;
+        }
         return new LogEntity($this, $data);
     }
 
 
-    public function Occupancy($data = null)
+    private $_occupancy = null;
+
+    // Idiomatic facade: $client->occupancy()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Occupancy() (PHP method
+    // names are case-insensitive).
+    public function occupancy($data = null)
     {
         require_once __DIR__ . '/entity/occupancy_entity.php';
+        if ($data === null) {
+            if ($this->_occupancy === null) {
+                $this->_occupancy = new OccupancyEntity($this, null);
+            }
+            return $this->_occupancy;
+        }
         return new OccupancyEntity($this, $data);
     }
 
 
-    public function Station($data = null)
+    private $_station = null;
+
+    // Idiomatic facade: $client->station()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Station() (PHP method
+    // names are case-insensitive).
+    public function station($data = null)
     {
         require_once __DIR__ . '/entity/station_entity.php';
+        if ($data === null) {
+            if ($this->_station === null) {
+                $this->_station = new StationEntity($this, null);
+            }
+            return $this->_station;
+        }
         return new StationEntity($this, $data);
     }
 
 
-    public function Vehicle($data = null)
+    private $_vehicle = null;
+
+    // Idiomatic facade: $client->vehicle()->list() / ->load(["id" => ...]).
+    // Also serves the deprecated PascalCase alias Vehicle() (PHP method
+    // names are case-insensitive).
+    public function vehicle($data = null)
     {
         require_once __DIR__ . '/entity/vehicle_entity.php';
+        if ($data === null) {
+            if ($this->_vehicle === null) {
+                $this->_vehicle = new VehicleEntity($this, null);
+            }
+            return $this->_vehicle;
+        }
         return new VehicleEntity($this, $data);
     }
 

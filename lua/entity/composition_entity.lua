@@ -79,6 +79,10 @@ end
 
 
 
+---@param reqmatch CompositionLoadMatch
+---@param ctrl? table
+---@return Composition
+---@return string? err
 function CompositionEntity:load(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({
