@@ -115,10 +115,10 @@ composition = client.Composition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | ``$OBJECT`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `vehicle` | ``$STRING`` | No |  |
-| `version` | ``$STRING`` | No |  |
+| `composition` | `dict` | No |  |
+| `timestamp` | `int` | No |  |
+| `vehicle` | `str` | No |  |
+| `version` | `str` | No |  |
 
 ### Operations
 
@@ -127,7 +127,7 @@ composition = client.Composition()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Composition().load({"id": "composition_id"})
+result = client.Composition().load()
 ```
 
 ### Common Methods
@@ -169,21 +169,21 @@ connection = client.Connection()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival` | ``$OBJECT`` | No |  |
-| `departure` | ``$OBJECT`` | No |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `occupancy` | ``$OBJECT`` | No |  |
-| `via` | ``$OBJECT`` | No |  |
+| `arrival` | `dict` | No |  |
+| `departure` | `dict` | No |  |
+| `duration` | `int` | No |  |
+| `id` | `int` | No |  |
+| `occupancy` | `dict` | No |  |
+| `via` | `dict` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Connection().list({})
+results = client.Connection().list()
 for connection in results:
     print(connection)
 ```
@@ -227,21 +227,21 @@ disturbance = client.Disturbance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `type` | ``$INTEGER`` | No |  |
+| `description` | `str` | No |  |
+| `id` | `int` | No |  |
+| `link` | `str` | No |  |
+| `timestamp` | `int` | No |  |
+| `title` | `str` | No |  |
+| `type` | `int` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Disturbance().list({})
+results = client.Disturbance().list()
 for disturbance in results:
     print(disturbance)
 ```
@@ -285,11 +285,11 @@ liveboard = client.Liveboard()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$OBJECT`` | Yes |  |
-| `station` | ``$STRING`` | Yes |  |
-| `stationinfo` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `departure` | `dict` | Yes |  |
+| `station` | `str` | Yes |  |
+| `stationinfo` | `dict` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `version` | `str` | Yes |  |
 
 ### Operations
 
@@ -298,7 +298,7 @@ liveboard = client.Liveboard()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Liveboard().load({"id": "liveboard_id"})
+result = client.Liveboard().load()
 ```
 
 ### Common Methods
@@ -340,18 +340,18 @@ log = client.Log()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `querytime` | ``$INTEGER`` | No |  |
-| `querytype` | ``$STRING`` | No |  |
-| `user_agent` | ``$STRING`` | No |  |
+| `querytime` | `int` | No |  |
+| `querytype` | `str` | No |  |
+| `user_agent` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Log().list({})
+results = client.Log().list()
 for log in results:
     print(log)
 ```
@@ -441,9 +441,9 @@ station = client.Station()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `station` | ``$ANY`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `station` | `Any` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `version` | `str` | Yes |  |
 
 ### Operations
 
@@ -452,7 +452,7 @@ station = client.Station()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Station().load({"id": "station_id"})
+result = client.Station().load()
 ```
 
 ### Common Methods
@@ -494,11 +494,11 @@ vehicle = client.Vehicle()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `vehicle` | ``$STRING`` | Yes |  |
-| `vehicleinfo` | ``$OBJECT`` | No |  |
-| `version` | ``$STRING`` | Yes |  |
+| `stop` | `dict` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `vehicle` | `str` | Yes |  |
+| `vehicleinfo` | `dict` | No |  |
+| `version` | `str` | Yes |  |
 
 ### Operations
 
@@ -507,7 +507,7 @@ vehicle = client.Vehicle()
 Load a single entity matching the given criteria. Returns the entity data and raises on error.
 
 ```python
-result = client.Vehicle().load({"id": "vehicle_id"})
+result = client.Vehicle().load()
 ```
 
 ### Common Methods

@@ -200,10 +200,10 @@ const composition = client.Composition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | ``$OBJECT`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `vehicle` | ``$STRING`` | No |  |
-| `version` | ``$STRING`` | No |  |
+| `composition` | `Record<string, any>` | No |  |
+| `timestamp` | `number` | No |  |
+| `vehicle` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
 
@@ -212,7 +212,7 @@ const composition = client.Composition()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Composition().load({ id: 'composition_id' })
+const result = await client.Composition().load()
 ```
 
 ### Common Methods
@@ -253,12 +253,12 @@ const connection = client.Connection()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival` | ``$OBJECT`` | No |  |
-| `departure` | ``$OBJECT`` | No |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `occupancy` | ``$OBJECT`` | No |  |
-| `via` | ``$OBJECT`` | No |  |
+| `arrival` | `Record<string, any>` | No |  |
+| `departure` | `Record<string, any>` | No |  |
+| `duration` | `number` | No |  |
+| `id` | `number` | No |  |
+| `occupancy` | `Record<string, any>` | No |  |
+| `via` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -308,12 +308,12 @@ const disturbance = client.Disturbance()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `type` | ``$INTEGER`` | No |  |
+| `description` | `string` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `timestamp` | `number` | No |  |
+| `title` | `string` | No |  |
+| `type` | `number` | No |  |
 
 ### Operations
 
@@ -363,11 +363,11 @@ const liveboard = client.Liveboard()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$OBJECT`` | Yes |  |
-| `station` | ``$STRING`` | Yes |  |
-| `stationinfo` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `departure` | `Record<string, any>` | Yes |  |
+| `station` | `string` | Yes |  |
+| `stationinfo` | `Record<string, any>` | Yes |  |
+| `timestamp` | `number` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -376,7 +376,7 @@ const liveboard = client.Liveboard()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Liveboard().load({ id: 'liveboard_id' })
+const result = await client.Liveboard().load()
 ```
 
 ### Common Methods
@@ -417,9 +417,9 @@ const log = client.Log()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `querytime` | ``$INTEGER`` | No |  |
-| `querytype` | ``$STRING`` | No |  |
-| `user_agent` | ``$STRING`` | No |  |
+| `querytime` | `number` | No |  |
+| `querytype` | `string` | No |  |
+| `user_agent` | `string` | No |  |
 
 ### Operations
 
@@ -514,9 +514,9 @@ const station = client.Station()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `station` | ``$ANY`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `station` | `any` | Yes |  |
+| `timestamp` | `number` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -525,7 +525,7 @@ const station = client.Station()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Station().load({ id: 'station_id' })
+const result = await client.Station().load()
 ```
 
 ### Common Methods
@@ -566,11 +566,11 @@ const vehicle = client.Vehicle()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `vehicle` | ``$STRING`` | Yes |  |
-| `vehicleinfo` | ``$OBJECT`` | No |  |
-| `version` | ``$STRING`` | Yes |  |
+| `stop` | `Record<string, any>` | Yes |  |
+| `timestamp` | `number` | Yes |  |
+| `vehicle` | `string` | Yes |  |
+| `vehicleinfo` | `Record<string, any>` | No |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -579,7 +579,7 @@ const vehicle = client.Vehicle()
 Load a single entity matching the given criteria.
 
 ```ts
-const result = await client.Vehicle().load({ id: 'vehicle_id' })
+const result = await client.Vehicle().load()
 ```
 
 ### Common Methods

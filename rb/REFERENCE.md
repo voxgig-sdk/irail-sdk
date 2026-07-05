@@ -8,7 +8,7 @@ Complete API reference for the Irail Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'irail_sdk'
+require_relative 'Irail_sdk'
 
 client = IrailSDK.new(options)
 ```
@@ -121,10 +121,10 @@ composition = client.Composition
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | ``$OBJECT`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `vehicle` | ``$STRING`` | No |  |
-| `version` | ``$STRING`` | No |  |
+| `composition` | `Hash` | No |  |
+| `timestamp` | `Integer` | No |  |
+| `vehicle` | `String` | No |  |
+| `version` | `String` | No |  |
 
 ### Operations
 
@@ -133,7 +133,7 @@ composition = client.Composition
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Composition.load({ "id" => "composition_id" })
+result = client.Composition.load()
 ```
 
 ### Common Methods
@@ -176,21 +176,21 @@ connection = client.Connection
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival` | ``$OBJECT`` | No |  |
-| `departure` | ``$OBJECT`` | No |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `occupancy` | ``$OBJECT`` | No |  |
-| `via` | ``$OBJECT`` | No |  |
+| `arrival` | `Hash` | No |  |
+| `departure` | `Hash` | No |  |
+| `duration` | `Integer` | No |  |
+| `id` | `Integer` | No |  |
+| `occupancy` | `Hash` | No |  |
+| `via` | `Hash` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Connection.list(nil)
+results = client.Connection.list
 ```
 
 ### Common Methods
@@ -233,21 +233,21 @@ disturbance = client.Disturbance
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `type` | ``$INTEGER`` | No |  |
+| `description` | `String` | No |  |
+| `id` | `Integer` | No |  |
+| `link` | `String` | No |  |
+| `timestamp` | `Integer` | No |  |
+| `title` | `String` | No |  |
+| `type` | `Integer` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Disturbance.list(nil)
+results = client.Disturbance.list
 ```
 
 ### Common Methods
@@ -290,11 +290,11 @@ liveboard = client.Liveboard
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$OBJECT`` | Yes |  |
-| `station` | ``$STRING`` | Yes |  |
-| `stationinfo` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `departure` | `Hash` | Yes |  |
+| `station` | `String` | Yes |  |
+| `stationinfo` | `Hash` | Yes |  |
+| `timestamp` | `Integer` | Yes |  |
+| `version` | `String` | Yes |  |
 
 ### Operations
 
@@ -303,7 +303,7 @@ liveboard = client.Liveboard
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Liveboard.load({ "id" => "liveboard_id" })
+result = client.Liveboard.load()
 ```
 
 ### Common Methods
@@ -346,18 +346,18 @@ log = client.Log
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `querytime` | ``$INTEGER`` | No |  |
-| `querytype` | ``$STRING`` | No |  |
-| `user_agent` | ``$STRING`` | No |  |
+| `querytime` | `Integer` | No |  |
+| `querytype` | `String` | No |  |
+| `user_agent` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Log.list(nil)
+results = client.Log.list
 ```
 
 ### Common Methods
@@ -447,9 +447,9 @@ station = client.Station
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `station` | ``$ANY`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `station` | `Object` | Yes |  |
+| `timestamp` | `Integer` | Yes |  |
+| `version` | `String` | Yes |  |
 
 ### Operations
 
@@ -458,7 +458,7 @@ station = client.Station
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Station.load({ "id" => "station_id" })
+result = client.Station.load()
 ```
 
 ### Common Methods
@@ -501,11 +501,11 @@ vehicle = client.Vehicle
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `vehicle` | ``$STRING`` | Yes |  |
-| `vehicleinfo` | ``$OBJECT`` | No |  |
-| `version` | ``$STRING`` | Yes |  |
+| `stop` | `Hash` | Yes |  |
+| `timestamp` | `Integer` | Yes |  |
+| `vehicle` | `String` | Yes |  |
+| `vehicleinfo` | `Hash` | No |  |
+| `version` | `String` | Yes |  |
 
 ### Operations
 
@@ -514,7 +514,7 @@ vehicle = client.Vehicle
 Load a single entity matching the given criteria. Raises on error.
 
 ```ruby
-result = client.Vehicle.load({ "id" => "vehicle_id" })
+result = client.Vehicle.load()
 ```
 
 ### Common Methods

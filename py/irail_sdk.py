@@ -221,49 +221,49 @@ class IrailSDK:
 
 
     def Composition(self, data=None) -> "CompositionEntity":
-        """Entity factory: client.Composition().list({}) / client.Composition().load({"id": ...})."""
+        """Entity factory: client.Composition().list() / client.Composition().load({"id": ...})."""
         from entity.composition_entity import CompositionEntity
         return CompositionEntity(self, data)
 
 
     def Connection(self, data=None) -> "ConnectionEntity":
-        """Entity factory: client.Connection().list({}) / client.Connection().load({"id": ...})."""
+        """Entity factory: client.Connection().list() / client.Connection().load({"id": ...})."""
         from entity.connection_entity import ConnectionEntity
         return ConnectionEntity(self, data)
 
 
     def Disturbance(self, data=None) -> "DisturbanceEntity":
-        """Entity factory: client.Disturbance().list({}) / client.Disturbance().load({"id": ...})."""
+        """Entity factory: client.Disturbance().list() / client.Disturbance().load({"id": ...})."""
         from entity.disturbance_entity import DisturbanceEntity
         return DisturbanceEntity(self, data)
 
 
     def Liveboard(self, data=None) -> "LiveboardEntity":
-        """Entity factory: client.Liveboard().list({}) / client.Liveboard().load({"id": ...})."""
+        """Entity factory: client.Liveboard().list() / client.Liveboard().load({"id": ...})."""
         from entity.liveboard_entity import LiveboardEntity
         return LiveboardEntity(self, data)
 
 
     def Log(self, data=None) -> "LogEntity":
-        """Entity factory: client.Log().list({}) / client.Log().load({"id": ...})."""
+        """Entity factory: client.Log().list() / client.Log().load({"id": ...})."""
         from entity.log_entity import LogEntity
         return LogEntity(self, data)
 
 
     def Occupancy(self, data=None) -> "OccupancyEntity":
-        """Entity factory: client.Occupancy().list({}) / client.Occupancy().load({"id": ...})."""
+        """Entity factory: client.Occupancy().list() / client.Occupancy().load({"id": ...})."""
         from entity.occupancy_entity import OccupancyEntity
         return OccupancyEntity(self, data)
 
 
     def Station(self, data=None) -> "StationEntity":
-        """Entity factory: client.Station().list({}) / client.Station().load({"id": ...})."""
+        """Entity factory: client.Station().list() / client.Station().load({"id": ...})."""
         from entity.station_entity import StationEntity
         return StationEntity(self, data)
 
 
     def Vehicle(self, data=None) -> "VehicleEntity":
-        """Entity factory: client.Vehicle().list({}) / client.Vehicle().load({"id": ...})."""
+        """Entity factory: client.Vehicle().list() / client.Vehicle().load({"id": ...})."""
         from entity.vehicle_entity import VehicleEntity
         return VehicleEntity(self, data)
 

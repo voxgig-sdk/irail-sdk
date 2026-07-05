@@ -66,8 +66,12 @@ class DisturbanceEntity:
     
 
     
-    def list(self, reqmatch: DisturbanceListMatch, ctrl=None) -> list[Disturbance]:
+    def list(self, reqmatch=None, ctrl=None) -> list[Disturbance]:
         utility = self._utility
+        # reqmatch is optional: an omitted match lists all records. Treat None
+        # as an empty match so client.Disturbance().list() works with no args.
+        if reqmatch is None:
+            reqmatch = {}
         ctx = utility.make_context({
             "opname": "list",
             "ctrl": ctrl,

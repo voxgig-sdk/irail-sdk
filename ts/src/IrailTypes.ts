@@ -12,7 +12,12 @@ export interface Composition {
   version?: string
 }
 
-export type CompositionLoadMatch = Partial<Composition>
+export interface CompositionLoadMatch {
+  composition?: Record<string, any>
+  timestamp?: number
+  vehicle?: string
+  version?: string
+}
 
 export interface Connection {
   arrival?: Record<string, any>
@@ -23,7 +28,14 @@ export interface Connection {
   via?: Record<string, any>
 }
 
-export type ConnectionListMatch = Partial<Connection>
+export interface ConnectionListMatch {
+  arrival?: Record<string, any>
+  departure?: Record<string, any>
+  duration?: number
+  id?: number
+  occupancy?: Record<string, any>
+  via?: Record<string, any>
+}
 
 export interface Disturbance {
   description?: string
@@ -34,7 +46,14 @@ export interface Disturbance {
   type?: number
 }
 
-export type DisturbanceListMatch = Partial<Disturbance>
+export interface DisturbanceListMatch {
+  description?: string
+  id?: number
+  link?: string
+  timestamp?: number
+  title?: string
+  type?: number
+}
 
 export interface Liveboard {
   departure: Record<string, any>
@@ -44,7 +63,13 @@ export interface Liveboard {
   version: string
 }
 
-export type LiveboardLoadMatch = Partial<Liveboard>
+export interface LiveboardLoadMatch {
+  departure?: Record<string, any>
+  station?: string
+  stationinfo?: Record<string, any>
+  timestamp?: number
+  version?: string
+}
 
 export interface Log {
   querytime?: number
@@ -52,12 +77,17 @@ export interface Log {
   user_agent?: string
 }
 
-export type LogListMatch = Partial<Log>
+export interface LogListMatch {
+  querytime?: number
+  querytype?: string
+  user_agent?: string
+}
 
 export interface Occupancy {
 }
 
-export type OccupancyCreateData = Partial<Occupancy>
+export interface OccupancyCreateData {
+}
 
 export interface Station {
   station: any
@@ -65,7 +95,11 @@ export interface Station {
   version: string
 }
 
-export type StationLoadMatch = Partial<Station>
+export interface StationLoadMatch {
+  station?: any
+  timestamp?: number
+  version?: string
+}
 
 export interface Vehicle {
   stop: Record<string, any>
@@ -75,5 +109,11 @@ export interface Vehicle {
   version: string
 }
 
-export type VehicleLoadMatch = Partial<Vehicle>
+export interface VehicleLoadMatch {
+  stop?: Record<string, any>
+  timestamp?: number
+  vehicle?: string
+  vehicleinfo?: Record<string, any>
+  version?: string
+}
 

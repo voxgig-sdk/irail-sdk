@@ -16,8 +16,7 @@ type Composition struct {
 	Version *string `json:"version,omitempty"`
 }
 
-// CompositionLoadMatch mirrors the composition fields as an all-optional match
-// filter (Go analog of Partial<Composition>).
+// CompositionLoadMatch is the typed request payload for Composition.LoadTyped.
 type CompositionLoadMatch struct {
 	Composition *map[string]any `json:"composition,omitempty"`
 	Timestamp *int `json:"timestamp,omitempty"`
@@ -35,8 +34,7 @@ type Connection struct {
 	Via *map[string]any `json:"via,omitempty"`
 }
 
-// ConnectionListMatch mirrors the connection fields as an all-optional match
-// filter (Go analog of Partial<Connection>).
+// ConnectionListMatch is the typed request payload for Connection.ListTyped.
 type ConnectionListMatch struct {
 	Arrival *map[string]any `json:"arrival,omitempty"`
 	Departure *map[string]any `json:"departure,omitempty"`
@@ -56,8 +54,7 @@ type Disturbance struct {
 	Type *int `json:"type,omitempty"`
 }
 
-// DisturbanceListMatch mirrors the disturbance fields as an all-optional match
-// filter (Go analog of Partial<Disturbance>).
+// DisturbanceListMatch is the typed request payload for Disturbance.ListTyped.
 type DisturbanceListMatch struct {
 	Description *string `json:"description,omitempty"`
 	Id *int `json:"id,omitempty"`
@@ -76,8 +73,7 @@ type Liveboard struct {
 	Version string `json:"version"`
 }
 
-// LiveboardLoadMatch mirrors the liveboard fields as an all-optional match
-// filter (Go analog of Partial<Liveboard>).
+// LiveboardLoadMatch is the typed request payload for Liveboard.LoadTyped.
 type LiveboardLoadMatch struct {
 	Departure *map[string]any `json:"departure,omitempty"`
 	Station *string `json:"station,omitempty"`
@@ -93,8 +89,7 @@ type Log struct {
 	UserAgent *string `json:"user_agent,omitempty"`
 }
 
-// LogListMatch mirrors the log fields as an all-optional match
-// filter (Go analog of Partial<Log>).
+// LogListMatch is the typed request payload for Log.ListTyped.
 type LogListMatch struct {
 	Querytime *int `json:"querytime,omitempty"`
 	Querytype *string `json:"querytype,omitempty"`
@@ -105,8 +100,7 @@ type LogListMatch struct {
 type Occupancy struct {
 }
 
-// OccupancyCreateData mirrors the occupancy fields as an all-optional match
-// filter (Go analog of Partial<Occupancy>).
+// OccupancyCreateData is the typed request payload for Occupancy.CreateTyped.
 type OccupancyCreateData struct {
 }
 
@@ -117,8 +111,7 @@ type Station struct {
 	Version string `json:"version"`
 }
 
-// StationLoadMatch mirrors the station fields as an all-optional match
-// filter (Go analog of Partial<Station>).
+// StationLoadMatch is the typed request payload for Station.LoadTyped.
 type StationLoadMatch struct {
 	Station *any `json:"station,omitempty"`
 	Timestamp *int `json:"timestamp,omitempty"`
@@ -134,8 +127,7 @@ type Vehicle struct {
 	Version string `json:"version"`
 }
 
-// VehicleLoadMatch mirrors the vehicle fields as an all-optional match
-// filter (Go analog of Partial<Vehicle>).
+// VehicleLoadMatch is the typed request payload for Vehicle.LoadTyped.
 type VehicleLoadMatch struct {
 	Stop *map[string]any `json:"stop,omitempty"`
 	Timestamp *int `json:"timestamp,omitempty"`

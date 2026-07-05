@@ -73,11 +73,11 @@ Create a new `StationEntity` instance. Pass `null` for no initial data.
 
 Create a new `VehicleEntity` instance. Pass `null` for no initial data.
 
-#### `optionsMap(): array`
+#### `options_map(): array`
 
 Return a deep copy of the current SDK options.
 
-#### `getUtility(): ProjectNameUtility`
+#### `get_utility(): IrailUtility`
 
 Return a copy of the SDK utility object.
 
@@ -120,10 +120,10 @@ $composition = $client->Composition();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | ``$OBJECT`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `vehicle` | ``$STRING`` | No |  |
-| `version` | ``$STRING`` | No |  |
+| `composition` | `array` | No |  |
+| `timestamp` | `int` | No |  |
+| `vehicle` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
 
@@ -132,24 +132,24 @@ $composition = $client->Composition();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Composition()->load(["id" => "composition_id"]);
+$result = $client->Composition()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -158,7 +158,7 @@ Set the entity match criteria.
 Create a new `CompositionEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -175,38 +175,38 @@ $connection = $client->Connection();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival` | ``$OBJECT`` | No |  |
-| `departure` | ``$OBJECT`` | No |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `occupancy` | ``$OBJECT`` | No |  |
-| `via` | ``$OBJECT`` | No |  |
+| `arrival` | `array` | No |  |
+| `departure` | `array` | No |  |
+| `duration` | `int` | No |  |
+| `id` | `int` | No |  |
+| `occupancy` | `array` | No |  |
+| `via` | `array` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Connection()->list([]);
+$results = $client->Connection()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -215,7 +215,7 @@ Set the entity match criteria.
 Create a new `ConnectionEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -232,38 +232,38 @@ $disturbance = $client->Disturbance();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `type` | ``$INTEGER`` | No |  |
+| `description` | `string` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `timestamp` | `int` | No |  |
+| `title` | `string` | No |  |
+| `type` | `int` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Disturbance()->list([]);
+$results = $client->Disturbance()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -272,7 +272,7 @@ Set the entity match criteria.
 Create a new `DisturbanceEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -289,11 +289,11 @@ $liveboard = $client->Liveboard();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$OBJECT`` | Yes |  |
-| `station` | ``$STRING`` | Yes |  |
-| `stationinfo` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `departure` | `array` | Yes |  |
+| `station` | `string` | Yes |  |
+| `stationinfo` | `array` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -302,24 +302,24 @@ $liveboard = $client->Liveboard();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Liveboard()->load(["id" => "liveboard_id"]);
+$result = $client->Liveboard()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -328,7 +328,7 @@ Set the entity match criteria.
 Create a new `LiveboardEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -345,35 +345,35 @@ $log = $client->Log();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `querytime` | ``$INTEGER`` | No |  |
-| `querytype` | ``$STRING`` | No |  |
-| `user_agent` | ``$STRING`` | No |  |
+| `querytime` | `int` | No |  |
+| `querytype` | `string` | No |  |
+| `user_agent` | `string` | No |  |
 
 ### Operations
 
-#### `list(array $reqmatch, ?array $ctrl = null): mixed`
+#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria. Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
 
 ```php
-$results = $client->Log()->list([]);
+$results = $client->Log()->list();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -382,7 +382,7 @@ Set the entity match criteria.
 Create a new `LogEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -408,19 +408,19 @@ $result = $client->Occupancy()->create([
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -429,7 +429,7 @@ Set the entity match criteria.
 Create a new `OccupancyEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -446,9 +446,9 @@ $station = $client->Station();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `station` | ``$ANY`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `station` | `mixed` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -457,24 +457,24 @@ $station = $client->Station();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Station()->load(["id" => "station_id"]);
+$result = $client->Station()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -483,7 +483,7 @@ Set the entity match criteria.
 Create a new `StationEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 
@@ -500,11 +500,11 @@ $vehicle = $client->Vehicle();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `vehicle` | ``$STRING`` | Yes |  |
-| `vehicleinfo` | ``$OBJECT`` | No |  |
-| `version` | ``$STRING`` | Yes |  |
+| `stop` | `array` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `vehicle` | `string` | Yes |  |
+| `vehicleinfo` | `array` | No |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -513,24 +513,24 @@ $vehicle = $client->Vehicle();
 Load a single entity matching the given criteria. Throws on error.
 
 ```php
-$result = $client->Vehicle()->load(["id" => "vehicle_id"]);
+$result = $client->Vehicle()->load();
 ```
 
 ### Common Methods
 
-#### `dataGet(): array`
+#### `data_get(): array`
 
 Get the entity data. Returns a copy of the current data.
 
-#### `dataSet($data): void`
+#### `data_set($data): void`
 
 Set the entity data.
 
-#### `matchGet(): array`
+#### `match_get(): array`
 
 Get the entity match criteria.
 
-#### `matchSet($match): void`
+#### `match_set($match): void`
 
 Set the entity match criteria.
 
@@ -539,7 +539,7 @@ Set the entity match criteria.
 Create a new `VehicleEntity` instance with the same client and
 options.
 
-#### `getName(): string`
+#### `get_name(): string`
 
 Return the entity name.
 

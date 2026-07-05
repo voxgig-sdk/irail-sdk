@@ -4,6 +4,8 @@
 
 The Lua SDK for the Irail API — an entity-oriented client using Lua conventions.
 
+It exposes the API as capitalised, semantic **Entities** — e.g. `client:Composition()` — each with the same small set of operations (`list`, `load`, `create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -34,9 +36,31 @@ local client = sdk.new()
 ### 3. Load a composition
 
 ```lua
-local composition, err = client:Composition():load({ id = "example_id" })
+local composition, err = client:Composition():load()
 if err then error(err) end
 print(composition)
+```
+
+
+## Error handling
+
+Entity operations return `(value, err)`. Check `err` before using
+the value:
+
+```lua
+local composition, err = client:Composition():load()
+if err then error(err) end
+```
+
+`direct` follows the same `(value, err)` convention:
+
+```lua
+local result, err = client:direct({
+  path = "/api/resource/{id}",
+  method = "GET",
+  params = { id = "example_id" },
+})
+if err then error(err) end
 ```
 
 
@@ -82,8 +106,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Composition():load({ id = "test01" })
--- result is the loaded data; err is set on failure
+local result, err = client:Composition():load()
+-- result is the returned data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -179,8 +203,6 @@ All entities share the same interface.
 | `load` | `(reqmatch, ctrl) -> any, err` | Load a single entity by match criteria. |
 | `list` | `(reqmatch, ctrl) -> any, err` | List entities matching the criteria. |
 | `create` | `(reqdata, ctrl) -> any, err` | Create a new entity. |
-| `update` | `(reqdata, ctrl) -> any, err` | Update an existing entity. |
-| `remove` | `(reqmatch, ctrl) -> any, err` | Remove an entity. |
 | `data_get` | `() -> table` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> table` | Get entity match criteria. |
@@ -195,12 +217,12 @@ data **directly** — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `load` / `create` | the entity record (a `table`) |
 | `list` | an array (`table`) of entity records |
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local composition, err = client:Composition():load({ id = "example_id" })
+    local composition, err = client:Composition():load()
     if err then error(err) end
     -- composition is the loaded record
 
@@ -332,15 +354,15 @@ Create an instance: `local composition = client:Composition(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | ``$OBJECT`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `vehicle` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `composition` | `table` |  |
+| `timestamp` | `number` |  |
+| `vehicle` | `string` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local composition, err = client:Composition():load({ id = "composition_id" })
+local composition, err = client:Composition():load()
 ```
 
 
@@ -358,12 +380,12 @@ Create an instance: `local connection = client:Connection(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival` | ``$OBJECT`` |  |
-| `departure` | ``$OBJECT`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `occupancy` | ``$OBJECT`` |  |
-| `via` | ``$OBJECT`` |  |
+| `arrival` | `table` |  |
+| `departure` | `table` |  |
+| `duration` | `number` |  |
+| `id` | `number` |  |
+| `occupancy` | `table` |  |
+| `via` | `table` |  |
 
 #### Example: List
 
@@ -386,12 +408,12 @@ Create an instance: `local disturbance = client:Disturbance(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `title` | ``$STRING`` |  |
-| `type` | ``$INTEGER`` |  |
+| `description` | `string` |  |
+| `id` | `number` |  |
+| `link` | `string` |  |
+| `timestamp` | `number` |  |
+| `title` | `string` |  |
+| `type` | `number` |  |
 
 #### Example: List
 
@@ -414,16 +436,16 @@ Create an instance: `local liveboard = client:Liveboard(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | ``$OBJECT`` |  |
-| `station` | ``$STRING`` |  |
-| `stationinfo` | ``$OBJECT`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `version` | ``$STRING`` |  |
+| `departure` | `table` |  |
+| `station` | `string` |  |
+| `stationinfo` | `table` |  |
+| `timestamp` | `number` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local liveboard, err = client:Liveboard():load({ id = "liveboard_id" })
+local liveboard, err = client:Liveboard():load()
 ```
 
 
@@ -441,9 +463,9 @@ Create an instance: `local log = client:Log(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `querytime` | ``$INTEGER`` |  |
-| `querytype` | ``$STRING`` |  |
-| `user_agent` | ``$STRING`` |  |
+| `querytime` | `number` |  |
+| `querytype` | `string` |  |
+| `user_agent` | `string` |  |
 
 #### Example: List
 
@@ -484,14 +506,14 @@ Create an instance: `local station = client:Station(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `station` | ``$ANY`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `version` | ``$STRING`` |  |
+| `station` | `any` |  |
+| `timestamp` | `number` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local station, err = client:Station():load({ id = "station_id" })
+local station, err = client:Station():load()
 ```
 
 
@@ -509,25 +531,29 @@ Create an instance: `local vehicle = client:Vehicle(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | ``$OBJECT`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `vehicle` | ``$STRING`` |  |
-| `vehicleinfo` | ``$OBJECT`` |  |
-| `version` | ``$STRING`` |  |
+| `stop` | `table` |  |
+| `timestamp` | `number` |  |
+| `vehicle` | `string` |  |
+| `vehicleinfo` | `table` |  |
+| `version` | `string` |  |
 
 #### Example: Load
 
 ```lua
-local vehicle, err = client:Vehicle():load({ id = "vehicle_id" })
+local vehicle, err = client:Vehicle():load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -544,8 +570,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as a second return value.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -594,9 +621,9 @@ stores the returned data and match criteria internally.
 
 ```lua
 local composition = client:Composition()
-composition:load({ id = "example_id" })
+composition:load()
 
--- composition:data_get() now returns the loaded composition data
+-- composition:data_get() now returns the composition data from the last load
 -- composition:match_get() returns the last match criteria
 ```
 

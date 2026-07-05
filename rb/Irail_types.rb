@@ -29,7 +29,7 @@ Composition = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Composition#load (any subset of Composition fields).
+# Request payload for Composition#load.
 #
 # @!attribute [rw] composition
 #   @return [Hash, nil]
@@ -79,7 +79,7 @@ Connection = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Connection#list (any subset of Connection fields).
+# Request payload for Connection#list.
 #
 # @!attribute [rw] arrival
 #   @return [Hash, nil]
@@ -137,7 +137,7 @@ Disturbance = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Disturbance#list (any subset of Disturbance fields).
+# Request payload for Disturbance#list.
 #
 # @!attribute [rw] description
 #   @return [String, nil]
@@ -191,7 +191,7 @@ Liveboard = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Liveboard#load (any subset of Liveboard fields).
+# Request payload for Liveboard#load.
 #
 # @!attribute [rw] departure
 #   @return [Hash, nil]
@@ -233,7 +233,7 @@ Log = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Log#list (any subset of Log fields).
+# Request payload for Log#list.
 #
 # @!attribute [rw] querytime
 #   @return [Integer, nil]
@@ -254,7 +254,7 @@ LogListMatch = Struct.new(
 class Occupancy
 end
 
-# Match filter for Occupancy#create (any subset of Occupancy fields).
+# Request payload for Occupancy#create.
 class OccupancyCreateData
 end
 
@@ -275,7 +275,7 @@ Station = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Station#load (any subset of Station fields).
+# Request payload for Station#load.
 #
 # @!attribute [rw] station
 #   @return [Object, nil]
@@ -317,7 +317,7 @@ Vehicle = Struct.new(
   keyword_init: true
 )
 
-# Match filter for Vehicle#load (any subset of Vehicle fields).
+# Request payload for Vehicle#load.
 #
 # @!attribute [rw] stop
 #   @return [Hash, nil]

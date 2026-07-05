@@ -4,6 +4,11 @@
 
 The Python SDK for the Irail API — an entity-oriented client following Pythonic conventions.
 
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Composition()` — each
+carrying a small, uniform set of operations (`list`, `load`, `create`) instead of raw URL
+paths and query strings. You work with named resources and verbs, which
+keeps the cognitive load low.
+
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
 
@@ -37,10 +42,38 @@ client = IrailSDK()
 
 ```python
 try:
-    composition = client.Composition().load({"id": "example_id"})
+    composition = client.Composition().load()
     print(composition)
 except Exception as err:
     print(f"load failed: {err}")
+```
+
+
+## Error handling
+
+Entity operations raise on failure, so wrap them in `try` / `except`:
+
+```python
+try:
+    composition = client.Composition().load()
+    print(composition)
+except Exception as err:
+    print(f"load failed: {err}")
+```
+
+`direct()` does **not** raise — it returns the result envelope. Branch
+on `ok`; on failure `status` holds the HTTP status (for error responses)
+and `err` holds a transport error, so read both defensively:
+
+```python
+result = client.direct({
+    "path": "/api/resource/{id}",
+    "method": "GET",
+    "params": {"id": "example_id"},
+})
+
+if not result["ok"]:
+    print("request failed:", result.get("status"), result.get("err"))
 ```
 
 
@@ -61,7 +94,10 @@ if result["ok"]:
     print(result["status"])  # 200
     print(result["data"])    # response body
 else:
-    print(result["err"])     # error value
+    # A non-2xx response carries status + data (the error body); a
+    # transport-level failure carries err instead. Only one is present, so
+    # read both with .get() rather than indexing a key that may be absent.
+    print(result.get("status"), result.get("err"))
 ```
 
 ### Prepare a request without sending it
@@ -87,7 +123,7 @@ Create a mock client for unit testing — no server required:
 client = IrailSDK.test()
 
 # Entity ops return the bare record and raise on error.
-composition = client.Composition().load({"id": "test01"})
+composition = client.Composition().load()
 # composition contains the mock response record
 ```
 
@@ -182,8 +218,6 @@ All entities share the same interface.
 | `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
 | `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
 | `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
-| `update` | `(reqdata, ctrl) -> any` | Update an existing entity. Raises on error. |
-| `remove` | `(reqmatch, ctrl) -> any` | Remove an entity. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -334,15 +368,15 @@ Create an instance: `composition = client.Composition()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | ``$OBJECT`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `vehicle` | ``$STRING`` |  |
-| `version` | ``$STRING`` |  |
+| `composition` | `dict` |  |
+| `timestamp` | `int` |  |
+| `vehicle` | `str` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
 ```python
-composition = client.Composition().load({"id": "composition_id"})
+composition = client.Composition().load()
 ```
 
 
@@ -354,23 +388,23 @@ Create an instance: `connection = client.Connection()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `arrival` | ``$OBJECT`` |  |
-| `departure` | ``$OBJECT`` |  |
-| `duration` | ``$INTEGER`` |  |
-| `id` | ``$INTEGER`` |  |
-| `occupancy` | ``$OBJECT`` |  |
-| `via` | ``$OBJECT`` |  |
+| `arrival` | `dict` |  |
+| `departure` | `dict` |  |
+| `duration` | `int` |  |
+| `id` | `int` |  |
+| `occupancy` | `dict` |  |
+| `via` | `dict` |  |
 
 #### Example: List
 
 ```python
-connections = client.Connection().list({})
+connections = client.Connection().list()
 ```
 
 
@@ -382,23 +416,23 @@ Create an instance: `disturbance = client.Disturbance()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `description` | ``$STRING`` |  |
-| `id` | ``$INTEGER`` |  |
-| `link` | ``$STRING`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `title` | ``$STRING`` |  |
-| `type` | ``$INTEGER`` |  |
+| `description` | `str` |  |
+| `id` | `int` |  |
+| `link` | `str` |  |
+| `timestamp` | `int` |  |
+| `title` | `str` |  |
+| `type` | `int` |  |
 
 #### Example: List
 
 ```python
-disturbances = client.Disturbance().list({})
+disturbances = client.Disturbance().list()
 ```
 
 
@@ -416,16 +450,16 @@ Create an instance: `liveboard = client.Liveboard()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | ``$OBJECT`` |  |
-| `station` | ``$STRING`` |  |
-| `stationinfo` | ``$OBJECT`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `version` | ``$STRING`` |  |
+| `departure` | `dict` |  |
+| `station` | `str` |  |
+| `stationinfo` | `dict` |  |
+| `timestamp` | `int` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
 ```python
-liveboard = client.Liveboard().load({"id": "liveboard_id"})
+liveboard = client.Liveboard().load()
 ```
 
 
@@ -437,20 +471,20 @@ Create an instance: `log = client.Log()`
 
 | Method | Description |
 | --- | --- |
-| `list(match)` | List entities matching the criteria. |
+| `list()` | List entities, optionally matching the given criteria. |
 
 #### Fields
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `querytime` | ``$INTEGER`` |  |
-| `querytype` | ``$STRING`` |  |
-| `user_agent` | ``$STRING`` |  |
+| `querytime` | `int` |  |
+| `querytype` | `str` |  |
+| `user_agent` | `str` |  |
 
 #### Example: List
 
 ```python
-logs = client.Log().list({})
+logs = client.Log().list()
 ```
 
 
@@ -486,14 +520,14 @@ Create an instance: `station = client.Station()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `station` | ``$ANY`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `version` | ``$STRING`` |  |
+| `station` | `Any` |  |
+| `timestamp` | `int` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
 ```python
-station = client.Station().load({"id": "station_id"})
+station = client.Station().load()
 ```
 
 
@@ -511,25 +545,29 @@ Create an instance: `vehicle = client.Vehicle()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | ``$OBJECT`` |  |
-| `timestamp` | ``$INTEGER`` |  |
-| `vehicle` | ``$STRING`` |  |
-| `vehicleinfo` | ``$OBJECT`` |  |
-| `version` | ``$STRING`` |  |
+| `stop` | `dict` |  |
+| `timestamp` | `int` |  |
+| `vehicle` | `str` |  |
+| `vehicleinfo` | `dict` |  |
+| `version` | `str` |  |
 
 #### Example: Load
 
 ```python
-vehicle = client.Vehicle().load({"id": "vehicle_id"})
+vehicle = client.Vehicle().load()
 ```
 
 
-## Explanation
+## Advanced
+
+> The sections above cover everyday use. The material below explains the
+> SDK's internals — useful when extending it with custom features, but not
+> needed for normal use.
 
 ### The operation pipeline
 
-Every entity operation (load, list, create, update, remove) follows a
-six-stage pipeline. Each stage fires a feature hook before executing:
+Every entity operation follows a six-stage pipeline. Each stage fires a
+feature hook before executing:
 
 ```
 PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
@@ -546,8 +584,9 @@ PrePoint → PreSpec → PreRequest → PreResponse → PreResult → PreDone
 - **PreDone**: Final stage before returning to the caller. Entity
   state (match, data) is updated here.
 
-If any stage returns an error, the pipeline short-circuits and the
-error is returned to the caller as the second element in the return tuple.
+If any stage errors, the pipeline short-circuits and the error surfaces
+to the caller — see [Error handling](#error-handling) for how that looks
+in this language.
 
 ### Features and hooks
 
@@ -595,9 +634,9 @@ stores the returned data and match criteria internally.
 
 ```python
 composition = client.Composition()
-composition.load({"id": "example_id"})
+composition.load()
 
-# composition.data_get() now returns the loaded composition data
+# composition.data_get() now returns the composition data from the last load
 # composition.match_get() returns the last match criteria
 ```
 

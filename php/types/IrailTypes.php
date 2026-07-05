@@ -21,7 +21,7 @@ class Composition
     public ?string $version = null;
 }
 
-/** Match filter for Composition#load (any subset of Composition fields). */
+/** Request payload for Composition#load. */
 class CompositionLoadMatch
 {
     public ?array $composition = null;
@@ -41,7 +41,7 @@ class Connection
     public ?array $via = null;
 }
 
-/** Match filter for Connection#list (any subset of Connection fields). */
+/** Request payload for Connection#list. */
 class ConnectionListMatch
 {
     public ?array $arrival = null;
@@ -63,7 +63,7 @@ class Disturbance
     public ?int $type = null;
 }
 
-/** Match filter for Disturbance#list (any subset of Disturbance fields). */
+/** Request payload for Disturbance#list. */
 class DisturbanceListMatch
 {
     public ?string $description = null;
@@ -84,7 +84,7 @@ class Liveboard
     public string $version;
 }
 
-/** Match filter for Liveboard#load (any subset of Liveboard fields). */
+/** Request payload for Liveboard#load. */
 class LiveboardLoadMatch
 {
     public ?array $departure = null;
@@ -102,7 +102,7 @@ class Log
     public ?string $user_agent = null;
 }
 
-/** Match filter for Log#list (any subset of Log fields). */
+/** Request payload for Log#list. */
 class LogListMatch
 {
     public ?int $querytime = null;
@@ -115,7 +115,7 @@ class Occupancy
 {
 }
 
-/** Match filter for Occupancy#create (any subset of Occupancy fields). */
+/** Request payload for Occupancy#create. */
 class OccupancyCreateData
 {
 }
@@ -128,7 +128,7 @@ class Station
     public string $version;
 }
 
-/** Match filter for Station#load (any subset of Station fields). */
+/** Request payload for Station#load. */
 class StationLoadMatch
 {
     public mixed $station = null;
@@ -146,7 +146,7 @@ class Vehicle
     public string $version;
 }
 
-/** Match filter for Vehicle#load (any subset of Vehicle fields). */
+/** Request payload for Vehicle#load. */
 class VehicleLoadMatch
 {
     public ?array $stop = null;

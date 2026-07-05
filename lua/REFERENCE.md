@@ -118,10 +118,10 @@ local composition = client:Composition(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | ``$OBJECT`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `vehicle` | ``$STRING`` | No |  |
-| `version` | ``$STRING`` | No |  |
+| `composition` | `table` | No |  |
+| `timestamp` | `number` | No |  |
+| `vehicle` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
 
@@ -130,7 +130,7 @@ local composition = client:Composition(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Composition():load({ id = "composition_id" })
+local result, err = client:Composition():load()
 ```
 
 ### Common Methods
@@ -173,12 +173,12 @@ local connection = client:Connection(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival` | ``$OBJECT`` | No |  |
-| `departure` | ``$OBJECT`` | No |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `occupancy` | ``$OBJECT`` | No |  |
-| `via` | ``$OBJECT`` | No |  |
+| `arrival` | `table` | No |  |
+| `departure` | `table` | No |  |
+| `duration` | `number` | No |  |
+| `id` | `number` | No |  |
+| `occupancy` | `table` | No |  |
+| `via` | `table` | No |  |
 
 ### Operations
 
@@ -230,12 +230,12 @@ local disturbance = client:Disturbance(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `type` | ``$INTEGER`` | No |  |
+| `description` | `string` | No |  |
+| `id` | `number` | No |  |
+| `link` | `string` | No |  |
+| `timestamp` | `number` | No |  |
+| `title` | `string` | No |  |
+| `type` | `number` | No |  |
 
 ### Operations
 
@@ -287,11 +287,11 @@ local liveboard = client:Liveboard(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$OBJECT`` | Yes |  |
-| `station` | ``$STRING`` | Yes |  |
-| `stationinfo` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `departure` | `table` | Yes |  |
+| `station` | `string` | Yes |  |
+| `stationinfo` | `table` | Yes |  |
+| `timestamp` | `number` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -300,7 +300,7 @@ local liveboard = client:Liveboard(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Liveboard():load({ id = "liveboard_id" })
+local result, err = client:Liveboard():load()
 ```
 
 ### Common Methods
@@ -343,9 +343,9 @@ local log = client:Log(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `querytime` | ``$INTEGER`` | No |  |
-| `querytype` | ``$STRING`` | No |  |
-| `user_agent` | ``$STRING`` | No |  |
+| `querytime` | `number` | No |  |
+| `querytype` | `string` | No |  |
+| `user_agent` | `string` | No |  |
 
 ### Operations
 
@@ -444,9 +444,9 @@ local station = client:Station(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `station` | ``$ANY`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `station` | `any` | Yes |  |
+| `timestamp` | `number` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -455,7 +455,7 @@ local station = client:Station(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Station():load({ id = "station_id" })
+local result, err = client:Station():load()
 ```
 
 ### Common Methods
@@ -498,11 +498,11 @@ local vehicle = client:Vehicle(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `vehicle` | ``$STRING`` | Yes |  |
-| `vehicleinfo` | ``$OBJECT`` | No |  |
-| `version` | ``$STRING`` | Yes |  |
+| `stop` | `table` | Yes |  |
+| `timestamp` | `number` | Yes |  |
+| `vehicle` | `string` | Yes |  |
+| `vehicleinfo` | `table` | No |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -511,7 +511,7 @@ local vehicle = client:Vehicle(nil)
 Load a single entity matching the given criteria.
 
 ```lua
-local result, err = client:Vehicle():load({ id = "vehicle_id" })
+local result, err = client:Vehicle():load()
 ```
 
 ### Common Methods

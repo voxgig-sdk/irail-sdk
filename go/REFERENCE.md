@@ -125,10 +125,10 @@ composition := client.Composition(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | ``$OBJECT`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `vehicle` | ``$STRING`` | No |  |
-| `version` | ``$STRING`` | No |  |
+| `composition` | `map[string]any` | No |  |
+| `timestamp` | `int` | No |  |
+| `vehicle` | `string` | No |  |
+| `version` | `string` | No |  |
 
 ### Operations
 
@@ -137,7 +137,7 @@ composition := client.Composition(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Composition(nil).Load(map[string]any{"id": "composition_id"}, nil)
+result, err := client.Composition(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -174,12 +174,12 @@ connection := client.Connection(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `arrival` | ``$OBJECT`` | No |  |
-| `departure` | ``$OBJECT`` | No |  |
-| `duration` | ``$INTEGER`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `occupancy` | ``$OBJECT`` | No |  |
-| `via` | ``$OBJECT`` | No |  |
+| `arrival` | `map[string]any` | No |  |
+| `departure` | `map[string]any` | No |  |
+| `duration` | `int` | No |  |
+| `id` | `int` | No |  |
+| `occupancy` | `map[string]any` | No |  |
+| `via` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -225,12 +225,12 @@ disturbance := client.Disturbance(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `description` | ``$STRING`` | No |  |
-| `id` | ``$INTEGER`` | No |  |
-| `link` | ``$STRING`` | No |  |
-| `timestamp` | ``$INTEGER`` | No |  |
-| `title` | ``$STRING`` | No |  |
-| `type` | ``$INTEGER`` | No |  |
+| `description` | `string` | No |  |
+| `id` | `int` | No |  |
+| `link` | `string` | No |  |
+| `timestamp` | `int` | No |  |
+| `title` | `string` | No |  |
+| `type` | `int` | No |  |
 
 ### Operations
 
@@ -276,11 +276,11 @@ liveboard := client.Liveboard(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | ``$OBJECT`` | Yes |  |
-| `station` | ``$STRING`` | Yes |  |
-| `stationinfo` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `departure` | `map[string]any` | Yes |  |
+| `station` | `string` | Yes |  |
+| `stationinfo` | `map[string]any` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -289,7 +289,7 @@ liveboard := client.Liveboard(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Liveboard(nil).Load(map[string]any{"id": "liveboard_id"}, nil)
+result, err := client.Liveboard(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -326,9 +326,9 @@ log := client.Log(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `querytime` | ``$INTEGER`` | No |  |
-| `querytype` | ``$STRING`` | No |  |
-| `user_agent` | ``$STRING`` | No |  |
+| `querytime` | `int` | No |  |
+| `querytype` | `string` | No |  |
+| `user_agent` | `string` | No |  |
 
 ### Operations
 
@@ -415,9 +415,9 @@ station := client.Station(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `station` | ``$ANY`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `version` | ``$STRING`` | Yes |  |
+| `station` | `any` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -426,7 +426,7 @@ station := client.Station(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Station(nil).Load(map[string]any{"id": "station_id"}, nil)
+result, err := client.Station(nil).Load(nil, nil)
 ```
 
 ### Common Methods
@@ -463,11 +463,11 @@ vehicle := client.Vehicle(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | ``$OBJECT`` | Yes |  |
-| `timestamp` | ``$INTEGER`` | Yes |  |
-| `vehicle` | ``$STRING`` | Yes |  |
-| `vehicleinfo` | ``$OBJECT`` | No |  |
-| `version` | ``$STRING`` | Yes |  |
+| `stop` | `map[string]any` | Yes |  |
+| `timestamp` | `int` | Yes |  |
+| `vehicle` | `string` | Yes |  |
+| `vehicleinfo` | `map[string]any` | No |  |
+| `version` | `string` | Yes |  |
 
 ### Operations
 
@@ -476,7 +476,7 @@ vehicle := client.Vehicle(nil)
 Load a single entity matching the given criteria.
 
 ```go
-result, err := client.Vehicle(nil).Load(map[string]any{"id": "vehicle_id"}, nil)
+result, err := client.Vehicle(nil).Load(nil, nil)
 ```
 
 ### Common Methods
