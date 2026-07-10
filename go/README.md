@@ -542,6 +542,10 @@ Create an instance: `occupancy := client.Occupancy(nil)`
 ```go
 result, err := client.Occupancy(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 

@@ -119,6 +119,7 @@ same parameters as `Direct()`.
 
 ```go
 composition := client.Composition(nil)
+fmt.Println(composition.GetName()) // "composition"
 ```
 
 ### Fields
@@ -138,6 +139,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Composition(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -168,6 +173,7 @@ Return the entity name.
 
 ```go
 connection := client.Connection(nil)
+fmt.Println(connection.GetName()) // "connection"
 ```
 
 ### Fields
@@ -189,6 +195,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Connection(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -219,6 +229,7 @@ Return the entity name.
 
 ```go
 disturbance := client.Disturbance(nil)
+fmt.Println(disturbance.GetName()) // "disturbance"
 ```
 
 ### Fields
@@ -240,6 +251,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Disturbance(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -270,6 +285,7 @@ Return the entity name.
 
 ```go
 liveboard := client.Liveboard(nil)
+fmt.Println(liveboard.GetName()) // "liveboard"
 ```
 
 ### Fields
@@ -290,6 +306,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Liveboard(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -320,6 +340,7 @@ Return the entity name.
 
 ```go
 log := client.Log(nil)
+fmt.Println(log.GetName()) // "log"
 ```
 
 ### Fields
@@ -338,6 +359,10 @@ List entities matching the given criteria. Returns an array.
 
 ```go
 results, err := client.Log(nil).List(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(results)
 ```
 
 ### Common Methods
@@ -368,6 +393,7 @@ Return the entity name.
 
 ```go
 occupancy := client.Occupancy(nil)
+fmt.Println(occupancy.GetName()) // "occupancy"
 ```
 
 ### Operations
@@ -379,6 +405,10 @@ Create a new entity with the given data.
 ```go
 result, err := client.Occupancy(nil).Create(map[string]any{
 }, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -409,6 +439,7 @@ Return the entity name.
 
 ```go
 station := client.Station(nil)
+fmt.Println(station.GetName()) // "station"
 ```
 
 ### Fields
@@ -427,6 +458,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Station(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
@@ -457,6 +492,7 @@ Return the entity name.
 
 ```go
 vehicle := client.Vehicle(nil)
+fmt.Println(vehicle.GetName()) // "vehicle"
 ```
 
 ### Fields
@@ -477,6 +513,10 @@ Load a single entity matching the given criteria.
 
 ```go
 result, err := client.Vehicle(nil).Load(nil, nil)
+if err != nil {
+    panic(err)
+}
+fmt.Println(result)
 ```
 
 ### Common Methods
