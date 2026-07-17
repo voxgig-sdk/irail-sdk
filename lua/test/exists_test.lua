@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- Irail SDK exists test
 
 local sdk = require("irail_sdk")
 
