@@ -62,7 +62,7 @@ describe('OccupancyEntity', async () => {
     const occupancy_ref01_ent = client.Occupancy()
     let occupancy_ref01_data = setup.data.new.occupancy['occupancy_ref01']
 
-    occupancy_ref01_data = await occupancy_ref01_ent.create(occupancy_ref01_data)
+    occupancy_ref01_data = (await occupancy_ref01_ent.create(occupancy_ref01_data)).data()
     assert(null != occupancy_ref01_data)
 
 

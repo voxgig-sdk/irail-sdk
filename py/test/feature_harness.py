@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import IrailControl
-from core.error import IrailError
-from core.result import IrailResult
-from core.spec import IrailSpec
+from irail_sdk.config import make_config
+from irail_sdk.features import _make_feature
+from irail_sdk.core.control import IrailControl
+from irail_sdk.core.error import IrailError
+from irail_sdk.core.result import IrailResult
+from irail_sdk.core.spec import IrailSpec
 
 
 # True when this SDK was generated with the named feature.

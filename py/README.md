@@ -38,7 +38,7 @@ client = IrailSDK()
 
 ### 3. Load a composition
 
-`load()` returns the bare record (a `dict`) and raises on error.
+`load()` returns the ENTITY — call data_get() for the record — and raises on error.
 
 ```python
 try:
@@ -55,8 +55,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    composition = client.Composition().load()
-    print(composition)
+    liveboard = client.Liveboard().load()
+    print(liveboard)
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -122,9 +122,10 @@ Create a mock client for unit testing — no server required:
 ```python
 client = IrailSDK.test()
 
-# Entity ops return the bare record and raise on error.
-composition = client.Composition().load()
-# composition contains the mock response record
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
+liveboard = client.Liveboard().load()
+# liveboard contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -227,7 +228,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -249,10 +250,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `composition` |  |
-| `timestamp` |  |
-| `vehicle` |  |
-| `version` |  |
+| `segments` |  |
 
 Operations: Load.
 
@@ -267,7 +265,7 @@ API path: `/composition/`
 | `duration` |  |
 | `id` |  |
 | `occupancy` |  |
-| `via` |  |
+| `vias` |  |
 
 Operations: List.
 
@@ -292,7 +290,7 @@ API path: `/disturbances/`
 
 | Field | Description |
 | --- | --- |
-| `departure` |  |
+| `departures` |  |
 | `station` |  |
 | `stationinfo` |  |
 | `timestamp` |  |
@@ -339,7 +337,7 @@ API path: `/stations/`
 
 | Field | Description |
 | --- | --- |
-| `stop` |  |
+| `stops` |  |
 | `timestamp` |  |
 | `vehicle` |  |
 | `vehicleinfo` |  |
@@ -368,10 +366,7 @@ Create an instance: `composition = client.Composition()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | `dict` |  |
-| `timestamp` | `int` |  |
-| `vehicle` | `str` |  |
-| `version` | `str` |  |
+| `segments` | `dict` |  |
 
 #### Example: Load
 
@@ -399,7 +394,7 @@ Create an instance: `connection = client.Connection()`
 | `duration` | `int` |  |
 | `id` | `int` |  |
 | `occupancy` | `dict` |  |
-| `via` | `dict` |  |
+| `vias` | `dict` |  |
 
 #### Example: List
 
@@ -450,7 +445,7 @@ Create an instance: `liveboard = client.Liveboard()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `dict` |  |
+| `departures` | `dict` |  |
 | `station` | `str` |  |
 | `stationinfo` | `dict` |  |
 | `timestamp` | `int` |  |
@@ -545,7 +540,7 @@ Create an instance: `vehicle = client.Vehicle()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | `dict` |  |
+| `stops` | `dict` |  |
 | `timestamp` | `int` |  |
 | `vehicle` | `str` |  |
 | `vehicleinfo` | `dict` |  |
@@ -633,11 +628,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-composition = client.Composition()
-composition.load()
+liveboard = client.Liveboard()
+liveboard.load()
 
-# composition.data_get() now returns the composition data from the last load
-# composition.match_get() returns the last match criteria
+# liveboard.data_get() now returns the liveboard data from the last load
+# liveboard.match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

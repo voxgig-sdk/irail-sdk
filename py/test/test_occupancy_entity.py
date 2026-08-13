@@ -6,9 +6,9 @@ import time
 
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from irail_sdk.utility.voxgig_struct import voxgig_struct as vs
 from irail_sdk import IrailSDK
-from core import helpers
+from irail_sdk.core import helpers
 
 _TEST_DIR = os.path.dirname(os.path.abspath(__file__))
 from test import runner
@@ -44,7 +44,7 @@ class TestOccupancyEntity:
         occupancy_ref01_data = helpers.to_map(vs.getprop(
             vs.getpath(setup["data"], "new.occupancy"), "occupancy_ref01"))
 
-        occupancy_ref01_data = helpers.to_map(occupancy_ref01_ent.create(occupancy_ref01_data, None))
+        occupancy_ref01_data = helpers.to_map(runner.entity_data(occupancy_ref01_ent.create(occupancy_ref01_data, None)))
         assert occupancy_ref01_data is not None
 
 

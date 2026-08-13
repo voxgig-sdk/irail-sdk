@@ -66,12 +66,12 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-composition, err := client.Composition(nil).Load(nil, nil)
+liveboard, err := client.Liveboard(nil).Load(nil, nil)
 if err != nil {
     // handle err
     return
 }
-_ = composition
+_ = liveboard
 ```
 
 `Direct` follows the same `(value, error)` convention:
@@ -135,13 +135,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-composition, err := client.Composition(nil).Load(
+liveboard, err := client.Liveboard(nil).Load(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(composition) // the returned mock data
+fmt.Println(liveboard) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -268,10 +268,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"composition"` |  |
-| `"timestamp"` |  |
-| `"vehicle"` |  |
-| `"version"` |  |
+| `"segments"` |  |
 
 Operations: Load.
 
@@ -286,7 +283,7 @@ API path: `/composition/`
 | `"duration"` |  |
 | `"id"` |  |
 | `"occupancy"` |  |
-| `"via"` |  |
+| `"vias"` |  |
 
 Operations: List.
 
@@ -311,7 +308,7 @@ API path: `/disturbances/`
 
 | Field | Description |
 | --- | --- |
-| `"departure"` |  |
+| `"departures"` |  |
 | `"station"` |  |
 | `"stationinfo"` |  |
 | `"timestamp"` |  |
@@ -358,7 +355,7 @@ API path: `/stations/`
 
 | Field | Description |
 | --- | --- |
-| `"stop"` |  |
+| `"stops"` |  |
 | `"timestamp"` |  |
 | `"vehicle"` |  |
 | `"vehicleinfo"` |  |
@@ -387,10 +384,7 @@ Create an instance: `composition := client.Composition(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | `map[string]any` |  |
-| `timestamp` | `int` |  |
-| `vehicle` | `string` |  |
-| `version` | `string` |  |
+| `segments` | `map[string]any` |  |
 
 #### Example: Load
 
@@ -422,7 +416,7 @@ Create an instance: `connection := client.Connection(nil)`
 | `duration` | `int` |  |
 | `id` | `int` |  |
 | `occupancy` | `map[string]any` |  |
-| `via` | `map[string]any` |  |
+| `vias` | `map[string]any` |  |
 
 #### Example: List
 
@@ -481,7 +475,7 @@ Create an instance: `liveboard := client.Liveboard(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `map[string]any` |  |
+| `departures` | `map[string]any` |  |
 | `station` | `string` |  |
 | `stationinfo` | `map[string]any` |  |
 | `timestamp` | `int` |  |
@@ -592,7 +586,7 @@ Create an instance: `vehicle := client.Vehicle(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | `map[string]any` |  |
+| `stops` | `map[string]any` |  |
 | `timestamp` | `int` |  |
 | `vehicle` | `string` |  |
 | `vehicleinfo` | `map[string]any` |  |
@@ -682,11 +676,11 @@ Entity instances are stateful. After a successful `Load`, the entity
 stores the returned data and match criteria internally.
 
 ```go
-composition := client.Composition(nil)
-composition.Load(nil, nil)
+liveboard := client.Liveboard(nil)
+liveboard.Load(nil, nil)
 
-// composition.Data() now returns the composition data from the last load
-// composition.Match() returns the last match criteria
+// liveboard.Data() now returns the liveboard data from the last load
+// liveboard.Match() returns the last match criteria
 ```
 
 Call `Make()` to create a fresh instance with the same configuration

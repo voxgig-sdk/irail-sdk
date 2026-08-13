@@ -200,10 +200,7 @@ const composition = client.Composition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | `Record<string, any>` | No |  |
-| `timestamp` | `number` | No |  |
-| `vehicle` | `string` | No |  |
-| `version` | `string` | No |  |
+| `segments` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -258,7 +255,7 @@ const connection = client.Connection()
 | `duration` | `number` | No |  |
 | `id` | `number` | No |  |
 | `occupancy` | `Record<string, any>` | No |  |
-| `via` | `Record<string, any>` | No |  |
+| `vias` | `Record<string, any>` | No |  |
 
 ### Operations
 
@@ -363,7 +360,7 @@ const liveboard = client.Liveboard()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `Record<string, any>` | Yes |  |
+| `departures` | `Record<string, any>` | Yes |  |
 | `station` | `string` | Yes |  |
 | `stationinfo` | `Record<string, any>` | Yes |  |
 | `timestamp` | `number` | Yes |  |
@@ -566,7 +563,7 @@ const vehicle = client.Vehicle()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | `Record<string, any>` | Yes |  |
+| `stops` | `Record<string, any>` | Yes |  |
 | `timestamp` | `number` | Yes |  |
 | `vehicle` | `string` | Yes |  |
 | `vehicleinfo` | `Record<string, any>` | No |  |

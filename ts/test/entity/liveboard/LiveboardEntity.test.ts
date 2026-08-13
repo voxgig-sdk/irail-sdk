@@ -62,7 +62,7 @@ describe('LiveboardEntity', async () => {
     // LOAD
     const liveboard_ref01_ent = client.Liveboard()
     const liveboard_ref01_match_dt0: any = {}
-    const liveboard_ref01_data_dt0 = await liveboard_ref01_ent.load(liveboard_ref01_match_dt0)
+    const liveboard_ref01_data_dt0 = (await liveboard_ref01_ent.load(liveboard_ref01_match_dt0)).data()
     assert(null != liveboard_ref01_data_dt0)
 
 

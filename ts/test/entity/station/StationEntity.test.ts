@@ -62,7 +62,7 @@ describe('StationEntity', async () => {
     // LOAD
     const station_ref01_ent = client.Station()
     const station_ref01_match_dt0: any = {}
-    const station_ref01_data_dt0 = await station_ref01_ent.load(station_ref01_match_dt0)
+    const station_ref01_data_dt0 = (await station_ref01_ent.load(station_ref01_match_dt0)).data()
     assert(null != station_ref01_data_dt0)
 
 

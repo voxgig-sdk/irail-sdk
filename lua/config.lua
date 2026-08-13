@@ -33,31 +33,10 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "composition",
+            ["name"] = "segments",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 0,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "timestamp",
-            ["req"] = false,
-            ["type"] = "`$INTEGER`",
-            ["index$"] = 1,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "vehicle",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 2,
-          },
-          {
-            ["active"] = true,
-            ["name"] = "version",
-            ["req"] = false,
-            ["type"] = "`$STRING`",
-            ["index$"] = 3,
           },
         },
         ["name"] = "composition",
@@ -106,6 +85,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/composition/",
                 ["parts"] = {
@@ -172,7 +152,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "via",
+            ["name"] = "vias",
             ["req"] = false,
             ["type"] = "`$OBJECT`",
             ["index$"] = 5,
@@ -275,6 +255,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/connections/",
                 ["parts"] = {
@@ -391,6 +372,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/disturbances/",
                 ["parts"] = {
@@ -421,7 +403,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "departure",
+            ["name"] = "departures",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
             ["index$"] = 0,
@@ -539,6 +521,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/liveboard/",
                 ["parts"] = {
@@ -615,6 +598,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/logs/",
                 ["parts"] = {
@@ -627,7 +611,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.logs`",
                 },
                 ["index$"] = 0,
               },
@@ -650,6 +634,7 @@ local function make_config()
               {
                 ["active"] = true,
                 ["args"] = {},
+                ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/feedback/occupancy.php",
                 ["parts"] = {
@@ -725,6 +710,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stations/",
                 ["parts"] = {
@@ -754,7 +740,7 @@ local function make_config()
         ["fields"] = {
           {
             ["active"] = true,
-            ["name"] = "stop",
+            ["name"] = "stops",
             ["req"] = true,
             ["type"] = "`$OBJECT`",
             ["index$"] = 0,
@@ -844,6 +830,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/vehicle/",
                 ["parts"] = {

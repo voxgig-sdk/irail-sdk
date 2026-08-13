@@ -31,7 +31,7 @@ main: kit: entity: connection: {
       type: "`$OBJECT`"
     }
     {
-      name: "via"
+      name: "vias"
       req: false
       type: "`$OBJECT`"
     }

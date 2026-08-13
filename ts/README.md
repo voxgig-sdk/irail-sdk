@@ -53,8 +53,8 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const composition = await client.Composition().load()
-  console.log(composition)
+  const liveboard = await client.Liveboard().load()
+  console.log(liveboard)
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -120,9 +120,10 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = IrailSDK.test()
 
-const composition = await client.Composition().load()
-// composition is a bare entity populated with mock response data
-console.log(composition)
+const liveboard = await client.Liveboard().load()
+// liveboard is the entity, populated with mock response data
+// — call liveboard.data() for the record itself
+console.log(liveboard)
 ```
 
 You can also use the instance method:
@@ -137,7 +138,7 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.Composition()
+const entity = client.Liveboard()
 
 // First call runs the operation and stores its result
 await entity.load()
@@ -295,10 +296,7 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `composition` |  |
-| `timestamp` |  |
-| `vehicle` |  |
-| `version` |  |
+| `segments` |  |
 
 Operations: load.
 
@@ -313,7 +311,7 @@ API path: `/composition/`
 | `duration` |  |
 | `id` |  |
 | `occupancy` |  |
-| `via` |  |
+| `vias` |  |
 
 Operations: list.
 
@@ -338,7 +336,7 @@ API path: `/disturbances/`
 
 | Field | Description |
 | --- | --- |
-| `departure` |  |
+| `departures` |  |
 | `station` |  |
 | `stationinfo` |  |
 | `timestamp` |  |
@@ -385,7 +383,7 @@ API path: `/stations/`
 
 | Field | Description |
 | --- | --- |
-| `stop` |  |
+| `stops` |  |
 | `timestamp` |  |
 | `vehicle` |  |
 | `vehicleinfo` |  |
@@ -414,10 +412,7 @@ Create an instance: `const composition = client.Composition()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | `Record<string, any>` |  |
-| `timestamp` | `number` |  |
-| `vehicle` | `string` |  |
-| `version` | `string` |  |
+| `segments` | `Record<string, any>` |  |
 
 #### Example: Load
 
@@ -445,7 +440,7 @@ Create an instance: `const connection = client.Connection()`
 | `duration` | `number` |  |
 | `id` | `number` |  |
 | `occupancy` | `Record<string, any>` |  |
-| `via` | `Record<string, any>` |  |
+| `vias` | `Record<string, any>` |  |
 
 #### Example: List
 
@@ -496,7 +491,7 @@ Create an instance: `const liveboard = client.Liveboard()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `Record<string, any>` |  |
+| `departures` | `Record<string, any>` |  |
 | `station` | `string` |  |
 | `stationinfo` | `Record<string, any>` |  |
 | `timestamp` | `number` |  |
@@ -591,7 +586,7 @@ Create an instance: `const vehicle = client.Vehicle()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | `Record<string, any>` |  |
+| `stops` | `Record<string, any>` |  |
 | `timestamp` | `number` |  |
 | `vehicle` | `string` |  |
 | `vehicleinfo` | `Record<string, any>` |  |
@@ -673,11 +668,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const composition = client.Composition()
-await composition.load()
+const liveboard = client.Liveboard()
+await liveboard.load()
 
-// composition.data() now returns the composition data from the last `load`
-// composition.match() returns the last match criteria
+// liveboard.data() now returns the liveboard data from the last `load`
+// liveboard.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

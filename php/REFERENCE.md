@@ -120,10 +120,7 @@ $composition = $client->Composition();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | `array` | No |  |
-| `timestamp` | `int` | No |  |
-| `vehicle` | `string` | No |  |
-| `version` | `string` | No |  |
+| `segments` | `array` | No |  |
 
 ### Operations
 
@@ -180,7 +177,7 @@ $connection = $client->Connection();
 | `duration` | `int` | No |  |
 | `id` | `int` | No |  |
 | `occupancy` | `array` | No |  |
-| `via` | `array` | No |  |
+| `vias` | `array` | No |  |
 
 ### Operations
 
@@ -289,7 +286,7 @@ $liveboard = $client->Liveboard();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `array` | Yes |  |
+| `departures` | `array` | Yes |  |
 | `station` | `string` | Yes |  |
 | `stationinfo` | `array` | Yes |  |
 | `timestamp` | `int` | Yes |  |
@@ -500,7 +497,7 @@ $vehicle = $client->Vehicle();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | `array` | Yes |  |
+| `stops` | `array` | Yes |  |
 | `timestamp` | `int` | Yes |  |
 | `vehicle` | `string` | Yes |  |
 | `vehicleinfo` | `array` | No |  |

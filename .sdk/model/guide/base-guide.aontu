@@ -35,6 +35,7 @@ guide: {
   entity: log: {
     path: "/logs/": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.logs`")|top
     }
   }
 

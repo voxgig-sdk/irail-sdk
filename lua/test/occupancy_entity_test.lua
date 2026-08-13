@@ -41,7 +41,7 @@ describe("OccupancyEntity", function()
 
     local occupancy_ref01_data_result, err = occupancy_ref01_ent:create(occupancy_ref01_data, nil)
     assert.is_nil(err)
-    occupancy_ref01_data = helpers.to_map(occupancy_ref01_data_result)
+    occupancy_ref01_data = helpers.to_map(type(occupancy_ref01_data_result) == 'table' and occupancy_ref01_data_result.data_get and occupancy_ref01_data_result:data_get() or occupancy_ref01_data_result)
     assert.is_not_nil(occupancy_ref01_data)
 
   end)

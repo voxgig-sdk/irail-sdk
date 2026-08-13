@@ -38,18 +38,27 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = IrailSDK.test()
-const composition = await client.Composition().load()
-// composition is a bare Composition populated with mock data
-console.log(composition)
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = IrailSDK.test({
+  entity: {
+    liveboard: {
+      test01: { id: 'test01' },
+    },
+  },
+})
+const liveboard = await client.Liveboard().load()
+// liveboard is the Liveboard entity, populated with mock data
+// — call liveboard.data() for the record itself
+console.log(liveboard)
 ```
 
 ### Python
 
 ```python
 client = IrailSDK.test()
-composition = client.Composition().load()
-print(composition)
+liveboard = client.Liveboard().load()
+print(liveboard)
 ```
 
 ### PHP
@@ -57,16 +66,16 @@ print(composition)
 ```php
 // Seed fixture data so offline calls resolve without a live server.
 $client = IrailSDK::test([
-    "entity" => ["composition" => ["test01" => []]],
+    "entity" => ["liveboard" => ["test01" => []]],
 ]);
-$composition = $client->Composition()->load();
+$liveboard = $client->Liveboard()->load();
 ```
 
 ### Golang
 
 ```go
 client := sdk.Test()
-result, err := client.Composition(nil).Load(
+result, err := client.Liveboard(nil).Load(
     nil, nil,
 )
 ```
@@ -76,16 +85,16 @@ result, err := client.Composition(nil).Load(
 ```ruby
 # Seed fixture data so offline calls resolve without a live server.
 client = IrailSDK.test({
-  "entity" => { "composition" => { "test01" => {} } },
+  "entity" => { "liveboard" => { "test01" => {} } },
 })
-composition = client.Composition.load()
+liveboard = client.Liveboard.load()
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:Composition():load()
+local result, err = client:Liveboard():load()
 ```
 
 ## Packages
@@ -189,7 +198,7 @@ require_once 'irail_sdk.php';
 $client = new IrailSDK();
 
 
-// Load a specific composition (returns the bare record; throws on error)
+// Load a specific composition (returns the ENTITY; call data_get() for the record; throws on error)
 $composition = $client->Composition()->load();
 print_r($composition);
 ```
@@ -217,7 +226,7 @@ require_relative "Irail_sdk"
 client = IrailSDK.new
 
 
-# Load a specific composition (returns the bare record; raises on error)
+# Load a specific composition (returns the ENTITY; call data_get for the record)
 composition = client.Composition.load()
 puts composition
 ```
@@ -351,6 +360,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://docs.irail.be/](https://docs.irail.be/)
 

@@ -44,7 +44,7 @@ class OccupancyEntityTest extends TestCase
             Vs::getpath($setup["data"], "new.occupancy"), "occupancy_ref01"));
 
         $occupancy_ref01_data_result = $occupancy_ref01_ent->create($occupancy_ref01_data, null);
-        $occupancy_ref01_data = Helpers::to_map($occupancy_ref01_data_result);
+        $occupancy_ref01_data = Helpers::to_map(is_object($occupancy_ref01_data_result) && method_exists($occupancy_ref01_data_result, 'data_get') ? $occupancy_ref01_data_result->data_get() : $occupancy_ref01_data_result);
         $this->assertNotNull($occupancy_ref01_data);
 
     }

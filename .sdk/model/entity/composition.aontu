@@ -6,24 +6,9 @@ main: kit: entity: composition: {
 
   fields: [
     {
-      name: "composition"
+      name: "segments"
       req: false
       type: "`$OBJECT`"
-    }
-    {
-      name: "timestamp"
-      req: false
-      type: "`$INTEGER`"
-    }
-    {
-      name: "vehicle"
-      req: false
-      type: "`$STRING`"
-    }
-    {
-      name: "version"
-      req: false
-      type: "`$STRING`"
     }
   ]
 

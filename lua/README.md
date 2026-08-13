@@ -48,7 +48,7 @@ Entity operations return `(value, err)`. Check `err` before using
 the value:
 
 ```lua
-local composition, err = client:Composition():load()
+local liveboard, err = client:Liveboard():load()
 if err then error(err) end
 ```
 
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Composition():load()
+local result, err = client:Liveboard():load()
 -- result is the returned data; err is set on failure
 ```
 
@@ -235,10 +235,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `composition` |  |
-| `timestamp` |  |
-| `vehicle` |  |
-| `version` |  |
+| `segments` |  |
 
 Operations: Load.
 
@@ -253,7 +250,7 @@ API path: `/composition/`
 | `duration` |  |
 | `id` |  |
 | `occupancy` |  |
-| `via` |  |
+| `vias` |  |
 
 Operations: List.
 
@@ -278,7 +275,7 @@ API path: `/disturbances/`
 
 | Field | Description |
 | --- | --- |
-| `departure` |  |
+| `departures` |  |
 | `station` |  |
 | `stationinfo` |  |
 | `timestamp` |  |
@@ -325,7 +322,7 @@ API path: `/stations/`
 
 | Field | Description |
 | --- | --- |
-| `stop` |  |
+| `stops` |  |
 | `timestamp` |  |
 | `vehicle` |  |
 | `vehicleinfo` |  |
@@ -354,10 +351,7 @@ Create an instance: `local composition = client:Composition(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | `table` |  |
-| `timestamp` | `number` |  |
-| `vehicle` | `string` |  |
-| `version` | `string` |  |
+| `segments` | `table` |  |
 
 #### Example: Load
 
@@ -385,7 +379,7 @@ Create an instance: `local connection = client:Connection(nil)`
 | `duration` | `number` |  |
 | `id` | `number` |  |
 | `occupancy` | `table` |  |
-| `via` | `table` |  |
+| `vias` | `table` |  |
 
 #### Example: List
 
@@ -436,7 +430,7 @@ Create an instance: `local liveboard = client:Liveboard(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `table` |  |
+| `departures` | `table` |  |
 | `station` | `string` |  |
 | `stationinfo` | `table` |  |
 | `timestamp` | `number` |  |
@@ -531,7 +525,7 @@ Create an instance: `local vehicle = client:Vehicle(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | `table` |  |
+| `stops` | `table` |  |
 | `timestamp` | `number` |  |
 | `vehicle` | `string` |  |
 | `vehicleinfo` | `table` |  |
@@ -620,11 +614,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local composition = client:Composition()
-composition:load()
+local liveboard = client:Liveboard()
+liveboard:load()
 
--- composition:data_get() now returns the composition data from the last load
--- composition:match_get() returns the last match criteria
+-- liveboard:data_get() now returns the liveboard data from the last load
+-- liveboard:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

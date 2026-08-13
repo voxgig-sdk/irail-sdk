@@ -37,7 +37,7 @@ class OccupancyEntityTest < Minitest::Test
       Vs.getpath(setup[:data], "new.occupancy"), "occupancy_ref01"))
 
     occupancy_ref01_data_result = occupancy_ref01_ent.create(occupancy_ref01_data, nil)
-    occupancy_ref01_data = Helpers.to_map(occupancy_ref01_data_result)
+    occupancy_ref01_data = Helpers.to_map(occupancy_ref01_data_result.respond_to?(:data_get) ? occupancy_ref01_data_result.data_get : occupancy_ref01_data_result)
     assert !occupancy_ref01_data.nil?
 
   end

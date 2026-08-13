@@ -121,10 +121,7 @@ composition = client.Composition
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | `Hash` | No |  |
-| `timestamp` | `Integer` | No |  |
-| `vehicle` | `String` | No |  |
-| `version` | `String` | No |  |
+| `segments` | `Hash` | No |  |
 
 ### Operations
 
@@ -181,7 +178,7 @@ connection = client.Connection
 | `duration` | `Integer` | No |  |
 | `id` | `Integer` | No |  |
 | `occupancy` | `Hash` | No |  |
-| `via` | `Hash` | No |  |
+| `vias` | `Hash` | No |  |
 
 ### Operations
 
@@ -290,7 +287,7 @@ liveboard = client.Liveboard
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `Hash` | Yes |  |
+| `departures` | `Hash` | Yes |  |
 | `station` | `String` | Yes |  |
 | `stationinfo` | `Hash` | Yes |  |
 | `timestamp` | `Integer` | Yes |  |
@@ -501,7 +498,7 @@ vehicle = client.Vehicle
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | `Hash` | Yes |  |
+| `stops` | `Hash` | Yes |  |
 | `timestamp` | `Integer` | Yes |  |
 | `vehicle` | `String` | Yes |  |
 | `vehicleinfo` | `Hash` | No |  |

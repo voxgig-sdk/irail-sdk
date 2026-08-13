@@ -15,19 +15,13 @@ declare(strict_types=1);
 /** Composition entity data model. */
 class Composition
 {
-    public ?array $composition = null;
-    public ?int $timestamp = null;
-    public ?string $vehicle = null;
-    public ?string $version = null;
+    public ?array $segments = null;
 }
 
 /** Request payload for Composition#load. */
 class CompositionLoadMatch
 {
-    public ?array $composition = null;
-    public ?int $timestamp = null;
-    public ?string $vehicle = null;
-    public ?string $version = null;
+    public ?array $segments = null;
 }
 
 /** Connection entity data model. */
@@ -38,7 +32,7 @@ class Connection
     public ?int $duration = null;
     public ?int $id = null;
     public ?array $occupancy = null;
-    public ?array $via = null;
+    public ?array $vias = null;
 }
 
 /** Request payload for Connection#list. */
@@ -49,7 +43,7 @@ class ConnectionListMatch
     public ?int $duration = null;
     public ?int $id = null;
     public ?array $occupancy = null;
-    public ?array $via = null;
+    public ?array $vias = null;
 }
 
 /** Disturbance entity data model. */
@@ -77,7 +71,7 @@ class DisturbanceListMatch
 /** Liveboard entity data model. */
 class Liveboard
 {
-    public array $departure;
+    public array $departures;
     public string $station;
     public array $stationinfo;
     public int $timestamp;
@@ -87,7 +81,7 @@ class Liveboard
 /** Request payload for Liveboard#load. */
 class LiveboardLoadMatch
 {
-    public ?array $departure = null;
+    public ?array $departures = null;
     public ?string $station = null;
     public ?array $stationinfo = null;
     public ?int $timestamp = null;
@@ -139,7 +133,7 @@ class StationLoadMatch
 /** Vehicle entity data model. */
 class Vehicle
 {
-    public array $stop;
+    public array $stops;
     public int $timestamp;
     public string $vehicle;
     public ?array $vehicleinfo = null;
@@ -149,7 +143,7 @@ class Vehicle
 /** Request payload for Vehicle#load. */
 class VehicleLoadMatch
 {
-    public ?array $stop = null;
+    public ?array $stops = null;
     public ?int $timestamp = null;
     public ?string $vehicle = null;
     public ?array $vehicleinfo = null;

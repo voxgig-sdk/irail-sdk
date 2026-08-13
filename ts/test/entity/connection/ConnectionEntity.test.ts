@@ -63,7 +63,7 @@ describe('ConnectionEntity', async () => {
     const connection_ref01_ent = client.Connection()
     const connection_ref01_match: any = {}
 
-    const connection_ref01_list = await connection_ref01_ent.list(connection_ref01_match)
+    const connection_ref01_list = (await connection_ref01_ent.list(connection_ref01_match)).map((e: any) => e.data())
 
 
   })

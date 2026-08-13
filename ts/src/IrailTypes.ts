@@ -6,17 +6,11 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Composition {
-  composition?: Record<string, any>
-  timestamp?: number
-  vehicle?: string
-  version?: string
+  segments?: Record<string, any>
 }
 
 export interface CompositionLoadMatch {
-  composition?: Record<string, any>
-  timestamp?: number
-  vehicle?: string
-  version?: string
+  segments?: Record<string, any>
 }
 
 export interface Connection {
@@ -25,7 +19,7 @@ export interface Connection {
   duration?: number
   id?: number
   occupancy?: Record<string, any>
-  via?: Record<string, any>
+  vias?: Record<string, any>
 }
 
 export interface ConnectionListMatch {
@@ -34,7 +28,7 @@ export interface ConnectionListMatch {
   duration?: number
   id?: number
   occupancy?: Record<string, any>
-  via?: Record<string, any>
+  vias?: Record<string, any>
 }
 
 export interface Disturbance {
@@ -56,7 +50,7 @@ export interface DisturbanceListMatch {
 }
 
 export interface Liveboard {
-  departure: Record<string, any>
+  departures: Record<string, any>
   station: string
   stationinfo: Record<string, any>
   timestamp: number
@@ -64,7 +58,7 @@ export interface Liveboard {
 }
 
 export interface LiveboardLoadMatch {
-  departure?: Record<string, any>
+  departures?: Record<string, any>
   station?: string
   stationinfo?: Record<string, any>
   timestamp?: number
@@ -102,7 +96,7 @@ export interface StationLoadMatch {
 }
 
 export interface Vehicle {
-  stop: Record<string, any>
+  stops: Record<string, any>
   timestamp: number
   vehicle: string
   vehicleinfo?: Record<string, any>
@@ -110,7 +104,7 @@ export interface Vehicle {
 }
 
 export interface VehicleLoadMatch {
-  stop?: Record<string, any>
+  stops?: Record<string, any>
   timestamp?: number
   vehicle?: string
   vehicleinfo?: Record<string, any>

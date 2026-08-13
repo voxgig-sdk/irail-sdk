@@ -16,11 +16,11 @@
 import pytest
 
 from projectname_sdk import IrailSDK
-from core.error import IrailError
-from core.result import IrailResult
-from core.response import IrailResponse
-from core.spec import IrailSpec
-from feature.base_feature import IrailBaseFeature
+from projectname_sdk.core.error import IrailError
+from projectname_sdk.core.result import IrailResult
+from projectname_sdk.core.response import IrailResponse
+from projectname_sdk.core.spec import IrailSpec
+from projectname_sdk.feature.base_feature import IrailBaseFeature
 
 
 def _client():

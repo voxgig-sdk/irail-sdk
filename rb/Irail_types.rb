@@ -10,43 +10,19 @@
 
 # Composition entity data model.
 #
-# @!attribute [rw] composition
+# @!attribute [rw] segments
 #   @return [Hash, nil]
-#
-# @!attribute [rw] timestamp
-#   @return [Integer, nil]
-#
-# @!attribute [rw] vehicle
-#   @return [String, nil]
-#
-# @!attribute [rw] version
-#   @return [String, nil]
 Composition = Struct.new(
-  :composition,
-  :timestamp,
-  :vehicle,
-  :version,
+  :segments,
   keyword_init: true
 )
 
 # Request payload for Composition#load.
 #
-# @!attribute [rw] composition
+# @!attribute [rw] segments
 #   @return [Hash, nil]
-#
-# @!attribute [rw] timestamp
-#   @return [Integer, nil]
-#
-# @!attribute [rw] vehicle
-#   @return [String, nil]
-#
-# @!attribute [rw] version
-#   @return [String, nil]
 CompositionLoadMatch = Struct.new(
-  :composition,
-  :timestamp,
-  :vehicle,
-  :version,
+  :segments,
   keyword_init: true
 )
 
@@ -67,7 +43,7 @@ CompositionLoadMatch = Struct.new(
 # @!attribute [rw] occupancy
 #   @return [Hash, nil]
 #
-# @!attribute [rw] via
+# @!attribute [rw] vias
 #   @return [Hash, nil]
 Connection = Struct.new(
   :arrival,
@@ -75,7 +51,7 @@ Connection = Struct.new(
   :duration,
   :id,
   :occupancy,
-  :via,
+  :vias,
   keyword_init: true
 )
 
@@ -96,7 +72,7 @@ Connection = Struct.new(
 # @!attribute [rw] occupancy
 #   @return [Hash, nil]
 #
-# @!attribute [rw] via
+# @!attribute [rw] vias
 #   @return [Hash, nil]
 ConnectionListMatch = Struct.new(
   :arrival,
@@ -104,7 +80,7 @@ ConnectionListMatch = Struct.new(
   :duration,
   :id,
   :occupancy,
-  :via,
+  :vias,
   keyword_init: true
 )
 
@@ -168,7 +144,7 @@ DisturbanceListMatch = Struct.new(
 
 # Liveboard entity data model.
 #
-# @!attribute [rw] departure
+# @!attribute [rw] departures
 #   @return [Hash]
 #
 # @!attribute [rw] station
@@ -183,7 +159,7 @@ DisturbanceListMatch = Struct.new(
 # @!attribute [rw] version
 #   @return [String]
 Liveboard = Struct.new(
-  :departure,
+  :departures,
   :station,
   :stationinfo,
   :timestamp,
@@ -193,7 +169,7 @@ Liveboard = Struct.new(
 
 # Request payload for Liveboard#load.
 #
-# @!attribute [rw] departure
+# @!attribute [rw] departures
 #   @return [Hash, nil]
 #
 # @!attribute [rw] station
@@ -208,7 +184,7 @@ Liveboard = Struct.new(
 # @!attribute [rw] version
 #   @return [String, nil]
 LiveboardLoadMatch = Struct.new(
-  :departure,
+  :departures,
   :station,
   :stationinfo,
   :timestamp,
@@ -294,7 +270,7 @@ StationLoadMatch = Struct.new(
 
 # Vehicle entity data model.
 #
-# @!attribute [rw] stop
+# @!attribute [rw] stops
 #   @return [Hash]
 #
 # @!attribute [rw] timestamp
@@ -309,7 +285,7 @@ StationLoadMatch = Struct.new(
 # @!attribute [rw] version
 #   @return [String]
 Vehicle = Struct.new(
-  :stop,
+  :stops,
   :timestamp,
   :vehicle,
   :vehicleinfo,
@@ -319,7 +295,7 @@ Vehicle = Struct.new(
 
 # Request payload for Vehicle#load.
 #
-# @!attribute [rw] stop
+# @!attribute [rw] stops
 #   @return [Hash, nil]
 #
 # @!attribute [rw] timestamp
@@ -334,7 +310,7 @@ Vehicle = Struct.new(
 # @!attribute [rw] version
 #   @return [String, nil]
 VehicleLoadMatch = Struct.new(
-  :stop,
+  :stops,
   :timestamp,
   :vehicle,
   :vehicleinfo,

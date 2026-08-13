@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# Irail SDK exists test
 
 import pytest
 from irail_sdk import IrailSDK

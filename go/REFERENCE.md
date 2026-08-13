@@ -126,10 +126,7 @@ fmt.Println(composition.GetName()) // "composition"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | `map[string]any` | No |  |
-| `timestamp` | `int` | No |  |
-| `vehicle` | `string` | No |  |
-| `version` | `string` | No |  |
+| `segments` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -185,7 +182,7 @@ fmt.Println(connection.GetName()) // "connection"
 | `duration` | `int` | No |  |
 | `id` | `int` | No |  |
 | `occupancy` | `map[string]any` | No |  |
-| `via` | `map[string]any` | No |  |
+| `vias` | `map[string]any` | No |  |
 
 ### Operations
 
@@ -292,7 +289,7 @@ fmt.Println(liveboard.GetName()) // "liveboard"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `map[string]any` | Yes |  |
+| `departures` | `map[string]any` | Yes |  |
 | `station` | `string` | Yes |  |
 | `stationinfo` | `map[string]any` | Yes |  |
 | `timestamp` | `int` | Yes |  |
@@ -499,7 +496,7 @@ fmt.Println(vehicle.GetName()) // "vehicle"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | `map[string]any` | Yes |  |
+| `stops` | `map[string]any` | Yes |  |
 | `timestamp` | `int` | Yes |  |
 | `vehicle` | `string` | Yes |  |
 | `vehicleinfo` | `map[string]any` | No |  |

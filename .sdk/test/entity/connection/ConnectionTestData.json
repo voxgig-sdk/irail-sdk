@@ -7,7 +7,7 @@
         "duration": "s3e",
         "id": "CONNECTION00",
         "occupancy": {},
-        "via": {}
+        "vias": {}
       },
       "CONNECTION01": {
         "arrival": {},
@@ -15,7 +15,7 @@
         "duration": "s7a",
         "id": "CONNECTION01",
         "occupancy": {},
-        "via": {}
+        "vias": {}
       },
       "CONNECTION02": {
         "arrival": {},
@@ -23,7 +23,7 @@
         "duration": "sb6",
         "id": "CONNECTION02",
         "occupancy": {},
-        "via": {}
+        "vias": {}
       }
     }
   },
@@ -34,7 +34,7 @@
         "departure": {},
         "duration": "sf2",
         "occupancy": {},
-        "via": {}
+        "vias": {}
       }
     }
   }

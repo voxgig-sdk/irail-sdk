@@ -2,7 +2,7 @@
   "existing": {
     "vehicle": {
       "VEHICLE00": {
-        "stop": {},
+        "stops": {},
         "timestamp": "s33",
         "vehicle": "s34",
         "vehicleinfo": {},
@@ -10,7 +10,7 @@
         "id": "VEHICLE00"
       },
       "VEHICLE01": {
-        "stop": {},
+        "stops": {},
         "timestamp": "s65",
         "vehicle": "s66",
         "vehicleinfo": {},
@@ -18,7 +18,7 @@
         "id": "VEHICLE01"
       },
       "VEHICLE02": {
-        "stop": {},
+        "stops": {},
         "timestamp": "s97",
         "vehicle": "s98",
         "vehicleinfo": {},
@@ -30,7 +30,7 @@
   "new": {
     "vehicle": {
       "vehicle_ref01": {
-        "stop": {},
+        "stops": {},
         "timestamp": "sc9",
         "vehicle": "sca",
         "vehicleinfo": {},

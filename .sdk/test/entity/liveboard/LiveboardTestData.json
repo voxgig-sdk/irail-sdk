@@ -2,7 +2,7 @@
   "existing": {
     "liveboard": {
       "LIVEBOARD00": {
-        "departure": {},
+        "departures": {},
         "station": "s33",
         "stationinfo": {},
         "timestamp": "s35",
@@ -10,7 +10,7 @@
         "id": "LIVEBOARD00"
       },
       "LIVEBOARD01": {
-        "departure": {},
+        "departures": {},
         "station": "s65",
         "stationinfo": {},
         "timestamp": "s67",
@@ -18,7 +18,7 @@
         "id": "LIVEBOARD01"
       },
       "LIVEBOARD02": {
-        "departure": {},
+        "departures": {},
         "station": "s97",
         "stationinfo": {},
         "timestamp": "s99",
@@ -30,7 +30,7 @@
   "new": {
     "liveboard": {
       "liveboard_ref01": {
-        "departure": {},
+        "departures": {},
         "station": "sc9",
         "stationinfo": {},
         "timestamp": "scb",

@@ -37,7 +37,7 @@ class LogEntity extends IrailEntityBase<Log> {
 
 
 
-  async list(this: any, reqmatch?: LogListMatch, ctrl?: Control): Promise<Log[]> {
+  async list(this: any, reqmatch?: LogListMatch, ctrl?: Control): Promise<LogEntity[]> {
 
     const utility = this._utility
 

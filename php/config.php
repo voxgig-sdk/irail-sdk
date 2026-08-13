@@ -39,31 +39,10 @@ class IrailConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'composition',
+              'name' => 'segments',
               'req' => false,
               'type' => '`$OBJECT`',
               'index$' => 0,
-            ],
-            [
-              'active' => true,
-              'name' => 'timestamp',
-              'req' => false,
-              'type' => '`$INTEGER`',
-              'index$' => 1,
-            ],
-            [
-              'active' => true,
-              'name' => 'vehicle',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 2,
-            ],
-            [
-              'active' => true,
-              'name' => 'version',
-              'req' => false,
-              'type' => '`$STRING`',
-              'index$' => 3,
             ],
           ],
           'name' => 'composition',
@@ -112,6 +91,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/composition/',
                   'parts' => [
@@ -178,7 +158,7 @@ class IrailConfig
             ],
             [
               'active' => true,
-              'name' => 'via',
+              'name' => 'vias',
               'req' => false,
               'type' => '`$OBJECT`',
               'index$' => 5,
@@ -281,6 +261,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/connections/',
                   'parts' => [
@@ -397,6 +378,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/disturbances/',
                   'parts' => [
@@ -427,7 +409,7 @@ class IrailConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'departure',
+              'name' => 'departures',
               'req' => true,
               'type' => '`$OBJECT`',
               'index$' => 0,
@@ -545,6 +527,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/liveboard/',
                   'parts' => [
@@ -621,6 +604,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/logs/',
                   'parts' => [
@@ -633,7 +617,7 @@ class IrailConfig
                   ],
                   'transform' => [
                     'req' => '`reqdata`',
-                    'res' => '`body`',
+                    'res' => '`body.logs`',
                   ],
                   'index$' => 0,
                 ],
@@ -656,6 +640,7 @@ class IrailConfig
                 [
                   'active' => true,
                   'args' => [],
+                  'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/feedback/occupancy.php',
                   'parts' => [
@@ -731,6 +716,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stations/',
                   'parts' => [
@@ -760,7 +746,7 @@ class IrailConfig
           'fields' => [
             [
               'active' => true,
-              'name' => 'stop',
+              'name' => 'stops',
               'req' => true,
               'type' => '`$OBJECT`',
               'index$' => 0,
@@ -850,6 +836,7 @@ class IrailConfig
                       ],
                     ],
                   ],
+                  'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/vehicle/',
                   'parts' => [

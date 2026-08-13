@@ -34,7 +34,7 @@ client = IrailSDK.new
 
 ```ruby
 begin
-  # load returns the bare Composition record (raises on error).
+  # load returns the ENTITY — call data_get for the Composition record (raises on error).
   composition = client.Composition.load()
   puts composition
 rescue => err
@@ -49,7 +49,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  composition = client.Composition.load()
+  liveboard = client.Liveboard.load()
 rescue => err
   warn "load failed: #{err}"
 end
@@ -117,9 +117,10 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = IrailSDK.test
 
-# Entity ops return the bare mock record (raises on error).
-composition = client.Composition.load()
-puts composition
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
+liveboard = client.Liveboard.load()
+puts liveboard
 ```
 
 ### Use a custom fetch function
@@ -243,10 +244,7 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `composition` |  |
-| `timestamp` |  |
-| `vehicle` |  |
-| `version` |  |
+| `segments` |  |
 
 Operations: Load.
 
@@ -261,7 +259,7 @@ API path: `/composition/`
 | `duration` |  |
 | `id` |  |
 | `occupancy` |  |
-| `via` |  |
+| `vias` |  |
 
 Operations: List.
 
@@ -286,7 +284,7 @@ API path: `/disturbances/`
 
 | Field | Description |
 | --- | --- |
-| `departure` |  |
+| `departures` |  |
 | `station` |  |
 | `stationinfo` |  |
 | `timestamp` |  |
@@ -333,7 +331,7 @@ API path: `/stations/`
 
 | Field | Description |
 | --- | --- |
-| `stop` |  |
+| `stops` |  |
 | `timestamp` |  |
 | `vehicle` |  |
 | `vehicleinfo` |  |
@@ -362,15 +360,12 @@ Create an instance: `composition = client.Composition`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | `Hash` |  |
-| `timestamp` | `Integer` |  |
-| `vehicle` | `String` |  |
-| `version` | `String` |  |
+| `segments` | `Hash` |  |
 
 #### Example: Load
 
 ```ruby
-# load returns the bare Composition record (raises on error).
+# load returns the ENTITY — call data_get for the Composition record (raises on error).
 composition = client.Composition.load()
 ```
 
@@ -394,7 +389,7 @@ Create an instance: `connection = client.Connection`
 | `duration` | `Integer` |  |
 | `id` | `Integer` |  |
 | `occupancy` | `Hash` |  |
-| `via` | `Hash` |  |
+| `vias` | `Hash` |  |
 
 #### Example: List
 
@@ -447,7 +442,7 @@ Create an instance: `liveboard = client.Liveboard`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `Hash` |  |
+| `departures` | `Hash` |  |
 | `station` | `String` |  |
 | `stationinfo` | `Hash` |  |
 | `timestamp` | `Integer` |  |
@@ -456,7 +451,7 @@ Create an instance: `liveboard = client.Liveboard`
 #### Example: Load
 
 ```ruby
-# load returns the bare Liveboard record (raises on error).
+# load returns the ENTITY — call data_get for the Liveboard record (raises on error).
 liveboard = client.Liveboard.load()
 ```
 
@@ -526,7 +521,7 @@ Create an instance: `station = client.Station`
 #### Example: Load
 
 ```ruby
-# load returns the bare Station record (raises on error).
+# load returns the ENTITY — call data_get for the Station record (raises on error).
 station = client.Station.load()
 ```
 
@@ -545,7 +540,7 @@ Create an instance: `vehicle = client.Vehicle`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | `Hash` |  |
+| `stops` | `Hash` |  |
 | `timestamp` | `Integer` |  |
 | `vehicle` | `String` |  |
 | `vehicleinfo` | `Hash` |  |
@@ -554,7 +549,7 @@ Create an instance: `vehicle = client.Vehicle`
 #### Example: Load
 
 ```ruby
-# load returns the bare Vehicle record (raises on error).
+# load returns the ENTITY — call data_get for the Vehicle record (raises on error).
 vehicle = client.Vehicle.load()
 ```
 
@@ -635,11 +630,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-composition = client.Composition
-composition.load()
+liveboard = client.Liveboard
+liveboard.load()
 
-# composition.data_get now returns the composition data from the last load
-# composition.match_get returns the last match criteria
+# liveboard.data_get now returns the liveboard data from the last load
+# liveboard.match_get returns the last match criteria
 ```
 
 Call `make` to create a fresh instance with the same configuration

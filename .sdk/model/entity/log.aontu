@@ -52,7 +52,7 @@ main: kit: entity: log: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.logs`"
           }
         }
       ]

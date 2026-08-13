@@ -33,31 +33,10 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "composition",
+						"name": "segments",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 0,
-					},
-					map[string]any{
-						"active": true,
-						"name": "timestamp",
-						"req": false,
-						"type": "`$INTEGER`",
-						"index$": 1,
-					},
-					map[string]any{
-						"active": true,
-						"name": "vehicle",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 2,
-					},
-					map[string]any{
-						"active": true,
-						"name": "version",
-						"req": false,
-						"type": "`$STRING`",
-						"index$": 3,
 					},
 				},
 				"name": "composition",
@@ -106,6 +85,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/composition/",
 								"parts": []any{
@@ -126,7 +106,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -172,7 +151,7 @@ func MakeConfig() map[string]any {
 					},
 					map[string]any{
 						"active": true,
-						"name": "via",
+						"name": "vias",
 						"req": false,
 						"type": "`$OBJECT`",
 						"index$": 5,
@@ -275,6 +254,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/connections/",
 								"parts": []any{
@@ -301,7 +281,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -391,6 +370,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/disturbances/",
 								"parts": []any{
@@ -410,7 +390,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -421,7 +400,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "departure",
+						"name": "departures",
 						"req": true,
 						"type": "`$OBJECT`",
 						"index$": 0,
@@ -539,6 +518,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/liveboard/",
 								"parts": []any{
@@ -563,7 +543,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -615,6 +594,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/logs/",
 								"parts": []any{
@@ -627,12 +607,11 @@ func MakeConfig() map[string]any {
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
-									"res": "`body`",
+									"res": "`body.logs`",
 								},
 								"index$": 0,
 							},
 						},
-						"key$": "list",
 					},
 				},
 				"relations": map[string]any{
@@ -650,6 +629,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"active": true,
 								"args": map[string]any{},
+								"kind": "http",
 								"method": "POST",
 								"orig": "/feedback/occupancy.php",
 								"parts": []any{
@@ -664,7 +644,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "create",
 					},
 				},
 				"relations": map[string]any{
@@ -725,6 +704,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/stations/",
 								"parts": []any{
@@ -743,7 +723,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{
@@ -754,7 +733,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"active": true,
-						"name": "stop",
+						"name": "stops",
 						"req": true,
 						"type": "`$OBJECT`",
 						"index$": 0,
@@ -844,6 +823,7 @@ func MakeConfig() map[string]any {
 										},
 									},
 								},
+								"kind": "http",
 								"method": "GET",
 								"orig": "/vehicle/",
 								"parts": []any{
@@ -865,7 +845,6 @@ func MakeConfig() map[string]any {
 								"index$": 0,
 							},
 						},
-						"key$": "load",
 					},
 				},
 				"relations": map[string]any{

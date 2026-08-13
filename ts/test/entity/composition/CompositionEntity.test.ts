@@ -62,7 +62,7 @@ describe('CompositionEntity', async () => {
     // LOAD
     const composition_ref01_ent = client.Composition()
     const composition_ref01_match_dt0: any = {}
-    const composition_ref01_data_dt0 = await composition_ref01_ent.load(composition_ref01_match_dt0)
+    const composition_ref01_data_dt0 = (await composition_ref01_ent.load(composition_ref01_match_dt0)).data()
     assert(null != composition_ref01_data_dt0)
 
 

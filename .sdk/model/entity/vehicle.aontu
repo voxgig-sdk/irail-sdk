@@ -6,7 +6,7 @@ main: kit: entity: vehicle: {
 
   fields: [
     {
-      name: "stop"
+      name: "stops"
       req: true
       type: "`$OBJECT`"
     }

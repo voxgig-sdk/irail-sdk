@@ -7,16 +7,10 @@
 -- edit by hand.
 
 ---@class Composition
----@field composition? table
----@field timestamp? number
----@field vehicle? string
----@field version? string
+---@field segments? table
 
 ---@class CompositionLoadMatch
----@field composition? table
----@field timestamp? number
----@field vehicle? string
----@field version? string
+---@field segments? table
 
 ---@class Connection
 ---@field arrival? table
@@ -24,7 +18,7 @@
 ---@field duration? number
 ---@field id? number
 ---@field occupancy? table
----@field via? table
+---@field vias? table
 
 ---@class ConnectionListMatch
 ---@field arrival? table
@@ -32,7 +26,7 @@
 ---@field duration? number
 ---@field id? number
 ---@field occupancy? table
----@field via? table
+---@field vias? table
 
 ---@class Disturbance
 ---@field description? string
@@ -51,14 +45,14 @@
 ---@field type? number
 
 ---@class Liveboard
----@field departure table
+---@field departures table
 ---@field station string
 ---@field stationinfo table
 ---@field timestamp number
 ---@field version string
 
 ---@class LiveboardLoadMatch
----@field departure? table
+---@field departures? table
 ---@field station? string
 ---@field stationinfo? table
 ---@field timestamp? number
@@ -89,14 +83,14 @@
 ---@field version? string
 
 ---@class Vehicle
----@field stop table
+---@field stops table
 ---@field timestamp number
 ---@field vehicle string
 ---@field vehicleinfo? table
 ---@field version string
 
 ---@class VehicleLoadMatch
----@field stop? table
+---@field stops? table
 ---@field timestamp? number
 ---@field vehicle? string
 ---@field vehicleinfo? table

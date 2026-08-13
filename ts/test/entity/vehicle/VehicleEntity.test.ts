@@ -62,7 +62,7 @@ describe('VehicleEntity', async () => {
     // LOAD
     const vehicle_ref01_ent = client.Vehicle()
     const vehicle_ref01_match_dt0: any = {}
-    const vehicle_ref01_data_dt0 = await vehicle_ref01_ent.load(vehicle_ref01_match_dt0)
+    const vehicle_ref01_data_dt0 = (await vehicle_ref01_ent.load(vehicle_ref01_match_dt0)).data()
     assert(null != vehicle_ref01_data_dt0)
 
 

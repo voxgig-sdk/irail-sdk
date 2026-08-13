@@ -115,10 +115,7 @@ composition = client.Composition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | `dict` | No |  |
-| `timestamp` | `int` | No |  |
-| `vehicle` | `str` | No |  |
-| `version` | `str` | No |  |
+| `segments` | `dict` | No |  |
 
 ### Operations
 
@@ -174,7 +171,7 @@ connection = client.Connection()
 | `duration` | `int` | No |  |
 | `id` | `int` | No |  |
 | `occupancy` | `dict` | No |  |
-| `via` | `dict` | No |  |
+| `vias` | `dict` | No |  |
 
 ### Operations
 
@@ -285,7 +282,7 @@ liveboard = client.Liveboard()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `dict` | Yes |  |
+| `departures` | `dict` | Yes |  |
 | `station` | `str` | Yes |  |
 | `stationinfo` | `dict` | Yes |  |
 | `timestamp` | `int` | Yes |  |
@@ -494,7 +491,7 @@ vehicle = client.Vehicle()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | `dict` | Yes |  |
+| `stops` | `dict` | Yes |  |
 | `timestamp` | `int` | Yes |  |
 | `vehicle` | `str` | Yes |  |
 | `vehicleinfo` | `dict` | No |  |

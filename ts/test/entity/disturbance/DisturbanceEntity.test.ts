@@ -63,7 +63,7 @@ describe('DisturbanceEntity', async () => {
     const disturbance_ref01_ent = client.Disturbance()
     const disturbance_ref01_match: any = {}
 
-    const disturbance_ref01_list = await disturbance_ref01_ent.list(disturbance_ref01_match)
+    const disturbance_ref01_list = (await disturbance_ref01_ent.list(disturbance_ref01_match)).map((e: any) => e.data())
 
 
   })

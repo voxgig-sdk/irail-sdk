@@ -118,10 +118,7 @@ local composition = client:Composition(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `composition` | `table` | No |  |
-| `timestamp` | `number` | No |  |
-| `vehicle` | `string` | No |  |
-| `version` | `string` | No |  |
+| `segments` | `table` | No |  |
 
 ### Operations
 
@@ -178,7 +175,7 @@ local connection = client:Connection(nil)
 | `duration` | `number` | No |  |
 | `id` | `number` | No |  |
 | `occupancy` | `table` | No |  |
-| `via` | `table` | No |  |
+| `vias` | `table` | No |  |
 
 ### Operations
 
@@ -287,7 +284,7 @@ local liveboard = client:Liveboard(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `departure` | `table` | Yes |  |
+| `departures` | `table` | Yes |  |
 | `station` | `string` | Yes |  |
 | `stationinfo` | `table` | Yes |  |
 | `timestamp` | `number` | Yes |  |
@@ -498,7 +495,7 @@ local vehicle = client:Vehicle(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `stop` | `table` | Yes |  |
+| `stops` | `table` | Yes |  |
 | `timestamp` | `number` | Yes |  |
 | `vehicle` | `string` | Yes |  |
 | `vehicleinfo` | `table` | No |  |

@@ -35,7 +35,7 @@ $client = new IrailSDK();
 
 ```php
 try {
-    // load() returns the bare Composition record (throws on error).
+    // load() returns the ENTITY — call data_get() for the Composition record (throws on error).
     $composition = $client->Composition()->load();
     print_r($composition);
 } catch (\Throwable $err) {
@@ -51,7 +51,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $composition = $client->Composition()->load();
+    $liveboard = $client->Liveboard()->load();
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -123,9 +123,10 @@ Create a mock client for unit testing — no server required:
 ```php
 $client = IrailSDK::test();
 
-// Entity ops return the bare mock record (throws on error).
-$composition = $client->Composition()->load();
-print_r($composition);
+// Entity ops return the ENTITY (throws on error);
+// call data_get() for the mock record.
+$liveboard = $client->Liveboard()->load();
+print_r($liveboard);
 ```
 
 ### Use a custom fetch function
@@ -231,7 +232,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (an `array` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
 ops, a `list` for `list`) and throw on error. Wrap calls in
 `try`/`catch` to handle failures.
 
@@ -253,10 +254,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `composition` |  |
-| `timestamp` |  |
-| `vehicle` |  |
-| `version` |  |
+| `segments` |  |
 
 Operations: Load.
 
@@ -271,7 +269,7 @@ API path: `/composition/`
 | `duration` |  |
 | `id` |  |
 | `occupancy` |  |
-| `via` |  |
+| `vias` |  |
 
 Operations: List.
 
@@ -296,7 +294,7 @@ API path: `/disturbances/`
 
 | Field | Description |
 | --- | --- |
-| `departure` |  |
+| `departures` |  |
 | `station` |  |
 | `stationinfo` |  |
 | `timestamp` |  |
@@ -343,7 +341,7 @@ API path: `/stations/`
 
 | Field | Description |
 | --- | --- |
-| `stop` |  |
+| `stops` |  |
 | `timestamp` |  |
 | `vehicle` |  |
 | `vehicleinfo` |  |
@@ -372,15 +370,12 @@ Create an instance: `$composition = $client->Composition();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `composition` | `array` |  |
-| `timestamp` | `int` |  |
-| `vehicle` | `string` |  |
-| `version` | `string` |  |
+| `segments` | `array` |  |
 
 #### Example: Load
 
 ```php
-// load() returns the bare Composition record (throws on error).
+// load() returns the ENTITY — call data_get() for the Composition record (throws on error).
 $composition = $client->Composition()->load();
 ```
 
@@ -404,7 +399,7 @@ Create an instance: `$connection = $client->Connection();`
 | `duration` | `int` |  |
 | `id` | `int` |  |
 | `occupancy` | `array` |  |
-| `via` | `array` |  |
+| `vias` | `array` |  |
 
 #### Example: List
 
@@ -457,7 +452,7 @@ Create an instance: `$liveboard = $client->Liveboard();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `departure` | `array` |  |
+| `departures` | `array` |  |
 | `station` | `string` |  |
 | `stationinfo` | `array` |  |
 | `timestamp` | `int` |  |
@@ -466,7 +461,7 @@ Create an instance: `$liveboard = $client->Liveboard();`
 #### Example: Load
 
 ```php
-// load() returns the bare Liveboard record (throws on error).
+// load() returns the ENTITY — call data_get() for the Liveboard record (throws on error).
 $liveboard = $client->Liveboard()->load();
 ```
 
@@ -536,7 +531,7 @@ Create an instance: `$station = $client->Station();`
 #### Example: Load
 
 ```php
-// load() returns the bare Station record (throws on error).
+// load() returns the ENTITY — call data_get() for the Station record (throws on error).
 $station = $client->Station()->load();
 ```
 
@@ -555,7 +550,7 @@ Create an instance: `$vehicle = $client->Vehicle();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `stop` | `array` |  |
+| `stops` | `array` |  |
 | `timestamp` | `int` |  |
 | `vehicle` | `string` |  |
 | `vehicleinfo` | `array` |  |
@@ -564,7 +559,7 @@ Create an instance: `$vehicle = $client->Vehicle();`
 #### Example: Load
 
 ```php
-// load() returns the bare Vehicle record (throws on error).
+// load() returns the ENTITY — call data_get() for the Vehicle record (throws on error).
 $vehicle = $client->Vehicle()->load();
 ```
 
@@ -645,11 +640,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$composition = $client->Composition();
-$composition->load();
+$liveboard = $client->Liveboard();
+$liveboard->load();
 
-// $composition->data_get() now returns the composition data from the last load
-// $composition->match_get() returns the last match criteria
+// $liveboard->data_get() now returns the liveboard data from the last load
+// $liveboard->match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

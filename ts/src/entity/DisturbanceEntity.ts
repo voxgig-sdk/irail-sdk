@@ -37,7 +37,7 @@ class DisturbanceEntity extends IrailEntityBase<Disturbance> {
 
 
 
-  async list(this: any, reqmatch?: DisturbanceListMatch, ctrl?: Control): Promise<Disturbance[]> {
+  async list(this: any, reqmatch?: DisturbanceListMatch, ctrl?: Control): Promise<DisturbanceEntity[]> {
 
     const utility = this._utility
 

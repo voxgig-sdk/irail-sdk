@@ -6,7 +6,7 @@ main: kit: entity: liveboard: {
 
   fields: [
     {
-      name: "departure"
+      name: "departures"
       req: true
       type: "`$OBJECT`"
     }
