@@ -1,7 +1,30 @@
 # Irail SDK configuration
 
 
+_shared_config = None
+
+
+def shared_config():
+    """Return the process-wide config, built once on first use.
+
+    The SDK reads the config on every request and never writes to it, so one
+    instance is shared by every client rather than rebuilt per client.
+
+    The returned dict is shared: treat it as read-only. Callers that need to
+    mutate should use make_config, which always returns a fresh copy.
+    """
+    global _shared_config
+    if _shared_config is None:
+        _shared_config = make_config()
+    return _shared_config
+
+
 def make_config():
+    """Build a fresh, fully materialised config dict.
+
+    Every call rebuilds the whole structure, so prefer shared_config unless
+    you need a private copy you intend to mutate.
+    """
     return {
         "main": {
             "name": "Irail",
@@ -33,11 +56,8 @@ def make_config():
       "composition": {
         "fields": [
           {
-            "active": True,
             "name": "segments",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
         ],
         "name": "composition",
@@ -47,28 +67,22 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "id",
                       "orig": "id",
@@ -76,12 +90,10 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "lang",
                       "orig": "lang",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -104,10 +116,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.composition`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -117,46 +127,28 @@ def make_config():
       "connection": {
         "fields": [
           {
-            "active": True,
             "name": "arrival",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "departure",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "duration",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "occupancy",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "vias",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 5,
           },
         ],
         "name": "connection",
@@ -166,37 +158,29 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "alert",
                       "orig": "alert",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "from",
                       "orig": "from",
@@ -204,42 +188,33 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "lang",
                       "orig": "lang",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": 6,
                       "kind": "query",
                       "name": "result",
                       "orig": "result",
-                      "reqd": False,
                       "type": "`$INTEGER`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "time",
                       "orig": "time",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "departure",
                       "kind": "query",
                       "name": "timesel",
                       "orig": "timesel",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "to",
                       "orig": "to",
@@ -247,11 +222,9 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "type_of_transport",
                       "orig": "type_of_transport",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -280,10 +253,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.connection`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -293,46 +264,28 @@ def make_config():
       "disturbance": {
         "fields": [
           {
-            "active": True,
             "name": "description",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "id",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "link",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "timestamp",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "title",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 4,
           },
           {
-            "active": True,
             "name": "type",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 5,
           },
         ],
         "name": "disturbance",
@@ -342,33 +295,26 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "lang",
                       "orig": "lang",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "line_break_character",
                       "orig": "line_break_character",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -390,10 +336,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.disturbance`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -403,39 +347,29 @@ def make_config():
       "liveboard": {
         "fields": [
           {
-            "active": True,
             "name": "departures",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "station",
             "req": True,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "stationinfo",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "timestamp",
             "req": True,
             "type": "`$INTEGER`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "version",
             "req": True,
             "type": "`$STRING`",
-            "index$": 4,
           },
         ],
         "name": "liveboard",
@@ -445,79 +379,62 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "alert",
                       "orig": "alert",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "example": "departure",
                       "kind": "query",
                       "name": "arrdep",
                       "orig": "arrdep",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "300917",
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "BE.NMBS.008892007",
                       "kind": "query",
                       "name": "id",
                       "orig": "id",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "lang",
                       "orig": "lang",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "Gent-Sint-Pieters",
                       "kind": "query",
                       "name": "station",
                       "orig": "station",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "1230",
                       "kind": "query",
                       "name": "time",
                       "orig": "time",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -544,10 +461,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -557,25 +472,16 @@ def make_config():
       "log": {
         "fields": [
           {
-            "active": True,
             "name": "querytime",
-            "req": False,
             "type": "`$INTEGER`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "querytype",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "user_agent",
-            "req": False,
             "type": "`$STRING`",
-            "index$": 2,
           },
         ],
         "name": "log",
@@ -585,16 +491,13 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -614,10 +517,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.logs`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "list",
           },
         },
         "relations": {
@@ -633,7 +534,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "active": True,
                 "args": {},
                 "kind": "http",
                 "method": "POST",
@@ -647,10 +547,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "create",
           },
         },
         "relations": {
@@ -660,25 +558,24 @@ def make_config():
       "station": {
         "fields": [
           {
-            "active": True,
             "name": "station",
             "req": True,
             "type": "`$ANY`",
-            "index$": 0,
+            "union": {
+              "branches": 2,
+              "count": 1,
+              "depth": 0,
+            },
           },
           {
-            "active": True,
             "name": "timestamp",
             "req": True,
             "type": "`$INTEGER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "version",
             "req": True,
             "type": "`$STRING`",
-            "index$": 2,
           },
         ],
         "name": "station",
@@ -688,25 +585,20 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "lang",
                       "orig": "lang",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -727,10 +619,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.station`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {
@@ -740,39 +630,28 @@ def make_config():
       "vehicle": {
         "fields": [
           {
-            "active": True,
             "name": "stops",
             "req": True,
             "type": "`$OBJECT`",
-            "index$": 0,
           },
           {
-            "active": True,
             "name": "timestamp",
             "req": True,
             "type": "`$INTEGER`",
-            "index$": 1,
           },
           {
-            "active": True,
             "name": "vehicle",
             "req": True,
             "type": "`$STRING`",
-            "index$": 2,
           },
           {
-            "active": True,
             "name": "vehicleinfo",
-            "req": False,
             "type": "`$OBJECT`",
-            "index$": 3,
           },
           {
-            "active": True,
             "name": "version",
             "req": True,
             "type": "`$STRING`",
-            "index$": 4,
           },
         ],
         "name": "vehicle",
@@ -782,37 +661,29 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "active": True,
                 "args": {
                   "query": [
                     {
-                      "active": True,
                       "example": False,
                       "kind": "query",
                       "name": "alert",
                       "orig": "alert",
-                      "reqd": False,
                       "type": "`$BOOLEAN`",
                     },
                     {
-                      "active": True,
                       "kind": "query",
                       "name": "date",
                       "orig": "date",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "xml",
                       "kind": "query",
                       "name": "format",
                       "orig": "format",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "IC532",
                       "kind": "query",
                       "name": "id",
@@ -821,12 +692,10 @@ def make_config():
                       "type": "`$STRING`",
                     },
                     {
-                      "active": True,
                       "example": "en",
                       "kind": "query",
                       "name": "lang",
                       "orig": "lang",
-                      "reqd": False,
                       "type": "`$STRING`",
                     },
                   ],
@@ -850,10 +719,8 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "index$": 0,
               },
             ],
-            "key$": "load",
           },
         },
         "relations": {

@@ -33,7 +33,7 @@ class DisturbanceEntityTest < Minitest::Test
     assert_equal 3, seen.length
 
     # Inbound: streaming active -> yields each item from the feature.
-    cfg = IrailConfig.make_config
+    cfg = IrailConfig.shared_config
     if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
       sdk = IrailSDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
       got = []

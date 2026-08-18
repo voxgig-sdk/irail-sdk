@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from irail_sdk.config import make_config
+from irail_sdk.config import shared_config
 from irail_sdk.features import _make_feature
 from irail_sdk.core.control import IrailControl
 from irail_sdk.core.error import IrailError
@@ -24,7 +24,7 @@ from irail_sdk.core.spec import IrailSpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

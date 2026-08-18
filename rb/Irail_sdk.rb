@@ -28,7 +28,7 @@ class IrailSDK
     utility = IrailUtility.new
     @_utility = utility
 
-    config = IrailConfig.make_config
+    config = IrailConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

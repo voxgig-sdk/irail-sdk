@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://api.irail.be',
+    base: "https://api.irail.be",
 
     headers: {
       "content-type": "application/json"
@@ -76,11 +76,8 @@ class Config {
     "composition": {
       "fields": [
         {
-          "active": true,
           "name": "segments",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         }
       ],
       "name": "composition",
@@ -90,28 +87,22 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "id",
                     "orig": "id",
@@ -119,12 +110,10 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "lang",
                     "orig": "lang",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -146,11 +135,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.composition`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -160,46 +147,28 @@ class Config {
     "connection": {
       "fields": [
         {
-          "active": true,
           "name": "arrival",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "departure",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "duration",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 2
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "occupancy",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 4
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "vias",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 5
+          "type": "`$OBJECT`"
         }
       ],
       "name": "connection",
@@ -209,37 +178,29 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "alert",
                     "orig": "alert",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "from",
                     "orig": "from",
@@ -247,42 +208,33 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "lang",
                     "orig": "lang",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": 6,
                     "kind": "query",
                     "name": "result",
                     "orig": "result",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "time",
                     "orig": "time",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "departure",
                     "kind": "query",
                     "name": "timesel",
                     "orig": "timesel",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "to",
                     "orig": "to",
@@ -290,11 +242,9 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "type_of_transport",
                     "orig": "type_of_transport",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -322,11 +272,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.connection`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -336,46 +284,28 @@ class Config {
     "disturbance": {
       "fields": [
         {
-          "active": true,
           "name": "description",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "id",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "link",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "timestamp",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "title",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "type",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 5
+          "type": "`$INTEGER`"
         }
       ],
       "name": "disturbance",
@@ -385,33 +315,26 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "lang",
                     "orig": "lang",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "line_break_character",
                     "orig": "line_break_character",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -432,11 +355,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.disturbance`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -446,39 +367,29 @@ class Config {
     "liveboard": {
       "fields": [
         {
-          "active": true,
           "name": "departures",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "station",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "stationinfo",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 2
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "timestamp",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 3
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "version",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         }
       ],
       "name": "liveboard",
@@ -488,79 +399,62 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "alert",
                     "orig": "alert",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "example": "departure",
                     "kind": "query",
                     "name": "arrdep",
                     "orig": "arrdep",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "300917",
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "BE.NMBS.008892007",
                     "kind": "query",
                     "name": "id",
                     "orig": "id",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "lang",
                     "orig": "lang",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "Gent-Sint-Pieters",
                     "kind": "query",
                     "name": "station",
                     "orig": "station",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "1230",
                     "kind": "query",
                     "name": "time",
                     "orig": "time",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -586,11 +480,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -600,25 +492,16 @@ class Config {
     "log": {
       "fields": [
         {
-          "active": true,
           "name": "querytime",
-          "req": false,
-          "type": "`$INTEGER`",
-          "index$": 0
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "querytype",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "user_agent",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         }
       ],
       "name": "log",
@@ -628,16 +511,13 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -656,11 +536,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.logs`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -676,7 +554,6 @@ class Config {
           "name": "create",
           "points": [
             {
-              "active": true,
               "args": {},
               "kind": "http",
               "method": "POST",
@@ -689,11 +566,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "create"
+          ]
         }
       },
       "relations": {
@@ -703,25 +578,24 @@ class Config {
     "station": {
       "fields": [
         {
-          "active": true,
           "name": "station",
           "req": true,
           "type": "`$ANY`",
-          "index$": 0
+          "union": {
+            "branches": 2,
+            "count": 1,
+            "depth": 0
+          }
         },
         {
-          "active": true,
           "name": "timestamp",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "version",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         }
       ],
       "name": "station",
@@ -731,25 +605,20 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "lang",
                     "orig": "lang",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -769,11 +638,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.station`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {
@@ -783,39 +650,28 @@ class Config {
     "vehicle": {
       "fields": [
         {
-          "active": true,
           "name": "stops",
           "req": true,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "timestamp",
           "req": true,
-          "type": "`$INTEGER`",
-          "index$": 1
+          "type": "`$INTEGER`"
         },
         {
-          "active": true,
           "name": "vehicle",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 2
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "vehicleinfo",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 3
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "version",
           "req": true,
-          "type": "`$STRING`",
-          "index$": 4
+          "type": "`$STRING`"
         }
       ],
       "name": "vehicle",
@@ -825,37 +681,29 @@ class Config {
           "name": "load",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": false,
                     "kind": "query",
                     "name": "alert",
                     "orig": "alert",
-                    "reqd": false,
                     "type": "`$BOOLEAN`"
                   },
                   {
-                    "active": true,
                     "kind": "query",
                     "name": "date",
                     "orig": "date",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "xml",
                     "kind": "query",
                     "name": "format",
                     "orig": "format",
-                    "reqd": false,
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "IC532",
                     "kind": "query",
                     "name": "id",
@@ -864,12 +712,10 @@ class Config {
                     "type": "`$STRING`"
                   },
                   {
-                    "active": true,
                     "example": "en",
                     "kind": "query",
                     "name": "lang",
                     "orig": "lang",
-                    "reqd": false,
                     "type": "`$STRING`"
                   }
                 ]
@@ -892,11 +738,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "load"
+          ]
         }
       },
       "relations": {

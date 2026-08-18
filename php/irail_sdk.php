@@ -40,7 +40,7 @@ class IrailSDK
         $utility = new IrailUtility();
         $this->_utility = $utility;
 
-        $config = IrailConfig::make_config();
+        $config = IrailConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

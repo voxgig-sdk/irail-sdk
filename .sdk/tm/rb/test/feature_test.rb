@@ -15,7 +15,7 @@ require_relative "../Irail_sdk"
 module IrailFeatureHarness
   # True when this SDK was generated with the named feature.
   def self.has_feature?(name)
-    f = IrailConfig.make_config["feature"]
+    f = IrailConfig.shared_config["feature"]
     f.is_a?(Hash) && !f[name].nil?
   end
 
