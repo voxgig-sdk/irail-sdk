@@ -19,9 +19,20 @@ class Config {
     return fi
   }
 
+  // False for a feature added at runtime via options.extend (station's
+  // adopt path) - the constructor uses this to skip makeFeature for names
+  // no generated class backs.
+  hasFeature(this: any, fn: string) {
+    return null != FEATURE_CLASS[fn]
+  }
+
 
   main = {
     name: 'Irail',
+        slug: "irail",
+    version: "0.0.1",
+    target: "ts",
+
   }
 
 
@@ -374,6 +385,7 @@ class Config {
         {
           "name": "station",
           "req": true,
+          "short": "Station name",
           "type": "`$STRING`"
         },
         {
@@ -384,11 +396,13 @@ class Config {
         {
           "name": "timestamp",
           "req": true,
+          "short": "Unix timestamp of the response",
           "type": "`$INTEGER`"
         },
         {
           "name": "version",
           "req": true,
+          "short": "API version",
           "type": "`$STRING`"
         }
       ],
@@ -590,11 +604,13 @@ class Config {
         {
           "name": "timestamp",
           "req": true,
+          "short": "Unix timestamp of the response",
           "type": "`$INTEGER`"
         },
         {
           "name": "version",
           "req": true,
+          "short": "API version",
           "type": "`$STRING`"
         }
       ],
@@ -657,11 +673,13 @@ class Config {
         {
           "name": "timestamp",
           "req": true,
+          "short": "Unix timestamp of the response",
           "type": "`$INTEGER`"
         },
         {
           "name": "vehicle",
           "req": true,
+          "short": "Vehicle identifier",
           "type": "`$STRING`"
         },
         {
@@ -671,6 +689,7 @@ class Config {
         {
           "name": "version",
           "req": true,
+          "short": "API version",
           "type": "`$STRING`"
         }
       ],

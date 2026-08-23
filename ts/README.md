@@ -9,7 +9,7 @@ The API is exposed as capitalised, semantic **Entities** — e.g.
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go`, `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb` — see
 > the [top-level README](../README.md).
 
 
@@ -337,10 +337,10 @@ API path: `/disturbances/`
 | Field | Description |
 | --- | --- |
 | `departures` |  |
-| `station` |  |
+| `station` | Station name |
 | `stationinfo` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: load.
 
@@ -372,8 +372,8 @@ API path: `/feedback/occupancy.php`
 | Field | Description |
 | --- | --- |
 | `station` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: load.
 
@@ -384,10 +384,10 @@ API path: `/stations/`
 | Field | Description |
 | --- | --- |
 | `stops` |  |
-| `timestamp` |  |
-| `vehicle` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
 | `vehicleinfo` |  |
-| `version` |  |
+| `version` | API version |
 
 Operations: load.
 
@@ -492,10 +492,10 @@ Create an instance: `const liveboard = client.Liveboard()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `departures` | `Record<string, any>` |  |
-| `station` | `string` |  |
+| `station` | `string` | Station name |
 | `stationinfo` | `Record<string, any>` |  |
-| `timestamp` | `number` |  |
-| `version` | `string` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -562,8 +562,8 @@ Create an instance: `const station = client.Station()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `station` | `any` |  |
-| `timestamp` | `number` |  |
-| `version` | `string` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -587,10 +587,10 @@ Create an instance: `const vehicle = client.Vehicle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `stops` | `Record<string, any>` |  |
-| `timestamp` | `number` |  |
-| `vehicle` | `string` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
 | `vehicleinfo` | `Record<string, any>` |  |
-| `version` | `string` |  |
+| `version` | `string` | API version |
 
 #### Example: Load
 

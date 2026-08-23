@@ -290,10 +290,10 @@ fmt.Println(liveboard.GetName()) // "liveboard"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `departures` | `map[string]any` | Yes |  |
-| `station` | `string` | Yes |  |
+| `station` | `string` | Yes | Station name |
 | `stationinfo` | `map[string]any` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -444,8 +444,8 @@ fmt.Println(station.GetName()) // "station"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `station` | `any` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -497,10 +497,10 @@ fmt.Println(vehicle.GetName()) // "vehicle"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stops` | `map[string]any` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `vehicle` | `string` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `vehicle` | `string` | Yes | Vehicle identifier |
 | `vehicleinfo` | `map[string]any` | No |  |
-| `version` | `string` | Yes |  |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 

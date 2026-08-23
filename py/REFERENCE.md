@@ -283,10 +283,10 @@ liveboard = client.Liveboard()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `departures` | `dict` | Yes |  |
-| `station` | `str` | Yes |  |
+| `station` | `str` | Yes | Station name |
 | `stationinfo` | `dict` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `version` | `str` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `version` | `str` | Yes | API version |
 
 ### Operations
 
@@ -439,8 +439,8 @@ station = client.Station()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `station` | `Any` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `version` | `str` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `version` | `str` | Yes | API version |
 
 ### Operations
 
@@ -492,10 +492,10 @@ vehicle = client.Vehicle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stops` | `dict` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `vehicle` | `str` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `vehicle` | `str` | Yes | Vehicle identifier |
 | `vehicleinfo` | `dict` | No |  |
-| `version` | `str` | Yes |  |
+| `version` | `str` | Yes | API version |
 
 ### Operations
 

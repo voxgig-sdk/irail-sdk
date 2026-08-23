@@ -291,10 +291,10 @@ API path: `/disturbances/`
 | Field | Description |
 | --- | --- |
 | `departures` |  |
-| `station` |  |
+| `station` | Station name |
 | `stationinfo` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: Load.
 
@@ -326,8 +326,8 @@ API path: `/feedback/occupancy.php`
 | Field | Description |
 | --- | --- |
 | `station` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: Load.
 
@@ -338,10 +338,10 @@ API path: `/stations/`
 | Field | Description |
 | --- | --- |
 | `stops` |  |
-| `timestamp` |  |
-| `vehicle` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
 | `vehicleinfo` |  |
-| `version` |  |
+| `version` | API version |
 
 Operations: Load.
 
@@ -446,10 +446,10 @@ Create an instance: `liveboard = client.Liveboard()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `departures` | `dict` |  |
-| `station` | `str` |  |
+| `station` | `str` | Station name |
 | `stationinfo` | `dict` |  |
-| `timestamp` | `int` |  |
-| `version` | `str` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `version` | `str` | API version |
 
 #### Example: Load
 
@@ -516,8 +516,8 @@ Create an instance: `station = client.Station()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `station` | `Any` |  |
-| `timestamp` | `int` |  |
-| `version` | `str` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `version` | `str` | API version |
 
 #### Example: Load
 
@@ -541,10 +541,10 @@ Create an instance: `vehicle = client.Vehicle()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `stops` | `dict` |  |
-| `timestamp` | `int` |  |
-| `vehicle` | `str` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `vehicle` | `str` | Vehicle identifier |
 | `vehicleinfo` | `dict` |  |
-| `version` | `str` |  |
+| `version` | `str` | API version |
 
 #### Example: Load
 

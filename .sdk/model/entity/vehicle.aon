@@ -1,38 +1,41 @@
-# Entity: liveboard
+# Entity: vehicle
 
-main: kit: entity: liveboard: {
+main: kit: entity: vehicle: {
 
   alias: field: {}
 
   fields: [
     {
-      name: "departures"
-      req: true
-      type: "`$OBJECT`"
-    }
-    {
-      name: "station"
-      req: true
-      type: "`$STRING`"
-    }
-    {
-      name: "stationinfo"
+      name: "stops"
       req: true
       type: "`$OBJECT`"
     }
     {
       name: "timestamp"
       req: true
+      short: "Unix timestamp of the response"
       type: "`$INTEGER`"
+    }
+    {
+      name: "vehicle"
+      req: true
+      short: "Vehicle identifier"
+      type: "`$STRING`"
+    }
+    {
+      name: "vehicleinfo"
+      req: false
+      type: "`$OBJECT`"
     }
     {
       name: "version"
       req: true
+      short: "API version"
       type: "`$STRING`"
     }
   ]
 
-  name: "liveboard"
+  name: "vehicle"
   op: {
     load: {
       name: "load"
@@ -49,15 +52,6 @@ main: kit: entity: liveboard: {
                 type: "`$BOOLEAN`"
               }
               {
-                example: "departure"
-                kind: "query"
-                name: "arrdep"
-                orig: "arrdep"
-                reqd: false
-                type: "`$STRING`"
-              }
-              {
-                example: "300917"
                 kind: "query"
                 name: "date"
                 orig: "date"
@@ -73,11 +67,11 @@ main: kit: entity: liveboard: {
                 type: "`$STRING`"
               }
               {
-                example: "BE.NMBS.008892007"
+                example: "IC532"
                 kind: "query"
                 name: "id"
                 orig: "id"
-                reqd: false
+                reqd: true
                 type: "`$STRING`"
               }
               {
@@ -88,39 +82,20 @@ main: kit: entity: liveboard: {
                 reqd: false
                 type: "`$STRING`"
               }
-              {
-                example: "Gent-Sint-Pieters"
-                kind: "query"
-                name: "station"
-                orig: "station"
-                reqd: false
-                type: "`$STRING`"
-              }
-              {
-                example: "1230"
-                kind: "query"
-                name: "time"
-                orig: "time"
-                reqd: false
-                type: "`$STRING`"
-              }
             ]
           }
           method: "GET"
-          orig: "/liveboard/"
+          orig: "/vehicle/"
           parts: [
-            "liveboard"
+            "vehicle"
           ]
           select: {
             exist: [
               "alert"
-              "arrdep"
               "date"
               "format"
               "id"
               "lang"
-              "station"
-              "time"
             ]
           }
           transform: {

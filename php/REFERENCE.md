@@ -287,10 +287,10 @@ $liveboard = $client->Liveboard();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `departures` | `array` | Yes |  |
-| `station` | `string` | Yes |  |
+| `station` | `string` | Yes | Station name |
 | `stationinfo` | `array` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -444,8 +444,8 @@ $station = $client->Station();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `station` | `mixed` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -498,10 +498,10 @@ $vehicle = $client->Vehicle();
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stops` | `array` | Yes |  |
-| `timestamp` | `int` | Yes |  |
-| `vehicle` | `string` | Yes |  |
+| `timestamp` | `int` | Yes | Unix timestamp of the response |
+| `vehicle` | `string` | Yes | Vehicle identifier |
 | `vehicleinfo` | `array` | No |  |
-| `version` | `string` | Yes |  |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 

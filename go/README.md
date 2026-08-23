@@ -6,7 +6,7 @@ The Golang SDK for the Irail API — an entity-oriented client using standard Go
 
 It exposes the API as capitalised, semantic **Entities** — e.g. `client.Composition(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
-> Other languages, the CLI, and MCP server live alongside this one — see
+> Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
 
 
@@ -309,10 +309,10 @@ API path: `/disturbances/`
 | Field | Description |
 | --- | --- |
 | `"departures"` |  |
-| `"station"` |  |
+| `"station"` | Station name |
 | `"stationinfo"` |  |
-| `"timestamp"` |  |
-| `"version"` |  |
+| `"timestamp"` | Unix timestamp of the response |
+| `"version"` | API version |
 
 Operations: Load.
 
@@ -344,8 +344,8 @@ API path: `/feedback/occupancy.php`
 | Field | Description |
 | --- | --- |
 | `"station"` |  |
-| `"timestamp"` |  |
-| `"version"` |  |
+| `"timestamp"` | Unix timestamp of the response |
+| `"version"` | API version |
 
 Operations: Load.
 
@@ -356,10 +356,10 @@ API path: `/stations/`
 | Field | Description |
 | --- | --- |
 | `"stops"` |  |
-| `"timestamp"` |  |
-| `"vehicle"` |  |
+| `"timestamp"` | Unix timestamp of the response |
+| `"vehicle"` | Vehicle identifier |
 | `"vehicleinfo"` |  |
-| `"version"` |  |
+| `"version"` | API version |
 
 Operations: Load.
 
@@ -476,10 +476,10 @@ Create an instance: `liveboard := client.Liveboard(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `departures` | `map[string]any` |  |
-| `station` | `string` |  |
+| `station` | `string` | Station name |
 | `stationinfo` | `map[string]any` |  |
-| `timestamp` | `int` |  |
-| `version` | `string` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -558,8 +558,8 @@ Create an instance: `station := client.Station(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `station` | `any` |  |
-| `timestamp` | `int` |  |
-| `version` | `string` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -587,10 +587,10 @@ Create an instance: `vehicle := client.Vehicle(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `stops` | `map[string]any` |  |
-| `timestamp` | `int` |  |
-| `vehicle` | `string` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
 | `vehicleinfo` | `map[string]any` |  |
-| `version` | `string` |  |
+| `version` | `string` | API version |
 
 #### Example: Load
 

@@ -361,10 +361,10 @@ const liveboard = client.Liveboard()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `departures` | `Record<string, any>` | Yes |  |
-| `station` | `string` | Yes |  |
+| `station` | `string` | Yes | Station name |
 | `stationinfo` | `Record<string, any>` | Yes |  |
-| `timestamp` | `number` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `number` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -512,8 +512,8 @@ const station = client.Station()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `station` | `any` | Yes |  |
-| `timestamp` | `number` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `number` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -564,10 +564,10 @@ const vehicle = client.Vehicle()
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stops` | `Record<string, any>` | Yes |  |
-| `timestamp` | `number` | Yes |  |
-| `vehicle` | `string` | Yes |  |
+| `timestamp` | `number` | Yes | Unix timestamp of the response |
+| `vehicle` | `string` | Yes | Vehicle identifier |
 | `vehicleinfo` | `Record<string, any>` | No |  |
-| `version` | `string` | Yes |  |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 

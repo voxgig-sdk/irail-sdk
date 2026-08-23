@@ -18,11 +18,13 @@ main: kit: entity: station: {
     {
       name: "timestamp"
       req: true
+      short: "Unix timestamp of the response"
       type: "`$INTEGER`"
     }
     {
       name: "version"
       req: true
+      short: "API version"
       type: "`$STRING`"
     }
   ]

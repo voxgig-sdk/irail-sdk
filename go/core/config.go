@@ -11,6 +11,9 @@ func MakeConfig() map[string]any {
 	return map[string]any{
 		"main": map[string]any{
 			"name": "Irail",
+			"slug": "irail",
+			"version": "0.0.1",
+			"target": "go",
 		},
 		"feature": map[string]any{
 			"test": map[string]any{
@@ -337,6 +340,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "station",
 						"req": true,
+						"short": "Station name",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -347,11 +351,13 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "timestamp",
 						"req": true,
+						"short": "Unix timestamp of the response",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "version",
 						"req": true,
+						"short": "API version",
 						"type": "`$STRING`",
 					},
 				},
@@ -553,11 +559,13 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "timestamp",
 						"req": true,
+						"short": "Unix timestamp of the response",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "version",
 						"req": true,
+						"short": "API version",
 						"type": "`$STRING`",
 					},
 				},
@@ -620,11 +628,13 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "timestamp",
 						"req": true,
+						"short": "Unix timestamp of the response",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "vehicle",
 						"req": true,
+						"short": "Vehicle identifier",
 						"type": "`$STRING`",
 					},
 					map[string]any{
@@ -634,6 +644,7 @@ func MakeConfig() map[string]any {
 					map[string]any{
 						"name": "version",
 						"req": true,
+						"short": "API version",
 						"type": "`$STRING`",
 					},
 				},

@@ -295,10 +295,10 @@ API path: `/disturbances/`
 | Field | Description |
 | --- | --- |
 | `departures` |  |
-| `station` |  |
+| `station` | Station name |
 | `stationinfo` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: Load.
 
@@ -330,8 +330,8 @@ API path: `/feedback/occupancy.php`
 | Field | Description |
 | --- | --- |
 | `station` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: Load.
 
@@ -342,10 +342,10 @@ API path: `/stations/`
 | Field | Description |
 | --- | --- |
 | `stops` |  |
-| `timestamp` |  |
-| `vehicle` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
 | `vehicleinfo` |  |
-| `version` |  |
+| `version` | API version |
 
 Operations: Load.
 
@@ -453,10 +453,10 @@ Create an instance: `$liveboard = $client->Liveboard();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `departures` | `array` |  |
-| `station` | `string` |  |
+| `station` | `string` | Station name |
 | `stationinfo` | `array` |  |
-| `timestamp` | `int` |  |
-| `version` | `string` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -525,8 +525,8 @@ Create an instance: `$station = $client->Station();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `station` | `mixed` |  |
-| `timestamp` | `int` |  |
-| `version` | `string` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -551,10 +551,10 @@ Create an instance: `$vehicle = $client->Vehicle();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `stops` | `array` |  |
-| `timestamp` | `int` |  |
-| `vehicle` | `string` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
 | `vehicleinfo` | `array` |  |
-| `version` | `string` |  |
+| `version` | `string` | API version |
 
 #### Example: Load
 

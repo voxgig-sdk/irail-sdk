@@ -276,10 +276,10 @@ API path: `/disturbances/`
 | Field | Description |
 | --- | --- |
 | `departures` |  |
-| `station` |  |
+| `station` | Station name |
 | `stationinfo` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: Load.
 
@@ -311,8 +311,8 @@ API path: `/feedback/occupancy.php`
 | Field | Description |
 | --- | --- |
 | `station` |  |
-| `timestamp` |  |
-| `version` |  |
+| `timestamp` | Unix timestamp of the response |
+| `version` | API version |
 
 Operations: Load.
 
@@ -323,10 +323,10 @@ API path: `/stations/`
 | Field | Description |
 | --- | --- |
 | `stops` |  |
-| `timestamp` |  |
-| `vehicle` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
 | `vehicleinfo` |  |
-| `version` |  |
+| `version` | API version |
 
 Operations: Load.
 
@@ -431,10 +431,10 @@ Create an instance: `local liveboard = client:Liveboard(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `departures` | `table` |  |
-| `station` | `string` |  |
+| `station` | `string` | Station name |
 | `stationinfo` | `table` |  |
-| `timestamp` | `number` |  |
-| `version` | `string` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -501,8 +501,8 @@ Create an instance: `local station = client:Station(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `station` | `any` |  |
-| `timestamp` | `number` |  |
-| `version` | `string` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `version` | `string` | API version |
 
 #### Example: Load
 
@@ -526,10 +526,10 @@ Create an instance: `local vehicle = client:Vehicle(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `stops` | `table` |  |
-| `timestamp` | `number` |  |
-| `vehicle` | `string` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
 | `vehicleinfo` | `table` |  |
-| `version` | `string` |  |
+| `version` | `string` | API version |
 
 #### Example: Load
 

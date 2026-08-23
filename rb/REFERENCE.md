@@ -288,10 +288,10 @@ liveboard = client.Liveboard
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `departures` | `Hash` | Yes |  |
-| `station` | `String` | Yes |  |
+| `station` | `String` | Yes | Station name |
 | `stationinfo` | `Hash` | Yes |  |
-| `timestamp` | `Integer` | Yes |  |
-| `version` | `String` | Yes |  |
+| `timestamp` | `Integer` | Yes | Unix timestamp of the response |
+| `version` | `String` | Yes | API version |
 
 ### Operations
 
@@ -445,8 +445,8 @@ station = client.Station
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `station` | `Object` | Yes |  |
-| `timestamp` | `Integer` | Yes |  |
-| `version` | `String` | Yes |  |
+| `timestamp` | `Integer` | Yes | Unix timestamp of the response |
+| `version` | `String` | Yes | API version |
 
 ### Operations
 
@@ -499,10 +499,10 @@ vehicle = client.Vehicle
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stops` | `Hash` | Yes |  |
-| `timestamp` | `Integer` | Yes |  |
-| `vehicle` | `String` | Yes |  |
+| `timestamp` | `Integer` | Yes | Unix timestamp of the response |
+| `vehicle` | `String` | Yes | Vehicle identifier |
 | `vehicleinfo` | `Hash` | No |  |
-| `version` | `String` | Yes |  |
+| `version` | `String` | Yes | API version |
 
 ### Operations
 

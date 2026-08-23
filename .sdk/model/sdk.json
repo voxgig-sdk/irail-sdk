@@ -413,6 +413,7 @@
               "active": true,
               "name": "station",
               "req": true,
+              "short": "Station name",
               "type": "`$STRING`"
             },
             {
@@ -425,12 +426,14 @@
               "active": true,
               "name": "timestamp",
               "req": true,
+              "short": "Unix timestamp of the response",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "version",
               "req": true,
+              "short": "API version",
               "type": "`$STRING`"
             }
           ],
@@ -673,12 +676,14 @@
               "active": true,
               "name": "timestamp",
               "req": true,
+              "short": "Unix timestamp of the response",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "version",
               "req": true,
+              "short": "API version",
               "type": "`$STRING`"
             }
           ],
@@ -752,12 +757,14 @@
               "active": true,
               "name": "timestamp",
               "req": true,
+              "short": "Unix timestamp of the response",
               "type": "`$INTEGER`"
             },
             {
               "active": true,
               "name": "vehicle",
               "req": true,
+              "short": "Vehicle identifier",
               "type": "`$STRING`"
             },
             {
@@ -770,6 +777,7 @@
               "active": true,
               "name": "version",
               "req": true,
+              "short": "API version",
               "type": "`$STRING`"
             }
           ],

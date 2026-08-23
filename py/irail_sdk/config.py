@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "Irail",
+            "slug": "irail",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -354,6 +357,7 @@ def make_config():
           {
             "name": "station",
             "req": True,
+            "short": "Station name",
             "type": "`$STRING`",
           },
           {
@@ -364,11 +368,13 @@ def make_config():
           {
             "name": "timestamp",
             "req": True,
+            "short": "Unix timestamp of the response",
             "type": "`$INTEGER`",
           },
           {
             "name": "version",
             "req": True,
+            "short": "API version",
             "type": "`$STRING`",
           },
         ],
@@ -570,11 +576,13 @@ def make_config():
           {
             "name": "timestamp",
             "req": True,
+            "short": "Unix timestamp of the response",
             "type": "`$INTEGER`",
           },
           {
             "name": "version",
             "req": True,
+            "short": "API version",
             "type": "`$STRING`",
           },
         ],
@@ -637,11 +645,13 @@ def make_config():
           {
             "name": "timestamp",
             "req": True,
+            "short": "Unix timestamp of the response",
             "type": "`$INTEGER`",
           },
           {
             "name": "vehicle",
             "req": True,
+            "short": "Vehicle identifier",
             "type": "`$STRING`",
           },
           {
@@ -651,6 +661,7 @@ def make_config():
           {
             "name": "version",
             "req": True,
+            "short": "API version",
             "type": "`$STRING`",
           },
         ],

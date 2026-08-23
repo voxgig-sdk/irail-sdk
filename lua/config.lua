@@ -7,6 +7,9 @@ local function make_config()
   return {
     main = {
       name = "Irail",
+      slug = "irail",
+      version = "0.0.1",
+      target = "lua",
     },
     feature = {
       ["test"] = {
@@ -333,6 +336,7 @@ local function make_config()
           {
             ["name"] = "station",
             ["req"] = true,
+            ["short"] = "Station name",
             ["type"] = "`$STRING`",
           },
           {
@@ -343,11 +347,13 @@ local function make_config()
           {
             ["name"] = "timestamp",
             ["req"] = true,
+            ["short"] = "Unix timestamp of the response",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "version",
             ["req"] = true,
+            ["short"] = "API version",
             ["type"] = "`$STRING`",
           },
         },
@@ -549,11 +555,13 @@ local function make_config()
           {
             ["name"] = "timestamp",
             ["req"] = true,
+            ["short"] = "Unix timestamp of the response",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "version",
             ["req"] = true,
+            ["short"] = "API version",
             ["type"] = "`$STRING`",
           },
         },
@@ -616,11 +624,13 @@ local function make_config()
           {
             ["name"] = "timestamp",
             ["req"] = true,
+            ["short"] = "Unix timestamp of the response",
             ["type"] = "`$INTEGER`",
           },
           {
             ["name"] = "vehicle",
             ["req"] = true,
+            ["short"] = "Vehicle identifier",
             ["type"] = "`$STRING`",
           },
           {
@@ -630,6 +640,7 @@ local function make_config()
           {
             ["name"] = "version",
             ["req"] = true,
+            ["short"] = "API version",
             ["type"] = "`$STRING`",
           },
         },

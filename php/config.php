@@ -33,6 +33,9 @@ class IrailConfig
         return [
             "main" => [
                 "name" => "Irail",
+                "slug" => "irail",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -359,6 +362,7 @@ class IrailConfig
             [
               'name' => 'station',
               'req' => true,
+              'short' => 'Station name',
               'type' => '`$STRING`',
             ],
             [
@@ -369,11 +373,13 @@ class IrailConfig
             [
               'name' => 'timestamp',
               'req' => true,
+              'short' => 'Unix timestamp of the response',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'version',
               'req' => true,
+              'short' => 'API version',
               'type' => '`$STRING`',
             ],
           ],
@@ -575,11 +581,13 @@ class IrailConfig
             [
               'name' => 'timestamp',
               'req' => true,
+              'short' => 'Unix timestamp of the response',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'version',
               'req' => true,
+              'short' => 'API version',
               'type' => '`$STRING`',
             ],
           ],
@@ -642,11 +650,13 @@ class IrailConfig
             [
               'name' => 'timestamp',
               'req' => true,
+              'short' => 'Unix timestamp of the response',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'vehicle',
               'req' => true,
+              'short' => 'Vehicle identifier',
               'type' => '`$STRING`',
             ],
             [
@@ -656,6 +666,7 @@ class IrailConfig
             [
               'name' => 'version',
               'req' => true,
+              'short' => 'API version',
               'type' => '`$STRING`',
             ],
           ],

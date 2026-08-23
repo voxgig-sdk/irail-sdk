@@ -285,10 +285,10 @@ local liveboard = client:Liveboard(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `departures` | `table` | Yes |  |
-| `station` | `string` | Yes |  |
+| `station` | `string` | Yes | Station name |
 | `stationinfo` | `table` | Yes |  |
-| `timestamp` | `number` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `number` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -442,8 +442,8 @@ local station = client:Station(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `station` | `any` | Yes |  |
-| `timestamp` | `number` | Yes |  |
-| `version` | `string` | Yes |  |
+| `timestamp` | `number` | Yes | Unix timestamp of the response |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
@@ -496,10 +496,10 @@ local vehicle = client:Vehicle(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `stops` | `table` | Yes |  |
-| `timestamp` | `number` | Yes |  |
-| `vehicle` | `string` | Yes |  |
+| `timestamp` | `number` | Yes | Unix timestamp of the response |
+| `vehicle` | `string` | Yes | Vehicle identifier |
 | `vehicleinfo` | `table` | No |  |
-| `version` | `string` | Yes |  |
+| `version` | `string` | Yes | API version |
 
 ### Operations
 
