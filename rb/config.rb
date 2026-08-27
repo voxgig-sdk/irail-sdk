@@ -28,6 +28,7 @@ module IrailConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
