@@ -42,7 +42,7 @@ client = IrailSDK()
 
 ```python
 try:
-    composition = client.Composition().load()
+    composition = client.Composition().load({"id": "example_id"})
     print(composition)
 except Exception as err:
     print(f"load failed: {err}")
@@ -124,7 +124,7 @@ client = IrailSDK.test()
 
 # Entity ops return the ENTITY and raises on error;
 # call data_get() for the record.
-liveboard = client.Liveboard().load()
+liveboard = client.Liveboard().load({"id": "test01"})
 # liveboard contains the mock response record
 ```
 
@@ -371,7 +371,7 @@ Create an instance: `composition = client.Composition()`
 #### Example: Load
 
 ```python
-composition = client.Composition().load()
+composition = client.Composition().load({"id": "composition_id"})
 ```
 
 
@@ -399,7 +399,7 @@ Create an instance: `connection = client.Connection()`
 #### Example: List
 
 ```python
-connections = client.Connection().list()
+connections = client.Connection().list({"from": "example", "to": "example"})
 ```
 
 
@@ -454,7 +454,7 @@ Create an instance: `liveboard = client.Liveboard()`
 #### Example: Load
 
 ```python
-liveboard = client.Liveboard().load()
+liveboard = client.Liveboard().load({"id": "liveboard_id"})
 ```
 
 
@@ -549,8 +549,31 @@ Create an instance: `vehicle = client.Vehicle()`
 #### Example: Load
 
 ```python
-vehicle = client.Vehicle().load()
+vehicle = client.Vehicle().load({"id": "vehicle_id"})
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

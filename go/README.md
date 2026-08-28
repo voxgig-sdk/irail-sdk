@@ -51,7 +51,7 @@ func main() {
     client := sdk.New()
 
     // Load a single composition — the value is the loaded record.
-    composition, err := client.Composition(nil).Load(nil, nil)
+    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil {
         panic(err)
     }
@@ -136,7 +136,7 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 liveboard, err := client.Liveboard(nil).Load(
-    nil, nil,
+    map[string]any{"id": "test01"}, nil,
 )
 if err != nil {
     panic(err)
@@ -255,7 +255,7 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    composition, err := client.Composition(nil).Load(nil, nil)
+    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id"}, nil)
     if err != nil { /* handle */ }
     // composition is the returned record
 
@@ -389,7 +389,7 @@ Create an instance: `composition := client.Composition(nil)`
 #### Example: Load
 
 ```go
-composition, err := client.Composition(nil).Load(nil, nil)
+composition, err := client.Composition(nil).Load(map[string]any{"id": "composition_id"}, nil)
 if err != nil {
     panic(err)
 }
@@ -484,7 +484,7 @@ Create an instance: `liveboard := client.Liveboard(nil)`
 #### Example: Load
 
 ```go
-liveboard, err := client.Liveboard(nil).Load(nil, nil)
+liveboard, err := client.Liveboard(nil).Load(map[string]any{"id": "liveboard_id"}, nil)
 if err != nil {
     panic(err)
 }
@@ -595,12 +595,35 @@ Create an instance: `vehicle := client.Vehicle(nil)`
 #### Example: Load
 
 ```go
-vehicle, err := client.Vehicle(nil).Load(nil, nil)
+vehicle, err := client.Vehicle(nil).Load(map[string]any{"id": "vehicle_id"}, nil)
 if err != nil {
     panic(err)
 }
 fmt.Println(vehicle) // the loaded record
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

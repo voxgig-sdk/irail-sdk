@@ -39,7 +39,7 @@ const client = new IrailSDK()
 
 ```ts
 try {
-  const composition = await client.Composition().load()
+  const composition = await client.Composition().load({ id: 'example_id' })
   console.log(composition)
 } catch (err) {
   console.error('load failed:', err)
@@ -120,7 +120,7 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = IrailSDK.test()
 
-const liveboard = await client.Liveboard().load()
+const liveboard = await client.Liveboard().load({ id: 'test01' })
 // liveboard is the entity, populated with mock response data
 // — call liveboard.data() for the record itself
 console.log(liveboard)
@@ -141,7 +141,7 @@ Entity instances remember their last match and data:
 const entity = client.Liveboard()
 
 // First call runs the operation and stores its result
-await entity.load()
+await entity.load({ id: 'example' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -417,7 +417,7 @@ Create an instance: `const composition = client.Composition()`
 #### Example: Load
 
 ```ts
-const composition = await client.Composition().load()
+const composition = await client.Composition().load({ id: 'composition_id' })
 ```
 
 
@@ -445,7 +445,7 @@ Create an instance: `const connection = client.Connection()`
 #### Example: List
 
 ```ts
-const connections = await client.Connection().list()
+const connections = await client.Connection().list({ from: "example", to: "example" })
 ```
 
 
@@ -500,7 +500,7 @@ Create an instance: `const liveboard = client.Liveboard()`
 #### Example: Load
 
 ```ts
-const liveboard = await client.Liveboard().load()
+const liveboard = await client.Liveboard().load({ id: 'liveboard_id' })
 ```
 
 
@@ -595,8 +595,31 @@ Create an instance: `const vehicle = client.Vehicle()`
 #### Example: Load
 
 ```ts
-const vehicle = await client.Vehicle().load()
+const vehicle = await client.Vehicle().load({ id: 'vehicle_id' })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced
@@ -672,7 +695,7 @@ const liveboard = client.Liveboard()
 await liveboard.load()
 
 // liveboard.data() now returns the liveboard data from the last `load`
-// liveboard.match() returns the last match criteria
+// liveboard.match() returns { id: "example_id" }
 ```
 
 Call `make()` to create a fresh instance with the same configuration

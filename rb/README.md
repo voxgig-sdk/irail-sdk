@@ -35,7 +35,7 @@ client = IrailSDK.new
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the Composition record (raises on error).
-  composition = client.Composition.load()
+  composition = client.Composition.load({ "id" => "example_id" })
   puts composition
 rescue => err
   warn "load failed: #{err}"
@@ -112,14 +112,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = IrailSDK.test
+client = IrailSDK.test({
+  "entity" => { "liveboard" => { "test01" => { "id" => "test01" } } },
+})
 
 # Entity ops return the ENTITY (raises on error);
 # call data_get for the mock record.
-liveboard = client.Liveboard.load()
+liveboard = client.Liveboard.load({ "id" => "test01" })
 puts liveboard
 ```
 
@@ -366,7 +369,7 @@ Create an instance: `composition = client.Composition`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Composition record (raises on error).
-composition = client.Composition.load()
+composition = client.Composition.load({ "id" => "composition_id" })
 ```
 
 
@@ -452,7 +455,7 @@ Create an instance: `liveboard = client.Liveboard`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Liveboard record (raises on error).
-liveboard = client.Liveboard.load()
+liveboard = client.Liveboard.load({ "id" => "liveboard_id" })
 ```
 
 
@@ -550,8 +553,31 @@ Create an instance: `vehicle = client.Vehicle`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Vehicle record (raises on error).
-vehicle = client.Vehicle.load()
+vehicle = client.Vehicle.load({ "id" => "vehicle_id" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

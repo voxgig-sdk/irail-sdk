@@ -36,7 +36,7 @@ local client = sdk.new()
 ### 3. Load a composition
 
 ```lua
-local composition, err = client:Composition():load()
+local composition, err = client:Composition():load({ id = "example_id" })
 if err then error(err) end
 print(composition)
 ```
@@ -106,7 +106,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:Liveboard():load()
+local result, err = client:Liveboard():load({ id = "test01" })
 -- result is the returned data; err is set on failure
 ```
 
@@ -222,7 +222,7 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local composition, err = client:Composition():load()
+    local composition, err = client:Composition():load({ id = "example_id" })
     if err then error(err) end
     -- composition is the loaded record
 
@@ -356,7 +356,7 @@ Create an instance: `local composition = client:Composition(nil)`
 #### Example: Load
 
 ```lua
-local composition, err = client:Composition():load()
+local composition, err = client:Composition():load({ id = "composition_id" })
 ```
 
 
@@ -439,7 +439,7 @@ Create an instance: `local liveboard = client:Liveboard(nil)`
 #### Example: Load
 
 ```lua
-local liveboard, err = client:Liveboard():load()
+local liveboard, err = client:Liveboard():load({ id = "liveboard_id" })
 ```
 
 
@@ -534,8 +534,31 @@ Create an instance: `local vehicle = client:Vehicle(nil)`
 #### Example: Load
 
 ```lua
-local vehicle, err = client:Vehicle():load()
+local vehicle, err = client:Vehicle():load({ id = "vehicle_id" })
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

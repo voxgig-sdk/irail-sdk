@@ -10,7 +10,10 @@ export interface Composition {
 }
 
 export interface CompositionLoadMatch {
-  segments?: Record<string, any>
+  date?: string
+  format?: string
+  id: string
+  lang?: string
 }
 
 export interface Connection {
@@ -23,12 +26,16 @@ export interface Connection {
 }
 
 export interface ConnectionListMatch {
-  arrival?: Record<string, any>
-  departure?: Record<string, any>
-  duration?: number
-  id?: number
-  occupancy?: Record<string, any>
-  vias?: Record<string, any>
+  alert?: boolean
+  date?: string
+  format?: string
+  from: string
+  lang?: string
+  result?: number
+  time?: string
+  timesel?: string
+  to: string
+  type_of_transport?: string
 }
 
 export interface Disturbance {
@@ -41,12 +48,9 @@ export interface Disturbance {
 }
 
 export interface DisturbanceListMatch {
-  description?: string
-  id?: number
-  link?: string
-  timestamp?: number
-  title?: string
-  type?: number
+  format?: string
+  lang?: string
+  line_break_character?: string
 }
 
 export interface Liveboard {
@@ -58,11 +62,14 @@ export interface Liveboard {
 }
 
 export interface LiveboardLoadMatch {
-  departures?: Record<string, any>
+  alert?: boolean
+  arrdep?: string
+  date?: string
+  format?: string
+  id?: string
+  lang?: string
   station?: string
-  stationinfo?: Record<string, any>
-  timestamp?: number
-  version?: string
+  time?: string
 }
 
 export interface Log {
@@ -72,9 +79,7 @@ export interface Log {
 }
 
 export interface LogListMatch {
-  querytime?: number
-  querytype?: string
-  user_agent?: string
+  format?: string
 }
 
 export interface Occupancy {
@@ -90,9 +95,8 @@ export interface Station {
 }
 
 export interface StationLoadMatch {
-  station?: any
-  timestamp?: number
-  version?: string
+  format?: string
+  lang?: string
 }
 
 export interface Vehicle {
@@ -104,10 +108,10 @@ export interface Vehicle {
 }
 
 export interface VehicleLoadMatch {
-  stops?: Record<string, any>
-  timestamp?: number
-  vehicle?: string
-  vehicleinfo?: Record<string, any>
-  version?: string
+  alert?: boolean
+  date?: string
+  format?: string
+  id: string
+  lang?: string
 }
 

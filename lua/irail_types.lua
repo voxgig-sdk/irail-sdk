@@ -10,7 +10,10 @@
 ---@field segments? table
 
 ---@class CompositionLoadMatch
----@field segments? table
+---@field date? string
+---@field format? string
+---@field id string
+---@field lang? string
 
 ---@class Connection
 ---@field arrival? table
@@ -21,12 +24,16 @@
 ---@field vias? table
 
 ---@class ConnectionListMatch
----@field arrival? table
----@field departure? table
----@field duration? number
----@field id? number
----@field occupancy? table
----@field vias? table
+---@field alert? boolean
+---@field date? string
+---@field format? string
+---@field from string
+---@field lang? string
+---@field result? number
+---@field time? string
+---@field timesel? string
+---@field to string
+---@field type_of_transport? string
 
 ---@class Disturbance
 ---@field description? string
@@ -37,12 +44,9 @@
 ---@field type? number
 
 ---@class DisturbanceListMatch
----@field description? string
----@field id? number
----@field link? string
----@field timestamp? number
----@field title? string
----@field type? number
+---@field format? string
+---@field lang? string
+---@field line_break_character? string
 
 ---@class Liveboard
 ---@field departures table
@@ -52,11 +56,14 @@
 ---@field version string
 
 ---@class LiveboardLoadMatch
----@field departures? table
+---@field alert? boolean
+---@field arrdep? string
+---@field date? string
+---@field format? string
+---@field id? string
+---@field lang? string
 ---@field station? string
----@field stationinfo? table
----@field timestamp? number
----@field version? string
+---@field time? string
 
 ---@class Log
 ---@field querytime? number
@@ -64,9 +71,7 @@
 ---@field user_agent? string
 
 ---@class LogListMatch
----@field querytime? number
----@field querytype? string
----@field user_agent? string
+---@field format? string
 
 ---@class Occupancy
 
@@ -78,9 +83,8 @@
 ---@field version string
 
 ---@class StationLoadMatch
----@field station? any
----@field timestamp? number
----@field version? string
+---@field format? string
+---@field lang? string
 
 ---@class Vehicle
 ---@field stops table
@@ -90,11 +94,11 @@
 ---@field version string
 
 ---@class VehicleLoadMatch
----@field stops? table
----@field timestamp? number
----@field vehicle? string
----@field vehicleinfo? table
----@field version? string
+---@field alert? boolean
+---@field date? string
+---@field format? string
+---@field id string
+---@field lang? string
 
 local M = {}
 

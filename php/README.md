@@ -36,7 +36,7 @@ $client = new IrailSDK();
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the Composition record (throws on error).
-    $composition = $client->Composition()->load();
+    $composition = $client->Composition()->load(["id" => "example_id"]);
     print_r($composition);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -118,14 +118,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = IrailSDK::test();
+$client = IrailSDK::test([
+    "entity" => ["liveboard" => ["test01" => ["id" => "test01"]]],
+]);
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$liveboard = $client->Liveboard()->load();
+$liveboard = $client->Liveboard()->load(["id" => "test01"]);
 print_r($liveboard);
 ```
 
@@ -376,7 +379,7 @@ Create an instance: `$composition = $client->Composition();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Composition record (throws on error).
-$composition = $client->Composition()->load();
+$composition = $client->Composition()->load(["id" => "composition_id"]);
 ```
 
 
@@ -462,7 +465,7 @@ Create an instance: `$liveboard = $client->Liveboard();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Liveboard record (throws on error).
-$liveboard = $client->Liveboard()->load();
+$liveboard = $client->Liveboard()->load(["id" => "liveboard_id"]);
 ```
 
 
@@ -560,8 +563,31 @@ Create an instance: `$vehicle = $client->Vehicle();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Vehicle record (throws on error).
-$vehicle = $client->Vehicle()->load();
+$vehicle = $client->Vehicle()->load(["id" => "vehicle_id"]);
 ```
+
+## Features
+
+This SDK ships 1 optional features. Each is **inactive until you
+switch it on**, so an SDK you have not configured behaves exactly as if none of
+them existed — no retries, no cache, no logging, no measurable overhead.
+
+Activate a feature by name in the client options, alongside the options shown
+above:
+
+| Feature | What it does |
+|---|---|
+| [`test`](#test) | In-memory mock transport for testing without a live server |
+
+### test
+
+In-memory mock transport for testing without a live server.
+
+| Option | Default |
+|---|---|
+| `active` | `false` |
+
+Set `feature.test.active` to enable it, then override any of the options above.
 
 
 ## Advanced

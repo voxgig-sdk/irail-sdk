@@ -19,10 +19,22 @@ Composition = Struct.new(
 
 # Request payload for Composition#load.
 #
-# @!attribute [rw] segments
-#   @return [Hash, nil]
+# @!attribute [rw] date
+#   @return [String, nil]
+#
+# @!attribute [rw] format
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [String]
+#
+# @!attribute [rw] lang
+#   @return [String, nil]
 CompositionLoadMatch = Struct.new(
-  :segments,
+  :date,
+  :format,
+  :id,
+  :lang,
   keyword_init: true
 )
 
@@ -57,30 +69,46 @@ Connection = Struct.new(
 
 # Request payload for Connection#list.
 #
-# @!attribute [rw] arrival
-#   @return [Hash, nil]
+# @!attribute [rw] alert
+#   @return [Boolean, nil]
 #
-# @!attribute [rw] departure
-#   @return [Hash, nil]
+# @!attribute [rw] date
+#   @return [String, nil]
 #
-# @!attribute [rw] duration
+# @!attribute [rw] format
+#   @return [String, nil]
+#
+# @!attribute [rw] from
+#   @return [String]
+#
+# @!attribute [rw] lang
+#   @return [String, nil]
+#
+# @!attribute [rw] result
 #   @return [Integer, nil]
 #
-# @!attribute [rw] id
-#   @return [Integer, nil]
+# @!attribute [rw] time
+#   @return [String, nil]
 #
-# @!attribute [rw] occupancy
-#   @return [Hash, nil]
+# @!attribute [rw] timesel
+#   @return [String, nil]
 #
-# @!attribute [rw] vias
-#   @return [Hash, nil]
+# @!attribute [rw] to
+#   @return [String]
+#
+# @!attribute [rw] type_of_transport
+#   @return [String, nil]
 ConnectionListMatch = Struct.new(
-  :arrival,
-  :departure,
-  :duration,
-  :id,
-  :occupancy,
-  :vias,
+  :alert,
+  :date,
+  :format,
+  :from,
+  :lang,
+  :result,
+  :time,
+  :timesel,
+  :to,
+  :type_of_transport,
   keyword_init: true
 )
 
@@ -115,30 +143,18 @@ Disturbance = Struct.new(
 
 # Request payload for Disturbance#list.
 #
-# @!attribute [rw] description
+# @!attribute [rw] format
 #   @return [String, nil]
 #
-# @!attribute [rw] id
-#   @return [Integer, nil]
-#
-# @!attribute [rw] link
+# @!attribute [rw] lang
 #   @return [String, nil]
 #
-# @!attribute [rw] timestamp
-#   @return [Integer, nil]
-#
-# @!attribute [rw] title
+# @!attribute [rw] line_break_character
 #   @return [String, nil]
-#
-# @!attribute [rw] type
-#   @return [Integer, nil]
 DisturbanceListMatch = Struct.new(
-  :description,
-  :id,
-  :link,
-  :timestamp,
-  :title,
-  :type,
+  :format,
+  :lang,
+  :line_break_character,
   keyword_init: true
 )
 
@@ -169,26 +185,38 @@ Liveboard = Struct.new(
 
 # Request payload for Liveboard#load.
 #
-# @!attribute [rw] departures
-#   @return [Hash, nil]
+# @!attribute [rw] alert
+#   @return [Boolean, nil]
+#
+# @!attribute [rw] arrdep
+#   @return [String, nil]
+#
+# @!attribute [rw] date
+#   @return [String, nil]
+#
+# @!attribute [rw] format
+#   @return [String, nil]
+#
+# @!attribute [rw] id
+#   @return [String, nil]
+#
+# @!attribute [rw] lang
+#   @return [String, nil]
 #
 # @!attribute [rw] station
 #   @return [String, nil]
 #
-# @!attribute [rw] stationinfo
-#   @return [Hash, nil]
-#
-# @!attribute [rw] timestamp
-#   @return [Integer, nil]
-#
-# @!attribute [rw] version
+# @!attribute [rw] time
 #   @return [String, nil]
 LiveboardLoadMatch = Struct.new(
-  :departures,
+  :alert,
+  :arrdep,
+  :date,
+  :format,
+  :id,
+  :lang,
   :station,
-  :stationinfo,
-  :timestamp,
-  :version,
+  :time,
   keyword_init: true
 )
 
@@ -211,18 +239,10 @@ Log = Struct.new(
 
 # Request payload for Log#list.
 #
-# @!attribute [rw] querytime
-#   @return [Integer, nil]
-#
-# @!attribute [rw] querytype
-#   @return [String, nil]
-#
-# @!attribute [rw] user_agent
+# @!attribute [rw] format
 #   @return [String, nil]
 LogListMatch = Struct.new(
-  :querytime,
-  :querytype,
-  :user_agent,
+  :format,
   keyword_init: true
 )
 
@@ -253,18 +273,14 @@ Station = Struct.new(
 
 # Request payload for Station#load.
 #
-# @!attribute [rw] station
-#   @return [Object, nil]
+# @!attribute [rw] format
+#   @return [String, nil]
 #
-# @!attribute [rw] timestamp
-#   @return [Integer, nil]
-#
-# @!attribute [rw] version
+# @!attribute [rw] lang
 #   @return [String, nil]
 StationLoadMatch = Struct.new(
-  :station,
-  :timestamp,
-  :version,
+  :format,
+  :lang,
   keyword_init: true
 )
 
@@ -295,26 +311,26 @@ Vehicle = Struct.new(
 
 # Request payload for Vehicle#load.
 #
-# @!attribute [rw] stops
-#   @return [Hash, nil]
+# @!attribute [rw] alert
+#   @return [Boolean, nil]
 #
-# @!attribute [rw] timestamp
-#   @return [Integer, nil]
-#
-# @!attribute [rw] vehicle
+# @!attribute [rw] date
 #   @return [String, nil]
 #
-# @!attribute [rw] vehicleinfo
-#   @return [Hash, nil]
+# @!attribute [rw] format
+#   @return [String, nil]
 #
-# @!attribute [rw] version
+# @!attribute [rw] id
+#   @return [String]
+#
+# @!attribute [rw] lang
 #   @return [String, nil]
 VehicleLoadMatch = Struct.new(
-  :stops,
-  :timestamp,
-  :vehicle,
-  :vehicleinfo,
-  :version,
+  :alert,
+  :date,
+  :format,
+  :id,
+  :lang,
   keyword_init: true
 )
 

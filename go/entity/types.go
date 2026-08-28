@@ -19,7 +19,10 @@ type Composition struct {
 
 // CompositionLoadMatch is the typed request payload for Composition.LoadTyped.
 type CompositionLoadMatch struct {
-	Segments *map[string]any `json:"segments,omitempty"`
+	Date *string `json:"date,omitempty"`
+	Format *string `json:"format,omitempty"`
+	Id string `json:"id"`
+	Lang *string `json:"lang,omitempty"`
 }
 
 // Connection is the typed data model for the connection entity.
@@ -34,12 +37,16 @@ type Connection struct {
 
 // ConnectionListMatch is the typed request payload for Connection.ListTyped.
 type ConnectionListMatch struct {
-	Arrival *map[string]any `json:"arrival,omitempty"`
-	Departure *map[string]any `json:"departure,omitempty"`
-	Duration *int `json:"duration,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Occupancy *map[string]any `json:"occupancy,omitempty"`
-	Vias *map[string]any `json:"vias,omitempty"`
+	Alert *bool `json:"alert,omitempty"`
+	Date *string `json:"date,omitempty"`
+	Format *string `json:"format,omitempty"`
+	From string `json:"from"`
+	Lang *string `json:"lang,omitempty"`
+	Result *int `json:"result,omitempty"`
+	Time *string `json:"time,omitempty"`
+	Timesel *string `json:"timesel,omitempty"`
+	To string `json:"to"`
+	TypeOfTransport *string `json:"type_of_transport,omitempty"`
 }
 
 // Disturbance is the typed data model for the disturbance entity.
@@ -54,12 +61,9 @@ type Disturbance struct {
 
 // DisturbanceListMatch is the typed request payload for Disturbance.ListTyped.
 type DisturbanceListMatch struct {
-	Description *string `json:"description,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Link *string `json:"link,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
-	Title *string `json:"title,omitempty"`
-	Type *int `json:"type,omitempty"`
+	Format *string `json:"format,omitempty"`
+	Lang *string `json:"lang,omitempty"`
+	LineBreakCharacter *string `json:"line_break_character,omitempty"`
 }
 
 // Liveboard is the typed data model for the liveboard entity.
@@ -73,11 +77,14 @@ type Liveboard struct {
 
 // LiveboardLoadMatch is the typed request payload for Liveboard.LoadTyped.
 type LiveboardLoadMatch struct {
-	Departures *map[string]any `json:"departures,omitempty"`
+	Alert *bool `json:"alert,omitempty"`
+	Arrdep *string `json:"arrdep,omitempty"`
+	Date *string `json:"date,omitempty"`
+	Format *string `json:"format,omitempty"`
+	Id *string `json:"id,omitempty"`
+	Lang *string `json:"lang,omitempty"`
 	Station *string `json:"station,omitempty"`
-	Stationinfo *map[string]any `json:"stationinfo,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
-	Version *string `json:"version,omitempty"`
+	Time *string `json:"time,omitempty"`
 }
 
 // Log is the typed data model for the log entity.
@@ -89,9 +96,7 @@ type Log struct {
 
 // LogListMatch is the typed request payload for Log.ListTyped.
 type LogListMatch struct {
-	Querytime *int `json:"querytime,omitempty"`
-	Querytype *string `json:"querytype,omitempty"`
-	UserAgent *string `json:"user_agent,omitempty"`
+	Format *string `json:"format,omitempty"`
 }
 
 // Occupancy is the typed data model for the occupancy entity.
@@ -111,9 +116,8 @@ type Station struct {
 
 // StationLoadMatch is the typed request payload for Station.LoadTyped.
 type StationLoadMatch struct {
-	Station *any `json:"station,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
-	Version *string `json:"version,omitempty"`
+	Format *string `json:"format,omitempty"`
+	Lang *string `json:"lang,omitempty"`
 }
 
 // Vehicle is the typed data model for the vehicle entity.
@@ -127,11 +131,11 @@ type Vehicle struct {
 
 // VehicleLoadMatch is the typed request payload for Vehicle.LoadTyped.
 type VehicleLoadMatch struct {
-	Stops *map[string]any `json:"stops,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
-	Vehicle *string `json:"vehicle,omitempty"`
-	Vehicleinfo *map[string]any `json:"vehicleinfo,omitempty"`
-	Version *string `json:"version,omitempty"`
+	Alert *bool `json:"alert,omitempty"`
+	Date *string `json:"date,omitempty"`
+	Format *string `json:"format,omitempty"`
+	Id string `json:"id"`
+	Lang *string `json:"lang,omitempty"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

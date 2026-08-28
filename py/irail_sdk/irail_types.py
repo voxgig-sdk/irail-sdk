@@ -20,8 +20,14 @@ class Composition(TypedDict, total=False):
     segments: dict
 
 
-class CompositionLoadMatch(TypedDict, total=False):
-    segments: dict
+class CompositionLoadMatchRequired(TypedDict):
+    id: str
+
+
+class CompositionLoadMatch(CompositionLoadMatchRequired, total=False):
+    date: str
+    format: str
+    lang: str
 
 
 class Connection(TypedDict, total=False):
@@ -33,13 +39,19 @@ class Connection(TypedDict, total=False):
     vias: dict
 
 
-class ConnectionListMatch(TypedDict, total=False):
-    arrival: dict
-    departure: dict
-    duration: int
-    id: int
-    occupancy: dict
-    vias: dict
+class ConnectionListMatchRequired(TypedDict):
+    to: str
+
+
+class ConnectionListMatch(ConnectionListMatchRequired, total=False):
+    alert: bool
+    date: str
+    format: str
+    lang: str
+    result: int
+    time: str
+    timesel: str
+    type_of_transport: str
 
 
 class Disturbance(TypedDict, total=False):
@@ -52,12 +64,9 @@ class Disturbance(TypedDict, total=False):
 
 
 class DisturbanceListMatch(TypedDict, total=False):
-    description: str
-    id: int
-    link: str
-    timestamp: int
-    title: str
-    type: int
+    format: str
+    lang: str
+    line_break_character: str
 
 
 class Liveboard(TypedDict):
@@ -69,11 +78,14 @@ class Liveboard(TypedDict):
 
 
 class LiveboardLoadMatch(TypedDict, total=False):
-    departures: dict
+    alert: bool
+    arrdep: str
+    date: str
+    format: str
+    id: str
+    lang: str
     station: str
-    stationinfo: dict
-    timestamp: int
-    version: str
+    time: str
 
 
 class Log(TypedDict, total=False):
@@ -83,9 +95,7 @@ class Log(TypedDict, total=False):
 
 
 class LogListMatch(TypedDict, total=False):
-    querytime: int
-    querytype: str
-    user_agent: str
+    format: str
 
 
 class Occupancy(TypedDict):
@@ -103,9 +113,8 @@ class Station(TypedDict):
 
 
 class StationLoadMatch(TypedDict, total=False):
-    station: Any
-    timestamp: int
-    version: str
+    format: str
+    lang: str
 
 
 class VehicleRequired(TypedDict):
@@ -119,9 +128,12 @@ class Vehicle(VehicleRequired, total=False):
     vehicleinfo: dict
 
 
-class VehicleLoadMatch(TypedDict, total=False):
-    stops: dict
-    timestamp: int
-    vehicle: str
-    vehicleinfo: dict
-    version: str
+class VehicleLoadMatchRequired(TypedDict):
+    id: str
+
+
+class VehicleLoadMatch(VehicleLoadMatchRequired, total=False):
+    alert: bool
+    date: str
+    format: str
+    lang: str

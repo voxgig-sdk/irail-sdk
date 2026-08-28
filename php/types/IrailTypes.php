@@ -21,7 +21,10 @@ class Composition
 /** Request payload for Composition#load. */
 class CompositionLoadMatch
 {
-    public ?array $segments = null;
+    public ?string $date = null;
+    public ?string $format = null;
+    public string $id;
+    public ?string $lang = null;
 }
 
 /** Connection entity data model. */
@@ -38,12 +41,16 @@ class Connection
 /** Request payload for Connection#list. */
 class ConnectionListMatch
 {
-    public ?array $arrival = null;
-    public ?array $departure = null;
-    public ?int $duration = null;
-    public ?int $id = null;
-    public ?array $occupancy = null;
-    public ?array $vias = null;
+    public ?bool $alert = null;
+    public ?string $date = null;
+    public ?string $format = null;
+    public string $from;
+    public ?string $lang = null;
+    public ?int $result = null;
+    public ?string $time = null;
+    public ?string $timesel = null;
+    public string $to;
+    public ?string $type_of_transport = null;
 }
 
 /** Disturbance entity data model. */
@@ -60,12 +67,9 @@ class Disturbance
 /** Request payload for Disturbance#list. */
 class DisturbanceListMatch
 {
-    public ?string $description = null;
-    public ?int $id = null;
-    public ?string $link = null;
-    public ?int $timestamp = null;
-    public ?string $title = null;
-    public ?int $type = null;
+    public ?string $format = null;
+    public ?string $lang = null;
+    public ?string $line_break_character = null;
 }
 
 /** Liveboard entity data model. */
@@ -81,11 +85,14 @@ class Liveboard
 /** Request payload for Liveboard#load. */
 class LiveboardLoadMatch
 {
-    public ?array $departures = null;
+    public ?bool $alert = null;
+    public ?string $arrdep = null;
+    public ?string $date = null;
+    public ?string $format = null;
+    public ?string $id = null;
+    public ?string $lang = null;
     public ?string $station = null;
-    public ?array $stationinfo = null;
-    public ?int $timestamp = null;
-    public ?string $version = null;
+    public ?string $time = null;
 }
 
 /** Log entity data model. */
@@ -99,9 +106,7 @@ class Log
 /** Request payload for Log#list. */
 class LogListMatch
 {
-    public ?int $querytime = null;
-    public ?string $querytype = null;
-    public ?string $user_agent = null;
+    public ?string $format = null;
 }
 
 /** Occupancy entity data model. */
@@ -125,9 +130,8 @@ class Station
 /** Request payload for Station#load. */
 class StationLoadMatch
 {
-    public mixed $station = null;
-    public ?int $timestamp = null;
-    public ?string $version = null;
+    public ?string $format = null;
+    public ?string $lang = null;
 }
 
 /** Vehicle entity data model. */
@@ -143,10 +147,10 @@ class Vehicle
 /** Request payload for Vehicle#load. */
 class VehicleLoadMatch
 {
-    public ?array $stops = null;
-    public ?int $timestamp = null;
-    public ?string $vehicle = null;
-    public ?array $vehicleinfo = null;
-    public ?string $version = null;
+    public ?bool $alert = null;
+    public ?string $date = null;
+    public ?string $format = null;
+    public string $id;
+    public ?string $lang = null;
 }
 
