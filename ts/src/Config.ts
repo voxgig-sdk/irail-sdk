@@ -10,6 +10,17 @@ const FEATURE_CLASS: Record<string, typeof BaseFeature> = {
 }
 
 
+// Per-feature plugin DEFINITIONS (voxgig/plugin `Definition` values), from
+// the model's active plugin groups. A feature that takes a `plugins` option
+// (secrets over sekreto) reads its own entry; a feature with no plugins has
+// none. Named imports above make each definition statically reachable, so
+// an SDK carries exactly the plugin modules its model selects — the same
+// leanness the old side-effect registry imports bought, without a registry.
+const FEATURE_PLUGINS: Record<string, any[]> = {
+  
+}
+
+
 class Config {
 
   makeFeature(this: any, fn: string) {
@@ -133,8 +144,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/composition/",
-              "parts": [
-                "composition"
+              "segments": [
+                {
+                  "lit": "composition"
+                }
               ],
               "select": {
                 "exist": [
@@ -147,7 +160,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.composition`"
-              }
+              },
+              "parts": [
+                "composition"
+              ]
             }
           ]
         }
@@ -183,6 +199,10 @@ class Config {
           "type": "`$OBJECT`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "connection",
       "op": {
         "list": {
@@ -264,8 +284,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/connections/",
-              "parts": [
-                "connections"
+              "segments": [
+                {
+                  "lit": "connections"
+                }
               ],
               "select": {
                 "exist": [
@@ -284,7 +306,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.connection`"
-              }
+              },
+              "parts": [
+                "connections"
+              ]
             }
           ]
         }
@@ -320,6 +345,10 @@ class Config {
           "type": "`$INTEGER`"
         }
       ],
+      "id": {
+        "field": "id",
+        "name": "id"
+      },
       "name": "disturbance",
       "op": {
         "list": {
@@ -354,8 +383,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/disturbances/",
-              "parts": [
-                "disturbances"
+              "segments": [
+                {
+                  "lit": "disturbances"
+                }
               ],
               "select": {
                 "exist": [
@@ -367,7 +398,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.disturbance`"
-              }
+              },
+              "parts": [
+                "disturbances"
+              ]
             }
           ]
         }
@@ -477,8 +511,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/liveboard/",
-              "parts": [
-                "liveboard"
+              "segments": [
+                {
+                  "lit": "liveboard"
+                }
               ],
               "select": {
                 "exist": [
@@ -495,7 +531,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "liveboard"
+              ]
             }
           ]
         }
@@ -540,8 +579,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/logs/",
-              "parts": [
-                "logs"
+              "segments": [
+                {
+                  "lit": "logs"
+                }
               ],
               "select": {
                 "exist": [
@@ -551,7 +592,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.logs`"
-              }
+              },
+              "parts": [
+                "logs"
+              ]
             }
           ]
         }
@@ -573,15 +617,23 @@ class Config {
               "kind": "http",
               "method": "POST",
               "orig": "/feedback/occupancy.php",
-              "parts": [
-                "feedback",
-                "occupancy.php"
+              "segments": [
+                {
+                  "lit": "feedback"
+                },
+                {
+                  "lit": "occupancy.php"
+                }
               ],
               "select": {},
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "feedback",
+                "occupancy.php"
+              ]
             }
           ]
         }
@@ -643,8 +695,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/stations/",
-              "parts": [
-                "stations"
+              "segments": [
+                {
+                  "lit": "stations"
+                }
               ],
               "select": {
                 "exist": [
@@ -655,7 +709,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.station`"
-              }
+              },
+              "parts": [
+                "stations"
+              ]
             }
           ]
         }
@@ -743,8 +800,10 @@ class Config {
               "kind": "http",
               "method": "GET",
               "orig": "/vehicle/",
-              "parts": [
-                "vehicle"
+              "segments": [
+                {
+                  "lit": "vehicle"
+                }
               ],
               "select": {
                 "exist": [
@@ -758,7 +817,10 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              }
+              },
+              "parts": [
+                "vehicle"
+              ]
             }
           ]
         }
@@ -774,6 +836,7 @@ class Config {
 const config = new Config()
 
 export {
-  config
+  config,
+  FEATURE_PLUGINS,
 }
 

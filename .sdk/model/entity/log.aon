@@ -42,8 +42,10 @@ main: kit: entity: log: {
           }
           method: "GET"
           orig: "/logs/"
-          parts: [
-            "logs"
+          segments: [
+            {
+              lit: "logs"
+            }
           ]
           select: {
             exist: [

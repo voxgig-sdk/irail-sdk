@@ -111,8 +111,10 @@ main: kit: entity: liveboard: {
           }
           method: "GET"
           orig: "/liveboard/"
-          parts: [
-            "liveboard"
+          segments: [
+            {
+              lit: "liveboard"
+            }
           ]
           select: {
             exist: [

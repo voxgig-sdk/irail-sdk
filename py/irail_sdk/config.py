@@ -1,6 +1,14 @@
 # Irail SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -105,8 +113,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/composition/",
-                "parts": [
-                  "composition",
+                "segments": [
+                  {
+                    "lit": "composition",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -120,6 +130,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.composition`",
                 },
+                "parts": [
+                  "composition",
+                ],
               },
             ],
           },
@@ -155,6 +168,10 @@ def make_config():
             "type": "`$OBJECT`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "connection",
         "op": {
           "list": {
@@ -236,8 +253,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/connections/",
-                "parts": [
-                  "connections",
+                "segments": [
+                  {
+                    "lit": "connections",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -257,6 +276,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.connection`",
                 },
+                "parts": [
+                  "connections",
+                ],
               },
             ],
           },
@@ -292,6 +314,10 @@ def make_config():
             "type": "`$INTEGER`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "disturbance",
         "op": {
           "list": {
@@ -326,8 +352,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/disturbances/",
-                "parts": [
-                  "disturbances",
+                "segments": [
+                  {
+                    "lit": "disturbances",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -340,6 +368,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.disturbance`",
                 },
+                "parts": [
+                  "disturbances",
+                ],
               },
             ],
           },
@@ -449,8 +480,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/liveboard/",
-                "parts": [
-                  "liveboard",
+                "segments": [
+                  {
+                    "lit": "liveboard",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -468,6 +501,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "liveboard",
+                ],
               },
             ],
           },
@@ -512,8 +548,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/logs/",
-                "parts": [
-                  "logs",
+                "segments": [
+                  {
+                    "lit": "logs",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -524,6 +562,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.logs`",
                 },
+                "parts": [
+                  "logs",
+                ],
               },
             ],
           },
@@ -545,15 +586,23 @@ def make_config():
                 "kind": "http",
                 "method": "POST",
                 "orig": "/feedback/occupancy.php",
-                "parts": [
-                  "feedback",
-                  "occupancy.php",
+                "segments": [
+                  {
+                    "lit": "feedback",
+                  },
+                  {
+                    "lit": "occupancy.php",
+                  },
                 ],
                 "select": {},
                 "transform": {
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "feedback",
+                  "occupancy.php",
+                ],
               },
             ],
           },
@@ -615,8 +664,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/stations/",
-                "parts": [
-                  "stations",
+                "segments": [
+                  {
+                    "lit": "stations",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -628,6 +679,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.station`",
                 },
+                "parts": [
+                  "stations",
+                ],
               },
             ],
           },
@@ -715,8 +769,10 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/vehicle/",
-                "parts": [
-                  "vehicle",
+                "segments": [
+                  {
+                    "lit": "vehicle",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -731,6 +787,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "vehicle",
+                ],
               },
             ],
           },

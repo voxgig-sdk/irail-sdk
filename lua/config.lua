@@ -84,8 +84,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/composition/",
-                ["parts"] = {
-                  "composition",
+                ["segments"] = {
+                  {
+                    ["lit"] = "composition",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -98,6 +100,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.composition`",
+                },
+                ["parts"] = {
+                  "composition",
                 },
               },
             },
@@ -133,6 +138,10 @@ local function make_config()
             ["name"] = "vias",
             ["type"] = "`$OBJECT`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "connection",
         ["op"] = {
@@ -215,8 +224,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/connections/",
-                ["parts"] = {
-                  "connections",
+                ["segments"] = {
+                  {
+                    ["lit"] = "connections",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -235,6 +246,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.connection`",
+                },
+                ["parts"] = {
+                  "connections",
                 },
               },
             },
@@ -271,6 +285,10 @@ local function make_config()
             ["type"] = "`$INTEGER`",
           },
         },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
+        },
         ["name"] = "disturbance",
         ["op"] = {
           ["list"] = {
@@ -305,8 +323,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/disturbances/",
-                ["parts"] = {
-                  "disturbances",
+                ["segments"] = {
+                  {
+                    ["lit"] = "disturbances",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -318,6 +338,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.disturbance`",
+                },
+                ["parts"] = {
+                  "disturbances",
                 },
               },
             },
@@ -428,8 +451,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/liveboard/",
-                ["parts"] = {
-                  "liveboard",
+                ["segments"] = {
+                  {
+                    ["lit"] = "liveboard",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -446,6 +471,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "liveboard",
                 },
               },
             },
@@ -491,8 +519,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/logs/",
-                ["parts"] = {
-                  "logs",
+                ["segments"] = {
+                  {
+                    ["lit"] = "logs",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -502,6 +532,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.logs`",
+                },
+                ["parts"] = {
+                  "logs",
                 },
               },
             },
@@ -524,14 +557,22 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "POST",
                 ["orig"] = "/feedback/occupancy.php",
-                ["parts"] = {
-                  "feedback",
-                  "occupancy.php",
+                ["segments"] = {
+                  {
+                    ["lit"] = "feedback",
+                  },
+                  {
+                    ["lit"] = "occupancy.php",
+                  },
                 },
                 ["select"] = {},
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "feedback",
+                  "occupancy.php",
                 },
               },
             },
@@ -594,8 +635,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/stations/",
-                ["parts"] = {
-                  "stations",
+                ["segments"] = {
+                  {
+                    ["lit"] = "stations",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -606,6 +649,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.station`",
+                },
+                ["parts"] = {
+                  "stations",
                 },
               },
             },
@@ -694,8 +740,10 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/vehicle/",
-                ["parts"] = {
-                  "vehicle",
+                ["segments"] = {
+                  {
+                    ["lit"] = "vehicle",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -709,6 +757,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "vehicle",
                 },
               },
             },

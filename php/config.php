@@ -110,8 +110,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/composition/',
-                  'parts' => [
-                    'composition',
+                  'segments' => [
+                    [
+                      'lit' => 'composition',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -124,6 +126,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.composition`',
+                  ],
+                  'parts' => [
+                    'composition',
                   ],
                 ],
               ],
@@ -159,6 +164,10 @@ class IrailConfig
               'name' => 'vias',
               'type' => '`$OBJECT`',
             ],
+          ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
           ],
           'name' => 'connection',
           'op' => [
@@ -241,8 +250,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/connections/',
-                  'parts' => [
-                    'connections',
+                  'segments' => [
+                    [
+                      'lit' => 'connections',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -261,6 +272,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.connection`',
+                  ],
+                  'parts' => [
+                    'connections',
                   ],
                 ],
               ],
@@ -297,6 +311,10 @@ class IrailConfig
               'type' => '`$INTEGER`',
             ],
           ],
+          'id' => [
+            'field' => 'id',
+            'name' => 'id',
+          ],
           'name' => 'disturbance',
           'op' => [
             'list' => [
@@ -331,8 +349,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/disturbances/',
-                  'parts' => [
-                    'disturbances',
+                  'segments' => [
+                    [
+                      'lit' => 'disturbances',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -344,6 +364,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.disturbance`',
+                  ],
+                  'parts' => [
+                    'disturbances',
                   ],
                 ],
               ],
@@ -454,8 +477,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/liveboard/',
-                  'parts' => [
-                    'liveboard',
+                  'segments' => [
+                    [
+                      'lit' => 'liveboard',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -472,6 +497,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'liveboard',
                   ],
                 ],
               ],
@@ -517,8 +545,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/logs/',
-                  'parts' => [
-                    'logs',
+                  'segments' => [
+                    [
+                      'lit' => 'logs',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -528,6 +558,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.logs`',
+                  ],
+                  'parts' => [
+                    'logs',
                   ],
                 ],
               ],
@@ -550,14 +583,22 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/feedback/occupancy.php',
-                  'parts' => [
-                    'feedback',
-                    'occupancy.php',
+                  'segments' => [
+                    [
+                      'lit' => 'feedback',
+                    ],
+                    [
+                      'lit' => 'occupancy.php',
+                    ],
                   ],
                   'select' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'feedback',
+                    'occupancy.php',
                   ],
                 ],
               ],
@@ -620,8 +661,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stations/',
-                  'parts' => [
-                    'stations',
+                  'segments' => [
+                    [
+                      'lit' => 'stations',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -632,6 +675,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.station`',
+                  ],
+                  'parts' => [
+                    'stations',
                   ],
                 ],
               ],
@@ -720,8 +766,10 @@ class IrailConfig
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/vehicle/',
-                  'parts' => [
-                    'vehicle',
+                  'segments' => [
+                    [
+                      'lit' => 'vehicle',
+                    ],
                   ],
                   'select' => [
                     'exist' => [
@@ -735,6 +783,9 @@ class IrailConfig
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body`',
+                  ],
+                  'parts' => [
+                    'vehicle',
                   ],
                 ],
               ],

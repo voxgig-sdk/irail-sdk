@@ -57,8 +57,10 @@ main: kit: entity: station: {
           }
           method: "GET"
           orig: "/stations/"
-          parts: [
-            "stations"
+          segments: [
+            {
+              lit: "stations"
+            }
           ]
           select: {
             exist: [

@@ -12,9 +12,13 @@ main: kit: entity: occupancy: {
         {
           method: "POST"
           orig: "/feedback/occupancy.php"
-          parts: [
-            "feedback"
-            "occupancy.php"
+          segments: [
+            {
+              lit: "feedback"
+            }
+            {
+              lit: "occupancy.php"
+            }
           ]
           transform: {
             req: "`reqdata`"

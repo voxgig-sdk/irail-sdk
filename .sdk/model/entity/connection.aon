@@ -129,8 +129,10 @@ main: kit: entity: connection: {
           }
           method: "GET"
           orig: "/connections/"
-          parts: [
-            "connections"
+          segments: [
+            {
+              lit: "connections"
+            }
           ]
           select: {
             exist: [

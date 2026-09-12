@@ -54,8 +54,10 @@ main: kit: entity: composition: {
           }
           method: "GET"
           orig: "/composition/"
-          parts: [
-            "composition"
+          segments: [
+            {
+              lit: "composition"
+            }
           ]
           select: {
             exist: [

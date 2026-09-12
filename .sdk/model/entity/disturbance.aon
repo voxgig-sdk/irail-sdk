@@ -77,8 +77,10 @@ main: kit: entity: disturbance: {
           }
           method: "GET"
           orig: "/disturbances/"
-          parts: [
-            "disturbances"
+          segments: [
+            {
+              lit: "disturbances"
+            }
           ]
           select: {
             exist: [

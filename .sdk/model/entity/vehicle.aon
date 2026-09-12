@@ -86,8 +86,10 @@ main: kit: entity: vehicle: {
           }
           method: "GET"
           orig: "/vehicle/"
-          parts: [
-            "vehicle"
+          segments: [
+            {
+              lit: "vehicle"
+            }
           ]
           select: {
             exist: [
