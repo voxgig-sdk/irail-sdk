@@ -105,7 +105,7 @@ local result, err = client:Liveboard():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
+| TypeScript | `@voxgig-sdk/irail-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
 | Python | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
 | PHP | `voxgig-sdk/irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/irail-sdk/go` | `go get github.com/voxgig-sdk/irail-sdk/go@latest` |
@@ -119,7 +119,7 @@ local result, err = client:Liveboard():load({ id = "test01" })
 ### TypeScript
 
 ```ts
-import { IrailSDK } from '@voxgig-sdk/irail'
+import { IrailSDK } from '@voxgig-sdk/irail-sdk'
 
 const client = new IrailSDK()
 

@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { IrailSDK } from '@voxgig-sdk/irail'
+import { IrailSDK } from '@voxgig-sdk/irail-sdk'
 
 const client = new IrailSDK()
 ```
@@ -681,7 +681,7 @@ irail/
 Import the SDK from the package root:
 
 ```ts
-import { IrailSDK } from '@voxgig-sdk/irail'
+import { IrailSDK } from '@voxgig-sdk/irail-sdk'
 ```
 
 ### Entity state
