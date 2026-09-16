@@ -5,25 +5,25 @@
         "description": "s3c",
         "id": "DISTURBANCE00",
         "link": "s3e",
-        "timestamp": "s3f",
+        "timestamp": 63,
         "title": "s40",
-        "type": "s41"
+        "type": 65
       },
       "DISTURBANCE01": {
         "description": "s78",
         "id": "DISTURBANCE01",
         "link": "s7a",
-        "timestamp": "s7b",
+        "timestamp": 123,
         "title": "s7c",
-        "type": "s7d"
+        "type": 125
       },
       "DISTURBANCE02": {
         "description": "sb4",
         "id": "DISTURBANCE02",
         "link": "sb6",
-        "timestamp": "sb7",
+        "timestamp": 183,
         "title": "sb8",
-        "type": "sb9"
+        "type": 185
       }
     }
   },
@@ -32,9 +32,140 @@
       "disturbance_ref01": {
         "description": "sf0",
         "link": "sf2",
-        "timestamp": "sf3",
+        "timestamp": 243,
         "title": "sf4",
-        "type": "sf5"
+        "type": 245
+      }
+    }
+  },
+  "requests": {
+    "GET /disturbances/": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "getDisturbances",
+        "parameters": [
+          {
+            "description": "The response format",
+            "in": "query",
+            "name": "format",
+            "required": false,
+            "schema": {
+              "default": "xml",
+              "enum": [
+                "xml",
+                "json",
+                "jsonp"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "The language of any text or names in the response",
+            "in": "query",
+            "name": "lang",
+            "required": false,
+            "schema": {
+              "default": "en",
+              "enum": [
+                "nl",
+                "fr",
+                "en",
+                "de"
+              ],
+              "type": "string"
+            }
+          },
+          {
+            "description": "Character to use for line breaks in disturbance descriptions",
+            "in": "query",
+            "name": "lineBreakCharacter",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "protocol": "http",
+        "responses": {
+          "200": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "properties": {
+                    "disturbance": {
+                      "items": {
+                        "properties": {
+                          "description": {
+                            "type": "string"
+                          },
+                          "id": {
+                            "type": "integer"
+                          },
+                          "link": {
+                            "type": "string"
+                          },
+                          "timestamp": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "type": {
+                            "type": "integer"
+                          }
+                        },
+                        "type": "object"
+                      },
+                      "type": "array"
+                    },
+                    "timestamp": {
+                      "description": "Unix timestamp of the response",
+                      "type": "integer"
+                    },
+                    "version": {
+                      "description": "API version",
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "version",
+                    "timestamp",
+                    "disturbance"
+                  ],
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            },
+            "description": "Successful response with disturbances information",
+            "headers": {
+              "Access-Control-Allow-Origin": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "Content-Type": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "cache-control": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {},
+        "securitySource": "unspecified"
       }
     }
   }

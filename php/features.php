@@ -4,7 +4,10 @@ declare(strict_types=1);
 // Irail SDK feature factory
 
 require_once __DIR__ . '/feature/BaseFeature.php';
+require_once __DIR__ . '/feature/RatelimitFeature.php';
+require_once __DIR__ . '/feature/RetryFeature.php';
 require_once __DIR__ . '/feature/TestFeature.php';
+require_once __DIR__ . '/feature/TimeoutFeature.php';
 
 
 class IrailFeatures
@@ -14,8 +17,14 @@ class IrailFeatures
         switch ($name) {
             case "base":
                 return new IrailBaseFeature();
+            case "ratelimit":
+                return new IrailRatelimitFeature();
+            case "retry":
+                return new IrailRetryFeature();
             case "test":
                 return new IrailTestFeature();
+            case "timeout":
+                return new IrailTimeoutFeature();
             default:
                 return new IrailBaseFeature();
         }
@@ -31,7 +40,10 @@ class IrailFeatures
     {
         switch ($name) {
             case "base":
+            case "ratelimit":
+            case "retry":
             case "test":
+            case "timeout":
                 return true;
             default:
                 return false;

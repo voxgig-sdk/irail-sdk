@@ -16,5 +16,72 @@
     "occupancy": {
       "occupancy_ref01": {}
     }
+  },
+  "requests": {
+    "POST /feedback/occupancy.php": {
+      "provenance": "operation-contract",
+      "contract": {
+        "operationId": "postOccupancy",
+        "parameters": [],
+        "protocol": "http",
+        "requestBody": {
+          "content": {
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "properties": {
+                  "connection": {
+                    "description": "The connection URI",
+                    "type": "string"
+                  },
+                  "date": {
+                    "description": "The date in YYYYMMDD format",
+                    "type": "string"
+                  },
+                  "from": {
+                    "description": "The departure station URI",
+                    "type": "string"
+                  },
+                  "occupancy": {
+                    "description": "The occupancy level",
+                    "enum": [
+                      "low",
+                      "medium",
+                      "high"
+                    ],
+                    "type": "string"
+                  },
+                  "vehicle": {
+                    "description": "The vehicle ID",
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "connection",
+                  "from",
+                  "date",
+                  "vehicle",
+                  "occupancy"
+                ],
+                "type": "object"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback successfully submitted"
+          },
+          "400": {
+            "description": "Bad Request - Invalid parameters"
+          },
+          "429": {
+            "description": "Too Many Requests - Rate limit exceeded"
+          }
+        },
+        "securitySchemes": {},
+        "securitySource": "unspecified"
+      }
+    }
   }
 }

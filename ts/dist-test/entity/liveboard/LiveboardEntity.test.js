@@ -40,6 +40,8 @@ const node_path_1 = __importDefault(require("node:path"));
 const Fs = __importStar(require("node:fs"));
 const node_test_1 = require("node:test");
 const node_assert_1 = __importDefault(require("node:assert"));
+const live_runner_1 = require("../../live-runner");
+const live_entity_1 = require("../../live-entity");
 const __1 = require("../../..");
 const utility_1 = require("../../utility");
 // AFTER the imports on purpose: TypeScript hoists `import` above any
@@ -59,16 +61,12 @@ const utility_1 = require("../../utility");
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.IRAIL_TEST_LIVE;
         for (const op of ['load']) {
-            if ((0, utility_1.maybeSkipControl)(t, 'entityOp', 'liveboard.' + op, live))
+            if (!live && (0, utility_1.maybeSkipControl)(t, 'entityOp', 'liveboard.' + op, live))
                 return;
         }
         const setup = basicSetup();
-        // The basic flow consumes synthetic IDs and field values from the
-        // fixture (entity TestData.json). Those don't exist on the live API.
-        // Skip live runs unless the user provided a real ENTID env override.
-        if (setup.syntheticOnly) {
-            t.skip('live entity test uses synthetic IDs from fixture — set IRAIL_TEST_LIVEBOARD_ENTID JSON to run live');
-            return;
+        if (setup.live) {
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": [{ "active": true, "name": "departures", "req": true, "type": "`$OBJECT`", "index$": 0 }, { "active": true, "name": "station", "req": true, "short": "Station name", "type": "`$STRING`", "index$": 1 }, { "active": true, "name": "stationinfo", "req": true, "type": "`$OBJECT`", "index$": 2 }, { "active": true, "name": "timestamp", "req": true, "short": "Unix timestamp of the response", "type": "`$INTEGER`", "index$": 3 }, { "active": true, "name": "version", "req": true, "short": "API version", "type": "`$STRING`", "index$": 4 }], "name": "liveboard", "op": { "load": { "input": "data", "name": "load", "points": [{ "active": true, "args": { "query": [{ "active": true, "example": false, "kind": "query", "name": "alert", "orig": "alert", "reqd": false, "type": "`$BOOLEAN`", "index$": 0 }, { "active": true, "example": "departure", "kind": "query", "name": "arrdep", "orig": "arrdep", "reqd": false, "type": "`$STRING`", "index$": 1 }, { "active": true, "example": "300917", "kind": "query", "name": "date", "orig": "date", "reqd": false, "type": "`$STRING`", "index$": 2 }, { "active": true, "example": "xml", "kind": "query", "name": "format", "orig": "format", "reqd": false, "type": "`$STRING`", "index$": 3 }, { "active": true, "example": "BE.NMBS.008892007", "kind": "query", "name": "id", "orig": "id", "reqd": false, "type": "`$STRING`", "index$": 4 }, { "active": true, "example": "en", "kind": "query", "name": "lang", "orig": "lang", "reqd": false, "type": "`$STRING`", "index$": 5 }, { "active": true, "example": "Gent-Sint-Pieters", "kind": "query", "name": "station", "orig": "station", "reqd": false, "type": "`$STRING`", "index$": 6 }, { "active": true, "example": "1230", "kind": "query", "name": "time", "orig": "time", "reqd": false, "type": "`$STRING`", "index$": 7 }] }, "contract": { "id": "GET /liveboard/", "json": "{\"operationId\":\"getLiveboard\",\"parameters\":[{\"description\":\"The name of the station to query\",\"example\":\"Gent-Sint-Pieters\",\"in\":\"query\",\"name\":\"station\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"The ID of the station. Do not use both id and station parameters\",\"example\":\"BE.NMBS.008892007\",\"in\":\"query\",\"name\":\"id\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Whether the results should show arrivals or departures\",\"in\":\"query\",\"name\":\"arrdep\",\"required\":false,\"schema\":{\"default\":\"departure\",\"enum\":[\"departure\",\"arrival\"],\"type\":\"string\"}},{\"description\":\"Whether to include alerts about trains in the response\",\"in\":\"query\",\"name\":\"alerts\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"The time to query in hhmm format\",\"example\":\"1230\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"pattern\":\"^[0-2][0-9][0-5][0-9]$\",\"type\":\"string\"}},{\"description\":\"The date to query in ddmmyy format\",\"example\":\"300917\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^[0-3][0-9][0-1][0-9][0-9]{2}$\",\"type\":\"string\"}},{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"departures\":{\"departure\":[{\"canceled\":0,\"delay\":0,\"departureConnection\":\"http://irail.be/connections/8821006/20170316/IC1832\",\"id\":0,\"left\":0,\"occupancy\":{\"@id\":\"http://api.irail.be/terms/unknown\",\"name\":\"unknown\"},\"platform\":4,\"platforminfo\":{\"name\":\"4\",\"normal\":\"1\"},\"station\":\"Antwerp-Central\",\"stationinfo\":{\"@id\":\"http://irail.be/stations/NMBS/008821006\",\"id\":\"BE.NMBS.008821006\",\"locationX\":4.421101,\"locationY\":51.2172,\"name\":\"Antwerp-Central\",\"standardname\":\"Antwerpen-Centraal\"},\"time\":1489575600,\"vehicle\":\"BE.NMBS.IC3033\",\"vehicleinfo\":{\"@id\":\"http://irail.be/vehicle/IC3033\",\"name\":\"BE.NMBS.IC3033\",\"shortname\":\"IC3033\"}}],\"number\":32},\"station\":\"Ghent-Sint-Pieters\",\"stationinfo\":{\"@id\":\"http://irail.be/stations/NMBS/008821006\",\"id\":\"BE.NMBS.008821006\",\"locationX\":4.421101,\"locationY\":51.2172,\"name\":\"Antwerp-Central\",\"standardname\":\"Antwerpen-Centraal\"},\"timestamp\":1489614297,\"version\":\"1.1\"},\"schema\":{\"properties\":{\"departures\":{\"properties\":{\"departure\":{\"items\":{\"properties\":{\"canceled\":{\"description\":\"Whether the departure is canceled (1 or 0)\",\"type\":\"integer\"},\"delay\":{\"description\":\"Delay in seconds\",\"type\":\"integer\"},\"departureConnection\":{\"description\":\"URI of the departure connection\",\"type\":\"string\"},\"id\":{\"description\":\"Departure sequence ID\",\"type\":\"integer\"},\"left\":{\"description\":\"Whether the train has left (1 or 0)\",\"type\":\"integer\"},\"occupancy\":{\"properties\":{\"@id\":{\"description\":\"Occupancy level URI\",\"type\":\"string\"},\"name\":{\"description\":\"Occupancy level name\",\"enum\":[\"low\",\"medium\",\"high\",\"unknown\"],\"type\":\"string\"}},\"type\":\"object\"},\"platform\":{\"description\":\"Platform number\",\"type\":\"integer\"},\"platforminfo\":{\"properties\":{\"name\":{\"description\":\"Platform number\",\"type\":\"string\"},\"normal\":{\"description\":\"Whether this is the normal platform (1 or 0)\",\"type\":\"string\"}},\"type\":\"object\"},\"station\":{\"description\":\"Destination station name\",\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"time\":{\"description\":\"Departure time as Unix timestamp\",\"type\":\"integer\"},\"vehicle\":{\"description\":\"Vehicle identifier\",\"type\":\"string\"},\"vehicleinfo\":{\"properties\":{\"@id\":{\"description\":\"Vehicle URI\",\"type\":\"string\"},\"name\":{\"description\":\"Full vehicle name\",\"type\":\"string\"},\"shortname\":{\"description\":\"Short vehicle name\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"},\"number\":{\"description\":\"Number of departures\",\"type\":\"integer\"}},\"type\":\"object\"},\"station\":{\"description\":\"Station name\",\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"required\":[\"version\",\"timestamp\",\"station\",\"departures\"],\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with liveboard information\",\"headers\":{\"Access-Control-Allow-Origin\":{\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"schema\":{\"type\":\"string\"}},\"cache-control\":{\"schema\":{\"type\":\"string\"}},\"etag\":{\"schema\":{\"type\":\"string\"}}}},\"304\":{\"description\":\"Not Modified - Content has not changed\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"},\"500\":{\"description\":\"Internal Server Error - May occur when querying dates too far in the past or future\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}", "source": "openapi3", "version": 1 }, "kind": "http", "method": "GET", "orig": "/liveboard/", "segments": [{ "lit": "liveboard" }], "select": { "exist": ["alert", "arrdep", "date", "format", "id", "lang", "station", "time"] }, "transform": { "req": "`reqdata`", "res": "`body`" }, "index$": 0 }], "key$": "load" } }, "relations": { "ancestors": [] }, "key$": "liveboard", "name__orig": "liveboard", "Name": "Liveboard", "name_": "liveboard", "name-": "liveboard", "NAME": "LIVEBOARD", "index$": 3 }, { "active": true, "entity": "liveboard", "key$": "BasicLiveboardFlow", "kind": "basic", "name": "BasicLiveboardFlow", "param": {}, "step": [{ "active": true, "data": {}, "input": { "ref": "liveboard_ref01", "srcdatavar": "liveboard_ref01_data", "suffix": "_dt0" }, "match": {}, "op": "load", "spec": [], "valid": [{ "apply": "TextFieldMark", "def": { "mark": "Mark01-liveboard_ref01" } }], "index$": 0 }] }, 'Liveboard');
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -102,12 +100,6 @@ function basicSetup(extra) {
                 '`$VAL`': ['`$FORMAT`', 'upper', '`$COPY`']
             }]
     });
-    // Detect whether the user provided a real ENTID JSON via env var. The
-    // basic flow consumes synthetic IDs from the fixture file; without an
-    // override those synthetic IDs reach the live API and 4xx. Surface this
-    // to the test so it can skip rather than fail.
-    const idmapEnvVal = process.env['IRAIL_TEST_LIVEBOARD_ENTID'];
-    const idmapOverridden = null != idmapEnvVal && idmapEnvVal.trim().startsWith('{');
     const env = (0, utility_1.envOverride)({
         'IRAIL_TEST_LIVEBOARD_ENTID': idmap,
         'IRAIL_TEST_LIVE': 'FALSE',
@@ -115,7 +107,13 @@ function basicSetup(extra) {
     });
     idmap = env['IRAIL_TEST_LIVEBOARD_ENTID'];
     const live = 'TRUE' === env.IRAIL_TEST_LIVE;
+    const transport = (0, live_runner_1.createLiveTransport)();
     if (live) {
+        const rawIds = process.env['IRAIL_TEST_LIVEBOARD_ENTID'];
+        idmap = rawIds && rawIds.trim() ? JSON.parse(rawIds) : {};
+        if (!idmap || Array.isArray(idmap) || typeof idmap !== 'object') {
+            throw new Error('Live ENTID must be a JSON object');
+        }
         client = new __1.IrailSDK(merge([
             // FIRST, so the generated fields below win: sdk-test-control.json's
             // test.client.options adds to the live client, it does not redirect it.
@@ -126,7 +124,8 @@ function basicSetup(extra) {
             // argument at all - so a bare 'extra' silently discarded the apikey
             // and server values above and handed the SDK undefined. Harmless
             // while there was nothing in that object; not harmless now.
-            extra || {}
+            extra || {},
+            { system: { fetch: transport.fetch } }
         ]));
     }
     const setup = {
@@ -138,7 +137,7 @@ function basicSetup(extra) {
         data: entityData,
         explain: 'TRUE' === env.IRAIL_TEST_EXPLAIN,
         live,
-        syntheticOnly: live && !idmapOverridden,
+        transport,
         now: Date.now(),
     };
     return setup;

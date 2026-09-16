@@ -40,6 +40,12 @@ main: kit: entity: log: {
               }
             ]
           }
+          contract: {
+            id: "GET /logs/"
+            json: "{\"operationId\":\"getLogs\",\"parameters\":[{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"logs\":{\"items\":{\"properties\":{\"querytime\":{\"type\":\"integer\"},\"querytype\":{\"type\":\"string\"},\"user_agent\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"timestamp\":{\"type\":\"integer\"},\"version\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with log data\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}"
+            source: "openapi3"
+            version: 1
+          }
           method: "GET"
           orig: "/logs/"
           segments: [
