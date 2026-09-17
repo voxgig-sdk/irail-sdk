@@ -105,12 +105,12 @@ local result, err = client:Liveboard():load({ id = "test01" })
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/irail-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
-| Python | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
-| PHP | `voxgig-sdk/irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
+| TypeScript | `@voxgig-sdk/irail-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/tags) |
+| Python | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/tags) |
+| PHP | `voxgig-sdk/irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/tags) |
 | Golang | `github.com/voxgig-sdk/irail-sdk/go` | `go get github.com/voxgig-sdk/irail-sdk/go@latest` |
-| Ruby | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
-| Lua | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/releases) |
+| Ruby | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/tags) |
+| Lua | `voxgig-sdk-irail` | publish pending — [install from git tag](https://github.com/voxgig-sdk/irail-sdk/tags) |
 | Go CLI | `github.com/voxgig-sdk/irail-sdk/go-cli` | `go install github.com/voxgig-sdk/irail-sdk/go-cli/cmd/irail@latest` |
 | Go MCP server | `github.com/voxgig-sdk/irail-sdk/go-mcp` | `go get github.com/voxgig-sdk/irail-sdk/go-mcp@latest` |
 

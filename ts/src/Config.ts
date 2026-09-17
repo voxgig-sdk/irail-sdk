@@ -127,30 +127,30 @@ class Config {
 
     entity: {
       
-      composition: {
-      },
-
-      connection: {
-      },
-
-      disturbance: {
-      },
-
-      liveboard: {
-      },
-
-      log: {
-      },
-
-      occupancy: {
-      },
-
-      station: {
-      },
-
-      vehicle: {
-      },
-
+        composition: {
+        },
+  
+        connection: {
+        },
+  
+        disturbance: {
+        },
+  
+        liveboard: {
+        },
+  
+        log: {
+        },
+  
+        occupancy: {
+        },
+  
+        station: {
+        },
+  
+        vehicle: {
+        },
+  
     }
   }
 

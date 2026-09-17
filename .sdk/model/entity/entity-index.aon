@@ -1,10 +1,10 @@
 # Entity Models
 
-@"composition.aon"
-@"connection.aon"
-@"disturbance.aon"
-@"liveboard.aon"
-@"log.aon"
-@"occupancy.aon"
-@"station.aon"
-@"vehicle.aon"
+@"./composition.aon"
+@"./connection.aon"
+@"./disturbance.aon"
+@"./liveboard.aon"
+@"./log.aon"
+@"./occupancy.aon"
+@"./station.aon"
+@"./vehicle.aon"
