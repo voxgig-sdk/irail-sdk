@@ -1,0 +1,124 @@
+# Entity: vehicle
+
+main: kit: entity: vehicle: {
+
+  alias: field: {}
+
+  fields: {
+    stops: {
+      h: "Stops"
+      n: "stops"
+      r: true
+      t: "`$OBJECT`"
+    }
+    timestamp: {
+      h: "Timestamp"
+      n: "timestamp"
+      r: true
+      sh: "Unix timestamp of the response"
+      t: "`$INTEGER`"
+    }
+    vehicle: {
+      h: "Vehicle"
+      n: "vehicle"
+      r: true
+      sh: "Vehicle identifier"
+      t: "`$STRING`"
+    }
+    vehicleinfo: {
+      h: "Vehicleinfo"
+      n: "vehicleinfo"
+      r: false
+      t: "`$OBJECT`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "API version"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "vehicle"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /vehicle/"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "alert"
+                or: "alert"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "xml"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "IC532"
+                k: "query"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "en"
+                k: "query"
+                n: "lang"
+                or: "lang"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/vehicle/"
+          q: {
+            exist: [
+              "alert"
+              "date"
+              "format"
+              "id"
+              "lang"
+            ]
+          }
+          s: [
+            {
+              lit: "vehicle"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

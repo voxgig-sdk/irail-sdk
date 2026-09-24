@@ -19,7 +19,6 @@ import type {
   DisturbanceListMatch,
 } from '../IrailTypes'
 
-// TODO: needs Entity superclass
 class DisturbanceEntity extends IrailEntityBase<Disturbance> {
 
   constructor(client: IrailSDK, entopts: any) {

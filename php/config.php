@@ -120,6 +120,7 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'segments',
+              'title' => 'Segments',
               'type' => '`$OBJECT`',
             ],
           ],
@@ -130,43 +131,51 @@ class IrailConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'kind' => 'query',
-                        'name' => 'date',
-                        'orig' => 'date',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'en',
-                        'kind' => 'query',
-                        'name' => 'lang',
-                        'orig' => 'lang',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/composition/',
                   'segments' => [
                     [
                       'lit' => 'composition',
+                    ],
+                  ],
+                  'parts' => [
+                    'composition',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.composition`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'date',
+                        'orig' => 'date',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'lang',
+                        'orig' => 'lang',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'en',
+                      ],
                     ],
                   ],
                   'select' => [
@@ -176,13 +185,6 @@ class IrailConfig
                       'id',
                       'lang',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.composition`',
-                  ],
-                  'parts' => [
-                    'composition',
                   ],
                 ],
               ],
@@ -196,26 +198,32 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'arrival',
+              'title' => 'Arrival',
               'type' => '`$OBJECT`',
             ],
             [
               'name' => 'departure',
+              'title' => 'Departure',
               'type' => '`$OBJECT`',
             ],
             [
               'name' => 'duration',
+              'title' => 'Duration',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'id',
+              'title' => 'Id',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'occupancy',
+              'title' => 'Occupancy',
               'type' => '`$OBJECT`',
             ],
             [
               'name' => 'vias',
+              'title' => 'Vias',
               'type' => '`$OBJECT`',
             ],
           ],
@@ -230,83 +238,91 @@ class IrailConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => false,
-                        'kind' => 'query',
-                        'name' => 'alert',
-                        'orig' => 'alert',
-                        'type' => '`$BOOLEAN`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'date',
-                        'orig' => 'date',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'from',
-                        'orig' => 'from',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'en',
-                        'kind' => 'query',
-                        'name' => 'lang',
-                        'orig' => 'lang',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 6,
-                        'kind' => 'query',
-                        'name' => 'result',
-                        'orig' => 'result',
-                        'type' => '`$INTEGER`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'time',
-                        'orig' => 'time',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'departure',
-                        'kind' => 'query',
-                        'name' => 'timesel',
-                        'orig' => 'timesel',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'to',
-                        'orig' => 'to',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'type_of_transport',
-                        'orig' => 'type_of_transport',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/connections/',
                   'segments' => [
                     [
                       'lit' => 'connections',
+                    ],
+                  ],
+                  'parts' => [
+                    'connections',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.connection`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'alert',
+                        'orig' => 'alert',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                        'example' => false,
+                      ],
+                      [
+                        'name' => 'date',
+                        'orig' => 'date',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                      [
+                        'name' => 'from',
+                        'orig' => 'from',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'lang',
+                        'orig' => 'lang',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'en',
+                      ],
+                      [
+                        'name' => 'result',
+                        'orig' => 'result',
+                        'type' => '`$INTEGER`',
+                        'kind' => 'query',
+                        'example' => 6,
+                      ],
+                      [
+                        'name' => 'time',
+                        'orig' => 'time',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'timesel',
+                        'orig' => 'timesel',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'departure',
+                      ],
+                      [
+                        'name' => 'to',
+                        'orig' => 'to',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                      ],
+                      [
+                        'name' => 'type_of_transport',
+                        'orig' => 'type_of_transport',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
                     ],
                   ],
                   'select' => [
@@ -323,13 +339,6 @@ class IrailConfig
                       'type_of_transport',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.connection`',
-                  ],
-                  'parts' => [
-                    'connections',
-                  ],
                 ],
               ],
             ],
@@ -342,26 +351,32 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'description',
+              'title' => 'Description',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'id',
+              'title' => 'Id',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'link',
+              'title' => 'Link',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'timestamp',
+              'title' => 'Timestamp',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'title',
+              'title' => 'Title',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'type',
+              'title' => 'Type',
               'type' => '`$INTEGER`',
             ],
           ],
@@ -376,30 +391,6 @@ class IrailConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'en',
-                        'kind' => 'query',
-                        'name' => 'lang',
-                        'orig' => 'lang',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'line_break_character',
-                        'orig' => 'line_break_character',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/disturbances/',
@@ -408,19 +399,44 @@ class IrailConfig
                       'lit' => 'disturbances',
                     ],
                   ],
+                  'parts' => [
+                    'disturbances',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.disturbance`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                      [
+                        'name' => 'lang',
+                        'orig' => 'lang',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'en',
+                      ],
+                      [
+                        'name' => 'line_break_character',
+                        'orig' => 'line_break_character',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                    ],
+                  ],
                   'select' => [
                     'exist' => [
                       'format',
                       'lang',
                       'line_break_character',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.disturbance`',
-                  ],
-                  'parts' => [
-                    'disturbances',
                   ],
                 ],
               ],
@@ -434,31 +450,36 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'departures',
-              'req' => true,
+              'title' => 'Departures',
               'type' => '`$OBJECT`',
+              'req' => true,
             ],
             [
               'name' => 'station',
+              'title' => 'Station',
+              'type' => '`$STRING`',
               'req' => true,
               'short' => 'Station name',
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'stationinfo',
-              'req' => true,
+              'title' => 'Stationinfo',
               'type' => '`$OBJECT`',
+              'req' => true,
             ],
             [
               'name' => 'timestamp',
+              'title' => 'Timestamp',
+              'type' => '`$INTEGER`',
               'req' => true,
               'short' => 'Unix timestamp of the response',
-              'type' => '`$INTEGER`',
             ],
             [
               'name' => 'version',
+              'title' => 'Version',
+              'type' => '`$STRING`',
               'req' => true,
               'short' => 'API version',
-              'type' => '`$STRING`',
             ],
           ],
           'name' => 'liveboard',
@@ -468,72 +489,80 @@ class IrailConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => false,
-                        'kind' => 'query',
-                        'name' => 'alert',
-                        'orig' => 'alert',
-                        'type' => '`$BOOLEAN`',
-                      ],
-                      [
-                        'example' => 'departure',
-                        'kind' => 'query',
-                        'name' => 'arrdep',
-                        'orig' => 'arrdep',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => '300917',
-                        'kind' => 'query',
-                        'name' => 'date',
-                        'orig' => 'date',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'BE.NMBS.008892007',
-                        'kind' => 'query',
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'en',
-                        'kind' => 'query',
-                        'name' => 'lang',
-                        'orig' => 'lang',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'Gent-Sint-Pieters',
-                        'kind' => 'query',
-                        'name' => 'station',
-                        'orig' => 'station',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => '1230',
-                        'kind' => 'query',
-                        'name' => 'time',
-                        'orig' => 'time',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/liveboard/',
                   'segments' => [
                     [
                       'lit' => 'liveboard',
+                    ],
+                  ],
+                  'parts' => [
+                    'liveboard',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'alert',
+                        'orig' => 'alert',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                        'example' => false,
+                      ],
+                      [
+                        'name' => 'arrdep',
+                        'orig' => 'arrdep',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'departure',
+                      ],
+                      [
+                        'name' => 'date',
+                        'orig' => 'date',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => '300917',
+                      ],
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'BE.NMBS.008892007',
+                      ],
+                      [
+                        'name' => 'lang',
+                        'orig' => 'lang',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'en',
+                      ],
+                      [
+                        'name' => 'station',
+                        'orig' => 'station',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'Gent-Sint-Pieters',
+                      ],
+                      [
+                        'name' => 'time',
+                        'orig' => 'time',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => '1230',
+                      ],
                     ],
                   ],
                   'select' => [
@@ -548,13 +577,6 @@ class IrailConfig
                       'time',
                     ],
                   ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'liveboard',
-                  ],
                 ],
               ],
             ],
@@ -567,14 +589,17 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'querytime',
+              'title' => 'Querytime',
               'type' => '`$INTEGER`',
             ],
             [
               'name' => 'querytype',
+              'title' => 'Querytype',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'user_agent',
+              'title' => 'User Agent',
               'type' => '`$STRING`',
             ],
           ],
@@ -585,17 +610,6 @@ class IrailConfig
               'name' => 'list',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/logs/',
@@ -604,17 +618,29 @@ class IrailConfig
                       'lit' => 'logs',
                     ],
                   ],
-                  'select' => [
-                    'exist' => [
-                      'format',
-                    ],
+                  'parts' => [
+                    'logs',
                   ],
+                  'rename' => [],
                   'transform' => [
                     'req' => '`reqdata`',
                     'res' => '`body.logs`',
                   ],
-                  'parts' => [
-                    'logs',
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                    ],
+                  ],
+                  'select' => [
+                    'exist' => [
+                      'format',
+                    ],
                   ],
                 ],
               ],
@@ -633,7 +659,6 @@ class IrailConfig
               'name' => 'create',
               'points' => [
                 [
-                  'args' => [],
                   'kind' => 'http',
                   'method' => 'POST',
                   'orig' => '/feedback/occupancy.php',
@@ -645,15 +670,17 @@ class IrailConfig
                       'lit' => 'occupancy.php',
                     ],
                   ],
-                  'select' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
                   'parts' => [
                     'feedback',
                     'occupancy.php',
                   ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [],
+                  'select' => [],
                 ],
               ],
             ],
@@ -666,25 +693,23 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'station',
-              'req' => true,
+              'title' => 'Station',
               'type' => '`$ANY`',
-              'union' => [
-                'branches' => 2,
-                'count' => 1,
-                'depth' => 0,
-              ],
+              'req' => true,
             ],
             [
               'name' => 'timestamp',
+              'title' => 'Timestamp',
+              'type' => '`$INTEGER`',
               'req' => true,
               'short' => 'Unix timestamp of the response',
-              'type' => '`$INTEGER`',
             ],
             [
               'name' => 'version',
+              'title' => 'Version',
+              'type' => '`$STRING`',
               'req' => true,
               'short' => 'API version',
-              'type' => '`$STRING`',
             ],
           ],
           'name' => 'station',
@@ -694,24 +719,6 @@ class IrailConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'en',
-                        'kind' => 'query',
-                        'name' => 'lang',
-                        'orig' => 'lang',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/stations/',
@@ -720,18 +727,37 @@ class IrailConfig
                       'lit' => 'stations',
                     ],
                   ],
+                  'parts' => [
+                    'stations',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body.station`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                      [
+                        'name' => 'lang',
+                        'orig' => 'lang',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'en',
+                      ],
+                    ],
+                  ],
                   'select' => [
                     'exist' => [
                       'format',
                       'lang',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.station`',
-                  ],
-                  'parts' => [
-                    'stations',
                   ],
                 ],
               ],
@@ -745,30 +771,35 @@ class IrailConfig
           'fields' => [
             [
               'name' => 'stops',
-              'req' => true,
+              'title' => 'Stops',
               'type' => '`$OBJECT`',
+              'req' => true,
             ],
             [
               'name' => 'timestamp',
+              'title' => 'Timestamp',
+              'type' => '`$INTEGER`',
               'req' => true,
               'short' => 'Unix timestamp of the response',
-              'type' => '`$INTEGER`',
             ],
             [
               'name' => 'vehicle',
+              'title' => 'Vehicle',
+              'type' => '`$STRING`',
               'req' => true,
               'short' => 'Vehicle identifier',
-              'type' => '`$STRING`',
             ],
             [
               'name' => 'vehicleinfo',
+              'title' => 'Vehicleinfo',
               'type' => '`$OBJECT`',
             ],
             [
               'name' => 'version',
+              'title' => 'Version',
+              'type' => '`$STRING`',
               'req' => true,
               'short' => 'API version',
-              'type' => '`$STRING`',
             ],
           ],
           'name' => 'vehicle',
@@ -778,51 +809,59 @@ class IrailConfig
               'name' => 'load',
               'points' => [
                 [
-                  'args' => [
-                    'query' => [
-                      [
-                        'example' => false,
-                        'kind' => 'query',
-                        'name' => 'alert',
-                        'orig' => 'alert',
-                        'type' => '`$BOOLEAN`',
-                      ],
-                      [
-                        'kind' => 'query',
-                        'name' => 'date',
-                        'orig' => 'date',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'xml',
-                        'kind' => 'query',
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'IC532',
-                        'kind' => 'query',
-                        'name' => 'id',
-                        'orig' => 'id',
-                        'reqd' => true,
-                        'type' => '`$STRING`',
-                      ],
-                      [
-                        'example' => 'en',
-                        'kind' => 'query',
-                        'name' => 'lang',
-                        'orig' => 'lang',
-                        'type' => '`$STRING`',
-                      ],
-                    ],
-                  ],
                   'kind' => 'http',
                   'method' => 'GET',
                   'orig' => '/vehicle/',
                   'segments' => [
                     [
                       'lit' => 'vehicle',
+                    ],
+                  ],
+                  'parts' => [
+                    'vehicle',
+                  ],
+                  'rename' => [],
+                  'transform' => [
+                    'req' => '`reqdata`',
+                    'res' => '`body`',
+                  ],
+                  'args' => [
+                    'query' => [
+                      [
+                        'name' => 'alert',
+                        'orig' => 'alert',
+                        'type' => '`$BOOLEAN`',
+                        'kind' => 'query',
+                        'example' => false,
+                      ],
+                      [
+                        'name' => 'date',
+                        'orig' => 'date',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                      ],
+                      [
+                        'name' => 'format',
+                        'orig' => 'format',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'xml',
+                      ],
+                      [
+                        'name' => 'id',
+                        'orig' => 'id',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'reqd' => true,
+                        'example' => 'IC532',
+                      ],
+                      [
+                        'name' => 'lang',
+                        'orig' => 'lang',
+                        'type' => '`$STRING`',
+                        'kind' => 'query',
+                        'example' => 'en',
+                      ],
                     ],
                   ],
                   'select' => [
@@ -833,13 +872,6 @@ class IrailConfig
                       'id',
                       'lang',
                     ],
-                  ],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'parts' => [
-                    'vehicle',
                   ],
                 ],
               ],

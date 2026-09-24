@@ -1,0 +1,74 @@
+# Entity: log
+
+main: kit: entity: log: {
+
+  alias: field: {}
+
+  fields: {
+    querytime: {
+      h: "Querytime"
+      n: "querytime"
+      r: false
+      t: "`$INTEGER`"
+    }
+    querytype: {
+      h: "Querytype"
+      n: "querytype"
+      r: false
+      t: "`$STRING`"
+    }
+    user_agent: {
+      h: "User Agent"
+      n: "user_agent"
+      r: false
+      t: "`$STRING`"
+    }
+  }
+
+  name: "log"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /logs/"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "xml"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/logs/"
+          q: {
+            exist: [
+              "format"
+            ]
+          }
+          s: [
+            {
+              lit: "logs"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.logs`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

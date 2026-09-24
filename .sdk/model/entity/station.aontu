@@ -1,0 +1,90 @@
+# Entity: station
+
+main: kit: entity: station: {
+
+  alias: field: {}
+
+  fields: {
+    station: {
+      h: "Station"
+      n: "station"
+      r: true
+      t: "`$ANY`"
+      union: {
+        branches: 2
+        count: 1
+        depth: 0
+      }
+    }
+    timestamp: {
+      h: "Timestamp"
+      n: "timestamp"
+      r: true
+      sh: "Unix timestamp of the response"
+      t: "`$INTEGER`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "API version"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "station"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /stations/"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: "xml"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "en"
+                k: "query"
+                n: "lang"
+                or: "lang"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/stations/"
+          q: {
+            exist: [
+              "format"
+              "lang"
+            ]
+          }
+          s: [
+            {
+              lit: "stations"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.station`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DisturbanceEntity = void 0;
 const IrailEntityBase_1 = require("../IrailEntityBase");
-// TODO: needs Entity superclass
 class DisturbanceEntity extends IrailEntityBase_1.IrailEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

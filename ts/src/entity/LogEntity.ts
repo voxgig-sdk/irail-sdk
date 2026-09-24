@@ -19,7 +19,6 @@ import type {
   LogListMatch,
 } from '../IrailTypes'
 
-// TODO: needs Entity superclass
 class LogEntity extends IrailEntityBase<Log> {
 
   constructor(client: IrailSDK, entopts: any) {

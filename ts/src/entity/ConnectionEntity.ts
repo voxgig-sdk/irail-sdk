@@ -19,7 +19,6 @@ import type {
   ConnectionListMatch,
 } from '../IrailTypes'
 
-// TODO: needs Entity superclass
 class ConnectionEntity extends IrailEntityBase<Connection> {
 
   constructor(client: IrailSDK, entopts: any) {

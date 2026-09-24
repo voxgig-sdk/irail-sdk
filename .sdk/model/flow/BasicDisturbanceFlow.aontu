@@ -1,0 +1,22 @@
+# BasicDisturbanceFlow
+
+main: kit: flow: BasicDisturbanceFlow:
+{
+  entity: "disturbance",
+  kind: "basic",
+  name: "BasicDisturbanceFlow",
+  step: [
+    {
+      o: "list",
+      v: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "disturbance_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicDisturbanceFlow"
+}

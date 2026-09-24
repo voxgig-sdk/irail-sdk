@@ -98,6 +98,7 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "segments",
+						"title": "Segments",
 						"type": "`$OBJECT`",
 					},
 				},
@@ -108,43 +109,51 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"kind": "query",
-											"name": "date",
-											"orig": "date",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "lang",
-											"orig": "lang",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/composition/",
 								"segments": []any{
 									map[string]any{
 										"lit": "composition",
+									},
+								},
+								"parts": []any{
+									"composition",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.composition`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "lang",
+											"orig": "lang",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -154,13 +163,6 @@ func MakeConfig() map[string]any {
 										"id",
 										"lang",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.composition`",
-								},
-								"parts": []any{
-									"composition",
 								},
 							},
 						},
@@ -174,26 +176,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "arrival",
+						"title": "Arrival",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "departure",
+						"title": "Departure",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "duration",
+						"title": "Duration",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "occupancy",
+						"title": "Occupancy",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "vias",
+						"title": "Vias",
 						"type": "`$OBJECT`",
 					},
 				},
@@ -208,83 +216,91 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": false,
-											"kind": "query",
-											"name": "alert",
-											"orig": "alert",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "date",
-											"orig": "date",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "from",
-											"orig": "from",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "lang",
-											"orig": "lang",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": 6,
-											"kind": "query",
-											"name": "result",
-											"orig": "result",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "time",
-											"orig": "time",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "departure",
-											"kind": "query",
-											"name": "timesel",
-											"orig": "timesel",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "to",
-											"orig": "to",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "type_of_transport",
-											"orig": "type_of_transport",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/connections/",
 								"segments": []any{
 									map[string]any{
 										"lit": "connections",
+									},
+								},
+								"parts": []any{
+									"connections",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.connection`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "alert",
+											"orig": "alert",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
+										},
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+										map[string]any{
+											"name": "from",
+											"orig": "from",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "lang",
+											"orig": "lang",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+										map[string]any{
+											"name": "result",
+											"orig": "result",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 6,
+										},
+										map[string]any{
+											"name": "time",
+											"orig": "time",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "timesel",
+											"orig": "timesel",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "departure",
+										},
+										map[string]any{
+											"name": "to",
+											"orig": "to",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+										},
+										map[string]any{
+											"name": "type_of_transport",
+											"orig": "type_of_transport",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -301,13 +317,6 @@ func MakeConfig() map[string]any {
 										"type_of_transport",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.connection`",
-								},
-								"parts": []any{
-									"connections",
-								},
 							},
 						},
 					},
@@ -320,26 +329,32 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "description",
+						"title": "Description",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "link",
+						"title": "Link",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "title",
+						"title": "Title",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "type",
+						"title": "Type",
 						"type": "`$INTEGER`",
 					},
 				},
@@ -354,30 +369,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "lang",
-											"orig": "lang",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "line_break_character",
-											"orig": "line_break_character",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/disturbances/",
@@ -386,19 +377,44 @@ func MakeConfig() map[string]any {
 										"lit": "disturbances",
 									},
 								},
+								"parts": []any{
+									"disturbances",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.disturbance`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+										map[string]any{
+											"name": "lang",
+											"orig": "lang",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+										map[string]any{
+											"name": "line_break_character",
+											"orig": "line_break_character",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"format",
 										"lang",
 										"line_break_character",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.disturbance`",
-								},
-								"parts": []any{
-									"disturbances",
 								},
 							},
 						},
@@ -412,31 +428,36 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "departures",
-						"req": true,
+						"title": "Departures",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "station",
+						"title": "Station",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Station name",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "stationinfo",
-						"req": true,
+						"title": "Stationinfo",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
+						"type": "`$INTEGER`",
 						"req": true,
 						"short": "Unix timestamp of the response",
-						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "version",
+						"title": "Version",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "API version",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "liveboard",
@@ -446,72 +467,80 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": false,
-											"kind": "query",
-											"name": "alert",
-											"orig": "alert",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"example": "departure",
-											"kind": "query",
-											"name": "arrdep",
-											"orig": "arrdep",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "300917",
-											"kind": "query",
-											"name": "date",
-											"orig": "date",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "BE.NMBS.008892007",
-											"kind": "query",
-											"name": "id",
-											"orig": "id",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "lang",
-											"orig": "lang",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "Gent-Sint-Pieters",
-											"kind": "query",
-											"name": "station",
-											"orig": "station",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "1230",
-											"kind": "query",
-											"name": "time",
-											"orig": "time",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/liveboard/",
 								"segments": []any{
 									map[string]any{
 										"lit": "liveboard",
+									},
+								},
+								"parts": []any{
+									"liveboard",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "alert",
+											"orig": "alert",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
+										},
+										map[string]any{
+											"name": "arrdep",
+											"orig": "arrdep",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "departure",
+										},
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "300917",
+										},
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "BE.NMBS.008892007",
+										},
+										map[string]any{
+											"name": "lang",
+											"orig": "lang",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+										map[string]any{
+											"name": "station",
+											"orig": "station",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "Gent-Sint-Pieters",
+										},
+										map[string]any{
+											"name": "time",
+											"orig": "time",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "1230",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -526,13 +555,6 @@ func MakeConfig() map[string]any {
 										"time",
 									},
 								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"liveboard",
-								},
 							},
 						},
 					},
@@ -545,14 +567,17 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "querytime",
+						"title": "Querytime",
 						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "querytype",
+						"title": "Querytype",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "user_agent",
+						"title": "User Agent",
 						"type": "`$STRING`",
 					},
 				},
@@ -563,17 +588,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/logs/",
@@ -582,17 +596,29 @@ func MakeConfig() map[string]any {
 										"lit": "logs",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"format",
-									},
+								"parts": []any{
+									"logs",
 								},
+								"rename": map[string]any{},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body.logs`",
 								},
-								"parts": []any{
-									"logs",
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"format",
+									},
 								},
 							},
 						},
@@ -611,7 +637,6 @@ func MakeConfig() map[string]any {
 						"name": "create",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{},
 								"kind": "http",
 								"method": "POST",
 								"orig": "/feedback/occupancy.php",
@@ -623,15 +648,17 @@ func MakeConfig() map[string]any {
 										"lit": "occupancy.php",
 									},
 								},
-								"select": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
 								"parts": []any{
 									"feedback",
 									"occupancy.php",
 								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{},
+								"select": map[string]any{},
 							},
 						},
 					},
@@ -644,25 +671,23 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "station",
-						"req": true,
+						"title": "Station",
 						"type": "`$ANY`",
-						"union": map[string]any{
-							"branches": 2,
-							"count": 1,
-							"depth": 0,
-						},
+						"req": true,
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
+						"type": "`$INTEGER`",
 						"req": true,
 						"short": "Unix timestamp of the response",
-						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "version",
+						"title": "Version",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "API version",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "station",
@@ -672,24 +697,6 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "lang",
-											"orig": "lang",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/stations/",
@@ -698,18 +705,37 @@ func MakeConfig() map[string]any {
 										"lit": "stations",
 									},
 								},
+								"parts": []any{
+									"stations",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.station`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+										map[string]any{
+											"name": "lang",
+											"orig": "lang",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"format",
 										"lang",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.station`",
-								},
-								"parts": []any{
-									"stations",
 								},
 							},
 						},
@@ -723,30 +749,35 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "stops",
-						"req": true,
+						"title": "Stops",
 						"type": "`$OBJECT`",
+						"req": true,
 					},
 					map[string]any{
 						"name": "timestamp",
+						"title": "Timestamp",
+						"type": "`$INTEGER`",
 						"req": true,
 						"short": "Unix timestamp of the response",
-						"type": "`$INTEGER`",
 					},
 					map[string]any{
 						"name": "vehicle",
+						"title": "Vehicle",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "Vehicle identifier",
-						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "vehicleinfo",
+						"title": "Vehicleinfo",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "version",
+						"title": "Version",
+						"type": "`$STRING`",
 						"req": true,
 						"short": "API version",
-						"type": "`$STRING`",
 					},
 				},
 				"name": "vehicle",
@@ -756,51 +787,59 @@ func MakeConfig() map[string]any {
 						"name": "load",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": false,
-											"kind": "query",
-											"name": "alert",
-											"orig": "alert",
-											"type": "`$BOOLEAN`",
-										},
-										map[string]any{
-											"kind": "query",
-											"name": "date",
-											"orig": "date",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "xml",
-											"kind": "query",
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "IC532",
-											"kind": "query",
-											"name": "id",
-											"orig": "id",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-										map[string]any{
-											"example": "en",
-											"kind": "query",
-											"name": "lang",
-											"orig": "lang",
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/vehicle/",
 								"segments": []any{
 									map[string]any{
 										"lit": "vehicle",
+									},
+								},
+								"parts": []any{
+									"vehicle",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "alert",
+											"orig": "alert",
+											"type": "`$BOOLEAN`",
+											"kind": "query",
+											"example": false,
+										},
+										map[string]any{
+											"name": "date",
+											"orig": "date",
+											"type": "`$STRING`",
+											"kind": "query",
+										},
+										map[string]any{
+											"name": "format",
+											"orig": "format",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "xml",
+										},
+										map[string]any{
+											"name": "id",
+											"orig": "id",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "IC532",
+										},
+										map[string]any{
+											"name": "lang",
+											"orig": "lang",
+											"type": "`$STRING`",
+											"kind": "query",
+											"example": "en",
+										},
 									},
 								},
 								"select": map[string]any{
@@ -811,13 +850,6 @@ func MakeConfig() map[string]any {
 										"id",
 										"lang",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"parts": []any{
-									"vehicle",
 								},
 							},
 						},

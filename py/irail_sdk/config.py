@@ -123,6 +123,7 @@ def make_config():
         "fields": [
           {
             "name": "segments",
+            "title": "Segments",
             "type": "`$OBJECT`",
           },
         ],
@@ -133,37 +134,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "id",
-                      "orig": "id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "lang",
-                      "orig": "lang",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/composition/",
@@ -172,6 +142,45 @@ def make_config():
                     "lit": "composition",
                   },
                 ],
+                "parts": [
+                  "composition",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.composition`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                    {
+                      "name": "id",
+                      "orig": "id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "lang",
+                      "orig": "lang",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "date",
@@ -180,13 +189,6 @@ def make_config():
                     "lang",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.composition`",
-                },
-                "parts": [
-                  "composition",
-                ],
               },
             ],
           },
@@ -199,26 +201,32 @@ def make_config():
         "fields": [
           {
             "name": "arrival",
+            "title": "Arrival",
             "type": "`$OBJECT`",
           },
           {
             "name": "departure",
+            "title": "Departure",
             "type": "`$OBJECT`",
           },
           {
             "name": "duration",
+            "title": "Duration",
             "type": "`$INTEGER`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$INTEGER`",
           },
           {
             "name": "occupancy",
+            "title": "Occupancy",
             "type": "`$OBJECT`",
           },
           {
             "name": "vias",
+            "title": "Vias",
             "type": "`$OBJECT`",
           },
         ],
@@ -233,77 +241,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": False,
-                      "kind": "query",
-                      "name": "alert",
-                      "orig": "alert",
-                      "type": "`$BOOLEAN`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "from",
-                      "orig": "from",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "lang",
-                      "orig": "lang",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": 6,
-                      "kind": "query",
-                      "name": "result",
-                      "orig": "result",
-                      "type": "`$INTEGER`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "time",
-                      "orig": "time",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "departure",
-                      "kind": "query",
-                      "name": "timesel",
-                      "orig": "timesel",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "to",
-                      "orig": "to",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "type_of_transport",
-                      "orig": "type_of_transport",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/connections/",
@@ -312,6 +249,85 @@ def make_config():
                     "lit": "connections",
                   },
                 ],
+                "parts": [
+                  "connections",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.connection`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "alert",
+                      "orig": "alert",
+                      "type": "`$BOOLEAN`",
+                      "kind": "query",
+                      "example": False,
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                    {
+                      "name": "from",
+                      "orig": "from",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "lang",
+                      "orig": "lang",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                    {
+                      "name": "result",
+                      "orig": "result",
+                      "type": "`$INTEGER`",
+                      "kind": "query",
+                      "example": 6,
+                    },
+                    {
+                      "name": "time",
+                      "orig": "time",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "timesel",
+                      "orig": "timesel",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "departure",
+                    },
+                    {
+                      "name": "to",
+                      "orig": "to",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                    },
+                    {
+                      "name": "type_of_transport",
+                      "orig": "type_of_transport",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "alert",
@@ -326,13 +342,6 @@ def make_config():
                     "type_of_transport",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.connection`",
-                },
-                "parts": [
-                  "connections",
-                ],
               },
             ],
           },
@@ -345,26 +354,32 @@ def make_config():
         "fields": [
           {
             "name": "description",
+            "title": "Description",
             "type": "`$STRING`",
           },
           {
             "name": "id",
+            "title": "Id",
             "type": "`$INTEGER`",
           },
           {
             "name": "link",
+            "title": "Link",
             "type": "`$STRING`",
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
             "type": "`$INTEGER`",
           },
           {
             "name": "title",
+            "title": "Title",
             "type": "`$STRING`",
           },
           {
             "name": "type",
+            "title": "Type",
             "type": "`$INTEGER`",
           },
         ],
@@ -379,30 +394,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "lang",
-                      "orig": "lang",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "line_break_character",
-                      "orig": "line_break_character",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/disturbances/",
@@ -411,6 +402,38 @@ def make_config():
                     "lit": "disturbances",
                   },
                 ],
+                "parts": [
+                  "disturbances",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.disturbance`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                    {
+                      "name": "lang",
+                      "orig": "lang",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                    {
+                      "name": "line_break_character",
+                      "orig": "line_break_character",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "format",
@@ -418,13 +441,6 @@ def make_config():
                     "line_break_character",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.disturbance`",
-                },
-                "parts": [
-                  "disturbances",
-                ],
               },
             ],
           },
@@ -437,31 +453,36 @@ def make_config():
         "fields": [
           {
             "name": "departures",
-            "req": True,
+            "title": "Departures",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "station",
+            "title": "Station",
+            "type": "`$STRING`",
             "req": True,
             "short": "Station name",
-            "type": "`$STRING`",
           },
           {
             "name": "stationinfo",
-            "req": True,
+            "title": "Stationinfo",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
+            "type": "`$INTEGER`",
             "req": True,
             "short": "Unix timestamp of the response",
-            "type": "`$INTEGER`",
           },
           {
             "name": "version",
+            "title": "Version",
+            "type": "`$STRING`",
             "req": True,
             "short": "API version",
-            "type": "`$STRING`",
           },
         ],
         "name": "liveboard",
@@ -471,66 +492,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": False,
-                      "kind": "query",
-                      "name": "alert",
-                      "orig": "alert",
-                      "type": "`$BOOLEAN`",
-                    },
-                    {
-                      "example": "departure",
-                      "kind": "query",
-                      "name": "arrdep",
-                      "orig": "arrdep",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "300917",
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "BE.NMBS.008892007",
-                      "kind": "query",
-                      "name": "id",
-                      "orig": "id",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "lang",
-                      "orig": "lang",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "Gent-Sint-Pieters",
-                      "kind": "query",
-                      "name": "station",
-                      "orig": "station",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "1230",
-                      "kind": "query",
-                      "name": "time",
-                      "orig": "time",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/liveboard/",
@@ -539,6 +500,74 @@ def make_config():
                     "lit": "liveboard",
                   },
                 ],
+                "parts": [
+                  "liveboard",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "alert",
+                      "orig": "alert",
+                      "type": "`$BOOLEAN`",
+                      "kind": "query",
+                      "example": False,
+                    },
+                    {
+                      "name": "arrdep",
+                      "orig": "arrdep",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "departure",
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "300917",
+                    },
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                    {
+                      "name": "id",
+                      "orig": "id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "BE.NMBS.008892007",
+                    },
+                    {
+                      "name": "lang",
+                      "orig": "lang",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                    {
+                      "name": "station",
+                      "orig": "station",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "Gent-Sint-Pieters",
+                    },
+                    {
+                      "name": "time",
+                      "orig": "time",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "1230",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "alert",
@@ -551,13 +580,6 @@ def make_config():
                     "time",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "liveboard",
-                ],
               },
             ],
           },
@@ -570,14 +592,17 @@ def make_config():
         "fields": [
           {
             "name": "querytime",
+            "title": "Querytime",
             "type": "`$INTEGER`",
           },
           {
             "name": "querytype",
+            "title": "Querytype",
             "type": "`$STRING`",
           },
           {
             "name": "user_agent",
+            "title": "User Agent",
             "type": "`$STRING`",
           },
         ],
@@ -588,17 +613,6 @@ def make_config():
             "name": "list",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/logs/",
@@ -607,18 +621,30 @@ def make_config():
                     "lit": "logs",
                   },
                 ],
+                "parts": [
+                  "logs",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.logs`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "format",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.logs`",
-                },
-                "parts": [
-                  "logs",
-                ],
               },
             ],
           },
@@ -636,7 +662,6 @@ def make_config():
             "name": "create",
             "points": [
               {
-                "args": {},
                 "kind": "http",
                 "method": "POST",
                 "orig": "/feedback/occupancy.php",
@@ -648,15 +673,17 @@ def make_config():
                     "lit": "occupancy.php",
                   },
                 ],
-                "select": {},
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
                 "parts": [
                   "feedback",
                   "occupancy.php",
                 ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {},
+                "select": {},
               },
             ],
           },
@@ -669,25 +696,23 @@ def make_config():
         "fields": [
           {
             "name": "station",
-            "req": True,
+            "title": "Station",
             "type": "`$ANY`",
-            "union": {
-              "branches": 2,
-              "count": 1,
-              "depth": 0,
-            },
+            "req": True,
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
+            "type": "`$INTEGER`",
             "req": True,
             "short": "Unix timestamp of the response",
-            "type": "`$INTEGER`",
           },
           {
             "name": "version",
+            "title": "Version",
+            "type": "`$STRING`",
             "req": True,
             "short": "API version",
-            "type": "`$STRING`",
           },
         ],
         "name": "station",
@@ -697,24 +722,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "lang",
-                      "orig": "lang",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/stations/",
@@ -723,19 +730,38 @@ def make_config():
                     "lit": "stations",
                   },
                 ],
+                "parts": [
+                  "stations",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body.station`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                    {
+                      "name": "lang",
+                      "orig": "lang",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "format",
                     "lang",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body.station`",
-                },
-                "parts": [
-                  "stations",
-                ],
               },
             ],
           },
@@ -748,30 +774,35 @@ def make_config():
         "fields": [
           {
             "name": "stops",
-            "req": True,
+            "title": "Stops",
             "type": "`$OBJECT`",
+            "req": True,
           },
           {
             "name": "timestamp",
+            "title": "Timestamp",
+            "type": "`$INTEGER`",
             "req": True,
             "short": "Unix timestamp of the response",
-            "type": "`$INTEGER`",
           },
           {
             "name": "vehicle",
+            "title": "Vehicle",
+            "type": "`$STRING`",
             "req": True,
             "short": "Vehicle identifier",
-            "type": "`$STRING`",
           },
           {
             "name": "vehicleinfo",
+            "title": "Vehicleinfo",
             "type": "`$OBJECT`",
           },
           {
             "name": "version",
+            "title": "Version",
+            "type": "`$STRING`",
             "req": True,
             "short": "API version",
-            "type": "`$STRING`",
           },
         ],
         "name": "vehicle",
@@ -781,45 +812,6 @@ def make_config():
             "name": "load",
             "points": [
               {
-                "args": {
-                  "query": [
-                    {
-                      "example": False,
-                      "kind": "query",
-                      "name": "alert",
-                      "orig": "alert",
-                      "type": "`$BOOLEAN`",
-                    },
-                    {
-                      "kind": "query",
-                      "name": "date",
-                      "orig": "date",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "xml",
-                      "kind": "query",
-                      "name": "format",
-                      "orig": "format",
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "IC532",
-                      "kind": "query",
-                      "name": "id",
-                      "orig": "id",
-                      "reqd": True,
-                      "type": "`$STRING`",
-                    },
-                    {
-                      "example": "en",
-                      "kind": "query",
-                      "name": "lang",
-                      "orig": "lang",
-                      "type": "`$STRING`",
-                    },
-                  ],
-                },
                 "kind": "http",
                 "method": "GET",
                 "orig": "/vehicle/",
@@ -828,6 +820,53 @@ def make_config():
                     "lit": "vehicle",
                   },
                 ],
+                "parts": [
+                  "vehicle",
+                ],
+                "rename": {},
+                "transform": {
+                  "req": "`reqdata`",
+                  "res": "`body`",
+                },
+                "args": {
+                  "query": [
+                    {
+                      "name": "alert",
+                      "orig": "alert",
+                      "type": "`$BOOLEAN`",
+                      "kind": "query",
+                      "example": False,
+                    },
+                    {
+                      "name": "date",
+                      "orig": "date",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                    },
+                    {
+                      "name": "format",
+                      "orig": "format",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "xml",
+                    },
+                    {
+                      "name": "id",
+                      "orig": "id",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "reqd": True,
+                      "example": "IC532",
+                    },
+                    {
+                      "name": "lang",
+                      "orig": "lang",
+                      "type": "`$STRING`",
+                      "kind": "query",
+                      "example": "en",
+                    },
+                  ],
+                },
                 "select": {
                   "exist": [
                     "alert",
@@ -837,13 +876,6 @@ def make_config():
                     "lang",
                   ],
                 },
-                "transform": {
-                  "req": "`reqdata`",
-                  "res": "`body`",
-                },
-                "parts": [
-                  "vehicle",
-                ],
               },
             ],
           },

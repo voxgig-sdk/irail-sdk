@@ -1,0 +1,152 @@
+# Entity: liveboard
+
+main: kit: entity: liveboard: {
+
+  alias: field: {}
+
+  fields: {
+    departures: {
+      h: "Departures"
+      n: "departures"
+      r: true
+      t: "`$OBJECT`"
+    }
+    station: {
+      h: "Station"
+      n: "station"
+      r: true
+      sh: "Station name"
+      t: "`$STRING`"
+    }
+    stationinfo: {
+      h: "Stationinfo"
+      n: "stationinfo"
+      r: true
+      t: "`$OBJECT`"
+    }
+    timestamp: {
+      h: "Timestamp"
+      n: "timestamp"
+      r: true
+      sh: "Unix timestamp of the response"
+      t: "`$INTEGER`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: true
+      sh: "API version"
+      t: "`$STRING`"
+    }
+  }
+
+  name: "liveboard"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /liveboard/"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: false
+                k: "query"
+                n: "alert"
+                or: "alert"
+                r: false
+                t: "`$BOOLEAN`"
+              }
+              {
+                ex: "departure"
+                k: "query"
+                n: "arrdep"
+                or: "arrdep"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "300917"
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "xml"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "BE.NMBS.008892007"
+                k: "query"
+                n: "id"
+                or: "id"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "en"
+                k: "query"
+                n: "lang"
+                or: "lang"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "Gent-Sint-Pieters"
+                k: "query"
+                n: "station"
+                or: "station"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "1230"
+                k: "query"
+                n: "time"
+                or: "time"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/liveboard/"
+          q: {
+            exist: [
+              "alert"
+              "arrdep"
+              "date"
+              "format"
+              "id"
+              "lang"
+              "station"
+              "time"
+            ]
+          }
+          s: [
+            {
+              lit: "liveboard"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

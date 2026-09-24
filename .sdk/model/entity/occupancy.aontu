@@ -1,0 +1,42 @@
+# Entity: occupancy
+
+main: kit: entity: occupancy: {
+
+  alias: field: {}
+
+  name: "occupancy"
+  op: {
+    create: {
+      name: "create"
+      points: [
+        {
+          co: {
+            id: "POST /feedback/occupancy.php"
+            source: "openapi3"
+            version: 2
+          }
+          m: "POST"
+          o: "/feedback/occupancy.php"
+          s: [
+            {
+              lit: "feedback"
+            }
+            {
+              lit: "occupancy.php"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+  fields: {
+  }
+
+
+
+}

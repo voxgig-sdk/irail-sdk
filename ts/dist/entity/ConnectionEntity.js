@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.ConnectionEntity = void 0;
 const IrailEntityBase_1 = require("../IrailEntityBase");
-// TODO: needs Entity superclass
 class ConnectionEntity extends IrailEntityBase_1.IrailEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

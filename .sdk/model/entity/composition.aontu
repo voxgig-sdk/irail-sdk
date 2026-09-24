@@ -1,0 +1,87 @@
+# Entity: composition
+
+main: kit: entity: composition: {
+
+  alias: field: {}
+
+  fields: {
+    segments: {
+      h: "Segments"
+      n: "segments"
+      r: false
+      t: "`$OBJECT`"
+    }
+  }
+
+  name: "composition"
+  op: {
+    load: {
+      name: "load"
+      points: [
+        {
+          co: {
+            id: "GET /composition/"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                k: "query"
+                n: "date"
+                or: "date"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                ex: "xml"
+                k: "query"
+                n: "format"
+                or: "format"
+                r: false
+                t: "`$STRING`"
+              }
+              {
+                k: "query"
+                n: "id"
+                or: "id"
+                r: true
+                t: "`$STRING`"
+              }
+              {
+                ex: "en"
+                k: "query"
+                n: "lang"
+                or: "lang"
+                r: false
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/composition/"
+          q: {
+            exist: [
+              "date"
+              "format"
+              "id"
+              "lang"
+            ]
+          }
+          s: [
+            {
+              lit: "composition"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.composition`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

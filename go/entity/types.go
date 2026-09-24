@@ -1,7 +1,7 @@
 // Typed models for the Irail SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,7 +14,6 @@ import (
 
 // Composition is the typed data model for the composition entity.
 type Composition struct {
-	Segments *map[string]any `json:"segments,omitempty"`
 }
 
 // CompositionLoadMatch is the typed request payload for Composition.LoadTyped.
@@ -27,12 +26,6 @@ type CompositionLoadMatch struct {
 
 // Connection is the typed data model for the connection entity.
 type Connection struct {
-	Arrival *map[string]any `json:"arrival,omitempty"`
-	Departure *map[string]any `json:"departure,omitempty"`
-	Duration *int `json:"duration,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Occupancy *map[string]any `json:"occupancy,omitempty"`
-	Vias *map[string]any `json:"vias,omitempty"`
 }
 
 // ConnectionListMatch is the typed request payload for Connection.ListTyped.
@@ -51,12 +44,6 @@ type ConnectionListMatch struct {
 
 // Disturbance is the typed data model for the disturbance entity.
 type Disturbance struct {
-	Description *string `json:"description,omitempty"`
-	Id *int `json:"id,omitempty"`
-	Link *string `json:"link,omitempty"`
-	Timestamp *int `json:"timestamp,omitempty"`
-	Title *string `json:"title,omitempty"`
-	Type *int `json:"type,omitempty"`
 }
 
 // DisturbanceListMatch is the typed request payload for Disturbance.ListTyped.
@@ -68,11 +55,6 @@ type DisturbanceListMatch struct {
 
 // Liveboard is the typed data model for the liveboard entity.
 type Liveboard struct {
-	Departures map[string]any `json:"departures"`
-	Station string `json:"station"`
-	Stationinfo map[string]any `json:"stationinfo"`
-	Timestamp int `json:"timestamp"`
-	Version string `json:"version"`
 }
 
 // LiveboardLoadMatch is the typed request payload for Liveboard.LoadTyped.
@@ -89,9 +71,6 @@ type LiveboardLoadMatch struct {
 
 // Log is the typed data model for the log entity.
 type Log struct {
-	Querytime *int `json:"querytime,omitempty"`
-	Querytype *string `json:"querytype,omitempty"`
-	UserAgent *string `json:"user_agent,omitempty"`
 }
 
 // LogListMatch is the typed request payload for Log.ListTyped.
@@ -109,9 +88,6 @@ type OccupancyCreateData struct {
 
 // Station is the typed data model for the station entity.
 type Station struct {
-	Station any `json:"station"`
-	Timestamp int `json:"timestamp"`
-	Version string `json:"version"`
 }
 
 // StationLoadMatch is the typed request payload for Station.LoadTyped.
@@ -122,11 +98,6 @@ type StationLoadMatch struct {
 
 // Vehicle is the typed data model for the vehicle entity.
 type Vehicle struct {
-	Stops map[string]any `json:"stops"`
-	Timestamp int `json:"timestamp"`
-	Vehicle string `json:"vehicle"`
-	Vehicleinfo *map[string]any `json:"vehicleinfo,omitempty"`
-	Version string `json:"version"`
 }
 
 // VehicleLoadMatch is the typed request payload for Vehicle.LoadTyped.

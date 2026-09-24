@@ -24,20 +24,87 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "composition": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "segments",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "segments": {
+              "a": true,
+              "h": "Segments",
+              "n": "segments",
+              "r": false,
+              "t": "`$OBJECT`"
             }
-          ],
+          },
           "name": "composition",
           "op": {
             "load": {
@@ -45,60 +112,54 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /composition/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "id",
+                        "or": "id",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /composition/",
-                    "json": "{\"operationId\":\"getComposition\",\"parameters\":[{\"description\":\"The vehicle ID\",\"in\":\"query\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The date to query in ddmmyy format\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^[0-3][0-9][0-1][0-9][0-9]{2}$\",\"type\":\"string\"}},{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"composition\":{\"properties\":{\"segments\":{\"properties\":{\"number\":{\"type\":\"integer\"},\"segment\":{\"items\":{\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}},\"type\":\"object\"},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"vehicle\":{\"description\":\"Vehicle identifier\",\"type\":\"string\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with composition information\",\"headers\":{\"Access-Control-Allow-Origin\":{\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"schema\":{\"type\":\"string\"}}}},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/composition/",
-                  "segments": [
-                    {
-                      "lit": "composition"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/composition/",
+                  "q": {
                     "exist": [
                       "date",
                       "format",
@@ -106,7 +167,13 @@
                       "lang"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "composition"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.composition`"
                   }
@@ -123,44 +190,50 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "arrival",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "arrival": {
+              "a": true,
+              "h": "Arrival",
+              "n": "arrival",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "departure",
-              "req": false,
-              "type": "`$OBJECT`"
+            "departure": {
+              "a": true,
+              "h": "Departure",
+              "n": "departure",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "duration",
-              "req": false,
-              "type": "`$INTEGER`"
+            "duration": {
+              "a": true,
+              "h": "Duration",
+              "n": "duration",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "occupancy",
-              "req": false,
-              "type": "`$OBJECT`"
+            "occupancy": {
+              "a": true,
+              "h": "Occupancy",
+              "n": "occupancy",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "vias",
-              "req": false,
-              "type": "`$OBJECT`"
+            "vias": {
+              "a": true,
+              "h": "Vias",
+              "n": "vias",
+              "r": false,
+              "t": "`$OBJECT`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -172,111 +245,105 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /connections/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": false,
-                        "kind": "query",
-                        "name": "alert",
-                        "orig": "alert",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "ex": false,
+                        "k": "query",
+                        "n": "alert",
+                        "or": "alert",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "from",
-                        "orig": "from",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": 6,
-                        "kind": "query",
-                        "name": "result",
-                        "orig": "result",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 6,
+                        "k": "query",
+                        "n": "result",
+                        "or": "result",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "time",
-                        "orig": "time",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "time",
+                        "or": "time",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "departure",
-                        "kind": "query",
-                        "name": "timesel",
-                        "orig": "timesel",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "departure",
+                        "k": "query",
+                        "n": "timesel",
+                        "or": "timesel",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "to",
-                        "orig": "to",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "to",
+                        "or": "to",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "type_of_transport",
-                        "orig": "type_of_transport",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "type_of_transport",
+                        "or": "type_of_transport",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /connections/",
-                    "json": "{\"operationId\":\"getConnections\",\"parameters\":[{\"description\":\"The departure station name\",\"in\":\"query\",\"name\":\"from\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The arrival station name\",\"in\":\"query\",\"name\":\"to\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The time to query in hhmm format\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"pattern\":\"^[0-2][0-9][0-5][0-9]$\",\"type\":\"string\"}},{\"description\":\"The date to query in ddmmyy format\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^[0-3][0-9][0-1][0-9][0-9]{2}$\",\"type\":\"string\"}},{\"description\":\"Whether the time is the departure or arrival time\",\"in\":\"query\",\"name\":\"timesel\",\"required\":false,\"schema\":{\"default\":\"departure\",\"enum\":[\"departure\",\"arrival\"],\"type\":\"string\"}},{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}},{\"description\":\"Whether to include alerts about trains in the response\",\"in\":\"query\",\"name\":\"alerts\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"Filter by type of transport\",\"in\":\"query\",\"name\":\"typeOfTransport\",\"required\":false,\"schema\":{\"enum\":[\"automatic\",\"trains\",\"nointernationaltrains\",\"all\"],\"type\":\"string\"}},{\"description\":\"Number of results to return\",\"in\":\"query\",\"name\":\"results\",\"required\":false,\"schema\":{\"default\":6,\"maximum\":6,\"minimum\":1,\"type\":\"integer\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"connection\":{\"items\":{\"properties\":{\"arrival\":{\"properties\":{\"canceled\":{\"type\":\"integer\"},\"delay\":{\"type\":\"integer\"},\"platform\":{\"type\":\"string\"},\"station\":{\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"time\":{\"type\":\"integer\"},\"vehicle\":{\"type\":\"string\"}},\"type\":\"object\"},\"departure\":{\"properties\":{\"canceled\":{\"type\":\"integer\"},\"delay\":{\"type\":\"integer\"},\"platform\":{\"type\":\"string\"},\"station\":{\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"time\":{\"type\":\"integer\"},\"vehicle\":{\"type\":\"string\"}},\"type\":\"object\"},\"duration\":{\"type\":\"integer\"},\"id\":{\"type\":\"integer\"},\"occupancy\":{\"properties\":{\"@id\":{\"description\":\"Occupancy level URI\",\"type\":\"string\"},\"name\":{\"description\":\"Occupancy level name\",\"enum\":[\"low\",\"medium\",\"high\",\"unknown\"],\"type\":\"string\"}},\"type\":\"object\"},\"vias\":{\"properties\":{\"number\":{\"type\":\"integer\"},\"via\":{\"items\":{\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"required\":[\"version\",\"timestamp\",\"connection\"],\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with connections\",\"headers\":{\"Access-Control-Allow-Origin\":{\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"schema\":{\"type\":\"string\"}},\"cache-control\":{\"schema\":{\"type\":\"string\"}},\"etag\":{\"schema\":{\"type\":\"string\"}}}},\"304\":{\"description\":\"Not Modified - Content has not changed\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"},\"500\":{\"description\":\"Internal Server Error - May occur when querying dates too far in the past or future\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/connections/",
-                  "segments": [
-                    {
-                      "lit": "connections"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/connections/",
+                  "q": {
                     "exist": [
                       "alert",
                       "date",
@@ -290,7 +357,13 @@
                       "type_of_transport"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "connections"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.connection`"
                   }
@@ -307,44 +380,50 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "description",
-              "req": false,
-              "type": "`$STRING`"
+          "fields": {
+            "description": {
+              "a": true,
+              "h": "Description",
+              "n": "description",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$INTEGER`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "link",
-              "req": false,
-              "type": "`$STRING`"
+            "link": {
+              "a": true,
+              "h": "Link",
+              "n": "link",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "timestamp",
-              "req": false,
-              "type": "`$INTEGER`"
+            "timestamp": {
+              "a": true,
+              "h": "Timestamp",
+              "n": "timestamp",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "title",
-              "req": false,
-              "type": "`$STRING`"
+            "title": {
+              "a": true,
+              "h": "Title",
+              "n": "title",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "type",
-              "req": false,
-              "type": "`$INTEGER`"
+            "type": {
+              "a": true,
+              "h": "Type",
+              "n": "type",
+              "r": false,
+              "t": "`$INTEGER`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -356,59 +435,59 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /disturbances/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "line_break_character",
-                        "orig": "line_break_character",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "line_break_character",
+                        "or": "line_break_character",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /disturbances/",
-                    "json": "{\"operationId\":\"getDisturbances\",\"parameters\":[{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}},{\"description\":\"Character to use for line breaks in disturbance descriptions\",\"in\":\"query\",\"name\":\"lineBreakCharacter\",\"required\":false,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"disturbance\":{\"items\":{\"properties\":{\"description\":{\"type\":\"string\"},\"id\":{\"type\":\"integer\"},\"link\":{\"type\":\"string\"},\"timestamp\":{\"type\":\"integer\"},\"title\":{\"type\":\"string\"},\"type\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"required\":[\"version\",\"timestamp\",\"disturbance\"],\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with disturbances information\",\"headers\":{\"Access-Control-Allow-Origin\":{\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"schema\":{\"type\":\"string\"}},\"cache-control\":{\"schema\":{\"type\":\"string\"}}}},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/disturbances/",
-                  "segments": [
-                    {
-                      "lit": "disturbances"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/disturbances/",
+                  "q": {
                     "exist": [
                       "format",
                       "lang",
                       "line_break_character"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "disturbances"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.disturbance`"
                   }
@@ -425,41 +504,46 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "departures",
-              "req": true,
-              "type": "`$OBJECT`"
+          "fields": {
+            "departures": {
+              "a": true,
+              "h": "Departures",
+              "n": "departures",
+              "r": true,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "station",
-              "req": true,
-              "short": "Station name",
-              "type": "`$STRING`"
+            "station": {
+              "a": true,
+              "h": "Station",
+              "n": "station",
+              "r": true,
+              "sh": "Station name",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "stationinfo",
-              "req": true,
-              "type": "`$OBJECT`"
+            "stationinfo": {
+              "a": true,
+              "h": "Stationinfo",
+              "n": "stationinfo",
+              "r": true,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "timestamp",
-              "req": true,
-              "short": "Unix timestamp of the response",
-              "type": "`$INTEGER`"
+            "timestamp": {
+              "a": true,
+              "h": "Timestamp",
+              "n": "timestamp",
+              "r": true,
+              "sh": "Unix timestamp of the response",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "version",
-              "req": true,
-              "short": "API version",
-              "type": "`$STRING`"
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": true,
+              "sh": "API version",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "liveboard",
           "op": {
             "load": {
@@ -467,98 +551,92 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /liveboard/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": false,
-                        "kind": "query",
-                        "name": "alert",
-                        "orig": "alert",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "ex": false,
+                        "k": "query",
+                        "n": "alert",
+                        "or": "alert",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "example": "departure",
-                        "kind": "query",
-                        "name": "arrdep",
-                        "orig": "arrdep",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "departure",
+                        "k": "query",
+                        "n": "arrdep",
+                        "or": "arrdep",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "300917",
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "300917",
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "BE.NMBS.008892007",
-                        "kind": "query",
-                        "name": "id",
-                        "orig": "id",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "BE.NMBS.008892007",
+                        "k": "query",
+                        "n": "id",
+                        "or": "id",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "Gent-Sint-Pieters",
-                        "kind": "query",
-                        "name": "station",
-                        "orig": "station",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "Gent-Sint-Pieters",
+                        "k": "query",
+                        "n": "station",
+                        "or": "station",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "1230",
-                        "kind": "query",
-                        "name": "time",
-                        "orig": "time",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "1230",
+                        "k": "query",
+                        "n": "time",
+                        "or": "time",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /liveboard/",
-                    "json": "{\"operationId\":\"getLiveboard\",\"parameters\":[{\"description\":\"The name of the station to query\",\"example\":\"Gent-Sint-Pieters\",\"in\":\"query\",\"name\":\"station\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"The ID of the station. Do not use both id and station parameters\",\"example\":\"BE.NMBS.008892007\",\"in\":\"query\",\"name\":\"id\",\"required\":false,\"schema\":{\"type\":\"string\"}},{\"description\":\"Whether the results should show arrivals or departures\",\"in\":\"query\",\"name\":\"arrdep\",\"required\":false,\"schema\":{\"default\":\"departure\",\"enum\":[\"departure\",\"arrival\"],\"type\":\"string\"}},{\"description\":\"Whether to include alerts about trains in the response\",\"in\":\"query\",\"name\":\"alerts\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}},{\"description\":\"The time to query in hhmm format\",\"example\":\"1230\",\"in\":\"query\",\"name\":\"time\",\"required\":false,\"schema\":{\"pattern\":\"^[0-2][0-9][0-5][0-9]$\",\"type\":\"string\"}},{\"description\":\"The date to query in ddmmyy format\",\"example\":\"300917\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^[0-3][0-9][0-1][0-9][0-9]{2}$\",\"type\":\"string\"}},{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"departures\":{\"departure\":[{\"canceled\":0,\"delay\":0,\"departureConnection\":\"http://irail.be/connections/8821006/20170316/IC1832\",\"id\":0,\"left\":0,\"occupancy\":{\"@id\":\"http://api.irail.be/terms/unknown\",\"name\":\"unknown\"},\"platform\":4,\"platforminfo\":{\"name\":\"4\",\"normal\":\"1\"},\"station\":\"Antwerp-Central\",\"stationinfo\":{\"@id\":\"http://irail.be/stations/NMBS/008821006\",\"id\":\"BE.NMBS.008821006\",\"locationX\":4.421101,\"locationY\":51.2172,\"name\":\"Antwerp-Central\",\"standardname\":\"Antwerpen-Centraal\"},\"time\":1489575600,\"vehicle\":\"BE.NMBS.IC3033\",\"vehicleinfo\":{\"@id\":\"http://irail.be/vehicle/IC3033\",\"name\":\"BE.NMBS.IC3033\",\"shortname\":\"IC3033\"}}],\"number\":32},\"station\":\"Ghent-Sint-Pieters\",\"stationinfo\":{\"@id\":\"http://irail.be/stations/NMBS/008821006\",\"id\":\"BE.NMBS.008821006\",\"locationX\":4.421101,\"locationY\":51.2172,\"name\":\"Antwerp-Central\",\"standardname\":\"Antwerpen-Centraal\"},\"timestamp\":1489614297,\"version\":\"1.1\"},\"schema\":{\"properties\":{\"departures\":{\"properties\":{\"departure\":{\"items\":{\"properties\":{\"canceled\":{\"description\":\"Whether the departure is canceled (1 or 0)\",\"type\":\"integer\"},\"delay\":{\"description\":\"Delay in seconds\",\"type\":\"integer\"},\"departureConnection\":{\"description\":\"URI of the departure connection\",\"type\":\"string\"},\"id\":{\"description\":\"Departure sequence ID\",\"type\":\"integer\"},\"left\":{\"description\":\"Whether the train has left (1 or 0)\",\"type\":\"integer\"},\"occupancy\":{\"properties\":{\"@id\":{\"description\":\"Occupancy level URI\",\"type\":\"string\"},\"name\":{\"description\":\"Occupancy level name\",\"enum\":[\"low\",\"medium\",\"high\",\"unknown\"],\"type\":\"string\"}},\"type\":\"object\"},\"platform\":{\"description\":\"Platform number\",\"type\":\"integer\"},\"platforminfo\":{\"properties\":{\"name\":{\"description\":\"Platform number\",\"type\":\"string\"},\"normal\":{\"description\":\"Whether this is the normal platform (1 or 0)\",\"type\":\"string\"}},\"type\":\"object\"},\"station\":{\"description\":\"Destination station name\",\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"time\":{\"description\":\"Departure time as Unix timestamp\",\"type\":\"integer\"},\"vehicle\":{\"description\":\"Vehicle identifier\",\"type\":\"string\"},\"vehicleinfo\":{\"properties\":{\"@id\":{\"description\":\"Vehicle URI\",\"type\":\"string\"},\"name\":{\"description\":\"Full vehicle name\",\"type\":\"string\"},\"shortname\":{\"description\":\"Short vehicle name\",\"type\":\"string\"}},\"type\":\"object\"}},\"type\":\"object\"},\"type\":\"array\"},\"number\":{\"description\":\"Number of departures\",\"type\":\"integer\"}},\"type\":\"object\"},\"station\":{\"description\":\"Station name\",\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"required\":[\"version\",\"timestamp\",\"station\",\"departures\"],\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with liveboard information\",\"headers\":{\"Access-Control-Allow-Origin\":{\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"schema\":{\"type\":\"string\"}},\"cache-control\":{\"schema\":{\"type\":\"string\"}},\"etag\":{\"schema\":{\"type\":\"string\"}}}},\"304\":{\"description\":\"Not Modified - Content has not changed\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"},\"500\":{\"description\":\"Internal Server Error - May occur when querying dates too far in the past or future\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/liveboard/",
-                  "segments": [
-                    {
-                      "lit": "liveboard"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/liveboard/",
+                  "q": {
                     "exist": [
                       "alert",
                       "arrdep",
@@ -570,7 +648,13 @@
                       "time"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "liveboard"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -587,26 +671,29 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "querytime",
-              "req": false,
-              "type": "`$INTEGER`"
+          "fields": {
+            "querytime": {
+              "a": true,
+              "h": "Querytime",
+              "n": "querytime",
+              "r": false,
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "querytype",
-              "req": false,
-              "type": "`$STRING`"
+            "querytype": {
+              "a": true,
+              "h": "Querytype",
+              "n": "querytype",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "user_agent",
-              "req": false,
-              "type": "`$STRING`"
+            "user_agent": {
+              "a": true,
+              "h": "User Agent",
+              "n": "user_agent",
+              "r": false,
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "log",
           "op": {
             "list": {
@@ -614,40 +701,40 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /logs/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /logs/",
-                    "json": "{\"operationId\":\"getLogs\",\"parameters\":[{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"logs\":{\"items\":{\"properties\":{\"querytime\":{\"type\":\"integer\"},\"querytype\":{\"type\":\"string\"},\"user_agent\":{\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"timestamp\":{\"type\":\"integer\"},\"version\":{\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Successful response with log data\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/logs/",
-                  "segments": [
-                    {
-                      "lit": "logs"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/logs/",
+                  "q": {
                     "exist": [
                       "format"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "logs"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.logs`"
                   }
@@ -664,7 +751,7 @@
           "alias": {
             "field": {}
           },
-          "fields": [],
+          "fields": {},
           "name": "occupancy",
           "op": {
             "create": {
@@ -672,18 +759,19 @@
               "name": "create",
               "points": [
                 {
-                  "active": true,
-                  "args": {},
-                  "contract": {
+                  "a": true,
+                  "co": {
                     "id": "POST /feedback/occupancy.php",
-                    "json": "{\"operationId\":\"postOccupancy\",\"parameters\":[],\"protocol\":\"http\",\"requestBody\":{\"content\":{\"application/x-www-form-urlencoded\":{\"schema\":{\"properties\":{\"connection\":{\"description\":\"The connection URI\",\"type\":\"string\"},\"date\":{\"description\":\"The date in YYYYMMDD format\",\"type\":\"string\"},\"from\":{\"description\":\"The departure station URI\",\"type\":\"string\"},\"occupancy\":{\"description\":\"The occupancy level\",\"enum\":[\"low\",\"medium\",\"high\"],\"type\":\"string\"},\"vehicle\":{\"description\":\"The vehicle ID\",\"type\":\"string\"}},\"required\":[\"connection\",\"from\",\"date\",\"vehicle\",\"occupancy\"],\"type\":\"object\"}}},\"required\":true},\"responses\":{\"200\":{\"description\":\"Feedback successfully submitted\"},\"400\":{\"description\":\"Bad Request - Invalid parameters\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
                     "source": "openapi3",
-                    "version": 1
+                    "version": 2
                   },
-                  "kind": "http",
-                  "method": "POST",
-                  "orig": "/feedback/occupancy.php",
-                  "segments": [
+                  "g": {},
+                  "k": "http",
+                  "m": "POST",
+                  "o": "/feedback/occupancy.php",
+                  "q": {},
+                  "r": {},
+                  "s": [
                     {
                       "lit": "feedback"
                     },
@@ -691,8 +779,7 @@
                       "lit": "occupancy.php"
                     }
                   ],
-                  "select": {},
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -709,33 +796,36 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "station",
-              "req": true,
-              "type": "`$ANY`",
+          "fields": {
+            "station": {
+              "a": true,
+              "h": "Station",
+              "n": "station",
+              "r": true,
+              "t": "`$ANY`",
               "union": {
                 "branches": 2,
                 "count": 1,
                 "depth": 0
               }
             },
-            {
-              "active": true,
-              "name": "timestamp",
-              "req": true,
-              "short": "Unix timestamp of the response",
-              "type": "`$INTEGER`"
+            "timestamp": {
+              "a": true,
+              "h": "Timestamp",
+              "n": "timestamp",
+              "r": true,
+              "sh": "Unix timestamp of the response",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "version",
-              "req": true,
-              "short": "API version",
-              "type": "`$STRING`"
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": true,
+              "sh": "API version",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "station",
           "op": {
             "load": {
@@ -743,50 +833,50 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /stations/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /stations/",
-                    "json": "{\"operationId\":\"getStations\",\"parameters\":[{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"example\":{\"station\":{\"@id\":\"http://irail.be/stations/NMBS/008821006\",\"id\":\"BE.NMBS.008821006\",\"locationX\":4.421101,\"locationY\":51.2172,\"name\":\"Antwerp-Central\",\"standardname\":\"Antwerpen-Centraal\"},\"timestamp\":1489621486,\"version\":\"1.1\"},\"schema\":{\"properties\":{\"station\":{\"oneOf\":[{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},{\"items\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"type\":\"array\"}]},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"required\":[\"version\",\"timestamp\",\"station\"],\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with list of stations\",\"headers\":{\"Access-Control-Allow-Origin\":{\"description\":\"CORS header\",\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"description\":\"application/json or application/xml\",\"schema\":{\"type\":\"string\"}},\"cache-control\":{\"description\":\"Cache control directive\",\"schema\":{\"type\":\"string\"}},\"etag\":{\"description\":\"ETag for caching\",\"schema\":{\"type\":\"string\"}}}},\"304\":{\"description\":\"Not Modified - Content has not changed\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/stations/",
-                  "segments": [
-                    {
-                      "lit": "stations"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/stations/",
+                  "q": {
                     "exist": [
                       "format",
                       "lang"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "stations"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.station`"
                   }
@@ -803,41 +893,46 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "stops",
-              "req": true,
-              "type": "`$OBJECT`"
+          "fields": {
+            "stops": {
+              "a": true,
+              "h": "Stops",
+              "n": "stops",
+              "r": true,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "timestamp",
-              "req": true,
-              "short": "Unix timestamp of the response",
-              "type": "`$INTEGER`"
+            "timestamp": {
+              "a": true,
+              "h": "Timestamp",
+              "n": "timestamp",
+              "r": true,
+              "sh": "Unix timestamp of the response",
+              "t": "`$INTEGER`"
             },
-            {
-              "active": true,
-              "name": "vehicle",
-              "req": true,
-              "short": "Vehicle identifier",
-              "type": "`$STRING`"
+            "vehicle": {
+              "a": true,
+              "h": "Vehicle",
+              "n": "vehicle",
+              "r": true,
+              "sh": "Vehicle identifier",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "vehicleinfo",
-              "req": false,
-              "type": "`$OBJECT`"
+            "vehicleinfo": {
+              "a": true,
+              "h": "Vehicleinfo",
+              "n": "vehicleinfo",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "version",
-              "req": true,
-              "short": "API version",
-              "type": "`$STRING`"
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": true,
+              "sh": "API version",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "name": "vehicle",
           "op": {
             "load": {
@@ -845,70 +940,64 @@
               "name": "load",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /vehicle/",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": false,
-                        "kind": "query",
-                        "name": "alert",
-                        "orig": "alert",
-                        "reqd": false,
-                        "type": "`$BOOLEAN`"
+                        "a": true,
+                        "ex": false,
+                        "k": "query",
+                        "n": "alert",
+                        "or": "alert",
+                        "r": false,
+                        "t": "`$BOOLEAN`"
                       },
                       {
-                        "active": true,
-                        "kind": "query",
-                        "name": "date",
-                        "orig": "date",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "k": "query",
+                        "n": "date",
+                        "or": "date",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "xml",
-                        "kind": "query",
-                        "name": "format",
-                        "orig": "format",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "xml",
+                        "k": "query",
+                        "n": "format",
+                        "or": "format",
+                        "r": false,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "IC532",
-                        "kind": "query",
-                        "name": "id",
-                        "orig": "id",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "IC532",
+                        "k": "query",
+                        "n": "id",
+                        "or": "id",
+                        "r": true,
+                        "t": "`$STRING`"
                       },
                       {
-                        "active": true,
-                        "example": "en",
-                        "kind": "query",
-                        "name": "lang",
-                        "orig": "lang",
-                        "reqd": false,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "en",
+                        "k": "query",
+                        "n": "lang",
+                        "or": "lang",
+                        "r": false,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /vehicle/",
-                    "json": "{\"operationId\":\"getVehicle\",\"parameters\":[{\"description\":\"The vehicle ID (e.g., BE.NMBS.IC532 or IC532)\",\"example\":\"IC532\",\"in\":\"query\",\"name\":\"id\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"The date to query in ddmmyy format\",\"in\":\"query\",\"name\":\"date\",\"required\":false,\"schema\":{\"pattern\":\"^[0-3][0-9][0-1][0-9][0-9]{2}$\",\"type\":\"string\"}},{\"description\":\"The response format\",\"in\":\"query\",\"name\":\"format\",\"required\":false,\"schema\":{\"default\":\"xml\",\"enum\":[\"xml\",\"json\",\"jsonp\"],\"type\":\"string\"}},{\"description\":\"The language of any text or names in the response\",\"in\":\"query\",\"name\":\"lang\",\"required\":false,\"schema\":{\"default\":\"en\",\"enum\":[\"nl\",\"fr\",\"en\",\"de\"],\"type\":\"string\"}},{\"description\":\"Whether to include alerts about the train\",\"in\":\"query\",\"name\":\"alerts\",\"required\":false,\"schema\":{\"default\":false,\"type\":\"boolean\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"stops\":{\"properties\":{\"number\":{\"type\":\"integer\"},\"stop\":{\"items\":{\"properties\":{\"canceled\":{\"type\":\"integer\"},\"delay\":{\"type\":\"integer\"},\"id\":{\"type\":\"integer\"},\"left\":{\"type\":\"integer\"},\"occupancy\":{\"properties\":{\"@id\":{\"description\":\"Occupancy level URI\",\"type\":\"string\"},\"name\":{\"description\":\"Occupancy level name\",\"enum\":[\"low\",\"medium\",\"high\",\"unknown\"],\"type\":\"string\"}},\"type\":\"object\"},\"platform\":{\"type\":\"string\"},\"platforminfo\":{\"properties\":{\"name\":{\"description\":\"Platform number\",\"type\":\"string\"},\"normal\":{\"description\":\"Whether this is the normal platform (1 or 0)\",\"type\":\"string\"}},\"type\":\"object\"},\"station\":{\"type\":\"string\"},\"stationinfo\":{\"properties\":{\"@id\":{\"description\":\"The URI identifier of the station\",\"type\":\"string\"},\"id\":{\"description\":\"The (iRail) id of the station. The NMBS id can be deducted by removing the leading 'BE.NMBS.00'\",\"type\":\"string\"},\"locationX\":{\"description\":\"The longitude of the station\",\"type\":\"number\"},\"locationY\":{\"description\":\"The latitude of the station\",\"type\":\"number\"},\"name\":{\"description\":\"The default name of this station\",\"type\":\"string\"},\"standardname\":{\"description\":\"The consistent name of this station\",\"type\":\"string\"}},\"required\":[\"id\",\"@id\",\"locationX\",\"locationY\",\"standardname\",\"name\"],\"type\":\"object\"},\"time\":{\"type\":\"integer\"}},\"type\":\"object\"},\"type\":\"array\"}},\"type\":\"object\"},\"timestamp\":{\"description\":\"Unix timestamp of the response\",\"type\":\"integer\"},\"vehicle\":{\"description\":\"Vehicle identifier\",\"type\":\"string\"},\"vehicleinfo\":{\"properties\":{\"@id\":{\"description\":\"Vehicle URI\",\"type\":\"string\"},\"name\":{\"description\":\"Full vehicle name\",\"type\":\"string\"},\"shortname\":{\"description\":\"Short vehicle name\",\"type\":\"string\"}},\"type\":\"object\"},\"version\":{\"description\":\"API version\",\"type\":\"string\"}},\"required\":[\"version\",\"timestamp\",\"vehicle\",\"stops\"],\"type\":\"object\"}},\"application/xml\":{\"schema\":{\"type\":\"string\"}}},\"description\":\"Successful response with vehicle information\",\"headers\":{\"Access-Control-Allow-Origin\":{\"schema\":{\"type\":\"string\"}},\"Content-Type\":{\"schema\":{\"type\":\"string\"}},\"cache-control\":{\"schema\":{\"type\":\"string\"}},\"etag\":{\"schema\":{\"type\":\"string\"}}}},\"304\":{\"description\":\"Not Modified - Content has not changed\"},\"429\":{\"description\":\"Too Many Requests - Rate limit exceeded\"}},\"securitySchemes\":{},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/vehicle/",
-                  "segments": [
-                    {
-                      "lit": "vehicle"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/vehicle/",
+                  "q": {
                     "exist": [
                       "alert",
                       "date",
@@ -917,7 +1006,13 @@
                       "lang"
                     ]
                   },
-                  "transform": {
+                  "r": {},
+                  "s": [
+                    {
+                      "lit": "vehicle"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -1346,17 +1441,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "composition_ref01",
                 "srcdatavar": "composition_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1376,13 +1471,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1402,13 +1497,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1428,17 +1523,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "liveboard_ref01",
                 "srcdatavar": "liveboard_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1458,13 +1553,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -1484,15 +1579,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "occupancy_ref01"
               },
-              "match": {},
-              "op": "create",
-              "spec": [],
-              "valid": []
+              "m": {},
+              "o": "create",
+              "s": [],
+              "v": []
             }
           ]
         },
@@ -1505,17 +1600,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "station_ref01",
                 "srcdatavar": "station_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
@@ -1535,17 +1630,17 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {
+              "a": true,
+              "d": {},
+              "i": {
                 "ref": "vehicle_ref01",
                 "srcdatavar": "vehicle_ref01_data",
                 "suffix": "_dt0"
               },
-              "match": {},
-              "op": "load",
-              "spec": [],
-              "valid": [
+              "m": {},
+              "o": "load",
+              "s": [],
+              "v": [
                 {
                   "apply": "TextFieldMark",
                   "def": {
