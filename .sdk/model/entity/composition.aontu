@@ -5,11 +5,32 @@ main: kit: entity: composition: {
   alias: field: {}
 
   fields: {
-    segments: {
-      h: "Segments"
-      n: "segments"
+    composition: {
+      h: "Composition"
+      n: "composition"
       r: false
       t: "`$OBJECT`"
+    }
+    timestamp: {
+      h: "Timestamp"
+      n: "timestamp"
+      r: false
+      sh: "Unix timestamp of the response"
+      t: "`$INTEGER`"
+    }
+    vehicle: {
+      h: "Vehicle"
+      n: "vehicle"
+      r: false
+      sh: "Vehicle identifier"
+      t: "`$STRING`"
+    }
+    version: {
+      h: "Version"
+      n: "version"
+      r: false
+      sh: "API version"
+      t: "`$STRING`"
     }
   }
 

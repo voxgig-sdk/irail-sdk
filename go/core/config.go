@@ -97,9 +97,27 @@ func MakeConfig() map[string]any {
 			"composition": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"name": "segments",
-						"title": "Segments",
+						"name": "composition",
+						"title": "Composition",
 						"type": "`$OBJECT`",
+					},
+					map[string]any{
+						"name": "timestamp",
+						"title": "Timestamp",
+						"type": "`$INTEGER`",
+						"short": "Unix timestamp of the response",
+					},
+					map[string]any{
+						"name": "vehicle",
+						"title": "Vehicle",
+						"type": "`$STRING`",
+						"short": "Vehicle identifier",
+					},
+					map[string]any{
+						"name": "version",
+						"title": "Version",
+						"type": "`$STRING`",
+						"short": "API version",
 					},
 				},
 				"name": "composition",
@@ -236,7 +254,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "alert",
-											"orig": "alert",
+											"orig": "alerts",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -270,7 +288,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "result",
-											"orig": "result",
+											"orig": "results",
 											"type": "`$INTEGER`",
 											"kind": "query",
 											"example": 6,
@@ -297,7 +315,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "type_of_transport",
-											"orig": "type_of_transport",
+											"orig": "typeOfTransport",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -403,7 +421,7 @@ func MakeConfig() map[string]any {
 										},
 										map[string]any{
 											"name": "line_break_character",
-											"orig": "line_break_character",
+											"orig": "lineBreakCharacter",
 											"type": "`$STRING`",
 											"kind": "query",
 										},
@@ -487,7 +505,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "alert",
-											"orig": "alert",
+											"orig": "alerts",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,
@@ -807,7 +825,7 @@ func MakeConfig() map[string]any {
 									"query": []any{
 										map[string]any{
 											"name": "alert",
-											"orig": "alert",
+											"orig": "alerts",
 											"type": "`$BOOLEAN`",
 											"kind": "query",
 											"example": false,

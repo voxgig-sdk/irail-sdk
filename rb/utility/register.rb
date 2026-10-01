@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 IrailUtility.registrar = ->(u) {
   u.clean = IrailUtilities::Clean
+  u.clean_add = IrailUtilities::CleanAdd
+  u.clean_explain = IrailUtilities::CleanExplain
   u.done = IrailUtilities::Done
   u.make_error = IrailUtilities::MakeError
   u.feature_add = IrailUtilities::FeatureAdd

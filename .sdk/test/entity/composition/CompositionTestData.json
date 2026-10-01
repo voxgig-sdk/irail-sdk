@@ -2,15 +2,24 @@
   "existing": {
     "composition": {
       "COMPOSITION00": {
-        "segments": {},
+        "composition": {},
+        "timestamp": 41,
+        "vehicle": "s2a",
+        "version": "s2b",
         "id": "COMPOSITION00"
       },
       "COMPOSITION01": {
-        "segments": {},
+        "composition": {},
+        "timestamp": 81,
+        "vehicle": "s52",
+        "version": "s53",
         "id": "COMPOSITION01"
       },
       "COMPOSITION02": {
-        "segments": {},
+        "composition": {},
+        "timestamp": 121,
+        "vehicle": "s7a",
+        "version": "s7b",
         "id": "COMPOSITION02"
       }
     }
@@ -18,7 +27,10 @@
   "new": {
     "composition": {
       "composition_ref01": {
-        "segments": {}
+        "composition": {},
+        "timestamp": 161,
+        "vehicle": "sa2",
+        "version": "sa3"
       }
     }
   },

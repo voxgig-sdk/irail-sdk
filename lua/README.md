@@ -235,7 +235,10 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `segments` |  |
+| `composition` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
+| `version` | API version |
 
 Operations: Load.
 
@@ -351,7 +354,10 @@ Create an instance: `local composition = client:Composition(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `segments` | `table` |  |
+| `composition` | `table` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
+| `version` | `string` | API version |
 
 #### Example: Load
 

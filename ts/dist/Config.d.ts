@@ -81,11 +81,17 @@ declare class Config {
     };
     entity: {
         composition: {
-            fields: {
+            fields: ({
                 name: string;
                 title: string;
                 type: string;
-            }[];
+                short?: undefined;
+            } | {
+                name: string;
+                title: string;
+                type: string;
+                short: string;
+            })[];
             name: string;
             op: {
                 load: {

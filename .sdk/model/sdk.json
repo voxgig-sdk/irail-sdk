@@ -97,12 +97,36 @@
             "field": {}
           },
           "fields": {
-            "segments": {
+            "composition": {
               "a": true,
-              "h": "Segments",
-              "n": "segments",
+              "h": "Composition",
+              "n": "composition",
               "r": false,
               "t": "`$OBJECT`"
+            },
+            "timestamp": {
+              "a": true,
+              "h": "Timestamp",
+              "n": "timestamp",
+              "r": false,
+              "sh": "Unix timestamp of the response",
+              "t": "`$INTEGER`"
+            },
+            "vehicle": {
+              "a": true,
+              "h": "Vehicle",
+              "n": "vehicle",
+              "r": false,
+              "sh": "Vehicle identifier",
+              "t": "`$STRING`"
+            },
+            "version": {
+              "a": true,
+              "h": "Version",
+              "n": "version",
+              "r": false,
+              "sh": "API version",
+              "t": "`$STRING`"
             }
           },
           "name": "composition",
@@ -258,7 +282,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "alert",
-                        "or": "alert",
+                        "or": "alerts",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -301,7 +325,7 @@
                         "ex": 6,
                         "k": "query",
                         "n": "result",
-                        "or": "result",
+                        "or": "results",
                         "r": false,
                         "t": "`$INTEGER`"
                       },
@@ -334,7 +358,7 @@
                         "a": true,
                         "k": "query",
                         "n": "type_of_transport",
-                        "or": "type_of_transport",
+                        "or": "typeOfTransport",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -465,7 +489,7 @@
                         "a": true,
                         "k": "query",
                         "n": "line_break_character",
-                        "or": "line_break_character",
+                        "or": "lineBreakCharacter",
                         "r": false,
                         "t": "`$STRING`"
                       }
@@ -564,7 +588,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "alert",
-                        "or": "alert",
+                        "or": "alerts",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -953,7 +977,7 @@
                         "ex": false,
                         "k": "query",
                         "n": "alert",
-                        "or": "alert",
+                        "or": "alerts",
                         "r": false,
                         "t": "`$BOOLEAN`"
                       },
@@ -1694,7 +1718,12 @@
         },
         "base": "http://localhost:8000",
         "clean": {
-          "keys": "key,token,id"
+          "active": true,
+          "hint": "0",
+          "keys": "key,secret,token,password,passwd,authorization,cookie,credential,signature",
+          "mask": "[redacted]",
+          "min": "4",
+          "values": ""
         },
         "entity": {
           "`$CHILD`": {

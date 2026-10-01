@@ -80,7 +80,7 @@ main: kit: entity: disturbance: {
               {
                 k: "query"
                 n: "line_break_character"
-                or: "line_break_character"
+                or: "lineBreakCharacter"
                 r: false
                 t: "`$STRING`"
               }

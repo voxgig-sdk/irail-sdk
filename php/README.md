@@ -12,9 +12,14 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`):
+GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)), or
+from a clone as a Composer path repository:
 
-- Releases: [https://github.com/voxgig-sdk/irail-sdk/releases](https://github.com/voxgig-sdk/irail-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/irail-sdk
+composer config repositories.irail-sdk path ./irail-sdk/php
+composer require voxgig-sdk/irail-sdk:@dev
+```
 
 
 ## Tutorial: your first API call
@@ -257,7 +262,10 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `segments` |  |
+| `composition` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
+| `version` | API version |
 
 Operations: Load.
 
@@ -373,7 +381,10 @@ Create an instance: `$composition = $client->Composition();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `segments` | `array` |  |
+| `composition` | `array` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
+| `version` | `string` | API version |
 
 #### Example: Load
 

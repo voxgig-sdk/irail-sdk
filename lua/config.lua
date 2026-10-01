@@ -93,9 +93,27 @@ local function make_config()
       ["composition"] = {
         ["fields"] = {
           {
-            ["name"] = "segments",
-            ["title"] = "Segments",
+            ["name"] = "composition",
+            ["title"] = "Composition",
             ["type"] = "`$OBJECT`",
+          },
+          {
+            ["name"] = "timestamp",
+            ["title"] = "Timestamp",
+            ["type"] = "`$INTEGER`",
+            ["short"] = "Unix timestamp of the response",
+          },
+          {
+            ["name"] = "vehicle",
+            ["title"] = "Vehicle",
+            ["type"] = "`$STRING`",
+            ["short"] = "Vehicle identifier",
+          },
+          {
+            ["name"] = "version",
+            ["title"] = "Version",
+            ["type"] = "`$STRING`",
+            ["short"] = "API version",
           },
         },
         ["name"] = "composition",
@@ -232,7 +250,7 @@ local function make_config()
                   ["query"] = {
                     {
                       ["name"] = "alert",
-                      ["orig"] = "alert",
+                      ["orig"] = "alerts",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = false,
@@ -266,7 +284,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "result",
-                      ["orig"] = "result",
+                      ["orig"] = "results",
                       ["type"] = "`$INTEGER`",
                       ["kind"] = "query",
                       ["example"] = 6,
@@ -293,7 +311,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "type_of_transport",
-                      ["orig"] = "type_of_transport",
+                      ["orig"] = "typeOfTransport",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                     },
@@ -399,7 +417,7 @@ local function make_config()
                     },
                     {
                       ["name"] = "line_break_character",
-                      ["orig"] = "line_break_character",
+                      ["orig"] = "lineBreakCharacter",
                       ["type"] = "`$STRING`",
                       ["kind"] = "query",
                     },
@@ -483,7 +501,7 @@ local function make_config()
                   ["query"] = {
                     {
                       ["name"] = "alert",
-                      ["orig"] = "alert",
+                      ["orig"] = "alerts",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = false,
@@ -803,7 +821,7 @@ local function make_config()
                   ["query"] = {
                     {
                       ["name"] = "alert",
-                      ["orig"] = "alert",
+                      ["orig"] = "alerts",
                       ["type"] = "`$BOOLEAN`",
                       ["kind"] = "query",
                       ["example"] = false,

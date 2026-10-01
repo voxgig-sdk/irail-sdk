@@ -121,7 +121,10 @@ composition = client.Composition
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `segments` | `Hash` | No |  |
+| `composition` | `Hash` | No |  |
+| `timestamp` | `Integer` | No | Unix timestamp of the response |
+| `vehicle` | `String` | No | Vehicle identifier |
+| `version` | `String` | No | API version |
 
 ### Operations
 

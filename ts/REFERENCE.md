@@ -200,7 +200,10 @@ const composition = client.Composition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `segments` | `Record<string, any>` | No |  |
+| `composition` | `Record<string, any>` | No |  |
+| `timestamp` | `number` | No | Unix timestamp of the response |
+| `vehicle` | `string` | No | Vehicle identifier |
+| `version` | `string` | No | API version |
 
 ### Operations
 

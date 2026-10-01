@@ -15,9 +15,13 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`):
+release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)), or from a
+clone, which carries the compiled `dist/`:
 
-- Releases: [https://github.com/voxgig-sdk/irail-sdk/releases](https://github.com/voxgig-sdk/irail-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/irail-sdk
+npm install ./irail-sdk/ts
+```
 
 
 ## Tutorial: your first API call
@@ -301,7 +305,10 @@ The `prepare()` method returns:
 
 | Field | Description |
 | --- | --- |
-| `segments` |  |
+| `composition` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
+| `version` | API version |
 
 Operations: load.
 
@@ -417,7 +424,10 @@ Create an instance: `const composition = client.Composition()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `segments` | `Record<string, any>` |  |
+| `composition` | `Record<string, any>` |  |
+| `timestamp` | `number` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
+| `version` | `string` | API version |
 
 #### Example: Load
 

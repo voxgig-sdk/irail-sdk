@@ -18,6 +18,12 @@ Results: Successful response with composition information.
 
 SDK operations: `load`.
 
+Key fields to recognise:
+
+- `timestamp`: Unix timestamp of the response
+- `vehicle`: Vehicle identifier
+- `version`: API version
+
 ### Connection
 
 Results: Successful response with connections.

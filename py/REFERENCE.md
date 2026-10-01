@@ -115,7 +115,10 @@ composition = client.Composition()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `segments` | `dict` | No |  |
+| `composition` | `dict` | No |  |
+| `timestamp` | `int` | No | Unix timestamp of the response |
+| `vehicle` | `str` | No | Vehicle identifier |
+| `version` | `str` | No | API version |
 
 ### Operations
 

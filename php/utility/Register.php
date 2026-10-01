@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 IrailUtility::setRegistrar(function (IrailUtility $u): void {
     $u->clean = [IrailClean::class, 'call'];
+    $u->clean_add = [IrailClean::class, 'add'];
+    $u->clean_explain = [IrailDone::class, 'clean_explain'];
     $u->done = [IrailDone::class, 'call'];
     $u->make_error = [IrailMakeError::class, 'call'];
     $u->feature_add = [IrailFeatureAdd::class, 'call'];

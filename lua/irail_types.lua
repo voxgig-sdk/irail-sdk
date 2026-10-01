@@ -7,7 +7,10 @@
 -- edit by hand.
 
 ---@class Composition
----@field segments? table
+---@field composition? table
+---@field timestamp? number
+---@field vehicle? string
+---@field version? string
 
 ---@class CompositionLoadMatch
 ---@field date? string

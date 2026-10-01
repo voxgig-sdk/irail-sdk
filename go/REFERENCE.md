@@ -126,7 +126,10 @@ fmt.Println(composition.GetName()) // "composition"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `segments` | `map[string]any` | No |  |
+| `composition` | `map[string]any` | No |  |
+| `timestamp` | `int` | No | Unix timestamp of the response |
+| `vehicle` | `string` | No | Vehicle identifier |
+| `version` | `string` | No | API version |
 
 ### Operations
 

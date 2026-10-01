@@ -250,7 +250,10 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `segments` |  |
+| `composition` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
+| `version` | API version |
 
 Operations: Load.
 
@@ -366,7 +369,10 @@ Create an instance: `composition = client.Composition()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `segments` | `dict` |  |
+| `composition` | `dict` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `vehicle` | `str` | Vehicle identifier |
+| `version` | `str` | API version |
 
 #### Example: Load
 

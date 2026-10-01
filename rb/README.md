@@ -12,9 +12,18 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`):
+GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)), or
+from a clone:
 
-- Releases: [https://github.com/voxgig-sdk/irail-sdk/releases](https://github.com/voxgig-sdk/irail-sdk/releases)
+```bash
+git clone https://github.com/voxgig-sdk/irail-sdk
+```
+
+Then add it to your `Gemfile` by path, and run `bundle install`:
+
+```ruby
+gem "voxgig-sdk-irail-sdk", path: "./irail-sdk/rb"
+```
 
 
 ## Tutorial: your first API call
@@ -247,7 +256,10 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `segments` |  |
+| `composition` |  |
+| `timestamp` | Unix timestamp of the response |
+| `vehicle` | Vehicle identifier |
+| `version` | API version |
 
 Operations: Load.
 
@@ -363,7 +375,10 @@ Create an instance: `composition = client.Composition`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `segments` | `Hash` |  |
+| `composition` | `Hash` |  |
+| `timestamp` | `Integer` | Unix timestamp of the response |
+| `vehicle` | `String` | Vehicle identifier |
+| `version` | `String` | API version |
 
 #### Example: Load
 

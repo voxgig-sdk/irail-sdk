@@ -268,7 +268,10 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 | Field | Description |
 | --- | --- |
-| `"segments"` |  |
+| `"composition"` |  |
+| `"timestamp"` | Unix timestamp of the response |
+| `"vehicle"` | Vehicle identifier |
+| `"version"` | API version |
 
 Operations: Load.
 
@@ -384,7 +387,10 @@ Create an instance: `composition := client.Composition(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `segments` | `map[string]any` |  |
+| `composition` | `map[string]any` |  |
+| `timestamp` | `int` | Unix timestamp of the response |
+| `vehicle` | `string` | Vehicle identifier |
+| `version` | `string` | API version |
 
 #### Example: Load
 

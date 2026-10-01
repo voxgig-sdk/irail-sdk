@@ -65,7 +65,7 @@ main: kit: entity: connection: {
                 ex: false
                 k: "query"
                 n: "alert"
-                or: "alert"
+                or: "alerts"
                 r: false
                 t: "`$BOOLEAN`"
               }
@@ -103,7 +103,7 @@ main: kit: entity: connection: {
                 ex: 6
                 k: "query"
                 n: "result"
-                or: "result"
+                or: "results"
                 r: false
                 t: "`$INTEGER`"
               }
@@ -132,7 +132,7 @@ main: kit: entity: connection: {
               {
                 k: "query"
                 n: "type_of_transport"
-                or: "type_of_transport"
+                or: "typeOfTransport"
                 r: false
                 t: "`$STRING`"
               }

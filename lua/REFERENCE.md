@@ -118,7 +118,10 @@ local composition = client:Composition(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `segments` | `table` | No |  |
+| `composition` | `table` | No |  |
+| `timestamp` | `number` | No | Unix timestamp of the response |
+| `vehicle` | `string` | No | Vehicle identifier |
+| `version` | `string` | No | API version |
 
 ### Operations
 

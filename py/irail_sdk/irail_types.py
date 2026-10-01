@@ -17,7 +17,10 @@ from typing import TypedDict, Any
 
 
 class Composition(TypedDict, total=False):
-    segments: dict
+    composition: dict
+    timestamp: int
+    vehicle: str
+    version: str
 
 
 class CompositionLoadMatchRequired(TypedDict):

@@ -15,7 +15,10 @@ declare(strict_types=1);
 /** Composition entity data model. */
 class Composition
 {
-    public ?array $segments = null;
+    public ?array $composition = null;
+    public ?int $timestamp = null;
+    public ?string $vehicle = null;
+    public ?string $version = null;
 }
 
 /** Request payload for Composition#load. */

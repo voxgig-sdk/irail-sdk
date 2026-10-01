@@ -120,7 +120,10 @@ $composition = $client->Composition();
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `segments` | `array` | No |  |
+| `composition` | `array` | No |  |
+| `timestamp` | `int` | No | Unix timestamp of the response |
+| `vehicle` | `string` | No | Vehicle identifier |
+| `version` | `string` | No | API version |
 
 ### Operations
 

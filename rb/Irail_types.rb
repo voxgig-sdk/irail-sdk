@@ -10,10 +10,22 @@
 
 # Composition entity data model.
 #
-# @!attribute [rw] segments
+# @!attribute [rw] composition
 #   @return [Hash, nil]
+#
+# @!attribute [rw] timestamp
+#   @return [Integer, nil]
+#
+# @!attribute [rw] vehicle
+#   @return [String, nil]
+#
+# @!attribute [rw] version
+#   @return [String, nil]
 Composition = Struct.new(
-  :segments,
+  :composition,
+  :timestamp,
+  :vehicle,
+  :version,
   keyword_init: true
 )
 

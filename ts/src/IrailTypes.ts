@@ -6,7 +6,10 @@
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 
 export interface Composition {
-  segments?: Record<string, any>
+  composition?: Record<string, any>
+  timestamp?: number
+  vehicle?: string
+  version?: string
 }
 
 export interface CompositionLoadMatch {

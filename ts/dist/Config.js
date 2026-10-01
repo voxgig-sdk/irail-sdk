@@ -113,9 +113,27 @@ class Config {
         "composition": {
             "fields": [
                 {
-                    "name": "segments",
-                    "title": "Segments",
+                    "name": "composition",
+                    "title": "Composition",
                     "type": "`$OBJECT`"
+                },
+                {
+                    "name": "timestamp",
+                    "title": "Timestamp",
+                    "type": "`$INTEGER`",
+                    "short": "Unix timestamp of the response"
+                },
+                {
+                    "name": "vehicle",
+                    "title": "Vehicle",
+                    "type": "`$STRING`",
+                    "short": "Vehicle identifier"
+                },
+                {
+                    "name": "version",
+                    "title": "Version",
+                    "type": "`$STRING`",
+                    "short": "API version"
                 }
             ],
             "name": "composition",
@@ -252,7 +270,7 @@ class Config {
                                 "query": [
                                     {
                                         "name": "alert",
-                                        "orig": "alert",
+                                        "orig": "alerts",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query",
                                         "example": false
@@ -286,7 +304,7 @@ class Config {
                                     },
                                     {
                                         "name": "result",
-                                        "orig": "result",
+                                        "orig": "results",
                                         "type": "`$INTEGER`",
                                         "kind": "query",
                                         "example": 6
@@ -313,7 +331,7 @@ class Config {
                                     },
                                     {
                                         "name": "type_of_transport",
-                                        "orig": "type_of_transport",
+                                        "orig": "typeOfTransport",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     }
@@ -419,7 +437,7 @@ class Config {
                                     },
                                     {
                                         "name": "line_break_character",
-                                        "orig": "line_break_character",
+                                        "orig": "lineBreakCharacter",
                                         "type": "`$STRING`",
                                         "kind": "query"
                                     }
@@ -503,7 +521,7 @@ class Config {
                                 "query": [
                                     {
                                         "name": "alert",
-                                        "orig": "alert",
+                                        "orig": "alerts",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query",
                                         "example": false
@@ -823,7 +841,7 @@ class Config {
                                 "query": [
                                     {
                                         "name": "alert",
-                                        "orig": "alert",
+                                        "orig": "alerts",
                                         "type": "`$BOOLEAN`",
                                         "kind": "query",
                                         "example": false
