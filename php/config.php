@@ -93,6 +93,7 @@ class IrailConfig
           ],
           'optspec' => [
             'clearTimer' => '`$FUNCTION`',
+            'now' => '`$FUNCTION`',
             'setTimer' => '`$FUNCTION`',
           ],
           'strict' => false,
@@ -100,7 +101,7 @@ class IrailConfig
         ],
             ],
             "options" => [
-                "base" => "https://api.irail.be",
+                "base" => "https://api.irail.be/v1",
                 "headers" => [
           'content-type' => 'application/json',
         ],
@@ -109,8 +110,6 @@ class IrailConfig
                     "connection" => [],
                     "disturbance" => [],
                     "liveboard" => [],
-                    "log" => [],
-                    "occupancy" => [],
                     "station" => [],
                     "vehicle" => [],
                 ],
@@ -151,7 +150,7 @@ class IrailConfig
                 [
                   'kind' => 'http',
                   'method' => 'GET',
-                  'orig' => '/composition/',
+                  'orig' => '/composition',
                   'segments' => [
                     [
                       'lit' => 'composition',
@@ -178,7 +177,8 @@ class IrailConfig
                         'orig' => 'format',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'xml',
+                        'reqd' => true,
+                        'example' => 'json',
                       ],
                       [
                         'name' => 'id',
@@ -186,6 +186,7 @@ class IrailConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'example' => 'IC532',
                       ],
                       [
                         'name' => 'lang',
@@ -198,11 +199,19 @@ class IrailConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'date',
                       'format',
                       'id',
-                      'lang',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'kind' => 'raw',
+                        'media' => 'application/xml',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -258,7 +267,7 @@ class IrailConfig
                 [
                   'kind' => 'http',
                   'method' => 'GET',
-                  'orig' => '/connections/',
+                  'orig' => '/connections',
                   'segments' => [
                     [
                       'lit' => 'connections',
@@ -292,7 +301,8 @@ class IrailConfig
                         'orig' => 'format',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'xml',
+                        'reqd' => true,
+                        'example' => 'json',
                       ],
                       [
                         'name' => 'from',
@@ -300,6 +310,7 @@ class IrailConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'example' => 'Gent-Sint-Pieters',
                       ],
                       [
                         'name' => 'lang',
@@ -334,6 +345,7 @@ class IrailConfig
                         'type' => '`$STRING`',
                         'kind' => 'query',
                         'reqd' => true,
+                        'example' => 'Brussels-Central',
                       ],
                       [
                         'name' => 'type_of_transport',
@@ -345,17 +357,20 @@ class IrailConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'alert',
-                      'date',
                       'format',
                       'from',
-                      'lang',
-                      'result',
-                      'time',
-                      'timesel',
                       'to',
-                      'type_of_transport',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'kind' => 'raw',
+                        'media' => 'application/xml',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -411,7 +426,7 @@ class IrailConfig
                 [
                   'kind' => 'http',
                   'method' => 'GET',
-                  'orig' => '/disturbances/',
+                  'orig' => '/disturbances',
                   'segments' => [
                     [
                       'lit' => 'disturbances',
@@ -432,7 +447,8 @@ class IrailConfig
                         'orig' => 'format',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'xml',
+                        'reqd' => true,
+                        'example' => 'json',
                       ],
                       [
                         'name' => 'lang',
@@ -452,9 +468,17 @@ class IrailConfig
                   'select' => [
                     'exist' => [
                       'format',
-                      'lang',
-                      'line_break_character',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'kind' => 'raw',
+                        'media' => 'application/xml',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -509,7 +533,7 @@ class IrailConfig
                 [
                   'kind' => 'http',
                   'method' => 'GET',
-                  'orig' => '/liveboard/',
+                  'orig' => '/liveboard',
                   'segments' => [
                     [
                       'lit' => 'liveboard',
@@ -544,21 +568,20 @@ class IrailConfig
                         'orig' => 'date',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => '300917',
                       ],
                       [
                         'name' => 'format',
                         'orig' => 'format',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'xml',
+                        'reqd' => true,
+                        'example' => 'json',
                       ],
                       [
                         'name' => 'id',
                         'orig' => 'id',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'BE.NMBS.008892007',
                       ],
                       [
                         'name' => 'lang',
@@ -572,133 +595,34 @@ class IrailConfig
                         'orig' => 'station',
                         'type' => '`$STRING`',
                         'kind' => 'query',
+                        'reqd' => true,
                         'example' => 'Gent-Sint-Pieters',
+                        'field' => true,
                       ],
                       [
                         'name' => 'time',
                         'orig' => 'time',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => '1230',
                       ],
                     ],
                   ],
                   'select' => [
                     'exist' => [
-                      'alert',
-                      'arrdep',
-                      'date',
                       'format',
-                      'id',
-                      'lang',
                       'station',
-                      'time',
                     ],
                   ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'log' => [
-          'fields' => [
-            [
-              'name' => 'querytime',
-              'title' => 'Querytime',
-              'type' => '`$INTEGER`',
-            ],
-            [
-              'name' => 'querytype',
-              'title' => 'Querytype',
-              'type' => '`$STRING`',
-            ],
-            [
-              'name' => 'user_agent',
-              'title' => 'User Agent',
-              'type' => '`$STRING`',
-            ],
-          ],
-          'name' => 'log',
-          'op' => [
-            'list' => [
-              'input' => 'data',
-              'name' => 'list',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'GET',
-                  'orig' => '/logs/',
-                  'segments' => [
-                    [
-                      'lit' => 'logs',
-                    ],
-                  ],
-                  'parts' => [
-                    'logs',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body.logs`',
-                  ],
-                  'args' => [
-                    'query' => [
+                  'response' => [
+                    'alternatives' => [
                       [
-                        'name' => 'format',
-                        'orig' => 'format',
-                        'type' => '`$STRING`',
-                        'kind' => 'query',
-                        'example' => 'xml',
+                        'kind' => 'raw',
+                        'media' => 'application/xml',
                       ],
                     ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
-                  'select' => [
-                    'exist' => [
-                      'format',
-                    ],
-                  ],
-                ],
-              ],
-            ],
-          ],
-          'relations' => [
-            'ancestors' => [],
-          ],
-        ],
-        'occupancy' => [
-          'fields' => [],
-          'name' => 'occupancy',
-          'op' => [
-            'create' => [
-              'input' => 'data',
-              'name' => 'create',
-              'points' => [
-                [
-                  'kind' => 'http',
-                  'method' => 'POST',
-                  'orig' => '/feedback/occupancy.php',
-                  'segments' => [
-                    [
-                      'lit' => 'feedback',
-                    ],
-                    [
-                      'lit' => 'occupancy.php',
-                    ],
-                  ],
-                  'parts' => [
-                    'feedback',
-                    'occupancy.php',
-                  ],
-                  'rename' => [],
-                  'transform' => [
-                    'req' => '`reqdata`',
-                    'res' => '`body`',
-                  ],
-                  'args' => [],
-                  'select' => [],
                 ],
               ],
             ],
@@ -739,7 +663,7 @@ class IrailConfig
                 [
                   'kind' => 'http',
                   'method' => 'GET',
-                  'orig' => '/stations/',
+                  'orig' => '/stations',
                   'segments' => [
                     [
                       'lit' => 'stations',
@@ -760,7 +684,8 @@ class IrailConfig
                         'orig' => 'format',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'xml',
+                        'reqd' => true,
+                        'example' => 'json',
                       ],
                       [
                         'name' => 'lang',
@@ -774,8 +699,17 @@ class IrailConfig
                   'select' => [
                     'exist' => [
                       'format',
-                      'lang',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'kind' => 'raw',
+                        'media' => 'application/xml',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],
@@ -829,7 +763,7 @@ class IrailConfig
                 [
                   'kind' => 'http',
                   'method' => 'GET',
-                  'orig' => '/vehicle/',
+                  'orig' => '/vehicle',
                   'segments' => [
                     [
                       'lit' => 'vehicle',
@@ -863,7 +797,8 @@ class IrailConfig
                         'orig' => 'format',
                         'type' => '`$STRING`',
                         'kind' => 'query',
-                        'example' => 'xml',
+                        'reqd' => true,
+                        'example' => 'json',
                       ],
                       [
                         'name' => 'id',
@@ -884,12 +819,19 @@ class IrailConfig
                   ],
                   'select' => [
                     'exist' => [
-                      'alert',
-                      'date',
                       'format',
                       'id',
-                      'lang',
                     ],
+                  ],
+                  'response' => [
+                    'alternatives' => [
+                      [
+                        'kind' => 'raw',
+                        'media' => 'application/xml',
+                      ],
+                    ],
+                    'kind' => 'json',
+                    'media' => 'application/json',
                   ],
                 ],
               ],

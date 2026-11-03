@@ -20,7 +20,7 @@ import (
 const prompt = "irail"
 
 // entitiesHelp is the space-separated entity list shown by /help.
-const entitiesHelp = "composition connection disturbance liveboard log occupancy station vehicle"
+const entitiesHelp = "composition connection disturbance liveboard station vehicle"
 
 func main() {
 	os.Exit(run(os.Args[1:], os.Stdin, os.Stdout, os.Stderr))

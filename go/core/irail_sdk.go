@@ -146,6 +146,14 @@ func (sdk *IrailSDK) Prepare(fetchargs map[string]any) (map[string]any, error) {
 	if method == "" {
 		method = "GET"
 	}
+	method = strings.ToUpper(method)
+
+	allowMethodVal := vs.GetPath(options, []any{"allow", "method"})
+	if !Allowed(allowMethodVal, method) {
+		allowMethod, _ := allowMethodVal.(string)
+		return nil, ctx.MakeError("spec_method_allow",
+			"Method \""+method+"\" not allowed by SDK option allow.method value: \""+allowMethod+"\"")
+	}
 
 	params := ToMapAny(vs.GetProp(fetchargs, "params"))
 	if params == nil {
@@ -205,8 +213,7 @@ func (sdk *IrailSDK) Direct(fetchargs map[string]any) (map[string]any, error) {
 
 // Is this raw-access op permitted by the SDK's allow.op option?
 func (sdk *IrailSDK) opAllowed(op string) bool {
-	allowOp, _ := vs.GetPath(sdk.options, []any{"allow", "op"}).(string)
-	return strings.Contains(allowOp, op)
+	return Allowed(vs.GetPath(sdk.options, []any{"allow", "op"}), op)
 }
 
 func (sdk *IrailSDK) opDenied(op string) map[string]any {
@@ -278,20 +285,34 @@ func (sdk *IrailSDK) rawRequest(fetchargs map[string]any) (map[string]any, error
 		noBody := status == 204 || status == 304 || contentLength == "0"
 
 		var jsonData any
+		var bodyErr error
 		if !noBody {
 			if jf := vs.GetProp(fm, "json"); jf != nil {
 				if f, ok := jf.(func() any); ok {
 					jsonData = f()
 				}
 			}
+			if unreadable, _ := vs.GetProp(fm, "unreadable").(bool); unreadable {
+				var failed error
+				if status < 200 || status >= 300 {
+					failed = ctx.MakeError("request_status",
+						fmt.Sprintf("request: %d: %v", status, vs.GetProp(fm, "statusText")))
+				}
+				bodyErr = UnreadableBody(ctx, status, headers, vs.GetProp(fm, "body"),
+					fetchdef["headers"], failed)
+			}
 		}
 
-		return map[string]any{
-			"ok":      status >= 200 && status < 300,
+		out := map[string]any{
+			"ok":      bodyErr == nil && status >= 200 && status < 300,
 			"status":  status,
 			"headers": headers,
 			"data":    jsonData,
-		}, nil
+		}
+		if bodyErr != nil {
+			out["err"] = sdk.cleanErr(ctx, bodyErr)
+		}
+		return out, nil
 	}
 
 	return map[string]any{"ok": false, "err": ctx.MakeError("direct_invalid", "invalid response type")}, nil
@@ -354,7 +375,7 @@ func (sdk *IrailSDK) Graphql(
 // Composition returns a Composition entity bound to this client.
 // Idiomatic usage: client.Composition(nil).List(nil, nil) or
 // client.Composition(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Composition(data map[string]any) IrailEntity {
+func (sdk *IrailSDK) Composition(data map[string]any) IrailEntityBase {
 	return NewCompositionEntityFunc(sdk, data)
 }
 
@@ -362,7 +383,7 @@ func (sdk *IrailSDK) Composition(data map[string]any) IrailEntity {
 // Connection returns a Connection entity bound to this client.
 // Idiomatic usage: client.Connection(nil).List(nil, nil) or
 // client.Connection(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Connection(data map[string]any) IrailEntity {
+func (sdk *IrailSDK) Connection(data map[string]any) IrailEntityBase {
 	return NewConnectionEntityFunc(sdk, data)
 }
 
@@ -370,7 +391,7 @@ func (sdk *IrailSDK) Connection(data map[string]any) IrailEntity {
 // Disturbance returns a Disturbance entity bound to this client.
 // Idiomatic usage: client.Disturbance(nil).List(nil, nil) or
 // client.Disturbance(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Disturbance(data map[string]any) IrailEntity {
+func (sdk *IrailSDK) Disturbance(data map[string]any) IrailEntityBase {
 	return NewDisturbanceEntityFunc(sdk, data)
 }
 
@@ -378,31 +399,15 @@ func (sdk *IrailSDK) Disturbance(data map[string]any) IrailEntity {
 // Liveboard returns a Liveboard entity bound to this client.
 // Idiomatic usage: client.Liveboard(nil).List(nil, nil) or
 // client.Liveboard(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Liveboard(data map[string]any) IrailEntity {
+func (sdk *IrailSDK) Liveboard(data map[string]any) IrailEntityBase {
 	return NewLiveboardEntityFunc(sdk, data)
-}
-
-
-// Log returns a Log entity bound to this client.
-// Idiomatic usage: client.Log(nil).List(nil, nil) or
-// client.Log(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Log(data map[string]any) IrailEntity {
-	return NewLogEntityFunc(sdk, data)
-}
-
-
-// Occupancy returns a Occupancy entity bound to this client.
-// Idiomatic usage: client.Occupancy(nil).List(nil, nil) or
-// client.Occupancy(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Occupancy(data map[string]any) IrailEntity {
-	return NewOccupancyEntityFunc(sdk, data)
 }
 
 
 // Station returns a Station entity bound to this client.
 // Idiomatic usage: client.Station(nil).List(nil, nil) or
 // client.Station(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Station(data map[string]any) IrailEntity {
+func (sdk *IrailSDK) Station(data map[string]any) IrailEntityBase {
 	return NewStationEntityFunc(sdk, data)
 }
 
@@ -410,7 +415,7 @@ func (sdk *IrailSDK) Station(data map[string]any) IrailEntity {
 // Vehicle returns a Vehicle entity bound to this client.
 // Idiomatic usage: client.Vehicle(nil).List(nil, nil) or
 // client.Vehicle(nil).Load(map[string]any{"id": ...}, nil).
-func (sdk *IrailSDK) Vehicle(data map[string]any) IrailEntity {
+func (sdk *IrailSDK) Vehicle(data map[string]any) IrailEntityBase {
 	return NewVehicleEntityFunc(sdk, data)
 }
 

@@ -57,6 +57,7 @@ declare class Config {
             };
             optspec: {
                 clearTimer: string;
+                now: string;
                 setTimer: string;
             };
             strict: boolean;
@@ -73,8 +74,6 @@ declare class Config {
             connection: {};
             disturbance: {};
             liveboard: {};
-            log: {};
-            occupancy: {};
             station: {};
             vehicle: {};
         };
@@ -116,8 +115,15 @@ declare class Config {
                                 orig: string;
                                 type: string;
                                 kind: string;
-                                example?: undefined;
                                 reqd?: undefined;
+                                example?: undefined;
+                            } | {
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                reqd: boolean;
+                                example: string;
                             } | {
                                 name: string;
                                 orig: string;
@@ -125,17 +131,18 @@ declare class Config {
                                 kind: string;
                                 example: string;
                                 reqd?: undefined;
-                            } | {
-                                name: string;
-                                orig: string;
-                                type: string;
-                                kind: string;
-                                reqd: boolean;
-                                example?: undefined;
                             })[];
                         };
                         select: {
                             exist: string[];
+                        };
+                        response: {
+                            alternatives: {
+                                kind: string;
+                                media: string;
+                            }[];
+                            kind: string;
+                            media: string;
                         };
                     }[];
                 };
@@ -192,15 +199,15 @@ declare class Config {
                                 orig: string;
                                 type: string;
                                 kind: string;
+                                reqd: boolean;
                                 example: string;
-                                reqd?: undefined;
                             } | {
                                 name: string;
                                 orig: string;
                                 type: string;
                                 kind: string;
-                                reqd: boolean;
-                                example?: undefined;
+                                example: string;
+                                reqd?: undefined;
                             } | {
                                 name: string;
                                 orig: string;
@@ -212,6 +219,14 @@ declare class Config {
                         };
                         select: {
                             exist: string[];
+                        };
+                        response: {
+                            alternatives: {
+                                kind: string;
+                                media: string;
+                            }[];
+                            kind: string;
+                            media: string;
                         };
                     }[];
                 };
@@ -254,17 +269,34 @@ declare class Config {
                                 orig: string;
                                 type: string;
                                 kind: string;
+                                reqd: boolean;
                                 example: string;
                             } | {
                                 name: string;
                                 orig: string;
                                 type: string;
                                 kind: string;
+                                example: string;
+                                reqd?: undefined;
+                            } | {
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                reqd?: undefined;
                                 example?: undefined;
                             })[];
                         };
                         select: {
                             exist: string[];
+                        };
+                        response: {
+                            alternatives: {
+                                kind: string;
+                                media: string;
+                            }[];
+                            kind: string;
+                            media: string;
                         };
                     }[];
                 };
@@ -312,89 +344,53 @@ declare class Config {
                                 type: string;
                                 kind: string;
                                 example: boolean;
+                                reqd?: undefined;
+                                field?: undefined;
                             } | {
                                 name: string;
                                 orig: string;
                                 type: string;
                                 kind: string;
                                 example: string;
+                                reqd?: undefined;
+                                field?: undefined;
+                            } | {
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                example?: undefined;
+                                reqd?: undefined;
+                                field?: undefined;
+                            } | {
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                reqd: boolean;
+                                example: string;
+                                field?: undefined;
+                            } | {
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                reqd: boolean;
+                                example: string;
+                                field: boolean;
                             })[];
                         };
                         select: {
                             exist: string[];
                         };
-                    }[];
-                };
-            };
-            relations: {
-                ancestors: never[];
-            };
-        };
-        log: {
-            fields: {
-                name: string;
-                title: string;
-                type: string;
-            }[];
-            name: string;
-            op: {
-                list: {
-                    input: string;
-                    name: string;
-                    points: {
-                        kind: string;
-                        method: string;
-                        orig: string;
-                        segments: {
-                            lit: string;
-                        }[];
-                        parts: string[];
-                        rename: {};
-                        transform: {
-                            req: string;
-                            res: string;
-                        };
-                        args: {
-                            query: {
-                                name: string;
-                                orig: string;
-                                type: string;
+                        response: {
+                            alternatives: {
                                 kind: string;
-                                example: string;
+                                media: string;
                             }[];
+                            kind: string;
+                            media: string;
                         };
-                        select: {
-                            exist: string[];
-                        };
-                    }[];
-                };
-            };
-            relations: {
-                ancestors: never[];
-            };
-        };
-        occupancy: {
-            fields: never[];
-            name: string;
-            op: {
-                create: {
-                    input: string;
-                    name: string;
-                    points: {
-                        kind: string;
-                        method: string;
-                        orig: string;
-                        segments: {
-                            lit: string;
-                        }[];
-                        parts: string[];
-                        rename: {};
-                        transform: {
-                            req: string;
-                            res: string;
-                        };
-                        args: {};
-                        select: {};
                     }[];
                 };
             };
@@ -435,16 +431,32 @@ declare class Config {
                             res: string;
                         };
                         args: {
-                            query: {
+                            query: ({
+                                name: string;
+                                orig: string;
+                                type: string;
+                                kind: string;
+                                reqd: boolean;
+                                example: string;
+                            } | {
                                 name: string;
                                 orig: string;
                                 type: string;
                                 kind: string;
                                 example: string;
-                            }[];
+                                reqd?: undefined;
+                            })[];
                         };
                         select: {
                             exist: string[];
+                        };
+                        response: {
+                            alternatives: {
+                                kind: string;
+                                media: string;
+                            }[];
+                            kind: string;
+                            media: string;
                         };
                     }[];
                 };
@@ -511,19 +523,27 @@ declare class Config {
                                 orig: string;
                                 type: string;
                                 kind: string;
+                                reqd: boolean;
                                 example: string;
-                                reqd?: undefined;
                             } | {
                                 name: string;
                                 orig: string;
                                 type: string;
                                 kind: string;
-                                reqd: boolean;
                                 example: string;
+                                reqd?: undefined;
                             })[];
                         };
                         select: {
                             exist: string[];
+                        };
+                        response: {
+                            alternatives: {
+                                kind: string;
+                                media: string;
+                            }[];
+                            kind: string;
+                            media: string;
                         };
                     }[];
                 };

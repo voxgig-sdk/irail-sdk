@@ -57,14 +57,6 @@ Create a new `DisturbanceEntity` instance. Pass `None` for no initial data.
 
 Create a new `LiveboardEntity` instance. Pass `None` for no initial data.
 
-#### `Log(data=None)`
-
-Create a new `LogEntity` instance. Pass `None` for no initial data.
-
-#### `Occupancy(data=None)`
-
-Create a new `OccupancyEntity` instance. Pass `None` for no initial data.
-
 #### `Station(data=None)`
 
 Create a new `StationEntity` instance. Pass `None` for no initial data.
@@ -122,12 +114,12 @@ composition = client.Composition()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> CompositionEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
-result = client.Composition().load({"id": "composition_id"})
+result = client.Composition().load({"id": "composition_id", "format": "format"})
 ```
 
 ### Common Methods
@@ -178,14 +170,14 @@ connection = client.Connection()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[ConnectionEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.Connection().list({"from": "example", "to": "example"})
+results = client.Connection().list({"format": "example", "from": "example", "to": "example"})
 for connection in results:
-    print(connection)
+    print(connection.data_get())
 ```
 
 ### Common Methods
@@ -236,14 +228,14 @@ disturbance = client.Disturbance()
 
 ### Operations
 
-#### `list(reqmatch=None, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list[DisturbanceEntity]`
 
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list of entities, one per record, and raises on error.
 
 ```python
-results = client.Disturbance().list()
+results = client.Disturbance().list({"format": "example"})
 for disturbance in results:
-    print(disturbance)
+    print(disturbance.data_get())
 ```
 
 ### Common Methods
@@ -293,12 +285,12 @@ liveboard = client.Liveboard()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> LiveboardEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
-result = client.Liveboard().load({"id": "liveboard_id"})
+result = client.Liveboard().load({"id": "liveboard_id", "format": "format", "station": "station"})
 ```
 
 ### Common Methods
@@ -330,107 +322,6 @@ Return the entity name.
 
 ---
 
-## LogEntity
-
-```python
-log = client.Log()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `querytime` | `int` | No |  |
-| `querytype` | `str` | No |  |
-| `user_agent` | `str` | No |  |
-
-### Operations
-
-#### `list(reqmatch=None, ctrl=None) -> list`
-
-List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
-
-```python
-results = client.Log().list()
-for log in results:
-    print(log)
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `LogEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
-## OccupancyEntity
-
-```python
-occupancy = client.Occupancy()
-```
-
-### Operations
-
-#### `create(reqdata, ctrl=None) -> dict`
-
-Create a new entity with the given data. Returns the created entity data and raises on error.
-
-```python
-result = client.Occupancy().create({
-})
-```
-
-### Common Methods
-
-#### `data_get() -> dict`
-
-Get the entity data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> dict`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `OccupancyEntity` instance with the same options.
-
-#### `get_name() -> str`
-
-Return the entity name.
-
-
----
-
 ## StationEntity
 
 ```python
@@ -447,12 +338,12 @@ station = client.Station()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> StationEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
-result = client.Station().load()
+result = client.Station().load({"format": "format"})
 ```
 
 ### Common Methods
@@ -502,12 +393,12 @@ vehicle = client.Vehicle()
 
 ### Operations
 
-#### `load(reqmatch, ctrl=None) -> dict`
+#### `load(reqmatch, ctrl=None) -> VehicleEntity`
 
-Load a single entity matching the given criteria. Returns the entity data and raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and raises on error.
 
 ```python
-result = client.Vehicle().load({"id": "vehicle_id"})
+result = client.Vehicle().load({"id": "vehicle_id", "format": "format"})
 ```
 
 ### Common Methods
@@ -696,6 +587,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

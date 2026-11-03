@@ -12,19 +12,15 @@ var NewTestFeatureFunc func() Feature
 
 var NewTimeoutFeatureFunc func() Feature
 
-var NewCompositionEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
+var NewCompositionEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntityBase
 
-var NewConnectionEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
+var NewConnectionEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntityBase
 
-var NewDisturbanceEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
+var NewDisturbanceEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntityBase
 
-var NewLiveboardEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
+var NewLiveboardEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntityBase
 
-var NewLogEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
+var NewStationEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntityBase
 
-var NewOccupancyEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
-
-var NewStationEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
-
-var NewVehicleEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntity
+var NewVehicleEntityFunc func(client *IrailSDK, entopts map[string]any) IrailEntityBase
 

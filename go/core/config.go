@@ -71,6 +71,7 @@ func MakeConfig() map[string]any {
 				},
 				"optspec": map[string]any{
 					"clearTimer": "`$FUNCTION`",
+					"now": "`$FUNCTION`",
 					"setTimer": "`$FUNCTION`",
 				},
 				"strict": false,
@@ -78,7 +79,7 @@ func MakeConfig() map[string]any {
 			},
 		},
 		"options": map[string]any{
-			"base": "https://api.irail.be",
+			"base": "https://api.irail.be/v1",
 			"headers": map[string]any{
 				"content-type": "application/json",
 			},
@@ -87,8 +88,6 @@ func MakeConfig() map[string]any {
 				"connection": map[string]any{},
 				"disturbance": map[string]any{},
 				"liveboard": map[string]any{},
-				"log": map[string]any{},
-				"occupancy": map[string]any{},
 				"station": map[string]any{},
 				"vehicle": map[string]any{},
 			},
@@ -129,7 +128,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/composition/",
+								"orig": "/composition",
 								"segments": []any{
 									map[string]any{
 										"lit": "composition",
@@ -156,7 +155,8 @@ func MakeConfig() map[string]any {
 											"orig": "format",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "xml",
+											"reqd": true,
+											"example": "json",
 										},
 										map[string]any{
 											"name": "id",
@@ -164,6 +164,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"example": "IC532",
 										},
 										map[string]any{
 											"name": "lang",
@@ -176,11 +177,19 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"date",
 										"format",
 										"id",
-										"lang",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"kind": "raw",
+											"media": "application/xml",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -236,7 +245,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/connections/",
+								"orig": "/connections",
 								"segments": []any{
 									map[string]any{
 										"lit": "connections",
@@ -270,7 +279,8 @@ func MakeConfig() map[string]any {
 											"orig": "format",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "xml",
+											"reqd": true,
+											"example": "json",
 										},
 										map[string]any{
 											"name": "from",
@@ -278,6 +288,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"example": "Gent-Sint-Pieters",
 										},
 										map[string]any{
 											"name": "lang",
@@ -312,6 +323,7 @@ func MakeConfig() map[string]any {
 											"type": "`$STRING`",
 											"kind": "query",
 											"reqd": true,
+											"example": "Brussels-Central",
 										},
 										map[string]any{
 											"name": "type_of_transport",
@@ -323,17 +335,20 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"alert",
-										"date",
 										"format",
 										"from",
-										"lang",
-										"result",
-										"time",
-										"timesel",
 										"to",
-										"type_of_transport",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"kind": "raw",
+											"media": "application/xml",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -389,7 +404,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/disturbances/",
+								"orig": "/disturbances",
 								"segments": []any{
 									map[string]any{
 										"lit": "disturbances",
@@ -410,7 +425,8 @@ func MakeConfig() map[string]any {
 											"orig": "format",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "xml",
+											"reqd": true,
+											"example": "json",
 										},
 										map[string]any{
 											"name": "lang",
@@ -430,9 +446,17 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"format",
-										"lang",
-										"line_break_character",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"kind": "raw",
+											"media": "application/xml",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -487,7 +511,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/liveboard/",
+								"orig": "/liveboard",
 								"segments": []any{
 									map[string]any{
 										"lit": "liveboard",
@@ -522,21 +546,20 @@ func MakeConfig() map[string]any {
 											"orig": "date",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "300917",
 										},
 										map[string]any{
 											"name": "format",
 											"orig": "format",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "xml",
+											"reqd": true,
+											"example": "json",
 										},
 										map[string]any{
 											"name": "id",
 											"orig": "id",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "BE.NMBS.008892007",
 										},
 										map[string]any{
 											"name": "lang",
@@ -550,133 +573,34 @@ func MakeConfig() map[string]any {
 											"orig": "station",
 											"type": "`$STRING`",
 											"kind": "query",
+											"reqd": true,
 											"example": "Gent-Sint-Pieters",
+											"field": true,
 										},
 										map[string]any{
 											"name": "time",
 											"orig": "time",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "1230",
 										},
 									},
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"alert",
-										"arrdep",
-										"date",
 										"format",
-										"id",
-										"lang",
 										"station",
-										"time",
 									},
 								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"log": map[string]any{
-				"fields": []any{
-					map[string]any{
-						"name": "querytime",
-						"title": "Querytime",
-						"type": "`$INTEGER`",
-					},
-					map[string]any{
-						"name": "querytype",
-						"title": "Querytype",
-						"type": "`$STRING`",
-					},
-					map[string]any{
-						"name": "user_agent",
-						"title": "User Agent",
-						"type": "`$STRING`",
-					},
-				},
-				"name": "log",
-				"op": map[string]any{
-					"list": map[string]any{
-						"input": "data",
-						"name": "list",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "GET",
-								"orig": "/logs/",
-								"segments": []any{
-									map[string]any{
-										"lit": "logs",
-									},
-								},
-								"parts": []any{
-									"logs",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.logs`",
-								},
-								"args": map[string]any{
-									"query": []any{
+								"response": map[string]any{
+									"alternatives": []any{
 										map[string]any{
-											"name": "format",
-											"orig": "format",
-											"type": "`$STRING`",
-											"kind": "query",
-											"example": "xml",
+											"kind": "raw",
+											"media": "application/xml",
 										},
 									},
+									"kind": "json",
+									"media": "application/json",
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"format",
-									},
-								},
-							},
-						},
-					},
-				},
-				"relations": map[string]any{
-					"ancestors": []any{},
-				},
-			},
-			"occupancy": map[string]any{
-				"fields": []any{},
-				"name": "occupancy",
-				"op": map[string]any{
-					"create": map[string]any{
-						"input": "data",
-						"name": "create",
-						"points": []any{
-							map[string]any{
-								"kind": "http",
-								"method": "POST",
-								"orig": "/feedback/occupancy.php",
-								"segments": []any{
-									map[string]any{
-										"lit": "feedback",
-									},
-									map[string]any{
-										"lit": "occupancy.php",
-									},
-								},
-								"parts": []any{
-									"feedback",
-									"occupancy.php",
-								},
-								"rename": map[string]any{},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body`",
-								},
-								"args": map[string]any{},
-								"select": map[string]any{},
 							},
 						},
 					},
@@ -717,7 +641,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/stations/",
+								"orig": "/stations",
 								"segments": []any{
 									map[string]any{
 										"lit": "stations",
@@ -738,7 +662,8 @@ func MakeConfig() map[string]any {
 											"orig": "format",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "xml",
+											"reqd": true,
+											"example": "json",
 										},
 										map[string]any{
 											"name": "lang",
@@ -752,8 +677,17 @@ func MakeConfig() map[string]any {
 								"select": map[string]any{
 									"exist": []any{
 										"format",
-										"lang",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"kind": "raw",
+											"media": "application/xml",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},
@@ -807,7 +741,7 @@ func MakeConfig() map[string]any {
 							map[string]any{
 								"kind": "http",
 								"method": "GET",
-								"orig": "/vehicle/",
+								"orig": "/vehicle",
 								"segments": []any{
 									map[string]any{
 										"lit": "vehicle",
@@ -841,7 +775,8 @@ func MakeConfig() map[string]any {
 											"orig": "format",
 											"type": "`$STRING`",
 											"kind": "query",
-											"example": "xml",
+											"reqd": true,
+											"example": "json",
 										},
 										map[string]any{
 											"name": "id",
@@ -862,12 +797,19 @@ func MakeConfig() map[string]any {
 								},
 								"select": map[string]any{
 									"exist": []any{
-										"alert",
-										"date",
 										"format",
 										"id",
-										"lang",
 									},
+								},
+								"response": map[string]any{
+									"alternatives": []any{
+										map[string]any{
+											"kind": "raw",
+											"media": "application/xml",
+										},
+									},
+									"kind": "json",
+									"media": "application/json",
 								},
 							},
 						},

@@ -5,7 +5,7 @@
 The Python SDK for the Irail API — an entity-oriented client following Pythonic conventions.
 
 The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Composition()` — each
-carrying a small, uniform set of operations (`list`, `load`, `create`) instead of raw URL
+carrying a small, uniform set of operations (`list`, `load`) instead of raw URL
 paths and query strings. You work with named resources and verbs, which
 keeps the cognitive load low.
 
@@ -15,7 +15,7 @@ keeps the cognitive load low.
 
 ## Install
 This package is not yet published to PyPI. Install it from the GitHub
-release tag (`py/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)) or
+release tag (`py/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/irail-sdk/tags)) or
 from a source checkout:
 
 ```bash
@@ -42,8 +42,8 @@ client = IrailSDK()
 
 ```python
 try:
-    composition = client.Composition().load({"id": "example_id"})
-    print(composition)
+    composition = client.Composition().load({"id": "example_id", "format": "example_format"})
+    print(composition.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -55,8 +55,8 @@ Entity operations raise on failure, so wrap them in `try` / `except`:
 
 ```python
 try:
-    liveboard = client.Liveboard().load()
-    print(liveboard)
+    liveboard = client.Liveboard().load({"format": "example", "station": "example"})
+    print(liveboard.data_get())
 except Exception as err:
     print(f"load failed: {err}")
 ```
@@ -122,10 +122,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = IrailSDK.test()
 
-# Entity ops return the ENTITY and raises on error;
-# call data_get() for the record.
-liveboard = client.Liveboard().load({"id": "test01"})
-# liveboard contains the mock response record
+# Entity ops return the entity, and list one per record; they raise on error.
+liveboard = client.Liveboard().load({"id": "test01", "format": "example", "station": "example"})
+# data_get() on an entity reads its mock response record
 ```
 
 ### Use a custom fetch function
@@ -205,8 +204,6 @@ Creates a test-mode client with mock transport. Both arguments may be `None`.
 | `Connection` | `(data) -> ConnectionEntity` | Create a Connection entity instance. |
 | `Disturbance` | `(data) -> DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard` | `(data) -> LiveboardEntity` | Create a Liveboard entity instance. |
-| `Log` | `(data) -> LogEntity` | Create a Log entity instance. |
-| `Occupancy` | `(data) -> OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station` | `(data) -> StationEntity` | Create a Station entity instance. |
 | `Vehicle` | `(data) -> VehicleEntity` | Create a Vehicle entity instance. |
 
@@ -216,9 +213,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria. Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch, ctrl) -> list` | List entities matching the criteria, one per record. Raises on error. |
 | `data_get` | `() -> dict` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> dict` | Get entity match criteria. |
@@ -228,9 +224,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
-ops, a `list` for `list`) and raise on error. Wrap calls in
-`try`/`except` to handle failures.
+Entity operations return the entity, and `list` a `list` of entities, one
+per record; an entity's `data_get()` reads its record (a `dict`). They raise
+on error, so wrap calls in `try`/`except` to handle failures.
 
 The `direct()` escape hatch never raises — it returns a result `dict`
 you branch on via `result["ok"]`:
@@ -257,7 +253,7 @@ On error, `ok` is `False` and `err` contains the error value.
 
 Operations: Load.
 
-API path: `/composition/`
+API path: `/composition`
 
 #### Connection
 
@@ -272,7 +268,7 @@ API path: `/composition/`
 
 Operations: List.
 
-API path: `/connections/`
+API path: `/connections`
 
 #### Disturbance
 
@@ -287,7 +283,7 @@ API path: `/connections/`
 
 Operations: List.
 
-API path: `/disturbances/`
+API path: `/disturbances`
 
 #### Liveboard
 
@@ -301,28 +297,7 @@ API path: `/disturbances/`
 
 Operations: Load.
 
-API path: `/liveboard/`
-
-#### Log
-
-| Field | Description |
-| --- | --- |
-| `querytime` |  |
-| `querytype` |  |
-| `user_agent` |  |
-
-Operations: List.
-
-API path: `/logs/`
-
-#### Occupancy
-
-| Field | Description |
-| --- | --- |
-
-Operations: Create.
-
-API path: `/feedback/occupancy.php`
+API path: `/liveboard`
 
 #### Station
 
@@ -334,7 +309,7 @@ API path: `/feedback/occupancy.php`
 
 Operations: Load.
 
-API path: `/stations/`
+API path: `/stations`
 
 #### Vehicle
 
@@ -348,7 +323,7 @@ API path: `/stations/`
 
 Operations: Load.
 
-API path: `/vehicle/`
+API path: `/vehicle`
 
 
 
@@ -377,7 +352,7 @@ Create an instance: `composition = client.Composition()`
 #### Example: Load
 
 ```python
-composition = client.Composition().load({"id": "composition_id"})
+composition = client.Composition().load({"id": "composition_id", "format": "format"})
 ```
 
 
@@ -405,7 +380,7 @@ Create an instance: `connection = client.Connection()`
 #### Example: List
 
 ```python
-connections = client.Connection().list({"from": "example", "to": "example"})
+connections = client.Connection().list({"format": "example", "from": "example", "to": "example"})
 ```
 
 
@@ -433,7 +408,7 @@ Create an instance: `disturbance = client.Disturbance()`
 #### Example: List
 
 ```python
-disturbances = client.Disturbance().list()
+disturbances = client.Disturbance().list({"format": "example"})
 ```
 
 
@@ -460,50 +435,7 @@ Create an instance: `liveboard = client.Liveboard()`
 #### Example: Load
 
 ```python
-liveboard = client.Liveboard().load({"id": "liveboard_id"})
-```
-
-
-### Log
-
-Create an instance: `log = client.Log()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list()` | List entities, optionally matching the given criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `querytime` | `int` |  |
-| `querytype` | `str` |  |
-| `user_agent` | `str` |  |
-
-#### Example: List
-
-```python
-logs = client.Log().list()
-```
-
-
-### Occupancy
-
-Create an instance: `occupancy = client.Occupancy()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Example: Create
-
-```python
-occupancy = client.Occupancy().create({
-})
+liveboard = client.Liveboard().load({"id": "liveboard_id", "format": "format", "station": "station"})
 ```
 
 
@@ -528,7 +460,7 @@ Create an instance: `station = client.Station()`
 #### Example: Load
 
 ```python
-station = client.Station().load()
+station = client.Station().load({"format": "format"})
 ```
 
 
@@ -555,7 +487,7 @@ Create an instance: `vehicle = client.Vehicle()`
 #### Example: Load
 
 ```python
-vehicle = client.Vehicle().load({"id": "vehicle_id"})
+vehicle = client.Vehicle().load({"id": "vehicle_id", "format": "format"})
 ```
 
 ## Features
@@ -720,7 +652,7 @@ stores the returned data and match criteria internally.
 
 ```python
 liveboard = client.Liveboard()
-liveboard.load()
+liveboard.load({"format": "example", "station": "example"})
 
 # liveboard.data_get() now returns the liveboard data from the last load
 # liveboard.match_get() returns the last match criteria

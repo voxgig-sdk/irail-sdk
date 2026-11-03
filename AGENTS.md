@@ -31,7 +31,7 @@ Each feature is generated into every SDK target — as a directory
 `<lang>/src/feature/<name>/` (ts/js) or a flat file in the `<lang>/feature/`
 package (other languages). Each target's guide documents its features.
 
-**Entities** (8): `Composition`, `Connection`, `Disturbance`, `Liveboard`, `Log`, `Occupancy`, `Station`, `Vehicle`.
+**Entities** (6): `Composition`, `Connection`, `Disturbance`, `Liveboard`, `Station`, `Vehicle`.
 
 ## Generating and updating the SDK
 

@@ -39,18 +39,18 @@ main: kit: entity: station: {
       points: [
         {
           co: {
-            id: "GET /stations/"
+            id: "GET /stations"
             source: "openapi3"
             version: 2
           }
           g: {
             query: [
               {
-                ex: "xml"
+                ex: "json"
                 k: "query"
                 n: "format"
                 or: "format"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
@@ -64,12 +64,21 @@ main: kit: entity: station: {
             ]
           }
           m: "GET"
-          o: "/stations/"
+          o: "/stations"
           q: {
             exist: [
               "format"
-              "lang"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "application/xml"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

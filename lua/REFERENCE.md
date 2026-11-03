@@ -56,14 +56,6 @@ Create a new `Disturbance` entity instance. Pass `nil` for no initial data.
 
 Create a new `Liveboard` entity instance. Pass `nil` for no initial data.
 
-#### `Log(data)`
-
-Create a new `Log` entity instance. Pass `nil` for no initial data.
-
-#### `Occupancy(data)`
-
-Create a new `Occupancy` entity instance. Pass `nil` for no initial data.
-
 #### `Station(data)`
 
 Create a new `Station` entity instance. Pass `nil` for no initial data.
@@ -127,10 +119,10 @@ local composition = client:Composition(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:Composition():load({ id = "composition_id" })
+local result, err = client:Composition():load({ id = "composition_id", format = "format" })
 ```
 
 ### Common Methods
@@ -184,10 +176,10 @@ local connection = client:Connection(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Connection():list()
+local results, err = client:Connection():list({ format = "example", from = "example", to = "example" })
 ```
 
 ### Common Methods
@@ -241,10 +233,10 @@ local disturbance = client:Disturbance(nil)
 
 #### `list(reqmatch, ctrl) -> any, err`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Returns an array of entities, one per record, or `nil` and an error on failure.
 
 ```lua
-local results, err = client:Disturbance():list()
+local results, err = client:Disturbance():list({ format = "example" })
 ```
 
 ### Common Methods
@@ -297,10 +289,10 @@ local liveboard = client:Liveboard(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:Liveboard():load({ id = "liveboard_id" })
+local result, err = client:Liveboard():load({ id = "liveboard_id", format = "format", station = "station" })
 ```
 
 ### Common Methods
@@ -333,107 +325,6 @@ Return the entity name.
 
 ---
 
-## LogEntity
-
-```lua
-local log = client:Log(nil)
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `querytime` | `number` | No |  |
-| `querytype` | `string` | No |  |
-| `user_agent` | `string` | No |  |
-
-### Operations
-
-#### `list(reqmatch, ctrl) -> any, err`
-
-List entities matching the given criteria. Returns an array.
-
-```lua
-local results, err = client:Log():list()
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `LogEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
-## OccupancyEntity
-
-```lua
-local occupancy = client:Occupancy(nil)
-```
-
-### Operations
-
-#### `create(reqdata, ctrl) -> any, err`
-
-Create a new entity with the given data.
-
-```lua
-local result, err = client:Occupancy():create({
-})
-```
-
-### Common Methods
-
-#### `data_get() -> table`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get() -> table`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make() -> Entity`
-
-Create a new `OccupancyEntity` instance with the same client and
-options.
-
-#### `get_name() -> string`
-
-Return the entity name.
-
-
----
-
 ## StationEntity
 
 ```lua
@@ -452,10 +343,10 @@ local station = client:Station(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:Station():load()
+local result, err = client:Station():load({ format = "format" })
 ```
 
 ### Common Methods
@@ -508,10 +399,10 @@ local vehicle = client:Vehicle(nil)
 
 #### `load(reqmatch, ctrl) -> any, err`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, or `nil` and an error on failure.
 
 ```lua
-local result, err = client:Vehicle():load({ id = "vehicle_id" })
+local result, err = client:Vehicle():load({ id = "vehicle_id", format = "format" })
 ```
 
 ### Common Methods
@@ -701,6 +592,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

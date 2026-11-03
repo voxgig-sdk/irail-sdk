@@ -4,59 +4,46 @@
 #   guide.aontu
 
 guide: {
-  metrics: count: entity: 8
-  metrics: count: path: 8
-  metrics: count: method: 8
+  metrics: count: entity: 6
+  metrics: count: path: 6
+  metrics: count: method: 6
 
   entity: composition: {
-    path: "/composition/": {
+    path: "/composition": {
       op: load: method: *GET
       op: load: transform: res: *("`body.composition`")|top
     }
   }
 
   entity: connection: {
-    path: "/connections/": {
+    path: "/connections": {
       op: list: method: *GET
       op: list: transform: res: *("`body.connection`")|top
     }
   }
 
   entity: disturbance: {
-    path: "/disturbances/": {
+    path: "/disturbances": {
       op: list: method: *GET
       op: list: transform: res: *("`body.disturbance`")|top
     }
   }
 
   entity: liveboard: {
-    path: "/liveboard/": {
+    path: "/liveboard": {
       op: load: method: *GET
     }
   }
 
-  entity: log: {
-    path: "/logs/": {
-      op: list: method: *GET
-      op: list: transform: res: *("`body.logs`")|top
-    }
-  }
-
-  entity: occupancy: {
-    path: "/feedback/occupancy.php": {
-      op: create: method: *POST
-    }
-  }
-
   entity: station: {
-    path: "/stations/": {
+    path: "/stations": {
       op: load: method: *GET
       op: load: transform: res: *("`body.station`")|top
     }
   }
 
   entity: vehicle: {
-    path: "/vehicle/": {
+    path: "/vehicle": {
       op: load: method: *GET
     }
   }

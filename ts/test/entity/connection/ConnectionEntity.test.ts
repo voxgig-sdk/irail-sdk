@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { IrailSDK, BaseFeature, stdutil } from '../../..'
+import { IrailSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,64 @@ describe('ConnectionEntity', async () => {
   })
 
 
+  class FailHook extends BaseFeature {
+    name = 'failhook'
+    version = '0.0.1'
+    active = true
+    unexpected = 0
+    init() { }
+    PreSpec() { throw new Error('connection hook failed') }
+    PreUnexpected() { this.unexpected++ }
+  }
+
+  test('stream-error', async () => {
+    const offline = { net: { offline: true } }
+    await assert.rejects(async () => {
+      for await (const _item of IrailSDK.test(offline).Connection().stream('list')) { }
+    }, /offline/)
+
+    for await (const _item of IrailSDK.test(offline).Connection()
+      .stream('list', undefined, { ctrl: { throw: false } })) { }
+
+    if (null != (config as any).feature?.rbac) {
+      const denied = IrailSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } })
+      await assert.rejects(async () => {
+        for await (const _item of denied.Connection().stream('list')) { }
+      }, (err: any) => 'rbac_denied' === err.code)
+    }
+  })
+
+  test('stream-ctrl', async () => {
+    const explain: any = {}
+    const ctrl: any = { explain }
+    for await (const _item of IrailSDK.test().Connection().stream('list', undefined, { ctrl })) { }
+    assert.deepStrictEqual(Object.keys(ctrl), ['explain'])
+    assert(explain === ctrl.explain && 0 < Object.keys(explain).length)
+  })
+
+  test('unexpected', async () => {
+    const hook = new FailHook()
+    const client = new IrailSDK({ feature: { test: { active: true } }, extend: [hook] })
+    await assert.rejects(client.Connection().list(), /hook failed/)
+    assert(0 < hook.unexpected)
+
+    const fired = hook.unexpected
+    assert.strictEqual(await client.Connection().list(undefined, { throw: false }), undefined)
+    assert(fired < hook.unexpected)
+  })
+
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = IrailSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Connection().list({"alert":"x","format":"x","from":"x","to":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.IRAIL_TEST_LIVE
@@ -51,7 +109,7 @@ describe('ConnectionEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"arrival":{"a":true,"h":"Arrival","n":"arrival","r":false,"t":"`$OBJECT`","key$":"arrival","index$":0},"departure":{"a":true,"h":"Departure","n":"departure","r":false,"t":"`$OBJECT`","key$":"departure","index$":1},"duration":{"a":true,"h":"Duration","n":"duration","r":false,"t":"`$INTEGER`","key$":"duration","index$":2},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":3},"occupancy":{"a":true,"h":"Occupancy","n":"occupancy","r":false,"t":"`$OBJECT`","key$":"occupancy","index$":4},"vias":{"a":true,"h":"Vias","n":"vias","r":false,"t":"`$OBJECT`","key$":"vias","index$":5}},"id":{"field":"id","name":"id"},"name":"connection","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /connections/","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":false,"k":"query","n":"alert","or":"alerts","r":false,"t":"`$BOOLEAN`","index$":0},{"a":true,"k":"query","n":"date","or":"date","r":false,"t":"`$STRING`","index$":1},{"a":true,"ex":"xml","k":"query","n":"format","or":"format","r":false,"t":"`$STRING`","index$":2},{"a":true,"k":"query","n":"from","or":"from","r":true,"t":"`$STRING`","index$":3},{"a":true,"ex":"en","k":"query","n":"lang","or":"lang","r":false,"t":"`$STRING`","index$":4},{"a":true,"ex":6,"k":"query","n":"result","or":"results","r":false,"t":"`$INTEGER`","index$":5},{"a":true,"k":"query","n":"time","or":"time","r":false,"t":"`$STRING`","index$":6},{"a":true,"ex":"departure","k":"query","n":"timesel","or":"timesel","r":false,"t":"`$STRING`","index$":7},{"a":true,"k":"query","n":"to","or":"to","r":true,"t":"`$STRING`","index$":8},{"a":true,"k":"query","n":"type_of_transport","or":"typeOfTransport","r":false,"t":"`$STRING`","index$":9}]},"k":"http","m":"GET","o":"/connections/","q":{"exist":["alert","date","format","from","lang","result","time","timesel","to","type_of_transport"]},"r":{},"s":[{"lit":"connections"}],"t":{"req":"`reqdata`","res":"`body.connection`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"connection","name__orig":"connection","Name":"Connection","name_":"connection","name-":"connection","NAME":"CONNECTION","index$":1}, {"active":true,"entity":"connection","key$":"BasicConnectionFlow","kind":"basic","name":"BasicConnectionFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"connection_ref01"}}],"index$":0}]}, 'Connection', {"GET /connections/":{"protocol":"http","parameters":[{"name":"from","in":"query","description":"The departure station name","required":true,"schema":{"type":"string"},"index$":0},{"name":"to","in":"query","description":"The arrival station name","required":true,"schema":{"type":"string"},"index$":1},{"name":"time","in":"query","description":"The time to query in hhmm format","required":false,"schema":{"type":"string","pattern":"^[0-2][0-9][0-5][0-9]$"},"index$":2},{"name":"date","in":"query","description":"The date to query in ddmmyy format","required":false,"schema":{"type":"string","pattern":"^[0-3][0-9][0-1][0-9][0-9]{2}$"},"index$":3},{"name":"timesel","in":"query","description":"Whether the time is the departure or arrival time","required":false,"schema":{"type":"string","enum":["departure","arrival"],"default":"departure"},"index$":4},{"name":"format","in":"query","description":"The response format","required":false,"schema":{"type":"string","enum":["xml","json","jsonp"],"default":"xml"},"index$":5},{"name":"lang","in":"query","description":"The language of any text or names in the response","required":false,"schema":{"type":"string","enum":["nl","fr","en","de"],"default":"en"},"index$":6},{"name":"alerts","in":"query","description":"Whether to include alerts about trains in the response","required":false,"schema":{"type":"boolean","default":false},"index$":7},{"name":"typeOfTransport","in":"query","description":"Filter by type of transport","required":false,"schema":{"type":"string","enum":["automatic","trains","nointernationaltrains","all"]},"index$":8},{"name":"results","in":"query","description":"Number of results to return","required":false,"schema":{"type":"integer","minimum":1,"maximum":6,"default":6},"index$":9}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"arrival":{"a":true,"h":"Arrival","n":"arrival","r":false,"t":"`$OBJECT`","key$":"arrival","index$":0},"departure":{"a":true,"h":"Departure","n":"departure","r":false,"t":"`$OBJECT`","key$":"departure","index$":1},"duration":{"a":true,"h":"Duration","n":"duration","r":false,"t":"`$INTEGER`","key$":"duration","index$":2},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$INTEGER`","key$":"id","index$":3},"occupancy":{"a":true,"h":"Occupancy","n":"occupancy","r":false,"t":"`$OBJECT`","key$":"occupancy","index$":4},"vias":{"a":true,"h":"Vias","n":"vias","r":false,"t":"`$OBJECT`","key$":"vias","index$":5}},"id":{"field":"id","name":"id"},"name":"connection","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /connections","source":"openapi3","version":2},"g":{"query":[{"a":true,"ex":false,"k":"query","n":"alert","or":"alerts","r":false,"t":"`$BOOLEAN`","index$":0},{"a":true,"k":"query","n":"date","or":"date","r":false,"t":"`$STRING`","index$":1},{"a":true,"ex":"json","k":"query","n":"format","or":"format","r":true,"t":"`$STRING`","index$":2},{"a":true,"ex":"Gent-Sint-Pieters","k":"query","n":"from","or":"from","r":true,"t":"`$STRING`","index$":3},{"a":true,"ex":"en","k":"query","n":"lang","or":"lang","r":false,"t":"`$STRING`","index$":4},{"a":true,"ex":6,"k":"query","n":"result","or":"results","r":false,"t":"`$INTEGER`","index$":5},{"a":true,"k":"query","n":"time","or":"time","r":false,"t":"`$STRING`","index$":6},{"a":true,"ex":"departure","k":"query","n":"timesel","or":"timesel","r":false,"t":"`$STRING`","index$":7},{"a":true,"ex":"Brussels-Central","k":"query","n":"to","or":"to","r":true,"t":"`$STRING`","index$":8},{"a":true,"k":"query","n":"type_of_transport","or":"typeOfTransport","r":false,"t":"`$STRING`","index$":9}]},"k":"http","m":"GET","o":"/connections","q":{"exist":["format","from","to"]},"r":{},"rs":{"alternatives":[{"kind":"raw","media":"application/xml"}],"kind":"json","media":"application/json"},"s":[{"lit":"connections"}],"t":{"req":"`reqdata`","res":"`body.connection`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"connection","name__orig":"connection","Name":"Connection","name_":"connection","name-":"connection","NAME":"CONNECTION","index$":1}, {"active":true,"entity":"connection","key$":"BasicConnectionFlow","kind":"basic","name":"BasicConnectionFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"connection_ref01"}}],"index$":0}]}, 'Connection', {"GET /connections":{"protocol":"http","parameters":[{"name":"from","in":"query","description":"The departure station name","required":true,"schema":{"type":"string"},"example":"Gent-Sint-Pieters","index$":0},{"name":"to","in":"query","description":"The arrival station name","required":true,"schema":{"type":"string"},"example":"Brussels-Central","index$":1},{"name":"time","in":"query","description":"The time to query in hhmm format","required":false,"schema":{"type":"string","pattern":"^[0-2][0-9][0-5][0-9]$"},"index$":2},{"name":"date","in":"query","description":"The date to query in ddmmyy format","required":false,"schema":{"type":"string","pattern":"^[0-3][0-9][0-1][0-9][0-9]{2}$"},"index$":3},{"name":"timesel","in":"query","description":"Whether the time is the departure or arrival time","required":false,"schema":{"type":"string","enum":["departure","arrival"],"default":"departure"},"index$":4},{"name":"format","in":"query","description":"The response format","required":true,"schema":{"type":"string","enum":["xml","json","jsonp"],"default":"xml"},"example":"json","index$":5},{"name":"lang","in":"query","description":"The language of any text or names in the response","required":false,"schema":{"type":"string","enum":["nl","fr","en","de"],"default":"en"},"index$":6},{"name":"alerts","in":"query","description":"Whether to include alerts about trains in the response","required":false,"schema":{"type":"boolean","default":false},"index$":7},{"name":"typeOfTransport","in":"query","description":"Filter by type of transport","required":false,"schema":{"type":"string","enum":["automatic","trains","nointernationaltrains","all"]},"index$":8},{"name":"results","in":"query","description":"Number of results to return","required":false,"schema":{"type":"integer","minimum":1,"maximum":6,"default":6},"index$":9}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +130,12 @@ describe('ConnectionEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

@@ -4,7 +4,5 @@
 @"./BasicConnectionFlow.aontu"
 @"./BasicDisturbanceFlow.aontu"
 @"./BasicLiveboardFlow.aontu"
-@"./BasicLogFlow.aontu"
-@"./BasicOccupancyFlow.aontu"
 @"./BasicStationFlow.aontu"
 @"./BasicVehicleFlow.aontu"

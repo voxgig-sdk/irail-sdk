@@ -35,7 +35,7 @@
     }
   },
   "requests": {
-    "GET /composition/": {
+    "GET /composition": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

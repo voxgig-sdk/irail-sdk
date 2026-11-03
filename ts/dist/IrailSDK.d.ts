@@ -2,8 +2,6 @@ import { CompositionEntity } from './entity/CompositionEntity';
 import { ConnectionEntity } from './entity/ConnectionEntity';
 import { DisturbanceEntity } from './entity/DisturbanceEntity';
 import { LiveboardEntity } from './entity/LiveboardEntity';
-import { LogEntity } from './entity/LogEntity';
-import { OccupancyEntity } from './entity/OccupancyEntity';
 import { StationEntity } from './entity/StationEntity';
 import { VehicleEntity } from './entity/VehicleEntity';
 export type * from './IrailTypes';
@@ -14,6 +12,19 @@ import { IrailEntityBase } from './IrailEntityBase';
 import { Utility } from './utility/Utility';
 import { BaseFeature } from './feature/base/BaseFeature';
 declare const stdutil: Utility;
+type DirectResult = {
+    ok: false;
+    err: any;
+    status?: undefined;
+    headers?: undefined;
+    data?: undefined;
+} | {
+    ok: boolean;
+    status: number;
+    headers: any;
+    data: any;
+    err?: any;
+};
 declare class IrailSDK {
     _mode: string;
     _options: any;
@@ -24,39 +35,13 @@ declare class IrailSDK {
     options(): any;
     utility(): any;
     prepare(fetchargs?: any): Promise<any>;
-    direct(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
-    _rawRequest(fetchargs?: any): Promise<Error | {
-        ok: boolean;
-        err: any;
-        status?: undefined;
-        headers?: undefined;
-        data?: undefined;
-    } | {
-        ok: boolean;
-        status: number;
-        headers: any;
-        data: any;
-        err?: undefined;
-    }>;
+    direct(fetchargs?: any): Promise<DirectResult>;
+    _rawRequest(fetchargs?: any): Promise<DirectResult>;
     graphql(query: string, variables?: any, ctrl?: any): Promise<any>;
     Composition(entopts?: Record<string, any>): CompositionEntity;
     Connection(entopts?: Record<string, any>): ConnectionEntity;
     Disturbance(entopts?: Record<string, any>): DisturbanceEntity;
     Liveboard(entopts?: Record<string, any>): LiveboardEntity;
-    Log(entopts?: Record<string, any>): LogEntity;
-    Occupancy(entopts?: Record<string, any>): OccupancyEntity;
     Station(entopts?: Record<string, any>): StationEntity;
     Vehicle(entopts?: Record<string, any>): VehicleEntity;
     static test(testoptsarg?: any, sdkoptsarg?: any): IrailSDK;
@@ -69,3 +54,4 @@ declare class IrailSDK {
 }
 declare const SDK: typeof IrailSDK;
 export { stdutil, config, BaseFeature, IrailEntityBase, IrailSDK, SDK, };
+export type { DirectResult };

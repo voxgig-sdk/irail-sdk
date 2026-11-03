@@ -24,12 +24,12 @@ class Composition(TypedDict, total=False):
 
 
 class CompositionLoadMatchRequired(TypedDict):
+    format: str
     id: str
 
 
 class CompositionLoadMatch(CompositionLoadMatchRequired, total=False):
     date: str
-    format: str
     lang: str
 
 
@@ -42,19 +42,25 @@ class Connection(TypedDict, total=False):
     vias: dict
 
 
-class ConnectionListMatchRequired(TypedDict):
-    to: str
+ConnectionListMatchRequired = TypedDict('ConnectionListMatchRequired', {
+    "format": str,
+    "from": str,
+    "to": str,
+})
+
+ConnectionListMatchOptional = TypedDict('ConnectionListMatchOptional', {
+    "alert": bool,
+    "date": str,
+    "lang": str,
+    "result": int,
+    "time": str,
+    "timesel": str,
+    "type_of_transport": str,
+}, total=False)
 
 
-class ConnectionListMatch(ConnectionListMatchRequired, total=False):
-    alert: bool
-    date: str
-    format: str
-    lang: str
-    result: int
-    time: str
-    timesel: str
-    type_of_transport: str
+class ConnectionListMatch(ConnectionListMatchRequired, ConnectionListMatchOptional):
+    pass
 
 
 class Disturbance(TypedDict, total=False):
@@ -66,8 +72,11 @@ class Disturbance(TypedDict, total=False):
     type: int
 
 
-class DisturbanceListMatch(TypedDict, total=False):
+class DisturbanceListMatchRequired(TypedDict):
     format: str
+
+
+class DisturbanceListMatch(DisturbanceListMatchRequired, total=False):
     lang: str
     line_break_character: str
 
@@ -80,33 +89,18 @@ class Liveboard(TypedDict):
     version: str
 
 
-class LiveboardLoadMatch(TypedDict, total=False):
+class LiveboardLoadMatchRequired(TypedDict):
+    format: str
+    station: str
+
+
+class LiveboardLoadMatch(LiveboardLoadMatchRequired, total=False):
     alert: bool
     arrdep: str
     date: str
-    format: str
     id: str
     lang: str
-    station: str
     time: str
-
-
-class Log(TypedDict, total=False):
-    querytime: int
-    querytype: str
-    user_agent: str
-
-
-class LogListMatch(TypedDict, total=False):
-    format: str
-
-
-class Occupancy(TypedDict):
-    pass
-
-
-class OccupancyCreateData(TypedDict):
-    pass
 
 
 class Station(TypedDict):
@@ -115,8 +109,11 @@ class Station(TypedDict):
     version: str
 
 
-class StationLoadMatch(TypedDict, total=False):
+class StationLoadMatchRequired(TypedDict):
     format: str
+
+
+class StationLoadMatch(StationLoadMatchRequired, total=False):
     lang: str
 
 
@@ -132,11 +129,11 @@ class Vehicle(VehicleRequired, total=False):
 
 
 class VehicleLoadMatchRequired(TypedDict):
+    format: str
     id: str
 
 
 class VehicleLoadMatch(VehicleLoadMatchRequired, total=False):
     alert: bool
     date: str
-    format: str
     lang: str

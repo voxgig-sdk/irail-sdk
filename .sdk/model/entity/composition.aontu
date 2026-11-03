@@ -41,7 +41,7 @@ main: kit: entity: composition: {
       points: [
         {
           co: {
-            id: "GET /composition/"
+            id: "GET /composition"
             source: "openapi3"
             version: 2
           }
@@ -55,14 +55,15 @@ main: kit: entity: composition: {
                 t: "`$STRING`"
               }
               {
-                ex: "xml"
+                ex: "json"
                 k: "query"
                 n: "format"
                 or: "format"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
+                ex: "IC532"
                 k: "query"
                 n: "id"
                 or: "id"
@@ -80,14 +81,22 @@ main: kit: entity: composition: {
             ]
           }
           m: "GET"
-          o: "/composition/"
+          o: "/composition"
           q: {
             exist: [
-              "date"
               "format"
               "id"
-              "lang"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "application/xml"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

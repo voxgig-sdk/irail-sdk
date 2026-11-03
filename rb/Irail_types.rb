@@ -35,7 +35,7 @@ Composition = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] format
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] id
 #   @return [String]
@@ -88,7 +88,7 @@ Connection = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] format
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] from
 #   @return [String]
@@ -156,7 +156,7 @@ Disturbance = Struct.new(
 # Request payload for Disturbance#list.
 #
 # @!attribute [rw] format
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] lang
 #   @return [String, nil]
@@ -207,7 +207,7 @@ Liveboard = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] format
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] id
 #   @return [String, nil]
@@ -216,7 +216,7 @@ Liveboard = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] station
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] time
 #   @return [String, nil]
@@ -231,40 +231,6 @@ LiveboardLoadMatch = Struct.new(
   :time,
   keyword_init: true
 )
-
-# Log entity data model.
-#
-# @!attribute [rw] querytime
-#   @return [Integer, nil]
-#
-# @!attribute [rw] querytype
-#   @return [String, nil]
-#
-# @!attribute [rw] user_agent
-#   @return [String, nil]
-Log = Struct.new(
-  :querytime,
-  :querytype,
-  :user_agent,
-  keyword_init: true
-)
-
-# Request payload for Log#list.
-#
-# @!attribute [rw] format
-#   @return [String, nil]
-LogListMatch = Struct.new(
-  :format,
-  keyword_init: true
-)
-
-# Occupancy entity data model.
-class Occupancy
-end
-
-# Request payload for Occupancy#create.
-class OccupancyCreateData
-end
 
 # Station entity data model.
 #
@@ -286,7 +252,7 @@ Station = Struct.new(
 # Request payload for Station#load.
 #
 # @!attribute [rw] format
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] lang
 #   @return [String, nil]
@@ -330,7 +296,7 @@ Vehicle = Struct.new(
 #   @return [String, nil]
 #
 # @!attribute [rw] format
-#   @return [String, nil]
+#   @return [String]
 #
 # @!attribute [rw] id
 #   @return [String]

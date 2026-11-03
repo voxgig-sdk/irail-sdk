@@ -102,6 +102,7 @@ class Config {
       },
       "optspec": {
         "clearTimer": "`$FUNCTION`",
+        "now": "`$FUNCTION`",
         "setTimer": "`$FUNCTION`"
       },
       "strict": false,
@@ -112,7 +113,7 @@ class Config {
 
 
   options = {
-    base: "https://api.irail.be",
+    base: "https://api.irail.be/v1",
 
     headers: {
       "content-type": "application/json"
@@ -130,12 +131,6 @@ class Config {
         },
   
         liveboard: {
-        },
-  
-        log: {
-        },
-  
-        occupancy: {
         },
   
         station: {
@@ -184,7 +179,7 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/composition/",
+              "orig": "/composition",
               "segments": [
                 {
                   "lit": "composition"
@@ -211,14 +206,16 @@ class Config {
                     "orig": "format",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "xml"
+                    "reqd": true,
+                    "example": "json"
                   },
                   {
                     "name": "id",
                     "orig": "id",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "reqd": true
+                    "reqd": true,
+                    "example": "IC532"
                   },
                   {
                     "name": "lang",
@@ -231,11 +228,19 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "date",
                   "format",
-                  "id",
-                  "lang"
+                  "id"
                 ]
+              },
+              "response": {
+                "alternatives": [
+                  {
+                    "kind": "raw",
+                    "media": "application/xml"
+                  }
+                ],
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -291,7 +296,7 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/connections/",
+              "orig": "/connections",
               "segments": [
                 {
                   "lit": "connections"
@@ -325,14 +330,16 @@ class Config {
                     "orig": "format",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "xml"
+                    "reqd": true,
+                    "example": "json"
                   },
                   {
                     "name": "from",
                     "orig": "from",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "reqd": true
+                    "reqd": true,
+                    "example": "Gent-Sint-Pieters"
                   },
                   {
                     "name": "lang",
@@ -366,7 +373,8 @@ class Config {
                     "orig": "to",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "reqd": true
+                    "reqd": true,
+                    "example": "Brussels-Central"
                   },
                   {
                     "name": "type_of_transport",
@@ -378,17 +386,20 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "alert",
-                  "date",
                   "format",
                   "from",
-                  "lang",
-                  "result",
-                  "time",
-                  "timesel",
-                  "to",
-                  "type_of_transport"
+                  "to"
                 ]
+              },
+              "response": {
+                "alternatives": [
+                  {
+                    "kind": "raw",
+                    "media": "application/xml"
+                  }
+                ],
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -444,7 +455,7 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/disturbances/",
+              "orig": "/disturbances",
               "segments": [
                 {
                   "lit": "disturbances"
@@ -465,7 +476,8 @@ class Config {
                     "orig": "format",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "xml"
+                    "reqd": true,
+                    "example": "json"
                   },
                   {
                     "name": "lang",
@@ -484,10 +496,18 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "format",
-                  "lang",
-                  "line_break_character"
+                  "format"
                 ]
+              },
+              "response": {
+                "alternatives": [
+                  {
+                    "kind": "raw",
+                    "media": "application/xml"
+                  }
+                ],
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -542,7 +562,7 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/liveboard/",
+              "orig": "/liveboard",
               "segments": [
                 {
                   "lit": "liveboard"
@@ -576,22 +596,21 @@ class Config {
                     "name": "date",
                     "orig": "date",
                     "type": "`$STRING`",
-                    "kind": "query",
-                    "example": "300917"
+                    "kind": "query"
                   },
                   {
                     "name": "format",
                     "orig": "format",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "xml"
+                    "reqd": true,
+                    "example": "json"
                   },
                   {
                     "name": "id",
                     "orig": "id",
                     "type": "`$STRING`",
-                    "kind": "query",
-                    "example": "BE.NMBS.008892007"
+                    "kind": "query"
                   },
                   {
                     "name": "lang",
@@ -605,133 +624,34 @@ class Config {
                     "orig": "station",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "Gent-Sint-Pieters"
+                    "reqd": true,
+                    "example": "Gent-Sint-Pieters",
+                    "field": true
                   },
                   {
                     "name": "time",
                     "orig": "time",
                     "type": "`$STRING`",
-                    "kind": "query",
-                    "example": "1230"
+                    "kind": "query"
                   }
                 ]
               },
               "select": {
                 "exist": [
-                  "alert",
-                  "arrdep",
-                  "date",
                   "format",
-                  "id",
-                  "lang",
-                  "station",
-                  "time"
+                  "station"
                 ]
-              }
-            }
-          ]
-        }
-      },
-      "relations": {
-        "ancestors": []
-      }
-    },
-    "log": {
-      "fields": [
-        {
-          "name": "querytime",
-          "title": "Querytime",
-          "type": "`$INTEGER`"
-        },
-        {
-          "name": "querytype",
-          "title": "Querytype",
-          "type": "`$STRING`"
-        },
-        {
-          "name": "user_agent",
-          "title": "User Agent",
-          "type": "`$STRING`"
-        }
-      ],
-      "name": "log",
-      "op": {
-        "list": {
-          "input": "data",
-          "name": "list",
-          "points": [
-            {
-              "kind": "http",
-              "method": "GET",
-              "orig": "/logs/",
-              "segments": [
-                {
-                  "lit": "logs"
-                }
-              ],
-              "parts": [
-                "logs"
-              ],
-              "rename": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body.logs`"
               },
-              "args": {
-                "query": [
+              "response": {
+                "alternatives": [
                   {
-                    "name": "format",
-                    "orig": "format",
-                    "type": "`$STRING`",
-                    "kind": "query",
-                    "example": "xml"
+                    "kind": "raw",
+                    "media": "application/xml"
                   }
-                ]
-              },
-              "select": {
-                "exist": [
-                  "format"
-                ]
+                ],
+                "kind": "json",
+                "media": "application/json"
               }
-            }
-          ]
-        }
-      },
-      "relations": {
-        "ancestors": []
-      }
-    },
-    "occupancy": {
-      "fields": [],
-      "name": "occupancy",
-      "op": {
-        "create": {
-          "input": "data",
-          "name": "create",
-          "points": [
-            {
-              "kind": "http",
-              "method": "POST",
-              "orig": "/feedback/occupancy.php",
-              "segments": [
-                {
-                  "lit": "feedback"
-                },
-                {
-                  "lit": "occupancy.php"
-                }
-              ],
-              "parts": [
-                "feedback",
-                "occupancy.php"
-              ],
-              "rename": {},
-              "transform": {
-                "req": "`reqdata`",
-                "res": "`body`"
-              },
-              "args": {},
-              "select": {}
             }
           ]
         }
@@ -772,7 +692,7 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/stations/",
+              "orig": "/stations",
               "segments": [
                 {
                   "lit": "stations"
@@ -793,7 +713,8 @@ class Config {
                     "orig": "format",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "xml"
+                    "reqd": true,
+                    "example": "json"
                   },
                   {
                     "name": "lang",
@@ -806,9 +727,18 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "format",
-                  "lang"
+                  "format"
                 ]
+              },
+              "response": {
+                "alternatives": [
+                  {
+                    "kind": "raw",
+                    "media": "application/xml"
+                  }
+                ],
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]
@@ -862,7 +792,7 @@ class Config {
             {
               "kind": "http",
               "method": "GET",
-              "orig": "/vehicle/",
+              "orig": "/vehicle",
               "segments": [
                 {
                   "lit": "vehicle"
@@ -896,7 +826,8 @@ class Config {
                     "orig": "format",
                     "type": "`$STRING`",
                     "kind": "query",
-                    "example": "xml"
+                    "reqd": true,
+                    "example": "json"
                   },
                   {
                     "name": "id",
@@ -917,12 +848,19 @@ class Config {
               },
               "select": {
                 "exist": [
-                  "alert",
-                  "date",
                   "format",
-                  "id",
-                  "lang"
+                  "id"
                 ]
+              },
+              "response": {
+                "alternatives": [
+                  {
+                    "kind": "raw",
+                    "media": "application/xml"
+                  }
+                ],
+                "kind": "json",
+                "media": "application/json"
               }
             }
           ]

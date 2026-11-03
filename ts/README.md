@@ -5,7 +5,7 @@
 The TypeScript SDK for the Irail API — a type-safe, entity-oriented client with full async/await support.
 
 The API is exposed as capitalised, semantic **Entities** — e.g.
-`client.Composition()` — each with a small set of operations (`list`, `load`, `create`)
+`client.Composition()` — each with a small set of operations (`list`, `load`)
 instead of raw URL paths and query parameters. This keeps the surface
 predictable and low-friction for both humans and AI agents.
 
@@ -15,7 +15,7 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)), or from a
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/irail-sdk/tags)), or from a
 clone, which carries the compiled `dist/`:
 
 ```bash
@@ -39,12 +39,12 @@ const client = new IrailSDK()
 
 ### 3. Load a composition
 
-`load()` returns the entity directly and throws on failure:
+`load()` returns the entity and throws on failure; `.data()` reads its record:
 
 ```ts
 try {
-  const composition = await client.Composition().load({ id: 'example_id' })
-  console.log(composition)
+  const composition = await client.Composition().load({ id: 'example_id', format: 'example_format' })
+  console.log(composition.data())
 } catch (err) {
   console.error('load failed:', err)
 }
@@ -57,15 +57,16 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const liveboard = await client.Liveboard().load()
-  console.log(liveboard)
+  const liveboard = await client.Liveboard().load({ format: "example", station: "example" })
+  console.log(liveboard.data())
 } catch (err) {
   console.error('load failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -74,8 +75,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -93,9 +94,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -124,10 +122,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = IrailSDK.test()
 
-const liveboard = await client.Liveboard().load({ id: 'test01' })
-// liveboard is the entity, populated with mock response data
-// — call liveboard.data() for the record itself
-console.log(liveboard)
+const liveboard = await client.Liveboard().load({ id: 'test01', format: 'example_format', station: 'example_station' })
+// liveboard is the Liveboard entity; .data() reads its mock record
+console.log(liveboard.data())
 ```
 
 You can also use the instance method:
@@ -145,7 +142,7 @@ Entity instances remember their last match and data:
 const entity = client.Liveboard()
 
 // First call runs the operation and stores its result
-await entity.load({ id: 'example' })
+await entity.load({ id: 'example', format: 'example_format', station: 'example_station' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
@@ -229,8 +226,6 @@ new IrailSDK(options?: {
 | `Connection(data?)` | `ConnectionEntity` | Create a Connection entity instance. |
 | `Disturbance(data?)` | `DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard(data?)` | `LiveboardEntity` | Create a Liveboard entity instance. |
-| `Log(data?)` | `LogEntity` | Create a Log entity instance. |
-| `Occupancy(data?)` | `OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station(data?)` | `StationEntity` | Create a Station entity instance. |
 | `Vehicle(data?)` | `VehicleEntity` | Create a Vehicle entity instance. |
 | `tester(testopts?, sdkopts?)` | `IrailSDK` | Create a test-mode client instance. |
@@ -249,9 +244,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria. |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
-| `create` | `create(reqdata?, ctrl?): Promise<Entity>` | Create a new entity. |
+| `load` | `load(reqmatch?, ctrl?): Promise<Entity>` | Load a single entity by match criteria, and return it. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -260,10 +254,10 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
-- `load` and `create` resolve to a single entity object.
+- `load` resolves to a single entity object.
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
 
@@ -312,7 +306,7 @@ The `prepare()` method returns:
 
 Operations: load.
 
-API path: `/composition/`
+API path: `/composition`
 
 #### Connection
 
@@ -327,7 +321,7 @@ API path: `/composition/`
 
 Operations: list.
 
-API path: `/connections/`
+API path: `/connections`
 
 #### Disturbance
 
@@ -342,7 +336,7 @@ API path: `/connections/`
 
 Operations: list.
 
-API path: `/disturbances/`
+API path: `/disturbances`
 
 #### Liveboard
 
@@ -356,28 +350,7 @@ API path: `/disturbances/`
 
 Operations: load.
 
-API path: `/liveboard/`
-
-#### Log
-
-| Field | Description |
-| --- | --- |
-| `querytime` |  |
-| `querytype` |  |
-| `user_agent` |  |
-
-Operations: list.
-
-API path: `/logs/`
-
-#### Occupancy
-
-| Field | Description |
-| --- | --- |
-
-Operations: create.
-
-API path: `/feedback/occupancy.php`
+API path: `/liveboard`
 
 #### Station
 
@@ -389,7 +362,7 @@ API path: `/feedback/occupancy.php`
 
 Operations: load.
 
-API path: `/stations/`
+API path: `/stations`
 
 #### Vehicle
 
@@ -403,7 +376,7 @@ API path: `/stations/`
 
 Operations: load.
 
-API path: `/vehicle/`
+API path: `/vehicle`
 
 
 
@@ -432,7 +405,7 @@ Create an instance: `const composition = client.Composition()`
 #### Example: Load
 
 ```ts
-const composition = await client.Composition().load({ id: 'composition_id' })
+const composition = await client.Composition().load({ id: 'composition_id', format: 'format' })
 ```
 
 
@@ -460,7 +433,7 @@ Create an instance: `const connection = client.Connection()`
 #### Example: List
 
 ```ts
-const connections = await client.Connection().list({ from: "example", to: "example" })
+const connections = await client.Connection().list({ format: "example", from: "example", to: "example" })
 ```
 
 
@@ -488,7 +461,7 @@ Create an instance: `const disturbance = client.Disturbance()`
 #### Example: List
 
 ```ts
-const disturbances = await client.Disturbance().list()
+const disturbances = await client.Disturbance().list({ format: "example" })
 ```
 
 
@@ -515,50 +488,7 @@ Create an instance: `const liveboard = client.Liveboard()`
 #### Example: Load
 
 ```ts
-const liveboard = await client.Liveboard().load({ id: 'liveboard_id' })
-```
-
-
-### Log
-
-Create an instance: `const log = client.Log()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `querytime` | `number` |  |
-| `querytype` | `string` |  |
-| `user_agent` | `string` |  |
-
-#### Example: List
-
-```ts
-const logs = await client.Log().list()
-```
-
-
-### Occupancy
-
-Create an instance: `const occupancy = client.Occupancy()`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Example: Create
-
-```ts
-const occupancy = await client.Occupancy().create({
-})
+const liveboard = await client.Liveboard().load({ id: 'liveboard_id', format: 'format', station: 'station' })
 ```
 
 
@@ -583,7 +513,7 @@ Create an instance: `const station = client.Station()`
 #### Example: Load
 
 ```ts
-const station = await client.Station().load()
+const station = await client.Station().load({ format: 'format' })
 ```
 
 
@@ -610,7 +540,7 @@ Create an instance: `const vehicle = client.Vehicle()`
 #### Example: Load
 
 ```ts
-const vehicle = await client.Vehicle().load({ id: 'vehicle_id' })
+const vehicle = await client.Vehicle().load({ id: 'vehicle_id', format: 'format' })
 ```
 
 ## Features
@@ -768,7 +698,7 @@ calls on the same instance can rely on this state.
 
 ```ts
 const liveboard = client.Liveboard()
-await liveboard.load()
+await liveboard.load({ format: "example", station: "example" })
 
 // liveboard.data() now returns the liveboard data from the last `load`
 // liveboard.match() returns { id: "example_id" }

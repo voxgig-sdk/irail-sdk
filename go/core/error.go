@@ -12,6 +12,8 @@ type IrailError struct {
 	Ctx    *Context `json:"-"`
 	Result any
 	Spec   any
+	// The HTTP status, -1 when there was no response.
+	Status int
 }
 
 func NewIrailError(code string, msg string, ctx *Context) *IrailError {
@@ -21,7 +23,12 @@ func NewIrailError(code string, msg string, ctx *Context) *IrailError {
 		Code:               code,
 		Msg:                msg,
 		Ctx:                ctx,
+		Status:             -1,
 	}
+}
+
+func (e *IrailError) NotFound() bool {
+	return 404 == e.Status
 }
 
 func (e *IrailError) Error() string {
@@ -35,6 +42,7 @@ func (e *IrailError) Record() map[string]any {
 		"sdk":     e.Sdk,
 		"code":    e.Code,
 		"message": e.Msg,
+		"status":  e.Status,
 		"result":  e.Result,
 		"spec":    e.Spec,
 	}

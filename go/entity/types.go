@@ -19,7 +19,7 @@ type Composition struct {
 // CompositionLoadMatch is the typed request payload for Composition.LoadTyped.
 type CompositionLoadMatch struct {
 	Date *string `json:"date,omitempty"`
-	Format *string `json:"format,omitempty"`
+	Format string `json:"format"`
 	Id string `json:"id"`
 	Lang *string `json:"lang,omitempty"`
 }
@@ -32,7 +32,7 @@ type Connection struct {
 type ConnectionListMatch struct {
 	Alert *bool `json:"alert,omitempty"`
 	Date *string `json:"date,omitempty"`
-	Format *string `json:"format,omitempty"`
+	Format string `json:"format"`
 	From string `json:"from"`
 	Lang *string `json:"lang,omitempty"`
 	Result *int `json:"result,omitempty"`
@@ -48,7 +48,7 @@ type Disturbance struct {
 
 // DisturbanceListMatch is the typed request payload for Disturbance.ListTyped.
 type DisturbanceListMatch struct {
-	Format *string `json:"format,omitempty"`
+	Format string `json:"format"`
 	Lang *string `json:"lang,omitempty"`
 	LineBreakCharacter *string `json:"line_break_character,omitempty"`
 }
@@ -62,28 +62,11 @@ type LiveboardLoadMatch struct {
 	Alert *bool `json:"alert,omitempty"`
 	Arrdep *string `json:"arrdep,omitempty"`
 	Date *string `json:"date,omitempty"`
-	Format *string `json:"format,omitempty"`
+	Format string `json:"format"`
 	Id *string `json:"id,omitempty"`
 	Lang *string `json:"lang,omitempty"`
-	Station *string `json:"station,omitempty"`
+	Station string `json:"station"`
 	Time *string `json:"time,omitempty"`
-}
-
-// Log is the typed data model for the log entity.
-type Log struct {
-}
-
-// LogListMatch is the typed request payload for Log.ListTyped.
-type LogListMatch struct {
-	Format *string `json:"format,omitempty"`
-}
-
-// Occupancy is the typed data model for the occupancy entity.
-type Occupancy struct {
-}
-
-// OccupancyCreateData is the typed request payload for Occupancy.CreateTyped.
-type OccupancyCreateData struct {
 }
 
 // Station is the typed data model for the station entity.
@@ -92,7 +75,7 @@ type Station struct {
 
 // StationLoadMatch is the typed request payload for Station.LoadTyped.
 type StationLoadMatch struct {
-	Format *string `json:"format,omitempty"`
+	Format string `json:"format"`
 	Lang *string `json:"lang,omitempty"`
 }
 
@@ -104,7 +87,7 @@ type Vehicle struct {
 type VehicleLoadMatch struct {
 	Alert *bool `json:"alert,omitempty"`
 	Date *string `json:"date,omitempty"`
-	Format *string `json:"format,omitempty"`
+	Format string `json:"format"`
 	Id string `json:"id"`
 	Lang *string `json:"lang,omitempty"`
 }

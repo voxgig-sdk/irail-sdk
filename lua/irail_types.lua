@@ -14,7 +14,7 @@
 
 ---@class CompositionLoadMatch
 ---@field date? string
----@field format? string
+---@field format string
 ---@field id string
 ---@field lang? string
 
@@ -29,7 +29,7 @@
 ---@class ConnectionListMatch
 ---@field alert? boolean
 ---@field date? string
----@field format? string
+---@field format string
 ---@field from string
 ---@field lang? string
 ---@field result? number
@@ -47,7 +47,7 @@
 ---@field type? number
 
 ---@class DisturbanceListMatch
----@field format? string
+---@field format string
 ---@field lang? string
 ---@field line_break_character? string
 
@@ -62,23 +62,11 @@
 ---@field alert? boolean
 ---@field arrdep? string
 ---@field date? string
----@field format? string
+---@field format string
 ---@field id? string
 ---@field lang? string
----@field station? string
+---@field station string
 ---@field time? string
-
----@class Log
----@field querytime? number
----@field querytype? string
----@field user_agent? string
-
----@class LogListMatch
----@field format? string
-
----@class Occupancy
-
----@class OccupancyCreateData
 
 ---@class Station
 ---@field station any
@@ -86,7 +74,7 @@
 ---@field version string
 
 ---@class StationLoadMatch
----@field format? string
+---@field format string
 ---@field lang? string
 
 ---@class Vehicle
@@ -99,7 +87,7 @@
 ---@class VehicleLoadMatch
 ---@field alert? boolean
 ---@field date? string
----@field format? string
+---@field format string
 ---@field id string
 ---@field lang? string
 

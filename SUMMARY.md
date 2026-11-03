@@ -6,7 +6,7 @@ The iRail API provides access to Belgium&#39;s railway data, including train sch
 
 This guide introduces the API, the client libraries, and the companion tools in this repository. Start with the API capabilities, choose a client for your application, and use the linked reference when you need exact request and response details.
 
-The selected API surface contains 8 entities and 8 HTTP routes. There are 6 SDK targets and 2 companion tools.
+The selected API surface contains 6 entities and 6 HTTP routes. There are 6 SDK targets and 2 companion tools.
 
 An entity groups related API operations. An operation can have several routes with different inputs or authentication requirements. The SDK exposes the entity and its operations using the conventions of the selected language.
 
@@ -56,18 +56,6 @@ Key fields to recognise:
 - `timestamp`: Unix timestamp of the response
 - `version`: API version
 
-### Log
-
-Results: Successful response with log data.
-
-SDK operations: `list`.
-
-### Occupancy
-
-Results: Feedback successfully submitted.
-
-SDK operations: `create`.
-
 ### Station
 
 Results: Successful response with list of stations.
@@ -97,18 +85,16 @@ Use this map to locate a capability. Consult the entity reference before supplyi
 
 | Entity | SDK operation | HTTP route | Authentication |
 | --- | --- | --- | --- |
-| Composition | `load` | `GET /composition/` | See reference |
-| Connection | `list` | `GET /connections/` | See reference |
-| Disturbance | `list` | `GET /disturbances/` | See reference |
-| Liveboard | `load` | `GET /liveboard/` | See reference |
-| Log | `list` | `GET /logs/` | See reference |
-| Occupancy | `create` | `POST /feedback/occupancy.php` | See reference |
-| Station | `load` | `GET /stations/` | See reference |
-| Vehicle | `load` | `GET /vehicle/` | See reference |
+| Composition | `load` | `GET /composition` | See reference |
+| Connection | `list` | `GET /connections` | See reference |
+| Disturbance | `list` | `GET /disturbances` | See reference |
+| Liveboard | `load` | `GET /liveboard` | See reference |
+| Station | `load` | `GET /stations` | See reference |
+| Vehicle | `load` | `GET /vehicle` | See reference |
 
 ## Connect to the API
 
-- Production API Server: `https://api.irail.be`
+- Production API Server: `https://api.irail.be/v1`
 
 Check authentication for the route you plan to call. A route that declares no authentication can be used without credentials; this does not change the requirements of other routes. Keep credentials in environment variables or a configured secret provider, and keep them out of source control and logs.
 
@@ -152,7 +138,7 @@ Use the MCP server to expose supported API operations to an MCP client.
 
 Repository directory: `go-mcp/`. Not published. Build from the go-mcp directory.
 
-- `irail_list`: List records for an entity. Supported entities: `connection`, `disturbance`, `log`.
+- `irail_list`: List records for an entity. Supported entities: `connection`, `disturbance`.
 - `irail_load`: Load one record for an entity. Supported entities: `composition`, `liveboard`, `station`, `vehicle`.
 
 ## Operational features

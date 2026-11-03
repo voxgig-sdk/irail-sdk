@@ -57,14 +57,6 @@ Create a new `Disturbance` entity instance. Pass `nil` for no initial data.
 
 Create a new `Liveboard` entity instance. Pass `nil` for no initial data.
 
-#### `Log(data = nil)`
-
-Create a new `Log` entity instance. Pass `nil` for no initial data.
-
-#### `Occupancy(data = nil)`
-
-Create a new `Occupancy` entity instance. Pass `nil` for no initial data.
-
 #### `Station(data = nil)`
 
 Create a new `Station` entity instance. Pass `nil` for no initial data.
@@ -130,10 +122,10 @@ composition = client.Composition
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
-result = client.Composition.load({ "id" => "composition_id" })
+result = client.Composition.load({ "id" => "composition_id", "format" => "format" })
 ```
 
 ### Common Methods
@@ -187,10 +179,11 @@ connection = client.Connection
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.Connection.list
+results = client.Connection.list({ "format" => "example", "from" => "example", "to" => "example" })
+results.each { |item| puts item.data_get }
 ```
 
 ### Common Methods
@@ -244,10 +237,11 @@ disturbance = client.Disturbance
 
 #### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record; `data_get` reads each record. Raises on error.
 
 ```ruby
-results = client.Disturbance.list
+results = client.Disturbance.list({ "format" => "example" })
+results.each { |item| puts item.data_get }
 ```
 
 ### Common Methods
@@ -300,10 +294,10 @@ liveboard = client.Liveboard
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
-result = client.Liveboard.load({ "id" => "liveboard_id" })
+result = client.Liveboard.load({ "id" => "liveboard_id", "format" => "format", "station" => "station" })
 ```
 
 ### Common Methods
@@ -336,107 +330,6 @@ Return the entity name.
 
 ---
 
-## LogEntity
-
-```ruby
-log = client.Log
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `querytime` | `Integer` | No |  |
-| `querytype` | `String` | No |  |
-| `user_agent` | `String` | No |  |
-
-### Operations
-
-#### `list(reqmatch = nil, ctrl = nil) -> Array`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
-
-```ruby
-results = client.Log.list
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `LogEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
-## OccupancyEntity
-
-```ruby
-occupancy = client.Occupancy
-```
-
-### Operations
-
-#### `create(reqdata, ctrl = nil) -> result`
-
-Create a new entity with the given data. Raises on error.
-
-```ruby
-result = client.Occupancy.create({
-})
-```
-
-### Common Methods
-
-#### `data_get -> Hash`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set(data)`
-
-Set the entity data.
-
-#### `match_get -> Hash`
-
-Get the entity match criteria.
-
-#### `match_set(match)`
-
-Set the entity match criteria.
-
-#### `make -> Entity`
-
-Create a new `OccupancyEntity` instance with the same client and
-options.
-
-#### `get_name -> String`
-
-Return the entity name.
-
-
----
-
 ## StationEntity
 
 ```ruby
@@ -455,10 +348,10 @@ station = client.Station
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
-result = client.Station.load()
+result = client.Station.load({ "format" => "format" })
 ```
 
 ### Common Methods
@@ -511,10 +404,10 @@ vehicle = client.Vehicle
 
 #### `load(reqmatch, ctrl = nil) -> result`
 
-Load a single entity matching the given criteria. Raises on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get` reads, and raises on error.
 
 ```ruby
-result = client.Vehicle.load({ "id" => "vehicle_id" })
+result = client.Vehicle.load({ "id" => "vehicle_id", "format" => "format" })
 ```
 
 ### Common Methods
@@ -704,6 +597,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

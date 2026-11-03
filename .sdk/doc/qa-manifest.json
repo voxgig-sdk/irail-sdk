@@ -3,5 +3,22 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API version",
+      "Production API Server",
+      "Station name",
+      "Successful response with composition information",
+      "Successful response with connections",
+      "Successful response with disturbances information",
+      "Successful response with list of stations",
+      "Successful response with liveboard information",
+      "Successful response with vehicle information",
+      "The (iRail) id of the station. The NMBS id can be deducted by removing the leading &#39;BE.NMBS.00&#39;",
+      "The iRail API provides access to Belgium&#39;s railway data, including train schedules, stations, liveboards, connections, vehicles, and disturbances. It allows developers to create applications that can access real-time train information and service updates.",
+      "Unix timestamp of the response",
+      "Vehicle identifier"
+    ]
+  }
 }

@@ -96,30 +96,6 @@ Create a new `Liveboard` entity instance.
 
 **Returns:** `LiveboardEntity` instance.
 
-#### `Log(data?: object)`
-
-Create a new `Log` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `LogEntity` instance.
-
-#### `Occupancy(data?: object)`
-
-Create a new `Occupancy` entity instance.
-
-**Parameters:**
-
-| Name | Type | Description |
-| --- | --- | --- |
-| `data` | `object` | Initial entity data. |
-
-**Returns:** `OccupancyEntity` instance.
-
 #### `Station(data?: object)`
 
 Create a new `Station` entity instance.
@@ -171,8 +147,10 @@ Make a direct HTTP request to any API endpoint.
 | `fetchargs.headers` | `object` | Request headers (merged with defaults). |
 | `fetchargs.body` | `any` | Request body (objects are JSON-serialized). |
 | `fetchargs.ctrl` | `object` | Control options (e.g. `{ explain: true }`). |
+| `fetchargs.ctrl.signal` | `AbortSignal` | Aborts the request in flight: `ok` is then `false` and `err.code` is `request_aborted`. |
 
-**Returns:** `Promise<{ ok, status, headers, data } | Error>`
+**Returns:** `Promise<{ ok, status, headers, data }>`. On a failure
+`ok` is `false` and `err` holds the error.
 
 #### `prepare(fetchargs?: object)`
 
@@ -186,6 +164,15 @@ same parameters as `direct()`.
 Alias for `IrailSDK.test()`.
 
 **Returns:** `IrailSDK` instance in test mode.
+
+#### Cancelling a call
+
+Every entity operation takes an optional `ctrl` object after its match or
+data, and an `AbortSignal` in `ctrl.signal` cancels the request in flight.
+The operation then rejects with an error whose `code` is
+`request_aborted` and whose `cause` is the signal's reason. A request
+whose signal has already aborted is not sent. `stream()` takes the signal
+as `callopts.signal`, and ends when it aborts.
 
 
 ---
@@ -209,10 +196,10 @@ const composition = client.Composition()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Composition().load({ id: 'composition_id' })
+const result = await client.Composition().load({ id: 'composition_id', format: 'format' })
 ```
 
 ### Common Methods
@@ -264,10 +251,10 @@ const connection = client.Connection()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const results = await client.Connection().list({ from: "example", to: "example" })
+const results = await client.Connection().list({ format: "example", from: "example", to: "example" })
 ```
 
 ### Common Methods
@@ -319,10 +306,10 @@ const disturbance = client.Disturbance()
 
 #### `list(match: object, ctrl?: object)`
 
-List entities matching the given criteria. Returns an array.
+List entities matching the given criteria. Resolves to an array of entities, one per record.
 
 ```ts
-const results = await client.Disturbance().list()
+const results = await client.Disturbance().list({ format: "example" })
 ```
 
 ### Common Methods
@@ -373,10 +360,10 @@ const liveboard = client.Liveboard()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Liveboard().load({ id: 'liveboard_id' })
+const result = await client.Liveboard().load({ id: 'liveboard_id', format: 'format', station: 'station' })
 ```
 
 ### Common Methods
@@ -394,103 +381,6 @@ Get or set the entity match criteria. Works the same as `data()`.
 #### `make()`
 
 Create a new `LiveboardEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `IrailSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## LogEntity
-
-```ts
-const log = client.Log()
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `querytime` | `number` | No |  |
-| `querytype` | `string` | No |  |
-| `user_agent` | `string` | No |  |
-
-### Operations
-
-#### `list(match: object, ctrl?: object)`
-
-List entities matching the given criteria. Returns an array.
-
-```ts
-const results = await client.Log().list()
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `LogEntity` instance with the same client and
-options.
-
-#### `client()`
-
-Return the parent `IrailSDK` instance.
-
-#### `entopts()`
-
-Return a copy of the entity options.
-
-
----
-
-## OccupancyEntity
-
-```ts
-const occupancy = client.Occupancy()
-```
-
-### Operations
-
-#### `create(data: object, ctrl?: object)`
-
-Create a new entity with the given data.
-
-```ts
-const result = await client.Occupancy().create({
-})
-```
-
-### Common Methods
-
-#### `data(data?: object)`
-
-Get or set the entity data. When called with data, sets the entity's
-internal data and returns the current data. When called without
-arguments, returns a copy of the current data.
-
-#### `match(match?: object)`
-
-Get or set the entity match criteria. Works the same as `data()`.
-
-#### `make()`
-
-Create a new `OccupancyEntity` instance with the same client and
 options.
 
 #### `client()`
@@ -522,10 +412,10 @@ const station = client.Station()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Station().load()
+const result = await client.Station().load({ format: 'format' })
 ```
 
 ### Common Methods
@@ -576,10 +466,10 @@ const vehicle = client.Vehicle()
 
 #### `load(match: object, ctrl?: object)`
 
-Load a single entity matching the given criteria.
+Load a single entity matching the given criteria. Resolves to the entity, whose record `data()` reads.
 
 ```ts
-const result = await client.Vehicle().load({ id: 'vehicle_id' })
+const result = await client.Vehicle().load({ id: 'vehicle_id', format: 'format' })
 ```
 
 ### Common Methods
@@ -767,6 +657,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and

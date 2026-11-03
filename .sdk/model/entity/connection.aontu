@@ -55,7 +55,7 @@ main: kit: entity: connection: {
       points: [
         {
           co: {
-            id: "GET /connections/"
+            id: "GET /connections"
             source: "openapi3"
             version: 2
           }
@@ -77,14 +77,15 @@ main: kit: entity: connection: {
                 t: "`$STRING`"
               }
               {
-                ex: "xml"
+                ex: "json"
                 k: "query"
                 n: "format"
                 or: "format"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
+                ex: "Gent-Sint-Pieters"
                 k: "query"
                 n: "from"
                 or: "from"
@@ -123,6 +124,7 @@ main: kit: entity: connection: {
                 t: "`$STRING`"
               }
               {
+                ex: "Brussels-Central"
                 k: "query"
                 n: "to"
                 or: "to"
@@ -139,20 +141,23 @@ main: kit: entity: connection: {
             ]
           }
           m: "GET"
-          o: "/connections/"
+          o: "/connections"
           q: {
             exist: [
-              "alert"
-              "date"
               "format"
               "from"
-              "lang"
-              "result"
-              "time"
-              "timesel"
               "to"
-              "type_of_transport"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "application/xml"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

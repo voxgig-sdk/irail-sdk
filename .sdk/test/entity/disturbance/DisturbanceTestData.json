@@ -39,7 +39,7 @@
     }
   },
   "requests": {
-    "GET /disturbances/": {
+    "GET /disturbances": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

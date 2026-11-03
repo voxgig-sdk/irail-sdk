@@ -47,7 +47,7 @@ main: kit: entity: liveboard: {
       points: [
         {
           co: {
-            id: "GET /liveboard/"
+            id: "GET /liveboard"
             source: "openapi3"
             version: 2
           }
@@ -70,7 +70,6 @@ main: kit: entity: liveboard: {
                 t: "`$STRING`"
               }
               {
-                ex: "300917"
                 k: "query"
                 n: "date"
                 or: "date"
@@ -78,15 +77,14 @@ main: kit: entity: liveboard: {
                 t: "`$STRING`"
               }
               {
-                ex: "xml"
+                ex: "json"
                 k: "query"
                 n: "format"
                 or: "format"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
-                ex: "BE.NMBS.008892007"
                 k: "query"
                 n: "id"
                 or: "id"
@@ -106,11 +104,10 @@ main: kit: entity: liveboard: {
                 k: "query"
                 n: "station"
                 or: "station"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
-                ex: "1230"
                 k: "query"
                 n: "time"
                 or: "time"
@@ -120,18 +117,22 @@ main: kit: entity: liveboard: {
             ]
           }
           m: "GET"
-          o: "/liveboard/"
+          o: "/liveboard"
           q: {
             exist: [
-              "alert"
-              "arrdep"
-              "date"
               "format"
-              "id"
-              "lang"
               "station"
-              "time"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "application/xml"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

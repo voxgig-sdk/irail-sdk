@@ -47,7 +47,7 @@ main: kit: entity: vehicle: {
       points: [
         {
           co: {
-            id: "GET /vehicle/"
+            id: "GET /vehicle"
             source: "openapi3"
             version: 2
           }
@@ -69,11 +69,11 @@ main: kit: entity: vehicle: {
                 t: "`$STRING`"
               }
               {
-                ex: "xml"
+                ex: "json"
                 k: "query"
                 n: "format"
                 or: "format"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
@@ -95,15 +95,22 @@ main: kit: entity: vehicle: {
             ]
           }
           m: "GET"
-          o: "/vehicle/"
+          o: "/vehicle"
           q: {
             exist: [
-              "alert"
-              "date"
               "format"
               "id"
-              "lang"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "application/xml"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

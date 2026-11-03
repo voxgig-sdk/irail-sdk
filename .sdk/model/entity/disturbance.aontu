@@ -55,18 +55,18 @@ main: kit: entity: disturbance: {
       points: [
         {
           co: {
-            id: "GET /disturbances/"
+            id: "GET /disturbances"
             source: "openapi3"
             version: 2
           }
           g: {
             query: [
               {
-                ex: "xml"
+                ex: "json"
                 k: "query"
                 n: "format"
                 or: "format"
-                r: false
+                r: true
                 t: "`$STRING`"
               }
               {
@@ -87,13 +87,21 @@ main: kit: entity: disturbance: {
             ]
           }
           m: "GET"
-          o: "/disturbances/"
+          o: "/disturbances"
           q: {
             exist: [
               "format"
-              "lang"
-              "line_break_character"
             ]
+          }
+          rs: {
+            alternatives: [
+              {
+                kind: "raw"
+                media: "application/xml"
+              }
+            ]
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

@@ -17,7 +17,7 @@ main: {
       servers: [
         {
           description: "Production API Server"
-          url: "https://api.irail.be"
+          url: "https://api.irail.be/v1"
         }
       ]
       summary: "The iRail API provides access to Belgium's railway data, including train schedules, stations, liveboards, connections, vehicles, and disturbances."

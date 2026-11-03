@@ -4,7 +4,7 @@
 
 The PHP SDK for the Irail API — an entity-oriented client using PHP conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Composition()` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `$client->Composition()` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `$
 
 ## Install
 This package is not yet published to Packagist. Install it from the
-GitHub release tag (`php/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)), or
+GitHub release tag (`php/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/irail-sdk/tags)), or
 from a clone as a Composer path repository:
 
 ```bash
@@ -41,7 +41,7 @@ $client = new IrailSDK();
 ```php
 try {
     // load() returns the ENTITY — call data_get() for the Composition record (throws on error).
-    $composition = $client->Composition()->load(["id" => "example_id"]);
+    $composition = $client->Composition()->load(["id" => "example_id", "format" => "example_format"]);
     print_r($composition->data_get());
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -56,7 +56,7 @@ Entity operations throw a `\Throwable` on failure, so wrap them in
 
 ```php
 try {
-    $liveboard = $client->Liveboard()->load();
+    $liveboard = $client->Liveboard()->load(["format" => "example", "station" => "example"]);
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
@@ -133,7 +133,7 @@ $client = IrailSDK::test([
 
 // Entity ops return the ENTITY (throws on error);
 // call data_get() for the mock record.
-$liveboard = $client->Liveboard()->load(["id" => "test01"]);
+$liveboard = $client->Liveboard()->load(["id" => "test01", "format" => "example", "station" => "example"]);
 print_r($liveboard->data_get());
 ```
 
@@ -217,8 +217,6 @@ Creates a test-mode client with mock transport. Both arguments may be `null`.
 | `Connection` | `($data): ConnectionEntity` | Create a Connection entity instance. |
 | `Disturbance` | `($data): DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard` | `($data): LiveboardEntity` | Create a Liveboard entity instance. |
-| `Log` | `($data): LogEntity` | Create a Log entity instance. |
-| `Occupancy` | `($data): OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station` | `($data): StationEntity` | Create a Station entity instance. |
 | `Vehicle` | `($data): VehicleEntity` | Create a Vehicle entity instance. |
 
@@ -228,9 +226,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `($reqmatch, $ctrl): array` | Load a single entity by match criteria. |
-| `list` | `(?array $reqmatch = null, $ctrl): array` | List entities matching the criteria (call with no argument to list all). |
-| `create` | `($reqdata, $ctrl): array` | Create a new entity. |
+| `load` | `($reqmatch, $ctrl): mixed` | Load a single entity by match criteria, and return it. |
+| `list` | `(?array $reqmatch = null, $ctrl): mixed` | List entities matching the criteria (call with no argument to list all), one per record. |
 | `data_get` | `(): array` | Get entity data. |
 | `data_set` | `($data): void` | Set entity data. |
 | `match_get` | `(): array` | Get entity match criteria. |
@@ -240,9 +237,9 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the ENTITY (call data_get() for the record) (an `array` for single-entity
-ops, a `list` for `list`) and throw on error. Wrap calls in
-`try`/`catch` to handle failures.
+Entity operations return the entity, and `list` an `array` of entities, one
+per record; an entity's `data_get()` reads its record (an `array`). They
+throw on error, so wrap calls in `try`/`catch` to handle failures.
 
 The `direct()` escape hatch never throws — it returns a result `array`
 you branch on via `$result["ok"]`:
@@ -269,7 +266,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 Operations: Load.
 
-API path: `/composition/`
+API path: `/composition`
 
 #### Connection
 
@@ -284,7 +281,7 @@ API path: `/composition/`
 
 Operations: List.
 
-API path: `/connections/`
+API path: `/connections`
 
 #### Disturbance
 
@@ -299,7 +296,7 @@ API path: `/connections/`
 
 Operations: List.
 
-API path: `/disturbances/`
+API path: `/disturbances`
 
 #### Liveboard
 
@@ -313,28 +310,7 @@ API path: `/disturbances/`
 
 Operations: Load.
 
-API path: `/liveboard/`
-
-#### Log
-
-| Field | Description |
-| --- | --- |
-| `querytime` |  |
-| `querytype` |  |
-| `user_agent` |  |
-
-Operations: List.
-
-API path: `/logs/`
-
-#### Occupancy
-
-| Field | Description |
-| --- | --- |
-
-Operations: Create.
-
-API path: `/feedback/occupancy.php`
+API path: `/liveboard`
 
 #### Station
 
@@ -346,7 +322,7 @@ API path: `/feedback/occupancy.php`
 
 Operations: Load.
 
-API path: `/stations/`
+API path: `/stations`
 
 #### Vehicle
 
@@ -360,7 +336,7 @@ API path: `/stations/`
 
 Operations: Load.
 
-API path: `/vehicle/`
+API path: `/vehicle`
 
 
 
@@ -390,7 +366,7 @@ Create an instance: `$composition = $client->Composition();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Composition record (throws on error).
-$composition = $client->Composition()->load(["id" => "composition_id"]);
+$composition = $client->Composition()->load(["id" => "composition_id", "format" => "format"]);
 ```
 
 
@@ -418,8 +394,8 @@ Create an instance: `$connection = $client->Connection();`
 #### Example: List
 
 ```php
-// list() returns an array of Connection records (throws on error).
-$connections = $client->Connection()->list();
+// list() returns an array of Connection entities, one per record (throws on error).
+$connections = $client->Connection()->list(["format" => "example", "from" => "example", "to" => "example"]);
 ```
 
 
@@ -447,8 +423,8 @@ Create an instance: `$disturbance = $client->Disturbance();`
 #### Example: List
 
 ```php
-// list() returns an array of Disturbance records (throws on error).
-$disturbances = $client->Disturbance()->list();
+// list() returns an array of Disturbance entities, one per record (throws on error).
+$disturbances = $client->Disturbance()->list(["format" => "example"]);
 ```
 
 
@@ -476,51 +452,7 @@ Create an instance: `$liveboard = $client->Liveboard();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Liveboard record (throws on error).
-$liveboard = $client->Liveboard()->load(["id" => "liveboard_id"]);
-```
-
-
-### Log
-
-Create an instance: `$log = $client->Log();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `querytime` | `int` |  |
-| `querytype` | `string` |  |
-| `user_agent` | `string` |  |
-
-#### Example: List
-
-```php
-// list() returns an array of Log records (throws on error).
-$logs = $client->Log()->list();
-```
-
-
-### Occupancy
-
-Create an instance: `$occupancy = $client->Occupancy();`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Example: Create
-
-```php
-$occupancy = $client->Occupancy()->create([
-]);
+$liveboard = $client->Liveboard()->load(["id" => "liveboard_id", "format" => "format", "station" => "station"]);
 ```
 
 
@@ -546,7 +478,7 @@ Create an instance: `$station = $client->Station();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Station record (throws on error).
-$station = $client->Station()->load();
+$station = $client->Station()->load(["format" => "format"]);
 ```
 
 
@@ -574,7 +506,7 @@ Create an instance: `$vehicle = $client->Vehicle();`
 
 ```php
 // load() returns the ENTITY — call data_get() for the Vehicle record (throws on error).
-$vehicle = $client->Vehicle()->load(["id" => "vehicle_id"]);
+$vehicle = $client->Vehicle()->load(["id" => "vehicle_id", "format" => "format"]);
 ```
 
 ## Features
@@ -740,7 +672,7 @@ stores the returned data and match criteria internally.
 
 ```php
 $liveboard = $client->Liveboard();
-$liveboard->load();
+$liveboard->load(["format" => "example", "station" => "example"]);
 
 // $liveboard->data_get() now returns the liveboard data from the last load
 // $liveboard->match_get() returns the last match criteria

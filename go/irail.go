@@ -13,7 +13,12 @@ type Context = core.Context
 type Utility = core.Utility
 type Feature = core.Feature
 type Entity = core.Entity
-type IrailEntity = core.IrailEntity
+type IrailEntityBase = core.IrailEntityBase
+
+// Deprecated: use IrailEntityBase.
+type IrailEntity = core.IrailEntityBase
+
+type StreamItem = core.StreamItem
 type FetcherFunc = core.FetcherFunc
 type Spec = core.Spec
 type Result = core.Result
@@ -41,28 +46,22 @@ func init() {
 	core.NewTimeoutFeatureFunc = func() core.Feature {
 		return feature.NewTimeoutFeature()
 	}
-	core.NewCompositionEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
+	core.NewCompositionEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntityBase {
 		return entity.NewCompositionEntity(client, entopts)
 	}
-	core.NewConnectionEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
+	core.NewConnectionEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntityBase {
 		return entity.NewConnectionEntity(client, entopts)
 	}
-	core.NewDisturbanceEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
+	core.NewDisturbanceEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntityBase {
 		return entity.NewDisturbanceEntity(client, entopts)
 	}
-	core.NewLiveboardEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
+	core.NewLiveboardEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntityBase {
 		return entity.NewLiveboardEntity(client, entopts)
 	}
-	core.NewLogEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
-		return entity.NewLogEntity(client, entopts)
-	}
-	core.NewOccupancyEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
-		return entity.NewOccupancyEntity(client, entopts)
-	}
-	core.NewStationEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
+	core.NewStationEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntityBase {
 		return entity.NewStationEntity(client, entopts)
 	}
-	core.NewVehicleEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntity {
+	core.NewVehicleEntityFunc = func(client *core.IrailSDK, entopts map[string]any) core.IrailEntityBase {
 		return entity.NewVehicleEntity(client, entopts)
 	}
 }

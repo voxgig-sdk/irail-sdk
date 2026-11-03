@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Disturbance();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('disturbance hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.IrailSDK.test(offline).Disturbance().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.IrailSDK.test(offline).Disturbance()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.IrailSDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Disturbance().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.IrailSDK.test().Disturbance().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.IrailSDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Disturbance().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Disturbance().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.IrailSDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Disturbance().list({ "format": 1 }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.IRAIL_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "description": { "a": true, "h": "Description", "n": "description", "r": false, "t": "`$STRING`", "key$": "description", "index$": 0 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$INTEGER`", "key$": "id", "index$": 1 }, "link": { "a": true, "h": "Link", "n": "link", "r": false, "t": "`$STRING`", "key$": "link", "index$": 2 }, "timestamp": { "a": true, "h": "Timestamp", "n": "timestamp", "r": false, "t": "`$INTEGER`", "key$": "timestamp", "index$": 3 }, "title": { "a": true, "h": "Title", "n": "title", "r": false, "t": "`$STRING`", "key$": "title", "index$": 4 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$INTEGER`", "key$": "type", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "disturbance", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /disturbances/", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": "xml", "k": "query", "n": "format", "or": "format", "r": false, "t": "`$STRING`", "index$": 0 }, { "a": true, "ex": "en", "k": "query", "n": "lang", "or": "lang", "r": false, "t": "`$STRING`", "index$": 1 }, { "a": true, "k": "query", "n": "line_break_character", "or": "lineBreakCharacter", "r": false, "t": "`$STRING`", "index$": 2 }] }, "k": "http", "m": "GET", "o": "/disturbances/", "q": { "exist": ["format", "lang", "line_break_character"] }, "r": {}, "s": [{ "lit": "disturbances" }], "t": { "req": "`reqdata`", "res": "`body.disturbance`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "disturbance", "name__orig": "disturbance", "Name": "Disturbance", "name_": "disturbance", "name-": "disturbance", "NAME": "DISTURBANCE", "index$": 2 }, { "active": true, "entity": "disturbance", "key$": "BasicDisturbanceFlow", "kind": "basic", "name": "BasicDisturbanceFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "disturbance_ref01" } }], "index$": 0 }] }, 'Disturbance', { "GET /disturbances/": { "protocol": "http", "parameters": [{ "name": "format", "in": "query", "description": "The response format", "required": false, "schema": { "type": "string", "enum": ["xml", "json", "jsonp"], "default": "xml" }, "index$": 0 }, { "name": "lang", "in": "query", "description": "The language of any text or names in the response", "required": false, "schema": { "type": "string", "enum": ["nl", "fr", "en", "de"], "default": "en" }, "index$": 1 }, { "name": "lineBreakCharacter", "in": "query", "description": "Character to use for line breaks in disturbance descriptions", "required": false, "schema": { "type": "string" }, "index$": 2 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "description": { "a": true, "h": "Description", "n": "description", "r": false, "t": "`$STRING`", "key$": "description", "index$": 0 }, "id": { "a": true, "h": "Id", "n": "id", "r": false, "t": "`$INTEGER`", "key$": "id", "index$": 1 }, "link": { "a": true, "h": "Link", "n": "link", "r": false, "t": "`$STRING`", "key$": "link", "index$": 2 }, "timestamp": { "a": true, "h": "Timestamp", "n": "timestamp", "r": false, "t": "`$INTEGER`", "key$": "timestamp", "index$": 3 }, "title": { "a": true, "h": "Title", "n": "title", "r": false, "t": "`$STRING`", "key$": "title", "index$": 4 }, "type": { "a": true, "h": "Type", "n": "type", "r": false, "t": "`$INTEGER`", "key$": "type", "index$": 5 } }, "id": { "field": "id", "name": "id" }, "name": "disturbance", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /disturbances", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": "json", "k": "query", "n": "format", "or": "format", "r": true, "t": "`$STRING`", "index$": 0 }, { "a": true, "ex": "en", "k": "query", "n": "lang", "or": "lang", "r": false, "t": "`$STRING`", "index$": 1 }, { "a": true, "k": "query", "n": "line_break_character", "or": "lineBreakCharacter", "r": false, "t": "`$STRING`", "index$": 2 }] }, "k": "http", "m": "GET", "o": "/disturbances", "q": { "exist": ["format"] }, "r": {}, "rs": { "alternatives": [{ "kind": "raw", "media": "application/xml" }], "kind": "json", "media": "application/json" }, "s": [{ "lit": "disturbances" }], "t": { "req": "`reqdata`", "res": "`body.disturbance`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "disturbance", "name__orig": "disturbance", "Name": "Disturbance", "name_": "disturbance", "name-": "disturbance", "NAME": "DISTURBANCE", "index$": 2 }, { "active": true, "entity": "disturbance", "key$": "BasicDisturbanceFlow", "kind": "basic", "name": "BasicDisturbanceFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "disturbance_ref01" } }], "index$": 0 }] }, 'Disturbance', { "GET /disturbances": { "protocol": "http", "parameters": [{ "name": "format", "in": "query", "description": "The response format", "required": true, "schema": { "type": "string", "enum": ["xml", "json", "jsonp"], "default": "xml" }, "example": "json", "index$": 0 }, { "name": "lang", "in": "query", "description": "The language of any text or names in the response", "required": false, "schema": { "type": "string", "enum": ["nl", "fr", "en", "de"], "default": "en" }, "index$": 1 }, { "name": "lineBreakCharacter", "in": "query", "description": "Character to use for line breaks in disturbance descriptions", "required": false, "schema": { "type": "string" }, "index$": 2 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const disturbance_ref01_list = (await disturbance_ref01_ent.list(disturbance_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

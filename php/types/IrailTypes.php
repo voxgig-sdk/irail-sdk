@@ -25,7 +25,7 @@ class Composition
 class CompositionLoadMatch
 {
     public ?string $date = null;
-    public ?string $format = null;
+    public string $format;
     public string $id;
     public ?string $lang = null;
 }
@@ -46,7 +46,7 @@ class ConnectionListMatch
 {
     public ?bool $alert = null;
     public ?string $date = null;
-    public ?string $format = null;
+    public string $format;
     public string $from;
     public ?string $lang = null;
     public ?int $result = null;
@@ -70,7 +70,7 @@ class Disturbance
 /** Request payload for Disturbance#list. */
 class DisturbanceListMatch
 {
-    public ?string $format = null;
+    public string $format;
     public ?string $lang = null;
     public ?string $line_break_character = null;
 }
@@ -91,35 +91,11 @@ class LiveboardLoadMatch
     public ?bool $alert = null;
     public ?string $arrdep = null;
     public ?string $date = null;
-    public ?string $format = null;
+    public string $format;
     public ?string $id = null;
     public ?string $lang = null;
-    public ?string $station = null;
+    public string $station;
     public ?string $time = null;
-}
-
-/** Log entity data model. */
-class Log
-{
-    public ?int $querytime = null;
-    public ?string $querytype = null;
-    public ?string $user_agent = null;
-}
-
-/** Request payload for Log#list. */
-class LogListMatch
-{
-    public ?string $format = null;
-}
-
-/** Occupancy entity data model. */
-class Occupancy
-{
-}
-
-/** Request payload for Occupancy#create. */
-class OccupancyCreateData
-{
 }
 
 /** Station entity data model. */
@@ -133,7 +109,7 @@ class Station
 /** Request payload for Station#load. */
 class StationLoadMatch
 {
-    public ?string $format = null;
+    public string $format;
     public ?string $lang = null;
 }
 
@@ -152,7 +128,7 @@ class VehicleLoadMatch
 {
     public ?bool $alert = null;
     public ?string $date = null;
-    public ?string $format = null;
+    public string $format;
     public string $id;
     public ?string $lang = null;
 }

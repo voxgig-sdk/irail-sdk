@@ -138,7 +138,7 @@
                 {
                   "a": true,
                   "co": {
-                    "id": "GET /composition/",
+                    "id": "GET /composition",
                     "source": "openapi3",
                     "version": 2
                   },
@@ -154,15 +154,16 @@
                       },
                       {
                         "a": true,
-                        "ex": "xml",
+                        "ex": "json",
                         "k": "query",
                         "n": "format",
                         "or": "format",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
                         "a": true,
+                        "ex": "IC532",
                         "k": "query",
                         "n": "id",
                         "or": "id",
@@ -182,16 +183,24 @@
                   },
                   "k": "http",
                   "m": "GET",
-                  "o": "/composition/",
+                  "o": "/composition",
                   "q": {
                     "exist": [
-                      "date",
                       "format",
-                      "id",
-                      "lang"
+                      "id"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "application/xml"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "composition"
@@ -271,7 +280,7 @@
                 {
                   "a": true,
                   "co": {
-                    "id": "GET /connections/",
+                    "id": "GET /connections",
                     "source": "openapi3",
                     "version": 2
                   },
@@ -296,15 +305,16 @@
                       },
                       {
                         "a": true,
-                        "ex": "xml",
+                        "ex": "json",
                         "k": "query",
                         "n": "format",
                         "or": "format",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
                         "a": true,
+                        "ex": "Gent-Sint-Pieters",
                         "k": "query",
                         "n": "from",
                         "or": "from",
@@ -348,6 +358,7 @@
                       },
                       {
                         "a": true,
+                        "ex": "Brussels-Central",
                         "k": "query",
                         "n": "to",
                         "or": "to",
@@ -366,22 +377,25 @@
                   },
                   "k": "http",
                   "m": "GET",
-                  "o": "/connections/",
+                  "o": "/connections",
                   "q": {
                     "exist": [
-                      "alert",
-                      "date",
                       "format",
                       "from",
-                      "lang",
-                      "result",
-                      "time",
-                      "timesel",
-                      "to",
-                      "type_of_transport"
+                      "to"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "application/xml"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "connections"
@@ -461,7 +475,7 @@
                 {
                   "a": true,
                   "co": {
-                    "id": "GET /disturbances/",
+                    "id": "GET /disturbances",
                     "source": "openapi3",
                     "version": 2
                   },
@@ -469,11 +483,11 @@
                     "query": [
                       {
                         "a": true,
-                        "ex": "xml",
+                        "ex": "json",
                         "k": "query",
                         "n": "format",
                         "or": "format",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
@@ -497,15 +511,23 @@
                   },
                   "k": "http",
                   "m": "GET",
-                  "o": "/disturbances/",
+                  "o": "/disturbances",
                   "q": {
                     "exist": [
-                      "format",
-                      "lang",
-                      "line_break_character"
+                      "format"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "application/xml"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "disturbances"
@@ -577,7 +599,7 @@
                 {
                   "a": true,
                   "co": {
-                    "id": "GET /liveboard/",
+                    "id": "GET /liveboard",
                     "source": "openapi3",
                     "version": 2
                   },
@@ -603,7 +625,6 @@
                       },
                       {
                         "a": true,
-                        "ex": "300917",
                         "k": "query",
                         "n": "date",
                         "or": "date",
@@ -612,16 +633,15 @@
                       },
                       {
                         "a": true,
-                        "ex": "xml",
+                        "ex": "json",
                         "k": "query",
                         "n": "format",
                         "or": "format",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
                         "a": true,
-                        "ex": "BE.NMBS.008892007",
                         "k": "query",
                         "n": "id",
                         "or": "id",
@@ -643,12 +663,11 @@
                         "k": "query",
                         "n": "station",
                         "or": "station",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
                         "a": true,
-                        "ex": "1230",
                         "k": "query",
                         "n": "time",
                         "or": "time",
@@ -659,148 +678,27 @@
                   },
                   "k": "http",
                   "m": "GET",
-                  "o": "/liveboard/",
+                  "o": "/liveboard",
                   "q": {
                     "exist": [
-                      "alert",
-                      "arrdep",
-                      "date",
                       "format",
-                      "id",
-                      "lang",
-                      "station",
-                      "time"
+                      "station"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "application/xml"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "liveboard"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "log": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {
-            "querytime": {
-              "a": true,
-              "h": "Querytime",
-              "n": "querytime",
-              "r": false,
-              "t": "`$INTEGER`"
-            },
-            "querytype": {
-              "a": true,
-              "h": "Querytype",
-              "n": "querytype",
-              "r": false,
-              "t": "`$STRING`"
-            },
-            "user_agent": {
-              "a": true,
-              "h": "User Agent",
-              "n": "user_agent",
-              "r": false,
-              "t": "`$STRING`"
-            }
-          },
-          "name": "log",
-          "op": {
-            "list": {
-              "input": "data",
-              "name": "list",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "GET /logs/",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {
-                    "query": [
-                      {
-                        "a": true,
-                        "ex": "xml",
-                        "k": "query",
-                        "n": "format",
-                        "or": "format",
-                        "r": false,
-                        "t": "`$STRING`"
-                      }
-                    ]
-                  },
-                  "k": "http",
-                  "m": "GET",
-                  "o": "/logs/",
-                  "q": {
-                    "exist": [
-                      "format"
-                    ]
-                  },
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "logs"
-                    }
-                  ],
-                  "t": {
-                    "req": "`reqdata`",
-                    "res": "`body.logs`"
-                  }
-                }
-              ]
-            }
-          },
-          "relations": {
-            "ancestors": []
-          }
-        },
-        "occupancy": {
-          "active": true,
-          "alias": {
-            "field": {}
-          },
-          "fields": {},
-          "name": "occupancy",
-          "op": {
-            "create": {
-              "input": "data",
-              "name": "create",
-              "points": [
-                {
-                  "a": true,
-                  "co": {
-                    "id": "POST /feedback/occupancy.php",
-                    "source": "openapi3",
-                    "version": 2
-                  },
-                  "g": {},
-                  "k": "http",
-                  "m": "POST",
-                  "o": "/feedback/occupancy.php",
-                  "q": {},
-                  "r": {},
-                  "s": [
-                    {
-                      "lit": "feedback"
-                    },
-                    {
-                      "lit": "occupancy.php"
                     }
                   ],
                   "t": {
@@ -859,7 +757,7 @@
                 {
                   "a": true,
                   "co": {
-                    "id": "GET /stations/",
+                    "id": "GET /stations",
                     "source": "openapi3",
                     "version": 2
                   },
@@ -867,11 +765,11 @@
                     "query": [
                       {
                         "a": true,
-                        "ex": "xml",
+                        "ex": "json",
                         "k": "query",
                         "n": "format",
                         "or": "format",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
@@ -887,14 +785,23 @@
                   },
                   "k": "http",
                   "m": "GET",
-                  "o": "/stations/",
+                  "o": "/stations",
                   "q": {
                     "exist": [
-                      "format",
-                      "lang"
+                      "format"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "application/xml"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "stations"
@@ -966,7 +873,7 @@
                 {
                   "a": true,
                   "co": {
-                    "id": "GET /vehicle/",
+                    "id": "GET /vehicle",
                     "source": "openapi3",
                     "version": 2
                   },
@@ -991,11 +898,11 @@
                       },
                       {
                         "a": true,
-                        "ex": "xml",
+                        "ex": "json",
                         "k": "query",
                         "n": "format",
                         "or": "format",
-                        "r": false,
+                        "r": true,
                         "t": "`$STRING`"
                       },
                       {
@@ -1020,17 +927,24 @@
                   },
                   "k": "http",
                   "m": "GET",
-                  "o": "/vehicle/",
+                  "o": "/vehicle",
                   "q": {
                     "exist": [
-                      "alert",
-                      "date",
                       "format",
-                      "id",
-                      "lang"
+                      "id"
                     ]
                   },
                   "r": {},
+                  "rs": {
+                    "alternatives": [
+                      {
+                        "kind": "raw",
+                        "media": "application/xml"
+                      }
+                    ],
+                    "kind": "json",
+                    "media": "application/json"
+                  },
                   "s": [
                     {
                       "lit": "vehicle"
@@ -1371,6 +1285,7 @@
             },
             "optspec": {
               "clearTimer": "`$FUNCTION`",
+              "now": "`$FUNCTION`",
               "setTimer": "`$FUNCTION`"
             },
             "strict": false
@@ -1572,53 +1487,6 @@
             }
           ]
         },
-        "BasicLogFlow": {
-          "active": true,
-          "entity": "log",
-          "key$": "BasicLogFlow",
-          "kind": "basic",
-          "name": "BasicLogFlow",
-          "param": {},
-          "step": [
-            {
-              "a": true,
-              "d": {},
-              "i": {},
-              "m": {},
-              "o": "list",
-              "s": [],
-              "v": [
-                {
-                  "apply": "ItemExists",
-                  "def": {
-                    "ref": "log_ref01"
-                  }
-                }
-              ]
-            }
-          ]
-        },
-        "BasicOccupancyFlow": {
-          "active": true,
-          "entity": "occupancy",
-          "key$": "BasicOccupancyFlow",
-          "kind": "basic",
-          "name": "BasicOccupancyFlow",
-          "param": {},
-          "step": [
-            {
-              "a": true,
-              "d": {},
-              "i": {
-                "ref": "occupancy_ref01"
-              },
-              "m": {},
-              "o": "create",
-              "s": [],
-              "v": []
-            }
-          ]
-        },
         "BasicStationFlow": {
           "active": true,
           "entity": "station",
@@ -1695,7 +1563,7 @@
         "servers": [
           {
             "description": "Production API Server",
-            "url": "https://api.irail.be"
+            "url": "https://api.irail.be/v1"
           }
         ],
         "summary": "The iRail API provides access to Belgium's railway data, including train schedules, stations, liveboards, connections, vehicles, and disturbances.",
@@ -1707,7 +1575,7 @@
       "optspec": {
         "allow": {
           "method": "GET,PUT,POST,PATCH,DELETE,OPTIONS",
-          "op": "create,update,load,list,remove,command,direct,graphql"
+          "op": "create,update,patch,load,list,remove,command,direct,graphql"
         },
         "apikey": "",
         "auth": {
@@ -1760,6 +1628,11 @@
         "top": {
           "active": true
         }
+      },
+      "publisher": {
+        "name": "",
+        "security": "",
+        "url": ""
       },
       "repo": {
         "host": "github.com",
@@ -1990,7 +1863,10 @@
             "version": "0.0.1"
           },
           "superseded": [],
-          "title": "Go MCP server"
+          "title": "Go MCP server",
+          "tool": {
+            "write": false
+          }
         },
         "lua": {
           "active": true,
@@ -2367,6 +2243,17 @@
           "base": "",
           "strict": true
         }
+      },
+      "text": {
+        "about_md": "",
+        "docs_url": "",
+        "entity_desc": {},
+        "homepage": "",
+        "meta_source": "",
+        "summary": "",
+        "tagline": "",
+        "title": "",
+        "website": ""
       }
     }
   },

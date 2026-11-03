@@ -14,7 +14,7 @@ export interface Composition {
 
 export interface CompositionLoadMatch {
   date?: string
-  format?: string
+  format: string
   id: string
   lang?: string
 }
@@ -31,7 +31,7 @@ export interface Connection {
 export interface ConnectionListMatch {
   alert?: boolean
   date?: string
-  format?: string
+  format: string
   from: string
   lang?: string
   result?: number
@@ -51,7 +51,7 @@ export interface Disturbance {
 }
 
 export interface DisturbanceListMatch {
-  format?: string
+  format: string
   lang?: string
   line_break_character?: string
 }
@@ -68,27 +68,11 @@ export interface LiveboardLoadMatch {
   alert?: boolean
   arrdep?: string
   date?: string
-  format?: string
+  format: string
   id?: string
   lang?: string
-  station?: string
+  station: string
   time?: string
-}
-
-export interface Log {
-  querytime?: number
-  querytype?: string
-  user_agent?: string
-}
-
-export interface LogListMatch {
-  format?: string
-}
-
-export interface Occupancy {
-}
-
-export interface OccupancyCreateData {
 }
 
 export interface Station {
@@ -98,7 +82,7 @@ export interface Station {
 }
 
 export interface StationLoadMatch {
-  format?: string
+  format: string
   lang?: string
 }
 
@@ -113,7 +97,7 @@ export interface Vehicle {
 export interface VehicleLoadMatch {
   alert?: boolean
   date?: string
-  format?: string
+  format: string
   id: string
   lang?: string
 }

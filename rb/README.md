@@ -4,7 +4,7 @@
 
 The Ruby SDK for the Irail API — an entity-oriented client using idiomatic Ruby conventions.
 
-The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Composition` — with named operations (`list`/`load`/`create`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
+The SDK exposes the API as capitalised, semantic **Entities** — for example `client.Composition` — with named operations (`list`/`load`) instead of raw URL paths and query strings. Working with resources and verbs keeps call sites self-describing and reduces cognitive load.
 
 > Other languages, the CLI, and MCP server live alongside this one — see
 > the [top-level README](../README.md).
@@ -12,7 +12,7 @@ The SDK exposes the API as capitalised, semantic **Entities** — for example `c
 
 ## Install
 This package is not yet published to RubyGems. Install it from the
-GitHub release tag (`rb/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases)), or
+GitHub release tag (`rb/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/irail-sdk/tags)), or
 from a clone:
 
 ```bash
@@ -44,8 +44,8 @@ client = IrailSDK.new
 ```ruby
 begin
   # load returns the ENTITY — call data_get for the Composition record (raises on error).
-  composition = client.Composition.load({ "id" => "example_id" })
-  puts composition
+  composition = client.Composition.load({ "id" => "example_id", "format" => "example_format" })
+  puts composition.data_get
 rescue => err
   warn "load failed: #{err}"
 end
@@ -58,7 +58,7 @@ Entity operations raise on failure, so rescue them:
 
 ```ruby
 begin
-  liveboard = client.Liveboard.load()
+  liveboard = client.Liveboard.load({ "format" => "example", "station" => "example" })
 rescue => err
   warn "load failed: #{err}"
 end
@@ -130,9 +130,9 @@ client = IrailSDK.test({
 })
 
 # Entity ops return the ENTITY (raises on error);
-# call data_get for the mock record.
-liveboard = client.Liveboard.load({ "id" => "test01" })
-puts liveboard
+# data_get reads its mock record.
+liveboard = client.Liveboard.load({ "id" => "test01", "format" => "example", "station" => "example" })
+puts liveboard.data_get
 ```
 
 ### Use a custom fetch function
@@ -212,8 +212,6 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `Connection` | `(data) -> ConnectionEntity` | Create a Connection entity instance. |
 | `Disturbance` | `(data) -> DisturbanceEntity` | Create a Disturbance entity instance. |
 | `Liveboard` | `(data) -> LiveboardEntity` | Create a Liveboard entity instance. |
-| `Log` | `(data) -> LogEntity` | Create a Log entity instance. |
-| `Occupancy` | `(data) -> OccupancyEntity` | Create an Occupancy entity instance. |
 | `Station` | `(data) -> StationEntity` | Create a Station entity instance. |
 | `Vehicle` | `(data) -> VehicleEntity` | Create a Vehicle entity instance. |
 
@@ -223,9 +221,8 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria. Raises on error. |
-| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all). Raises on error. |
-| `create` | `(reqdata, ctrl) -> any` | Create a new entity. Raises on error. |
+| `load` | `(reqmatch, ctrl) -> any` | Load a single entity by match criteria, and return it. Raises on error. |
+| `list` | `(reqmatch = nil, ctrl) -> Array` | List entities matching the criteria (call with no argument to list all), one per record. Raises on error. |
 | `data_get` | `() -> Hash` | Get entity data. |
 | `data_set` | `(data)` | Set entity data. |
 | `match_get` | `() -> Hash` | Get entity match criteria. |
@@ -235,9 +232,10 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the result data directly. On failure they
-raise a `IrailError` (a `StandardError` subclass), so wrap
-calls in `begin`/`rescue` where you need to handle errors.
+Entity operations return the entity, and `list` an `Array` of entities, one
+per record; an entity's `data_get` reads its record. On failure they raise a
+`IrailError` (a `StandardError` subclass), so wrap calls in
+`begin`/`rescue` where you need to handle errors.
 
 The `direct` escape hatch is the exception: it never raises and instead
 returns a result `Hash` with these keys:
@@ -263,7 +261,7 @@ returns a result `Hash` with these keys:
 
 Operations: Load.
 
-API path: `/composition/`
+API path: `/composition`
 
 #### Connection
 
@@ -278,7 +276,7 @@ API path: `/composition/`
 
 Operations: List.
 
-API path: `/connections/`
+API path: `/connections`
 
 #### Disturbance
 
@@ -293,7 +291,7 @@ API path: `/connections/`
 
 Operations: List.
 
-API path: `/disturbances/`
+API path: `/disturbances`
 
 #### Liveboard
 
@@ -307,28 +305,7 @@ API path: `/disturbances/`
 
 Operations: Load.
 
-API path: `/liveboard/`
-
-#### Log
-
-| Field | Description |
-| --- | --- |
-| `querytime` |  |
-| `querytype` |  |
-| `user_agent` |  |
-
-Operations: List.
-
-API path: `/logs/`
-
-#### Occupancy
-
-| Field | Description |
-| --- | --- |
-
-Operations: Create.
-
-API path: `/feedback/occupancy.php`
+API path: `/liveboard`
 
 #### Station
 
@@ -340,7 +317,7 @@ API path: `/feedback/occupancy.php`
 
 Operations: Load.
 
-API path: `/stations/`
+API path: `/stations`
 
 #### Vehicle
 
@@ -354,7 +331,7 @@ API path: `/stations/`
 
 Operations: Load.
 
-API path: `/vehicle/`
+API path: `/vehicle`
 
 
 
@@ -384,7 +361,7 @@ Create an instance: `composition = client.Composition`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Composition record (raises on error).
-composition = client.Composition.load({ "id" => "composition_id" })
+composition = client.Composition.load({ "id" => "composition_id", "format" => "format" })
 ```
 
 
@@ -412,8 +389,9 @@ Create an instance: `connection = client.Connection`
 #### Example: List
 
 ```ruby
-# list returns an Array of Connection records (raises on error).
-connections = client.Connection.list
+# list returns an Array of Connection entities, one per record (raises on error).
+connections = client.Connection.list({ "format" => "example", "from" => "example", "to" => "example" })
+connections.each { |item| puts item.data_get }
 ```
 
 
@@ -441,8 +419,9 @@ Create an instance: `disturbance = client.Disturbance`
 #### Example: List
 
 ```ruby
-# list returns an Array of Disturbance records (raises on error).
-disturbances = client.Disturbance.list
+# list returns an Array of Disturbance entities, one per record (raises on error).
+disturbances = client.Disturbance.list({ "format" => "example" })
+disturbances.each { |item| puts item.data_get }
 ```
 
 
@@ -470,51 +449,7 @@ Create an instance: `liveboard = client.Liveboard`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Liveboard record (raises on error).
-liveboard = client.Liveboard.load({ "id" => "liveboard_id" })
-```
-
-
-### Log
-
-Create an instance: `log = client.Log`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `list(match)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `querytime` | `Integer` |  |
-| `querytype` | `String` |  |
-| `user_agent` | `String` |  |
-
-#### Example: List
-
-```ruby
-# list returns an Array of Log records (raises on error).
-logs = client.Log.list
-```
-
-
-### Occupancy
-
-Create an instance: `occupancy = client.Occupancy`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `create(data)` | Create a new entity with the given data. |
-
-#### Example: Create
-
-```ruby
-occupancy = client.Occupancy.create({
-})
+liveboard = client.Liveboard.load({ "id" => "liveboard_id", "format" => "format", "station" => "station" })
 ```
 
 
@@ -540,7 +475,7 @@ Create an instance: `station = client.Station`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Station record (raises on error).
-station = client.Station.load()
+station = client.Station.load({ "format" => "format" })
 ```
 
 
@@ -568,7 +503,7 @@ Create an instance: `vehicle = client.Vehicle`
 
 ```ruby
 # load returns the ENTITY — call data_get for the Vehicle record (raises on error).
-vehicle = client.Vehicle.load({ "id" => "vehicle_id" })
+vehicle = client.Vehicle.load({ "id" => "vehicle_id", "format" => "format" })
 ```
 
 ## Features
@@ -734,7 +669,7 @@ stores the returned data and match criteria internally.
 
 ```ruby
 liveboard = client.Liveboard
-liveboard.load()
+liveboard.load({ "format" => "example", "station" => "example" })
 
 # liveboard.data_get now returns the liveboard data from the last load
 # liveboard.match_get returns the last match criteria

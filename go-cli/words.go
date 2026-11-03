@@ -75,7 +75,7 @@ func runOp(client *sdk.IrailSDK, op string, query *eng.Value, entityAtom eng.Val
 
 // entityFor dispatches on the lowercase entity name. The generator
 // emits one `case "<name>":` per entity defined in the SDK model.
-func entityFor(client *sdk.IrailSDK, name string) (sdk.IrailEntity, error) {
+func entityFor(client *sdk.IrailSDK, name string) (sdk.IrailEntityBase, error) {
 	switch strings.ToLower(name) {
 	case "composition":
 		return client.Composition(nil), nil
@@ -85,10 +85,6 @@ func entityFor(client *sdk.IrailSDK, name string) (sdk.IrailEntity, error) {
 		return client.Disturbance(nil), nil
 	case "liveboard":
 		return client.Liveboard(nil), nil
-	case "log":
-		return client.Log(nil), nil
-	case "occupancy":
-		return client.Occupancy(nil), nil
 	case "station":
 		return client.Station(nil), nil
 	case "vehicle":

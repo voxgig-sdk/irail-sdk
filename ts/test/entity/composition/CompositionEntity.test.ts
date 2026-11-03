@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { IrailSDK, BaseFeature, stdutil } from '../../..'
+import { IrailSDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,6 +41,18 @@ describe('CompositionEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = IrailSDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.Composition().load({"date":1,"format":"x","id":"x"} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.IRAIL_TEST_LIVE
@@ -51,7 +63,7 @@ describe('CompositionEntity', async () => {
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"composition":{"a":true,"h":"Composition","n":"composition","r":false,"t":"`$OBJECT`","key$":"composition","index$":0},"timestamp":{"a":true,"h":"Timestamp","n":"timestamp","r":false,"sh":"Unix timestamp of the response","t":"`$INTEGER`","key$":"timestamp","index$":1},"vehicle":{"a":true,"h":"Vehicle","n":"vehicle","r":false,"sh":"Vehicle identifier","t":"`$STRING`","key$":"vehicle","index$":2},"version":{"a":true,"h":"Version","n":"version","r":false,"sh":"API version","t":"`$STRING`","key$":"version","index$":3}},"name":"composition","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /composition/","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"date","or":"date","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":"xml","k":"query","n":"format","or":"format","r":false,"t":"`$STRING`","index$":1},{"a":true,"k":"query","n":"id","or":"id","r":true,"t":"`$STRING`","index$":2},{"a":true,"ex":"en","k":"query","n":"lang","or":"lang","r":false,"t":"`$STRING`","index$":3}]},"k":"http","m":"GET","o":"/composition/","q":{"exist":["date","format","id","lang"]},"r":{},"s":[{"lit":"composition"}],"t":{"req":"`reqdata`","res":"`body.composition`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"composition","name__orig":"composition","Name":"Composition","name_":"composition","name-":"composition","NAME":"COMPOSITION","index$":0}, {"active":true,"entity":"composition","key$":"BasicCompositionFlow","kind":"basic","name":"BasicCompositionFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"composition_ref01","srcdatavar":"composition_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-composition_ref01"}}],"index$":0}]}, 'Composition', {"GET /composition/":{"protocol":"http","parameters":[{"name":"id","in":"query","description":"The vehicle ID","required":true,"schema":{"type":"string"},"index$":0},{"name":"date","in":"query","description":"The date to query in ddmmyy format","required":false,"schema":{"type":"string","pattern":"^[0-3][0-9][0-1][0-9][0-9]{2}$"},"index$":1},{"name":"format","in":"query","description":"The response format","required":false,"schema":{"type":"string","enum":["xml","json","jsonp"],"default":"xml"},"index$":2},{"name":"lang","in":"query","description":"The language of any text or names in the response","required":false,"schema":{"type":"string","enum":["nl","fr","en","de"],"default":"en"},"index$":3}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"composition":{"a":true,"h":"Composition","n":"composition","r":false,"t":"`$OBJECT`","key$":"composition","index$":0},"timestamp":{"a":true,"h":"Timestamp","n":"timestamp","r":false,"sh":"Unix timestamp of the response","t":"`$INTEGER`","key$":"timestamp","index$":1},"vehicle":{"a":true,"h":"Vehicle","n":"vehicle","r":false,"sh":"Vehicle identifier","t":"`$STRING`","key$":"vehicle","index$":2},"version":{"a":true,"h":"Version","n":"version","r":false,"sh":"API version","t":"`$STRING`","key$":"version","index$":3}},"name":"composition","op":{"load":{"input":"data","name":"load","points":[{"a":true,"co":{"id":"GET /composition","source":"openapi3","version":2},"g":{"query":[{"a":true,"k":"query","n":"date","or":"date","r":false,"t":"`$STRING`","index$":0},{"a":true,"ex":"json","k":"query","n":"format","or":"format","r":true,"t":"`$STRING`","index$":1},{"a":true,"ex":"IC532","k":"query","n":"id","or":"id","r":true,"t":"`$STRING`","index$":2},{"a":true,"ex":"en","k":"query","n":"lang","or":"lang","r":false,"t":"`$STRING`","index$":3}]},"k":"http","m":"GET","o":"/composition","q":{"exist":["format","id"]},"r":{},"rs":{"alternatives":[{"kind":"raw","media":"application/xml"}],"kind":"json","media":"application/json"},"s":[{"lit":"composition"}],"t":{"req":"`reqdata`","res":"`body.composition`"},"index$":0}],"key$":"load"}},"relations":{"ancestors":[]},"key$":"composition","name__orig":"composition","Name":"Composition","name_":"composition","name-":"composition","NAME":"COMPOSITION","index$":0}, {"active":true,"entity":"composition","key$":"BasicCompositionFlow","kind":"basic","name":"BasicCompositionFlow","param":{},"step":[{"a":true,"d":{},"i":{"ref":"composition_ref01","srcdatavar":"composition_ref01_data","suffix":"_dt0"},"m":{},"o":"load","s":[],"v":[{"apply":"TextFieldMark","def":{"mark":"Mark01-composition_ref01"}}],"index$":0}]}, 'Composition', {"GET /composition":{"protocol":"http","parameters":[{"name":"id","in":"query","description":"The vehicle ID","required":true,"schema":{"type":"string"},"example":"IC532","index$":0},{"name":"date","in":"query","description":"The date to query in ddmmyy format","required":false,"schema":{"type":"string","pattern":"^[0-3][0-9][0-1][0-9][0-9]{2}$"},"index$":1},{"name":"format","in":"query","description":"The response format","required":true,"schema":{"type":"string","enum":["xml","json","jsonp"],"default":"xml"},"example":"json","index$":2},{"name":"lang","in":"query","description":"The language of any text or names in the response","required":false,"schema":{"type":"string","enum":["nl","fr","en","de"],"default":"en"},"index$":3}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -72,6 +84,12 @@ describe('CompositionEntity', async () => {
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options

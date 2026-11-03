@@ -21,6 +21,7 @@ export IRAIL_APIKEY=sk_live_xxx
 # 4. Each command line is ONE boru expression, run against the API:
 ./irail-cli load 1 composition            # {id:1} shorthand
 ./irail-cli load '{id:1}' composition       # explicit match map
+./irail-cli list connection
 
 # 5. Override the API base URL for a single call
 IRAIL_BASE=https://api.example.com ./irail-cli load 1 composition
@@ -107,7 +108,7 @@ make build-all   # linux/darwin/windows x amd64/arm64, under dist/<os>-<arch>/
 ### Discover the available entities
 
 `/help` in the REPL prints the full entity list, or see [Entities](#entities)
-below — this SDK exposes 8 entities.
+below — this SDK exposes 6 entities.
 
 ## Reference
 
@@ -161,9 +162,9 @@ Meta-commands use the `/` prefix (everything else on a line is evaluated as boru
 
 ### Entities
 
-The 8 entities this SDK exposes (any is valid as `<entity>`):
+The 6 entities this SDK exposes (any is valid as `<entity>`):
 
-composition connection disturbance liveboard log occupancy station vehicle
+composition connection disturbance liveboard station vehicle
 
 ## Explanation
 

@@ -4,7 +4,7 @@
 
 The Golang SDK for the Irail API — an entity-oriented client using standard Go conventions. No generics required; data flows as `map[string]any`.
 
-It exposes the API as capitalised, semantic **Entities** — e.g. `client.Composition(nil)` — each with the same small set of operations (`List`, `Load`, `Create`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
+It exposes the API as capitalised, semantic **Entities** — e.g. `client.Composition(nil)` — each with the same small set of operations (`List`, `Load`) instead of raw URL paths and query strings. You call meaning, not endpoints, which keeps the cognitive load low.
 
 > Also generated from this model: `go-cli`, `go-mcp`, `lua`, `php`, `py`, `rb`, `ts` — see
 > the [top-level README](../README.md).
@@ -16,7 +16,7 @@ go get github.com/voxgig-sdk/irail-sdk/go@latest
 ```
 
 The Go module proxy resolves the version from the `go/vX.Y.Z` GitHub
-release tag — see [Releases](https://github.com/voxgig-sdk/irail-sdk/releases) for the available versions.
+release tag — see [Tags](https://github.com/voxgig-sdk/irail-sdk/tags) for the available versions.
 
 To vendor from a local checkout instead, clone this repo alongside your
 project and add a `replace` directive pointing at the checked-out
@@ -35,9 +35,10 @@ loading a specific record.
 ### Quickstart
 
 A complete program: create a client, then call the entity operations.
-Each operation returns `(value, error)` — the value is the data itself
-(there is no `{ok, data}` wrapper), so check `err` and use the value
-directly.
+Each operation returns `(value, error)` — the value is the entity, and for
+`List` a `[]any` of entities, one per record (there is no `{ok, data}`
+wrapper), so check `err` and read a record through the entity's
+`Data()`.
 
 ```go
 package main
@@ -50,12 +51,12 @@ import (
 func main() {
     client := sdk.New()
 
-    // Load a single composition — the value is the loaded record.
-    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id"}, nil)
+    // Load a single composition — the value is the entity; Data() reads its record.
+    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id", "format": "example_format"}, nil)
     if err != nil {
         panic(err)
     }
-    fmt.Println(composition)
+    fmt.Println(composition.(sdk.Entity).Data())
 }
 ```
 
@@ -66,7 +67,7 @@ Every entity operation returns `(value, error)`. Check `err` before
 using the value — there is no exception to catch:
 
 ```go
-liveboard, err := client.Liveboard(nil).Load(nil, nil)
+liveboard, err := client.Liveboard(nil).Load(map[string]any{"format": "example", "station": "example"}, nil)
 if err != nil {
     // handle err
     return
@@ -136,12 +137,12 @@ Create a mock client for unit testing — no server required:
 client := sdk.Test()
 
 liveboard, err := client.Liveboard(nil).Load(
-    map[string]any{"id": "test01"}, nil,
+    map[string]any{"id": "test01", "format": "example", "station": "example"}, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(liveboard) // the returned mock data
+fmt.Println(liveboard.(sdk.Entity).Data()) // the entity's mock record
 ```
 
 ### Use a custom fetch function
@@ -218,24 +219,21 @@ Creates a test-mode client with mock transport. Both arguments may be `nil`.
 | `GetUtility` | `() *Utility` | Copy of the SDK utility object. |
 | `Prepare` | `(fetchargs map[string]any) (map[string]any, error)` | Build an HTTP request definition without sending. |
 | `Direct` | `(fetchargs map[string]any) (map[string]any, error)` | Build and send an HTTP request. |
-| `Composition` | `(data map[string]any) IrailEntity` | Create a Composition entity instance. |
-| `Connection` | `(data map[string]any) IrailEntity` | Create a Connection entity instance. |
-| `Disturbance` | `(data map[string]any) IrailEntity` | Create a Disturbance entity instance. |
-| `Liveboard` | `(data map[string]any) IrailEntity` | Create a Liveboard entity instance. |
-| `Log` | `(data map[string]any) IrailEntity` | Create a Log entity instance. |
-| `Occupancy` | `(data map[string]any) IrailEntity` | Create an Occupancy entity instance. |
-| `Station` | `(data map[string]any) IrailEntity` | Create a Station entity instance. |
-| `Vehicle` | `(data map[string]any) IrailEntity` | Create a Vehicle entity instance. |
+| `Composition` | `(data map[string]any) IrailEntityBase` | Create a Composition entity instance. |
+| `Connection` | `(data map[string]any) IrailEntityBase` | Create a Connection entity instance. |
+| `Disturbance` | `(data map[string]any) IrailEntityBase` | Create a Disturbance entity instance. |
+| `Liveboard` | `(data map[string]any) IrailEntityBase` | Create a Liveboard entity instance. |
+| `Station` | `(data map[string]any) IrailEntityBase` | Create a Station entity instance. |
+| `Vehicle` | `(data map[string]any) IrailEntityBase` | Create a Vehicle entity instance. |
 
-### Entity interface (IrailEntity)
+### Entity interface (IrailEntityBase)
 
-All entities implement the `IrailEntity` interface.
+All entities implement the `IrailEntityBase` interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria. |
-| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria. |
-| `Create` | `(reqdata, ctrl map[string]any) (any, error)` | Create a new entity. |
+| `Load` | `(reqmatch, ctrl map[string]any) (any, error)` | Load a single entity by match criteria, and return it. |
+| `List` | `(reqmatch, ctrl map[string]any) (any, error)` | List entities matching the criteria, one per record. |
 | `Data` | `(args ...any) any` | Get or set entity data. |
 | `Match` | `(args ...any) any` | Get or set entity match criteria. |
 | `Make` | `() Entity` | Create a new instance with the same options. |
@@ -243,21 +241,21 @@ All entities implement the `IrailEntity` interface.
 
 ### Result shape
 
-Entity operations return `(value, error)`. The `value` is the
-operation's data **directly** — there is no wrapper:
+Entity operations return `(value, error)`. The `value` is the entity
+itself — there is no wrapper:
 
 | Operation | `value` |
 | --- | --- |
-| `Load` / `Create` | the entity record (`map[string]any`) |
-| `List` | a `[]any` of entity records |
+| `Load` | the entity, whose `Data()` reads its record (`map[string]any`) |
+| `List` | a `[]any` of entities, one per record |
 
 Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id"}, nil)
+    composition, err := client.Composition(nil).Load(map[string]any{"id": "example_id", "format": "example"}, nil)
     if err != nil { /* handle */ }
-    // composition is the returned record
+    // composition is the entity; composition.(sdk.Entity).Data() reads its record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -275,7 +273,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 
 Operations: Load.
 
-API path: `/composition/`
+API path: `/composition`
 
 #### Connection
 
@@ -290,7 +288,7 @@ API path: `/composition/`
 
 Operations: List.
 
-API path: `/connections/`
+API path: `/connections`
 
 #### Disturbance
 
@@ -305,7 +303,7 @@ API path: `/connections/`
 
 Operations: List.
 
-API path: `/disturbances/`
+API path: `/disturbances`
 
 #### Liveboard
 
@@ -319,28 +317,7 @@ API path: `/disturbances/`
 
 Operations: Load.
 
-API path: `/liveboard/`
-
-#### Log
-
-| Field | Description |
-| --- | --- |
-| `"querytime"` |  |
-| `"querytype"` |  |
-| `"user_agent"` |  |
-
-Operations: List.
-
-API path: `/logs/`
-
-#### Occupancy
-
-| Field | Description |
-| --- | --- |
-
-Operations: Create.
-
-API path: `/feedback/occupancy.php`
+API path: `/liveboard`
 
 #### Station
 
@@ -352,7 +329,7 @@ API path: `/feedback/occupancy.php`
 
 Operations: Load.
 
-API path: `/stations/`
+API path: `/stations`
 
 #### Vehicle
 
@@ -366,7 +343,7 @@ API path: `/stations/`
 
 Operations: Load.
 
-API path: `/vehicle/`
+API path: `/vehicle`
 
 
 
@@ -395,11 +372,11 @@ Create an instance: `composition := client.Composition(nil)`
 #### Example: Load
 
 ```go
-composition, err := client.Composition(nil).Load(map[string]any{"id": "composition_id"}, nil)
+composition, err := client.Composition(nil).Load(map[string]any{"id": "composition_id", "format": "format"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(composition) // the loaded record
+fmt.Println(composition.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -427,11 +404,14 @@ Create an instance: `connection := client.Connection(nil)`
 #### Example: List
 
 ```go
-connections, err := client.Connection(nil).List(nil, nil)
+connections, err := client.Connection(nil).List(map[string]any{"format": "example", "from": "example", "to": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(connections) // the array of records
+// A []any of entities, one per record.
+for _, item := range connections.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -459,11 +439,14 @@ Create an instance: `disturbance := client.Disturbance(nil)`
 #### Example: List
 
 ```go
-disturbances, err := client.Disturbance(nil).List(nil, nil)
+disturbances, err := client.Disturbance(nil).List(map[string]any{"format": "example"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(disturbances) // the array of records
+// A []any of entities, one per record.
+for _, item := range disturbances.([]any) {
+    fmt.Println(item.(sdk.Entity).Data())
+}
 ```
 
 
@@ -490,62 +473,11 @@ Create an instance: `liveboard := client.Liveboard(nil)`
 #### Example: Load
 
 ```go
-liveboard, err := client.Liveboard(nil).Load(map[string]any{"id": "liveboard_id"}, nil)
+liveboard, err := client.Liveboard(nil).Load(map[string]any{"id": "liveboard_id", "format": "format", "station": "station"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(liveboard) // the loaded record
-```
-
-
-### Log
-
-Create an instance: `log := client.Log(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `List(match, ctrl)` | List entities matching the criteria. |
-
-#### Fields
-
-| Field | Type | Description |
-| --- | --- | --- |
-| `querytime` | `int` |  |
-| `querytype` | `string` |  |
-| `user_agent` | `string` |  |
-
-#### Example: List
-
-```go
-logs, err := client.Log(nil).List(nil, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(logs) // the array of records
-```
-
-
-### Occupancy
-
-Create an instance: `occupancy := client.Occupancy(nil)`
-
-#### Operations
-
-| Method | Description |
-| --- | --- |
-| `Create(data, ctrl)` | Create a new entity with the given data. |
-
-#### Example: Create
-
-```go
-result, err := client.Occupancy(nil).Create(map[string]any{
-}, nil)
-if err != nil {
-    panic(err)
-}
-fmt.Println(result)
+fmt.Println(liveboard.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -570,11 +502,11 @@ Create an instance: `station := client.Station(nil)`
 #### Example: Load
 
 ```go
-station, err := client.Station(nil).Load(nil, nil)
+station, err := client.Station(nil).Load(map[string]any{"format": "format"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(station) // the loaded record
+fmt.Println(station.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 
@@ -601,11 +533,11 @@ Create an instance: `vehicle := client.Vehicle(nil)`
 #### Example: Load
 
 ```go
-vehicle, err := client.Vehicle(nil).Load(map[string]any{"id": "vehicle_id"}, nil)
+vehicle, err := client.Vehicle(nil).Load(map[string]any{"id": "vehicle_id", "format": "format"}, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(vehicle) // the loaded record
+fmt.Println(vehicle.(sdk.Entity).Data()) // the loaded entity's record
 ```
 
 ## Features
@@ -742,7 +674,9 @@ The Go SDK uses `map[string]any` throughout rather than typed structs.
 This mirrors the dynamic nature of the API and keeps the SDK
 flexible — no code generation is needed when the API schema changes.
 
-Use `core.ToMapAny()` to safely cast results and nested data.
+An operation returns the entity, and its `Data()` returns the record. Use
+`core.ToMapAny()` to safely cast that record, or data nested in it, to
+`map[string]any`: it returns `nil` for anything else, an entity included.
 
 ### Package structure
 
@@ -767,7 +701,7 @@ stores the returned data and match criteria internally.
 
 ```go
 liveboard := client.Liveboard(nil)
-liveboard.Load(nil, nil)
+liveboard.Load(map[string]any{"format": "example", "station": "example"}, nil)
 
 // liveboard.Data() now returns the liveboard data from the last load
 // liveboard.Match() returns the last match criteria

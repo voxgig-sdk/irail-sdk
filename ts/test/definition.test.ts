@@ -13,20 +13,43 @@ const PLAN: any[] = [
     "accessor": "Composition",
     "op": "load",
     "method": "GET",
-    "path": "/composition/",
+    "path": "/composition",
     "args": [],
     "select": {
+      "format": "json",
+      "id": "IC532",
       "date": "v1",
-      "format": "v1",
-      "id": "v1",
-      "lang": "v1"
+      "lang": "en"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json",
+      "application/xml"
+    ],
     "query": [
       "id",
       "date",
       "format",
       "lang"
+    ],
+    "queryArgs": [
+      {
+        "name": "date",
+        "wire": "date"
+      },
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "id",
+        "wire": "id"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -50,21 +73,26 @@ const PLAN: any[] = [
     "accessor": "Connection",
     "op": "list",
     "method": "GET",
-    "path": "/connections/",
+    "path": "/connections",
     "args": [],
     "select": {
+      "format": "json",
+      "from": "Gent-Sint-Pieters",
+      "to": "Brussels-Central",
       "alert": "v1",
       "date": "v1",
-      "format": "v1",
-      "from": "v1",
-      "lang": "v1",
-      "result": "v1",
+      "lang": "en",
+      "result": 6,
       "time": "v1",
-      "timesel": "v1",
-      "to": "v1",
+      "timesel": "departure",
       "type_of_transport": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json",
+      "application/xml"
+    ],
     "query": [
       "from",
       "to",
@@ -77,6 +105,48 @@ const PLAN: any[] = [
       "typeOfTransport",
       "results"
     ],
+    "queryArgs": [
+      {
+        "name": "alert",
+        "wire": "alerts"
+      },
+      {
+        "name": "date",
+        "wire": "date"
+      },
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "from",
+        "wire": "from"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      },
+      {
+        "name": "result",
+        "wire": "results"
+      },
+      {
+        "name": "time",
+        "wire": "time"
+      },
+      {
+        "name": "timesel",
+        "wire": "timesel"
+      },
+      {
+        "name": "to",
+        "wire": "to"
+      },
+      {
+        "name": "type_of_transport",
+        "wire": "typeOfTransport"
+      }
+    ],
     "auth": null,
     "status": 200,
     "sample": {
@@ -84,49 +154,49 @@ const PLAN: any[] = [
       "timestamp": 1,
       "connection": [
         {
-          "arrival": {
-            "canceled": 1,
-            "delay": 1,
-            "platform": "x",
-            "station": "x",
-            "stationinfo": {
-              "@id": "x",
-              "id": "x",
-              "locationX": 1,
-              "locationY": 1,
-              "name": "x",
-              "standardname": "x"
-            },
-            "time": 1,
-            "vehicle": "x"
-          },
-          "departure": {
-            "canceled": 1,
-            "delay": 1,
-            "platform": "x",
-            "station": "x",
-            "stationinfo": {
-              "@id": "x",
-              "id": "x",
-              "locationX": 1,
-              "locationY": 1,
-              "name": "x",
-              "standardname": "x"
-            },
-            "time": 1,
-            "vehicle": "x"
-          },
-          "duration": 1,
           "id": 1,
-          "occupancy": {
-            "@id": "x",
-            "name": "low"
+          "departure": {
+            "delay": 1,
+            "station": "x",
+            "stationinfo": {
+              "id": "x",
+              "@id": "x",
+              "locationX": 1,
+              "locationY": 1,
+              "standardname": "x",
+              "name": "x"
+            },
+            "time": 1,
+            "vehicle": "x",
+            "platform": "x",
+            "canceled": 1
+          },
+          "arrival": {
+            "delay": 1,
+            "station": "x",
+            "stationinfo": {
+              "id": "x",
+              "@id": "x",
+              "locationX": 1,
+              "locationY": 1,
+              "standardname": "x",
+              "name": "x"
+            },
+            "time": 1,
+            "vehicle": "x",
+            "platform": "x",
+            "canceled": 1
           },
           "vias": {
             "number": 1,
             "via": [
               {}
             ]
+          },
+          "duration": 1,
+          "occupancy": {
+            "@id": "x",
+            "name": "low"
           }
         }
       ]
@@ -138,18 +208,37 @@ const PLAN: any[] = [
     "accessor": "Disturbance",
     "op": "list",
     "method": "GET",
-    "path": "/disturbances/",
+    "path": "/disturbances",
     "args": [],
     "select": {
-      "format": "v1",
-      "lang": "v1",
+      "format": "json",
+      "lang": "en",
       "line_break_character": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json",
+      "application/xml"
+    ],
     "query": [
       "format",
       "lang",
       "lineBreakCharacter"
+    ],
+    "queryArgs": [
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      },
+      {
+        "name": "line_break_character",
+        "wire": "lineBreakCharacter"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -158,12 +247,12 @@ const PLAN: any[] = [
       "timestamp": 1,
       "disturbance": [
         {
-          "description": "x",
           "id": 1,
-          "link": "x",
-          "timestamp": 1,
           "title": "x",
-          "type": 1
+          "description": "x",
+          "type": 1,
+          "timestamp": 1,
+          "link": "x"
         }
       ]
     },
@@ -174,19 +263,24 @@ const PLAN: any[] = [
     "accessor": "Liveboard",
     "op": "load",
     "method": "GET",
-    "path": "/liveboard/",
+    "path": "/liveboard",
     "args": [],
     "select": {
-      "alert": "v1",
-      "arrdep": "v1",
-      "date": "300917",
-      "format": "v1",
-      "id": "BE.NMBS.008892007",
-      "lang": "v1",
+      "format": "json",
       "station": "Gent-Sint-Pieters",
-      "time": "1230"
+      "alert": "v1",
+      "arrdep": "departure",
+      "date": "v1",
+      "id": "v1",
+      "lang": "en",
+      "time": "v1"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json",
+      "application/xml"
+    ],
     "query": [
       "station",
       "id",
@@ -196,6 +290,40 @@ const PLAN: any[] = [
       "date",
       "format",
       "lang"
+    ],
+    "queryArgs": [
+      {
+        "name": "alert",
+        "wire": "alerts"
+      },
+      {
+        "name": "arrdep",
+        "wire": "arrdep"
+      },
+      {
+        "name": "date",
+        "wire": "date"
+      },
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "id",
+        "wire": "id"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      },
+      {
+        "name": "station",
+        "wire": "station"
+      },
+      {
+        "name": "time",
+        "wire": "time"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -252,64 +380,35 @@ const PLAN: any[] = [
     "idField": "id"
   },
   {
-    "entity": "log",
-    "accessor": "Log",
-    "op": "list",
-    "method": "GET",
-    "path": "/logs/",
-    "args": [],
-    "select": {
-      "format": "v1"
-    },
-    "headers": [],
-    "query": [
-      "format"
-    ],
-    "auth": null,
-    "status": 200,
-    "sample": {
-      "version": "x",
-      "timestamp": 1,
-      "logs": [
-        {
-          "querytime": 1,
-          "querytype": "x",
-          "user_agent": "x"
-        }
-      ]
-    },
-    "idField": "id"
-  },
-  {
-    "entity": "occupancy",
-    "accessor": "Occupancy",
-    "op": "create",
-    "method": "POST",
-    "path": "/feedback/occupancy.php",
-    "args": [],
-    "select": {},
-    "headers": [],
-    "query": [],
-    "auth": null,
-    "status": 200,
-    "sample": null,
-    "idField": "id"
-  },
-  {
     "entity": "station",
     "accessor": "Station",
     "op": "load",
     "method": "GET",
-    "path": "/stations/",
+    "path": "/stations",
     "args": [],
     "select": {
-      "format": "v1",
-      "lang": "v1"
+      "format": "json",
+      "lang": "en"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json",
+      "application/xml"
+    ],
     "query": [
       "format",
       "lang"
+    ],
+    "queryArgs": [
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -332,22 +431,49 @@ const PLAN: any[] = [
     "accessor": "Vehicle",
     "op": "load",
     "method": "GET",
-    "path": "/vehicle/",
+    "path": "/vehicle",
     "args": [],
     "select": {
+      "format": "json",
+      "id": "IC532",
       "alert": "v1",
       "date": "v1",
-      "format": "v1",
-      "id": "IC532",
-      "lang": "v1"
+      "lang": "en"
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json",
+      "application/xml"
+    ],
     "query": [
       "id",
       "date",
       "format",
       "lang",
       "alerts"
+    ],
+    "queryArgs": [
+      {
+        "name": "alert",
+        "wire": "alerts"
+      },
+      {
+        "name": "date",
+        "wire": "date"
+      },
+      {
+        "name": "format",
+        "wire": "format"
+      },
+      {
+        "name": "id",
+        "wire": "id"
+      },
+      {
+        "name": "lang",
+        "wire": "lang"
+      }
     ],
     "auth": null,
     "status": 200,
@@ -356,37 +482,37 @@ const PLAN: any[] = [
       "timestamp": 1,
       "vehicle": "x",
       "vehicleinfo": {
-        "@id": "x",
         "name": "x",
-        "shortname": "x"
+        "shortname": "x",
+        "@id": "x"
       },
       "stops": {
         "number": 1,
         "stop": [
           {
-            "canceled": 1,
-            "delay": 1,
             "id": 1,
-            "left": 1,
-            "occupancy": {
+            "station": "x",
+            "stationinfo": {
+              "id": "x",
               "@id": "x",
-              "name": "low"
+              "locationX": 1,
+              "locationY": 1,
+              "standardname": "x",
+              "name": "x"
             },
+            "time": 1,
+            "delay": 1,
             "platform": "x",
             "platforminfo": {
               "name": "x",
               "normal": "x"
             },
-            "station": "x",
-            "stationinfo": {
+            "canceled": 1,
+            "left": 1,
+            "occupancy": {
               "@id": "x",
-              "id": "x",
-              "locationX": 1,
-              "locationY": 1,
-              "name": "x",
-              "standardname": "x"
-            },
-            "time": 1
+              "name": "low"
+            }
           }
         ]
       }

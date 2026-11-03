@@ -84,9 +84,12 @@ class CompositionEntity extends IrailEntityBase_1.IrailEntityBase {
         catch (err) {
             // What a hook throws here must not escape the cleaning below.
             try {
-                fres = featureHook(ctx, 'PreUnexpected');
-                if (fres instanceof Promise) {
-                    await fres;
+                // Once per operation: makeError fires it for its own error.
+                if (!ctx.unexpectedFired) {
+                    fres = featureHook(ctx, 'PreUnexpected');
+                    if (fres instanceof Promise) {
+                        await fres;
+                    }
                 }
             }
             catch (hookerr) {
@@ -98,7 +101,7 @@ class CompositionEntity extends IrailEntityBase_1.IrailEntityBase {
             }
             else {
                 // Off-happy-path (throw disabled): typed as any so the method's
-                // Promise<Composition> return stays clean under strict null checks.
+                // Promise<CompositionEntity> return stays clean under strict null checks.
                 return undefined;
             }
         }

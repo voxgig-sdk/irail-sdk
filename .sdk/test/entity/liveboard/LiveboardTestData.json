@@ -39,7 +39,7 @@
     }
   },
   "requests": {
-    "GET /liveboard/": {
+    "GET /liveboard": {
       "provenance": "operation-contract",
       "version": 2,
       "source": "openapi3"

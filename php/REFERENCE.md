@@ -57,14 +57,6 @@ Create a new `DisturbanceEntity` instance. Pass `null` for no initial data.
 
 Create a new `LiveboardEntity` instance. Pass `null` for no initial data.
 
-#### `Log($data = null)`
-
-Create a new `LogEntity` instance. Pass `null` for no initial data.
-
-#### `Occupancy($data = null)`
-
-Create a new `OccupancyEntity` instance. Pass `null` for no initial data.
-
 #### `Station($data = null)`
 
 Create a new `StationEntity` instance. Pass `null` for no initial data.
@@ -129,10 +121,10 @@ $composition = $client->Composition();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
-$result = $client->Composition()->load(["id" => "composition_id"]);
+$result = $client->Composition()->load(["id" => "composition_id", "format" => "format"]);
 ```
 
 ### Common Methods
@@ -186,10 +178,10 @@ $connection = $client->Connection();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Connection()->list();
+$results = $client->Connection()->list(["format" => "example", "from" => "example", "to" => "example"]);
 ```
 
 ### Common Methods
@@ -243,10 +235,10 @@ $disturbance = $client->Disturbance();
 
 #### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
 
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array of entities, one per record, and throws on error.
 
 ```php
-$results = $client->Disturbance()->list();
+$results = $client->Disturbance()->list(["format" => "example"]);
 ```
 
 ### Common Methods
@@ -299,10 +291,10 @@ $liveboard = $client->Liveboard();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
-$result = $client->Liveboard()->load(["id" => "liveboard_id"]);
+$result = $client->Liveboard()->load(["id" => "liveboard_id", "format" => "format", "station" => "station"]);
 ```
 
 ### Common Methods
@@ -335,107 +327,6 @@ Return the entity name.
 
 ---
 
-## LogEntity
-
-```php
-$log = $client->Log();
-```
-
-### Fields
-
-| Field | Type | Required | Description |
-| --- | --- | --- | --- |
-| `querytime` | `int` | No |  |
-| `querytype` | `string` | No |  |
-| `user_agent` | `string` | No |  |
-
-### Operations
-
-#### `list(?array $reqmatch = null, ?array $ctrl = null): mixed`
-
-List entities matching the given criteria (call with no argument to list all). Returns an array. Throws on error.
-
-```php
-$results = $client->Log()->list();
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): LogEntity`
-
-Create a new `LogEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
-## OccupancyEntity
-
-```php
-$occupancy = $client->Occupancy();
-```
-
-### Operations
-
-#### `create(array $reqdata, ?array $ctrl = null): mixed`
-
-Create a new entity with the given data. Throws on error.
-
-```php
-$result = $client->Occupancy()->create([
-]);
-```
-
-### Common Methods
-
-#### `data_get(): array`
-
-Get the entity data. Returns a copy of the current data.
-
-#### `data_set($data): void`
-
-Set the entity data.
-
-#### `match_get(): array`
-
-Get the entity match criteria.
-
-#### `match_set($match): void`
-
-Set the entity match criteria.
-
-#### `make(): OccupancyEntity`
-
-Create a new `OccupancyEntity` instance with the same client and
-options.
-
-#### `get_name(): string`
-
-Return the entity name.
-
-
----
-
 ## StationEntity
 
 ```php
@@ -454,10 +345,10 @@ $station = $client->Station();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
-$result = $client->Station()->load();
+$result = $client->Station()->load(["format" => "format"]);
 ```
 
 ### Common Methods
@@ -510,10 +401,10 @@ $vehicle = $client->Vehicle();
 
 #### `load(array $reqmatch, ?array $ctrl = null): mixed`
 
-Load a single entity matching the given criteria. Throws on error.
+Load a single entity matching the given criteria. Returns the entity, whose record `data_get()` reads, and throws on error.
 
 ```php
-$result = $client->Vehicle()->load(["id" => "vehicle_id"]);
+$result = $client->Vehicle()->load(["id" => "vehicle_id", "format" => "format"]);
 ```
 
 ### Common Methods
@@ -703,6 +594,7 @@ Timeout.
 | Option | Type |
 |---|---|
 | `clearTimer` | function |
+| `now` | function |
 | `setTimer` | function |
 
 These take no default: the feature behaves one way when you supply them and
